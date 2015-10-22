@@ -34,13 +34,15 @@ keystone.init({
 keystone.import('models');
 
 //database
-var mongoURI = "mongodb://localhost/your-db";
-
+var mongoURI = "mongodb://localhost/keystone";
+// TODO: acertar para usar variável de ambiente
 if (process.env.mongolab) {
 	mongoURI = process.env.mongolab.credentials.uri;
 }
 
-keystone.set('monog', mongoURI);
+// var mongoURI = "mongodb://IbmCloud_66msqd73_rc5oqcc5_185k3qgu:MFZUjy0hWwgc_PMPBkpQma4ZU1hnkHeV@ds041053.mongolab.com:41053/IbmCloud_66msqd73_rc5oqcc5";
+
+keystone.set('mongo', mongoURI);
 
 // Setup common locals for your templates. The following are required for the
 // bundled templates and layouts. Any runtime locals (that should be set uniquely
