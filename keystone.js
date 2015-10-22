@@ -13,15 +13,15 @@ keystone.init({
 
 	'name': 'Sampa Digital',
 	'brand': 'Sampa Digital',
-	
+
 	'less': 'public',
 	'static': 'public',
 	'favicon': 'public/favicon.ico',
 	'views': 'templates/views',
 	'view engine': 'jade',
-	
+
 	'emails': 'templates/emails',
-	
+
 	'auto update': true,
 	'session': true,
 	'auth': true,
@@ -32,6 +32,15 @@ keystone.init({
 // Load your project's Models
 
 keystone.import('models');
+
+//database
+var mongoURI = "mongodb://localhost/your-db";
+
+if (process.env.mongolab) {
+	mongoURI = process.env.mongolab.credentials.uri;
+}
+
+keystone.set('monog', mongoURI);
 
 // Setup common locals for your templates. The following are required for the
 // bundled templates and layouts. Any runtime locals (that should be set uniquely
