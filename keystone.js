@@ -7,19 +7,18 @@ var keystone = require('keystone');
 var cfenv   = require("cfenv");
 // get the core cfenv application environment
 var appEnv = cfenv.getAppEnv();
-var mongoService = cfenv.getService('mongolab');
-
-// Initialise Keystone with your project's configuration.
-// See http://keystonejs.com/guide/config for available options
-// and documentation.
-
+var mongoService = appEnv.getService('mongolab');
 //database
 var mongoURI = "mongodb://localhost/keystone";
+// var mongoURI = "mongodb://IbmCloud_66msqd73_rc5oqcc5_185k3qgu:MFZUjy0hWwgc_PMPBkpQma4ZU1hnkHeV@ds041053.mongolab.com:41053/IbmCloud_66msqd73_rc5oqcc5";
 
 if (process.env.VCAP_SERVICES) {
 	mongoURI = mongoService.credentials.uri;
 }
-// var mongoURI = "mongodb://IbmCloud_66msqd73_rc5oqcc5_185k3qgu:MFZUjy0hWwgc_PMPBkpQma4ZU1hnkHeV@ds041053.mongolab.com:41053/IbmCloud_66msqd73_rc5oqcc5";
+
+// Initialise Keystone with your project's configuration.
+// See http://keystonejs.com/guide/config for available options
+// and documentation.
 
 keystone.init({
 
