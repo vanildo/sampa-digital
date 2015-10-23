@@ -4,23 +4,20 @@ require('dotenv').load();
 
 // Require keystone
 var keystone = require('keystone');
+var cfenv   = require("cfenv");
+// get the core cfenv application environment
+var appEnv = cfenv.getAppEnv();
+var mongoService = cfenv.getService('mongolab');
 
 // Initialise Keystone with your project's configuration.
 // See http://keystonejs.com/guide/config for available options
 // and documentation.
 
-var port = (process.env.VCAP_APP_PORT || 3000);
-var host = (process.env.VCAP_APP_HOST || 'localhost');
 //database
 var mongoURI = "mongodb://localhost/keystone";
 
 if (process.env.VCAP_SERVICES) {
-	var services = JSON.parse(process.env.VCAP_SERVICES);
-	// // TODO: acertar para usar variável de ambiente
-	if (services['mongolab']) {
-		mongoURI = services['mongolab'][0].credentials.uri;
-	}
-	// mongoURI = process.env.MONGODB;
+	mongoURI = mongoService.credentials.uri;
 }
 // var mongoURI = "mongodb://IbmCloud_66msqd73_rc5oqcc5_185k3qgu:MFZUjy0hWwgc_PMPBkpQma4ZU1hnkHeV@ds041053.mongolab.com:41053/IbmCloud_66msqd73_rc5oqcc5";
 
@@ -49,8 +46,8 @@ keystone.init({
 keystone.import('models');
 
 keystone.set('mongo', mongoURI);
-keystone.set('host', host);
-keystone.set('port',port);
+keystone.set('host', appEnv.bind);
+keystone.set('port',appEnv.port);
 
 // Setup common locals for your templates. The following are required for the
 // bundled templates and layouts. Any runtime locals (that should be set uniquely
