@@ -6,7 +6,7 @@ require('dotenv').load();
 var keystone = require('keystone');
 
 //database
-var mongoURI;
+var mongoUri;
 // var mongoURI = "mongodb://IbmCloud_66msqd73_rc5oqcc5_185k3qgu:MFZUjy0hWwgc_PMPBkpQma4ZU1hnkHeV@ds041053.mongolab.com:41053/IbmCloud_66msqd73_rc5oqcc5";
 
 if (process.env.VCAP_SERVICES) {
@@ -31,7 +31,7 @@ keystone.init({
 	'views': 'templates/views',
 	'view engine': 'jade',
 
-	'mongo': mongoURI,
+	'mongo': mongoUri,
 
 	'emails': 'templates/emails',
 
