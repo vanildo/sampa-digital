@@ -31,7 +31,7 @@ keystone.init({
 	'views': 'templates/views',
 	'view engine': 'jade',
 
-	'mongo': mongoURI
+	'mongo': mongoURI,
 
 	'emails': 'templates/emails',
 
