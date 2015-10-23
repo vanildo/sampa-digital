@@ -31,6 +31,8 @@ keystone.init({
 	'views': 'templates/views',
 	'view engine': 'jade',
 
+	'mongo': mongoURI
+
 	'emails': 'templates/emails',
 
 	'auto update': true,
@@ -44,9 +46,9 @@ keystone.init({
 
 keystone.import('models');
 
-keystone.set('mongo', mongoURI);
-keystone.set('host', appEnv.bind);
-keystone.set('port',appEnv.port);
+// keystone.set('mongo', mongoURI);
+// keystone.set('host', appEnv.bind);
+// keystone.set('port',appEnv.port);
 
 // Setup common locals for your templates. The following are required for the
 // bundled templates and layouts. Any runtime locals (that should be set uniquely
