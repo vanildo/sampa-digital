@@ -38,7 +38,15 @@ keystone.init({
 	'auto update': true,
 	'session': true,
 	'auth': true,
-	'user model': 'Usuario'
+	'user model': 'Usuario',
+
+	'cookie secret': process.env.COOKIE_SECRET || 'demo',
+
+	'ga property': process.env.GA_PROPERTY,
+	'ga domain': process.env.GA_DOMAIN,
+
+	'chartbeat property': process.env.CHARTBEAT_PROPERTY,
+	'chartbeat domain': process.env.CHARTBEAT_DOMAIN
 
 });
 
@@ -58,7 +66,11 @@ keystone.set('locals', {
 	_: require('underscore'),
 	env: keystone.get('env'),
 	utils: keystone.utils,
-	editable: keystone.content.editable
+	editable: keystone.content.editable,
+	ga_property: keystone.get('ga property'),
+	ga_domain: keystone.get('ga domain'),
+	chartbeat_property: keystone.get('chartbeat property'),
+	chartbeat_domain: keystone.get('chartbeat domain')
 });
 
 // Load your project's Routes
@@ -105,10 +117,11 @@ keystone.set('email tests', require('./routes/emails'));
 // Configure the navigation bar in Keystone's Admin UI
 
 keystone.set('nav', {
-	'posts': ['posts', 'post-categories'],
+	'posts': ['posts', 'post-comments', 'post-categories'],
 	'galleries': 'galleries',
 	'enquiries': 'enquiries',
-	'usuarios': 'usuarios'
+	'usuarios': 'usuarios',
+	'field-tests': 'things'
 });
 
 // Start Keystone to connect to your database and initialise the web server
