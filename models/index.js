@@ -5,3 +5,4 @@ require('./PostCategory');
 require('./Gallery');
 require('./Enquiry');
 require('./Thing');
+require('./Empresa');
