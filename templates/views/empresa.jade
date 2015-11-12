@@ -3,19 +3,23 @@ extends ../layouts/default
 block content
 	.page-header
 			a(href='/keystone/empresas').btn.btn-default.pull-right= user ? 'View Empresas' : 'Sign in to View Empresas'
-			h1 Contact
+			h1 Empresa
+                        
+			each empresa, i in empresas
+				#{empresa.codigo} #{empresa.nomeFantasia} #{empresa.razaoSocial}
+					br
 		.row
 			.col-sm-8
 				form(method='post').form-horizontal
-					input(type='hidden', name='action', value='empresa')					
+					input(type='hidden', name='action', value='empresa')
 					.form-group
 						label.col-sm-2.control-label Nome Fantasia
 						.col-sm-10
-							input(type='text' name='nomeFantasia' ).form-control					
+							input(type='text' name='nomeFantasia' ).form-control
 							.form-group
 						label.col-sm-2.control-label Razao Social
 						.col-sm-10
-							input(type='text' name='razaoSocial' ).form-control		
+							input(type='text' name='razaoSocial' ).form-control
 					.form-group
 						.col-sm-10.col-sm-offset-2
 							p.help-block Note: others can see your enquiry in the <a href='/keystone/empresass'>Admin UI</a>
@@ -29,5 +33,4 @@ block content
 						a(href='http://github.com/KeystoneJS/keystone-demo', target='_blank').list-group-item GitHub Repo
 						a(href='http://www.keystonejs.com/guide', target='_blank').list-group-item Documentation
 						a(href='https://groups.google.com/d/forum/keystonejs', target='_blank').list-group-item Google Group
-						
-						
+				

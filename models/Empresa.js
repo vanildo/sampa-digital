@@ -13,7 +13,7 @@ var Empresa = new keystone.List('Empresa', {
 });
 
 Empresa.add({
-    codigo: {type: Number, index: true},
+    codigo: {type: Number, index: true, unique: true, autokey: true},
     nomeFantasia: {type: String},
     razaoSocial: {type: String, index: true},
     descricao: {type: String},
