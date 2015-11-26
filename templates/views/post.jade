@@ -36,7 +36,3 @@ block content
 									| by #{data.post.author.name.full}
 						hr
 						!= data.post.content.full
-					//-comments
-					div
-						+comment-form()
-						+comment-thread(comments)
