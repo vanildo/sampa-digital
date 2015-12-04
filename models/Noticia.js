@@ -8,7 +8,7 @@ var Types = keystone.Field.Types;
 
 var Noticia = new keystone.List('Noticia', {
     map: {name: 'noticia'},
-    track: true,
+    track: { createdBy: true, updatedBy: true},
     autokey: {path: 'noticia', from: 'noticia'}
 });
 

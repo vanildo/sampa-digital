@@ -114,8 +114,7 @@ keystone.set('nav', {
     'enquiries': 'enquiries',
     'usuarios': 'usuarios',
     'field-tests': 'things',
-    'empresas': 'empresas',
-    'oportunidades': 'oportunidades',
+    'empresas': ['empresas', 'oportunidades'],
     'cnaes': 'cnaes',
     'pessoas': 'pessoas'
 

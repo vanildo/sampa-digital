@@ -12,8 +12,9 @@ Usuario.add({
 	name: { type: Types.Name, required: true, index: true },
 	email: { type: Types.Email, initial: true, required: true, index: true },
 	password: { type: Types.Password, initial: true, required: true }
-}, 'Permissions', {
-	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true }
+}, 'Permissions', { 
+	isAdmin: { type: Types.Boolean, default:true, hidden:true, noedit:true,  index: true },
+	empresa: {type: Boolean, label:'Cadastro de Empresa', index:true}
 });
 
 // Provide access to Keystone
@@ -33,5 +34,5 @@ Usuario.relationship({ ref: 'Post', path: 'posts', refPath: 'author' });
  * Registration
  */
 
-Usuario.defaultColumns = 'name, email, isAdmin';
+Usuario.defaultColumns = 'name, email';
 Usuario.register();

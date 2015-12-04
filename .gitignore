@@ -22,6 +22,7 @@ build/Release
 # Dependency directory
 # Deployed apps should consider commenting this line out:
 # see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
+node/keystone/node_modules
 abbrev
 ansi
 are-we-there-yet
@@ -90,7 +91,6 @@ isstream
 jshint-stylish
 json-stringify-safe
 jsonpointer
-keystone
 lcid
 load-json-file
 lodash

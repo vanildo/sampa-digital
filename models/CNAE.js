@@ -8,11 +8,14 @@ var Types = keystone.Field.Types;
 var CNAE = new keystone.List('CNAE', {
     map: {name: 'codigo'},
     track: true,
-    autokey: {path: 'codigo', from: 'codigo'}
+	noedit: true,
+    autokey: {path: 'codigo', from: 'codigo'},
+	
 });
 CNAE.add({
     codigo: {type: String, required: true},
-    descricao: {type: String}  
+    descricao: {type: String},  
+	
 });
 /**
  * Relationships
