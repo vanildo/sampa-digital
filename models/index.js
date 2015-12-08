@@ -6,3 +6,9 @@ require('./Gallery');
 require('./Enquiry');
 require('./Thing');
 require('./Empresa');
+require('./Oportunidade');
+require('./CNAE');
+require('./Pessoa');
+
+
+

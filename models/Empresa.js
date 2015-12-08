@@ -3,47 +3,46 @@ var Types = keystone.Field.Types;
 
 /**
  * Empresa Model
- * ==========
+ * =============
  */
 
 var Empresa = new keystone.List('Empresa', {
-    autokey: {path: 'slug', from: 'codigo', unique: true},
-    map: {name: 'codigo'}
-
+    map: {name: 'razaoSocial'},
+    track: true,
+    autokey: {path: 'razaoSocial', from: 'razaoSocial', unique: true}
 });
 
 Empresa.add({
-    codigo: {type: Number, index: true, unique: true, autokey: true},
-    nomeFantasia: {type: String},
-    razaoSocial: {type: String, index: true},
+    nomeFantasia: {type: String, label: 'Nome Fantasia'},
+    razaoSocial: {type: String, label: 'Razão Social'},
     descricao: {type: String},
+    responsavelLegal: {type: Types.Relationship, ref: 'Pessoa'},
     contato: {type: String},
     contatoComercial: {type: String},
     telefone: {type: String},
     endereco: {type: Types.Location},
-    cnpj: {type: String, index: true},
+    cnpj: {type: String, unique: true, required: true, initial: true, label: 'CNPJ'},
+    cnae: {type: Types.Relationship, ref: 'CNAE'},
     logo: {type: Types.CloudinaryImage},
     twitter: {type: String},
     facebook: {type: String},
-    linkedin: {type: String}
-}, 'Permissions', {
-    isAdmin: {type: Boolean, label: 'Can access Keystone', index: true}
+    linkedin: {type: String},
+    oportunidades: {type: Types.Relationship, ref: 'Oportunidade', many: true}
 });
-
-// Provide access to Keystone
-Empresa.schema.virtual('canAccessKeystone').get(function () {
-    return this.isAdmin;
-});
-
 
 /**
  * Relationships
  */
+
+Empresa.relationship({ref: 'Oportunidade', path: 'oportunidades', refPath: 'oportunidade'});
+Empresa.relationship({ref: 'CNAE', path: 'codigos', refPath: 'codigo'});
+Empresa.relationship({ref: 'Pessoa', path: 'nomes', refPath: 'nome'});
 
 
 /**
  * Registration
  */
 
-Empresa.defaultColumns = 'nomeFantasia, razaoSocial';
+Empresa.defaultColumns = 'razaoSocial, cnpj';
+
 Empresa.register();

@@ -9,6 +9,8 @@
  */
 
 var _ = require('underscore');
+var keystone = require('keystone');
+
 
 exports.theme = function (req, res, next) {
 	if (req.query.theme) {
@@ -49,19 +51,63 @@ exports.theme = function (req, res, next) {
 exports.initLocals = function(req, res, next) {
 
 	var locals = res.locals;
+	if(req.user){
+		if(!req.user.empresa){
+			locals.navLinks = [
+				{ label: 'Home',		key: 'home',		href: '/' },
+				{ label: 'Blog',		key: 'blog',		href: '/blog' },
+				{ label: 'Galeria',		key: 'gallery',		href: '/gallery' },
+				{ label: 'Contato',		key: 'contact',		href: '/contact' }
+			];
+			
+			keystone.set('nav', {
+						'posts': ['posts', 'post-comments', 'post-categories'],
+						'galleries': 'galleries',
+						'enquiries': 'enquiries',
+						'usuarios': 'usuarios',
+						'field-tests': 'things',
+						'empresas': 'empresas',
+						'oportunidades': 'oportunidades',
+						'cnaes': 'cnaes',
+						'pessoas': 'pessoas'
+						});
 
-	locals.navLinks = [
-		{ label: 'Home',		key: 'home',		href: '/' },
-		{ label: 'Blog',		key: 'blog',		href: '/blog' },
-		{ label: 'Galeria',		key: 'gallery',		href: '/gallery' },
-		{ label: 'Contato',		key: 'contact',		href: '/contact' },
-                { label: 'Empresa',		key: 'empresa',		href: '/empresa' }
-	];
+			locals.user = req.user;
 
-	locals.user = req.user;
+			next();
+		}else{
+			keystone.set('nav', {
+						'posts': ['posts', 'post-comments', 'post-categories'],
+						'galleries': 'galleries',
+						'empresas': 'empresas',
+						'usuarios': 'usuarios',
+						'oportunidades': 'oportunidades',
+						});
+						
+			locals.navLinks = [
+				{ label: 'Home',		key: 'home',		href: '/' },
+				{ label: 'Blog',		key: 'blog',		href: '/blog' },
+				{ label: 'Galeria',		key: 'gallery',		href: '/gallery' },
+				{ label: 'Contato',		key: 'contact',		href: '/contact' }
+			];
+			
+			locals.user = req.user;
 
-	next();
+			next();
+			
+		}
+	}else{
+		locals.navLinks = [
+				{ label: 'Home',		key: 'home',		href: '/' },
+				{ label: 'Blog',		key: 'blog',		href: '/blog' },
+				{ label: 'Galeria',		key: 'gallery',		href: '/gallery' },
+				{ label: 'Contato',		key: 'contact',		href: '/contact' }
+			];
 
+			locals.user = req.user;
+
+			next();
+	}
 };
 
 
