@@ -27,6 +27,7 @@ Empresa.add({
     twitter: {type: String},
     facebook: {type: String},
     linkedin: {type: String},
+    webSite: {type: String},
     oportunidades: {type: Types.Relationship, ref: 'Oportunidade', many: true}
 });
 
