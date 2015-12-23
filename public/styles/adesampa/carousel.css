@@ -1,0 +1,29 @@
+.slider{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+#mainCarousel{
+  background-image: url(../../images/templatemo_carousel_bg.jpg);
+  background-size: cover;
+  height: 400px;
+  /*Font*/
+  color: #FFFFFF;
+  /*Put it away from the nav*/
+  margin-top: 0;
+  /*centraliaze all content*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/*Change indicators to squares*/
+.carousel-indicators li{
+  border-radius: 0;
+}
+#mainCarousel p{
+  font-size: 21px;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+#mainCarousel h2{
+  font-size: 36px;
+}
