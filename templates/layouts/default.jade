@@ -15,7 +15,10 @@ html
 		link(href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700', rel='stylesheet')
 		link(href="/styles/themes/Flatly.min.css", rel="stylesheet")
 		
+		link(href="/styles/adesampa/all.css", rel="stylesheet")
 		link(href="/styles/adesampa/nav.css", rel="stylesheet")
+		link(href="/styles/adesampa/carousel.css", rel="stylesheet")
+		link(href="/styles/adesampa/forms.css", rel="stylesheet")
 		
 		if user && user.canAccessKeystone
 			link(href="/keystone/styles/content/editor.min.css", rel="stylesheet")
@@ -72,18 +75,32 @@ html
 											each theme in themes
 												li(class=currentTheme === theme ? 'active' : '')
 													a(href='?theme=' + theme)= theme
-		.container
-			//- intro
-			block intro
-			//- messages
-			+flash-messages(messages)
-			//- content
-			block content
-			//- footer
-			.site-footer: .container.text-center
-				p Copyright &copy; 2015 Jed Watson. All rights reserved.
-				p: a(href="https://twitter.com/keystonejs", class="twitter-follow-button", data-show-count="false", data-size="large") Follow @keystonejs
-		
+		//- intro
+		block intro
+		//- messages
+		+flash-messages(messages)
+		//- content
+		block content
+		//- footer
+		.separation-rule.footer
+			.container.text-center
+				.row
+					ul.list-inline
+						li
+							a(href="#")
+								span.social-icon-fb
+						li
+							a(href="#")
+								span.social-icon-twitter
+						li
+							a(href="#")
+								span.social-icon-rss													
+				.row
+					img(src="/images/topsponsors_bottom.png", alt="ADESAMPA. Agencia São Paulo de Desenvolvimento. Em cooperação, Prefeitura de São PAulo. Desenvolvimento, trabalho e empreendedorismo")
+				.row
+					p Adesampa © Todos os Direitos Reservados, 2016
+			img.right-align.bluemix(src="/images/bluemix.png", alt="Desenvolvido com Bluemix")
+		//- footer
 		script.
 			!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 
@@ -91,6 +108,8 @@ html
 		script(src='/js/jquery/jquery-2.1.4.min.js')
 		script(src='/js/bootstrap/collapse.js')
 		script(src='/js/bootstrap/dropdown.js')
+		script(src='/js/bootstrap/carousel.js')
+		script(src='/js/bootstrap/transition.js')
 		script.
 			$('body')[0].style.paddingTop = $('.navbar').height() + 30 + 'px';
 	

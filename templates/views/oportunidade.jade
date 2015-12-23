@@ -1,0 +1,29 @@
+extends ../layouts/default
+
+block intro
+	.container
+		.row
+			.col-md-12.text-center
+				if false
+					h2.orange Quero Vender!!
+					p
+						i Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit
+				else
+					h2.orange  Quero Comprar!! 
+					p
+						i Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit
+
+block content
+	.bg-pb
+		.container
+			
+			if data.posts.results.length
+				if data.posts.totalPages < 1
+					.row
+						.col-md-12
+							h3 Nenhuma notícia.
+				else
+					each post in data.posts.results
+						+post(post)
+
+				

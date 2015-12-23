@@ -1,58 +1,53 @@
 extends ../layouts/default
 
-include ../mixins/post
-block content
-	.page-header
-		a(href='/keystone/posts?new').btn.btn-default.pull-right= user ? 'Write Post' : 'Sign in to Write Post'
-		h1=category ? category.name : 'Blog'
-	.row
-		.col-sm-8
-			if filters.category && !category
-				h3 Invalid Category.
-			else
-				if posts.results.length
-					if posts.totalPages > 1
-						.lead.text-muted Showing 
-							strong #{posts.first}
-							|  to 
-							strong #{posts.last}
-							|  of 
-							strong #{posts.total}
-							|  posts
-					else
-						.lead.text-muted Showing #{utils.plural(posts.results.length, '* post')}
-					.blog
-						each post in posts.results
-							+post(post)
-					if posts.totalPages > 1
-						ul.pagination
-							if posts.previous
-								li: a(href='?page=' + posts.previous): span.glyphicon.glyphicon-chevron-left
-							else
-								li.disabled: a(href='?page=' + 1): span.glyphicon.glyphicon-chevron-left
-							each p, i in posts.pages
-								li(class=posts.currentPage === p ? 'active' : null)
-									a(href='?page=' + (p === '...' ? (i ? posts.totalPages : 1) : p ))= p
-							if posts.next
-								li: a(href='?page=' + posts.next): span.glyphicon.glyphicon-chevron-right
-							else
-								li.disabled: a(href='?page=' + posts.totalPages): span.glyphicon.glyphicon-chevron-right
+mixin post(post)
+	.post(data-ks-editable=editable(user, { list: 'Post', id: post.id }))
+		.row
+			.col-md-2.text-center
+				if post.image.exists
+					img.fit(src=post._.image.fit(160,160))
 				else
-					if category
-						.jumbotron.text-center
-							h3(style="margin-bottom:0;margin-top:0;") No posts in the category #{category.name}.
+					img.fit(src='/images/noticia_padrao.png')
+			.col-md-10
+				h3.no-margin: = post.title
+				p Publicado em:
+					if post.publishedDate
+							span.orange 
+								| #{post._.publishedDate.format('DD')} de #{post._.publishedDate.format('MMMM')} de #{post._.publishedDate.format('YYYY')}
+					if post.categories && post.categories.length
+						|  
+						each cat, i in post.categories
+							a(href='/blog/' + cat.key)= cat.name
+							if i < post.categories.length - 1
+								| , 
+							else
+								|  
+				p!= post.content.brief
+				if post.content.extended
+					p.btn.small.orange: a(href='/blog/post/' + post.slug) Leia mais
+
+block intro
+	.container
+		.row
+			.col-md-12.text-center
+				h2.orange Notícias
+				p
+					i Fique por dentro do que movimenta São Paulo
+		
+
+block content
+	.bg-pb
+		.container
+			if filters.category && !data.category
+				.row
+					.col-md-12
+						h3 Categoria Inválida.
+			else
+				if data.posts.results.length
+					if data.posts.totalPages < 1
+						.row
+							.col-md-12
+								h3 Nenhuma notícia.
 					else
-						.jumbotron.text-center
-							h3(style="margin-bottom:0;margin-top:0;") There are no posts yet.
-		.col-sm-4
-			if categories.length
-				.lead.text-muted Categories
-				ul.nav.nav-pills.nav-stacked
-					li(class=!category ? 'active' : null)
-						a(href='/blog') All
-					each cat in categories
-						li(role="presentation" class=category && category.id === cat.id ? 'active' : null)
-							a(href='/blog/' + cat.key)
-								=cat.name
-								if cat.postCount
-									span.badge.pull-right= cat.postCount
+						each post in data.posts.results
+							+post(post)
