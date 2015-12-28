@@ -7,27 +7,31 @@ var Types = keystone.Field.Types;
  */
 
 var Empresa = new keystone.List('Empresa', {
-    map: {name: 'razaoSocial'},
-    track: true,
-    autokey: {path: 'razaoSocial', from: 'razaoSocial', unique: true}
+    nocreate: true
 });
 
 Empresa.add({
-    nomeFantasia: {type: String, label: 'Nome Fantasia'},
-    razaoSocial: {type: String, label: 'Razão Social'},
+    nomeFantasia: {type: String, required: true},
+    razaoSocial: {type: String, required: true},
     descricao: {type: String},
     responsavelLegal: {type: Types.Relationship, ref: 'Pessoa'},
     contato: {type: String},
     contatoComercial: {type: String},
     telefone: {type: String},
     endereco: {type: Types.Location},
-    cnpj: {type: String, unique: true, required: true, initial: true, label: 'CNPJ'},
+    cnpj: {type: String, unique: true, required: true, initial: true},
     cnae: {type: Types.Relationship, ref: 'CNAE'},
-    logo: {type: Types.CloudinaryImage},
+    logo: { type: Types.Url },
     twitter: {type: String},
     facebook: {type: String},
     linkedin: {type: String},
-    oportunidades: {type: Types.Relationship, ref: 'Oportunidade', many: true}
+    webSite: {type: String},
+    oportunidades: {type: Types.Relationship, ref: 'Oportunidade', many: true},
+    empresaCadastroType: {type: Types.Select, options: [
+            {value: 'aprovado', label: "Aprovado"},
+            {value: 'rejeitado', label: "Rejeitado"},
+            {value: 'pendente', label: "Aguardando aprovação"},
+        ], required: true}
 });
 
 /**
@@ -43,6 +47,6 @@ Empresa.relationship({ref: 'Pessoa', path: 'nomes', refPath: 'nome'});
  * Registration
  */
 
-Empresa.defaultColumns = 'razaoSocial, cnpj';
-
+Empresa.defaultColumns = 'razaoSocial, cnpj, empresaCadastroType';
+Empresa.defaultSort = '-createdAt';
 Empresa.register();
