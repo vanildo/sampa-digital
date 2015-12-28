@@ -1,19 +1,25 @@
 mixin post(post)
-	article(data-ks-editable=editable(usuario, { list: 'Post', id: post.id })).media
-		.media-left
-			a(href='/blog/post/' + post.key)
+	.post(data-ks-editable=editable(user, { list: 'Post', id: post.id }))
+		.row
+			.col-md-2.text-center
 				if post.image.exists
-					img(src=post._.image.fit(80,80)).media-object
+					img.fit(src=post._.image.fit(160,160))
 				else
-					img(src="http://placehold.it/80x80").media-object
-		.media-body
-			h3.media-heading
-				a(href='/blog/post/' + post.key)= post.name
-			if post.publishedDate || post.author
-				p.text-muted.text-small
+					img.fit(src='/images/noticia_padrao.png')
+			.col-md-10
+				h3.no-margin: = post.title
+				p Publicado em:
 					if post.publishedDate
-						time= post._.publishedDate.format('MMMM Do, YYYY')
+							span.orange 
+								| #{post._.publishedDate.format('DD')} de #{post._.publishedDate.format('MMMM')} de #{post._.publishedDate.format('YYYY')}
+					if post.categories && post.categories.length
 						|  
-					if post.author
-						span by #{post.author.name.full}
-			!= post.content.brief
+						each cat, i in post.categories
+							a(href='/blog/' + cat.key)= cat.name
+							if i < post.categories.length - 1
+								| , 
+							else
+								|  
+				p!= post.content.brief
+				if post.content.extended
+					p.btn.small.orange: a(href='/blog/post/' + post.key) Leia mais
