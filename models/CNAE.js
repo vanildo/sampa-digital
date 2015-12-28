@@ -7,8 +7,7 @@ var Types = keystone.Field.Types;
 
 var CNAE = new keystone.List('CNAE', {
     map: {name: 'codigo'},
-    track: true,
-	noedit: true,
+    track: true,    
     autokey: {path: 'codigo', from: 'codigo'},
 	
 });
@@ -26,4 +25,5 @@ CNAE.add({
  * Registration
  */
 CNAE.defaultColumns = 'codigo , descricao';
+CNAE.defaultSort = 'descricao';
 CNAE.register();
