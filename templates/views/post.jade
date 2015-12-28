@@ -4,7 +4,7 @@ extends ../layouts/default
 include ../mixins/post
 
 block content
-	if !data.post
+	if !post
 		.jumbotron.text-center
 			h2 Notícia inválida...
 			p Por favor, verifique a url. 
@@ -19,16 +19,16 @@ block content
 							a(href="/blog") Notícias
 				article
 					header
-						h2.orange= data.post.title
+						h2.orange= post.title
 						p.orange Publicado em: 
-							if data.post.publishedDate
-								time(datetime=data.post.publishedDate)=data.post._.publishedDate.format('DD')
+							if post.publishedDate
+								time(datetime=post.publishedDate)=post._.publishedDate.format('DD')
 								|  de 
-								time(datetime=data.post.publishedDate)=data.post._.publishedDate.format('MMMM')
+								time(datetime=post.publishedDate)=post._.publishedDate.format('MMMM')
 								| de 
-								time(datetime=data.post.publishedDate)=data.post._.publishedDate.format('YYYY')
+								time(datetime=post.publishedDate)=post._.publishedDate.format('YYYY')
 						
 						
-						if data.post.image.exists
-							img(src=data.post._.image.fit(750,500)).img-responsive
-						!= data.post.content.full
+						if post.image.exists
+							img(src=post._.image.fit(750,500)).img-responsive
+						!= post.content.full

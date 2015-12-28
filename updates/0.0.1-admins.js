@@ -10,6 +10,7 @@
 exports.create = {
 	Usuario: [
 		{ 'name.first': 'Admin', 'name.last': 'User', email: 'vanildov@br.ibm.com', password: 'admin', isAdmin: true },
+                { 'name.first': 'Empresa', 'name.last': 'Empresa', email: 'empresa@br.empresa.com', password: 'admin', empresa: true },
                 { 'name.first': 'Ricardo', 'name.last': 'Ogata', email: 'rogata@br.ibm.com', password: 'admin', isAdmin: true }
 	]        
 };
