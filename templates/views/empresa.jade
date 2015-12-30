@@ -1,7 +1,7 @@
 extends ../layouts/default
 
 block content
-	if empresaSubmitted
+	if empresaSubmitted && usuarioSubmitted
 		.jumbotron.text-center
 			h1 Success!
 			if user
@@ -39,6 +39,18 @@ block content
 						label.col-sm-2.control-label Contato
 						.col-sm-10
 							input(type='text' name='contato').form-control
+					.form-group
+						label.col-sm-2.control-label Nome Usuario
+						.col-sm-10
+							input(type='text' name='name.first').form-control
+					.form-group
+						label.col-sm-2.control-label Sobrenome Usuario
+						.col-sm-10
+							input(type='text' name='name.last').form-control
+					.form-group
+						label.col-sm-2.control-label Email Usuario
+						.col-sm-10
+							input(type='text' name='email').form-control
 					.form-group
 						label.col-sm-2.control-label Contato Comercial
 						.col-sm-10

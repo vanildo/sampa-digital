@@ -5,35 +5,35 @@ var Pessoa = keystone.list('Pessoa');
 
 exports = module.exports = function (req, res) {
 
-	var view = new keystone.View(req, res);
-	var locals = res.locals;        
-      
-	locals.section = 'cadastro';	
-	locals.formData = req.body || {};
-	locals.validationErrors = {};
-	locals.pessoaSubmitted = false;
-        
-     
-	view.on('post', { action: 'cadastro' }, function (next) {
+    var view = new keystone.View(req, res);
+    var locals = res.locals;
 
-		var application = new Pessoa.model();               
-		var updater = application.getUpdateHandler(req);
+    locals.section = 'cadastro';
+    locals.formData = req.body || {};
+    locals.validationErrors = {};
+    locals.pessoaSubmitted = false;
 
-		updater.process(req.body, {
-			flashErrors: true
-		}, function (err) {
-			if (err) {
-				locals.validationErrors = err.errors;
-			} else {
-				locals.pessoaSubmitted = true;
-                                locals.pessoa = application;
-                                return res.redirect('/empresa/' + application.id);                              
-			}
-			next();
-		});
 
-	});
+    view.on('post', {action: 'cadastro'}, function (next) {        
 
-	view.render('pessoa');
+        var application = new Pessoa.model();
+        var updater = application.getUpdateHandler(req);
+
+        updater.process(req.body, {
+            flashErrors: true
+        }, function (err) {
+            if (err) {
+                locals.validationErrors = err.errors;
+            } else {
+                locals.pessoaSubmitted = true;
+                locals.pessoa = application;
+                return res.redirect('/empresa/' + application.id);
+            }
+            next();
+        });
+
+    });
+
+    view.render('pessoa');
 
 }
