@@ -3,18 +3,7 @@ extends ../layouts/default
 block content
 	if empresaSubmitted && usuarioSubmitted
 		.jumbotron.text-center
-			h1 Success!
-			if user
-				p Head over to the Admin UI to see your empresa:
-				a(href='/keystone/empresas').btn.btn-lg.btn-primary Admin UI 
-			else
-				p(style="margin-left: 10vw; margin-right: 10vw;") To see your empresa, sign in with the username 
-					code demo@keystonejs.com
-					|  and the password 
-					code demo
-					|  then go to the enquiries list.
-				a(href='/keystone/signin').btn.btn-lg.btn-primary Sign In
-	
+			h1 Empresa cadastrada com sucesso, Aguardando aprovação da Adesampa para empresa entrar no sistema!				
 	else
 		.page-header
 			a(href='/keystone/empresas').btn.btn-default.pull-right= user ? 'View Empresas' : 'Sign in to View Empresas'
@@ -60,17 +49,29 @@ block content
 						.col-sm-10
 							input(type='text' name='telefone').form-control
 					.form-group
+						label.col-sm-2.text-left.control-label CEP
+						.col-sm-10
+							input(type='text' name='cep').form-control
+					.form-group
 						label.col-sm-2.text-left.control-label Endereço
 						.col-sm-10
-							input(type='text' name='endereco.street1').form-control
+							input(type='text' name='endereco').form-control
 					.form-group
 						label.col-sm-2.text-left.control-label Número
 						.col-sm-10
-							input(type='text' name='endereco.number').form-control
+							input(type='text' name='enderecoNumero').form-control
 					.form-group
-						label.col-sm-2.text-left.control-label CEP
+						label.col-sm-2.text-left.control-label Bairro
 						.col-sm-10
-							input(type='text' name='endereco.postcode').form-control
+							input(type='text' name='bairro').form-control
+					.form-group
+						label.col-sm-2.text-left.control-label Cidade
+						.col-sm-10
+							input(type='text' name='cidade').form-control
+					.form-group
+						label.col-sm-2.text-left.control-label Estado
+						.col-sm-10
+							input(type='text' name='estado').form-control
 					.form-group
 						label.col-sm-2.control-label CNPJ
 						.col-sm-10

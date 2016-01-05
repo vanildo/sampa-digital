@@ -7,18 +7,40 @@ exports = module.exports = function (req, res) {
 
     var view = new keystone.View(req, res);
     var locals = res.locals;
-
     locals.section = 'cadastro';
     locals.formData = req.body || {};
     locals.validationErrors = {};
-    locals.pessoaSubmitted = false;
+    locals.cpfCheck = true;
+    locals.cpf = Pessoa;
 
 
-    view.on('post', {action: 'cadastro'}, function (next) {        
+    // Load the current category filter
+    view.on('post', {action: 'isCpf'}, function (next) {
+        if (req.body.cpf) {
+            Pessoa.model.findOne({'cpf': req.body.cpf}).exec(function (err, result) {
+                if (result) {
+                    locals.cpf = result;
+                    console.log(locals.cpf.id);
+                    return res.redirect('/empresa/' + locals.cpf.id);
+                } else
+                {
+                    locals.cpfCheck = false;
+                }
+                next(err);
+            });
+        } else {
+            next();
+        }
+        console.log(req.body.cpf);
+        console.log(locals.cpf.id);
+
+    });
+
+
+    view.on('post', {action: 'cadastro'}, function (next) {
 
         var application = new Pessoa.model();
         var updater = application.getUpdateHandler(req);
-
         updater.process(req.body, {
             flashErrors: true
         }, function (err) {
@@ -31,9 +53,6 @@ exports = module.exports = function (req, res) {
             }
             next();
         });
-
     });
-
     view.render('pessoa');
-
 }

@@ -12,8 +12,15 @@ var Pessoa = new keystone.List('Pessoa', {
 });
 Pessoa.add({
     nome: {type: String, required: true},
-    endereco: {type: Types.Location},   
-    cpf: {type: String, unique: true, required: true, initial: true, label: 'CPF'}
+    cep: {type: String, required: true, initial: true},
+    bairro: {type: String, required: true, initial: true},
+    cidade: {type: String, required: true, initial: true},
+    estado: {type: String, required: true, initial: true},
+    endereco: {type: String, required: true, initial: true},
+    enderecoNumero: {type: String, required: true, initial: true},
+    latitude: {type: String},
+    longitude: {type: String},    
+    cpf: {type: String, unique: true, required: true, initial: true}
 });
 /**
  * Relationships
