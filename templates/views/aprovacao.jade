@@ -1,0 +1,33 @@
+extends ../layouts/default
+
+block content
+	.page-header
+		h1 "Aprovação de Empresas no Sistema"
+
+			table(id="tbPendencia", class="false table items-list")
+				tr
+					th Razão Social
+					th Descrição
+					th Responsável Legal
+
+				if pendencias.length
+					each pendencia, i in pendencias
+						tr
+							td #{pendencia.razaoSocial}
+							td #{pendencia.descricao}
+							td #{pendencia.responsavelLegal.nome}
+							td(id=i) 
+								input(type='radio', name='aprove'+i, value=1)
+								| Aprovar
+								input(type='radio', name='aprove'+i, value=2)
+								| Reprovar
+					.row
+				else
+					.jumbotron.text-center
+						h3(style="margin-bottom:0;margin-top:0;") There are no albums yet.	
+		form(method='post').form-horizontal
+			input(type='hidden', name='action', value='aprovacao')
+			.form-group
+				.col-sm-10.col-sm-offset-2					
+					button(type='submit').btn.btn-primary Submit
+				

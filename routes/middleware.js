@@ -58,7 +58,8 @@ exports.initLocals = function (req, res, next) {
                 {label: 'Blog', key: 'blog', href: '/blog'},
                 {label: 'Galeria', key: 'gallery', href: '/gallery'},
                 {label: 'Contato', key: 'contact', href: '/contact'},
-                {label: 'Cadastro Empresa', key: 'pessoa', href: '/pessoa'}
+                {label: 'Cadastro Empresa', key: 'pessoa', href: '/pessoa'},
+                {label: 'Aprovaçao de Empresa', key: 'aprovacao', href: '/aprovacao'}
             ];
 
             keystone.set('nav', {
@@ -67,7 +68,7 @@ exports.initLocals = function (req, res, next) {
                 'enquiries': 'enquiries',
                 'usuarios': 'usuarios',
                 'field-tests': 'things',
-                'empresas': 'empresas'
+                'empresas': 'empresas'              
             });
 
             locals.user = req.user;
@@ -76,8 +77,8 @@ exports.initLocals = function (req, res, next) {
         } else {
             keystone.set('nav', {
                 'posts': ['posts', 'post-comments', 'post-categories'],
-                'galleries': 'galleries',              
-                'usuarios': 'usuarios'               
+                'galleries': 'galleries',
+                'usuarios': 'usuarios'
             });
 
             locals.navLinks = [
@@ -99,7 +100,7 @@ exports.initLocals = function (req, res, next) {
             {label: 'Blog', key: 'blog', href: '/blog'},
             {label: 'Galeria', key: 'gallery', href: '/gallery'},
             {label: 'Contato', key: 'contact', href: '/contact'},
-            {label: 'Cadastro Empresa', key: 'pessoa', href: '/pessoa'}          
+            {label: 'Cadastro Empresa', key: 'pessoa', href: '/pessoa'}
         ];
 
         locals.user = req.user;
