@@ -11,8 +11,9 @@ var Oportunidade = new keystone.List('Oportunidade', {
     autokey: {path: 'descricao', from: 'descricao'}
 });
 Oportunidade.add({
-    tipoOportunidade: {type: Types.Select, options: ['COMPRA', 'VENDA']},
+	nome: {type: String, required: true},
     descricao: {type: String, required: true},
+    tipoOportunidade: {type: Types.Select, options: ['COMPRA', 'VENDA']},
     quantidade: {type: Types.Number},
     preco: {type: Types.Money},
 });
