@@ -13,8 +13,8 @@ Usuario.add({
 	email: { type: Types.Email, initial: true, required: true, index: true },
 	password: { type: Types.Password, initial: true, required: true }
 }, 'Permissions', { 
-	isAdmin: { type: Types.Boolean, default:false, hidden:true, noedit:true,  index: true },
-	empresa: {type: Boolean, label:'Manutenção de Empresa', index:true}
+	isAdmin: { type: Types.Boolean, default:true, hidden:true, noedit:true,  index: true },
+	sampaAdmin: {type: Boolean, label:'Manutenção de Empresa', index:true}
 });
 
 // Provide access to Keystone
