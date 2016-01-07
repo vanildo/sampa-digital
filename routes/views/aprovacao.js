@@ -1,6 +1,7 @@
 var keystone = require('keystone');
 var Empresa = keystone.list('Empresa');
 
+
 exports = module.exports = function (req, res) {
 
 	var view = new keystone.View(req, res);
@@ -8,7 +9,7 @@ exports = module.exports = function (req, res) {
 
 	locals.section = 'aprovacao';
 
-	view.query('pendencias', Empresa.model.find().populate('responsavelLegal').sort('razaoSocial').where('empresaSituacaoSistema', 'pendente'));
+	view.query('pendencias', Empresa.model.find().populate('responsavelLegal empresaSituacaoSistema').sort('razaoSocial').where('empresaSituacaoSistema', 'pendente'));
 
 	view.render('aprovacao');
 
