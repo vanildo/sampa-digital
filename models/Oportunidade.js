@@ -6,13 +6,13 @@ var Types = keystone.Field.Types;
  */
 
 var Oportunidade = new keystone.List('Oportunidade', {
-    map: {name: 'descricao'},
+    map: {name: 'nome'},
     track: true,
-    autokey: {path: 'descricao', from: 'descricao'}
+    autokey: {path: 'nome', from: 'nome'}
 });
 Oportunidade.add({
-	nome: {type: String, required: true},
-    descricao: {type: String, required: true},
+	nome: {type: String, inital:true, required: true},
+    descricao: {type: String},
     tipoOportunidade: {type: Types.Select, options: ['COMPRA', 'VENDA']},
     quantidade: {type: Types.Number},
     preco: {type: Types.Money},
