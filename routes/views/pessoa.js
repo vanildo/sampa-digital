@@ -12,6 +12,7 @@ exports = module.exports = function (req, res) {
     locals.validationErrors = {};
     locals.cpfCheck = true;
     locals.cpf = Pessoa;
+    locals.cpfNumero;
 
 
     // Load the current category filter
@@ -31,6 +32,7 @@ exports = module.exports = function (req, res) {
         } else {
             next();
         }
+        locals.cpf = req.body.cpf;
         console.log(req.body.cpf);
         console.log(locals.cpf.id);
 
