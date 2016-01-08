@@ -1,6 +1,15 @@
 extends ../layouts/default
 
 block content
+	script.
+		$('body').on('change', '.form-checkbox', function(){
+			if ($('#termos').prop('checked')){
+				$('#sendButton').removeClass('disabled');
+			}
+			else {
+				$('#sendButton').addClass('disabled');
+			};
+		});
 	if cpfCheck
 		.container
 			.row
@@ -82,7 +91,12 @@ block content
 							.form-group
 								label.control-label.sr-only Cidade:
 								input(type='text' name='estado' placeholder='Estado' ).form-control
-
+				.row
+					.col-md-12
+						input(type='checkbox', name='termos', id='termos', checked=false).form-checkbox
+						label(for='termos').form-checkbox
+							&nbsp;Li e concordo com os 
+							a(href='termos') Termos de Uso
 				.row
 					.col-md-12.text-center
-						button(type='submit').btn.green.small Enviar
+						button(type='submit').btn.green.small.disabled#sendButton Enviar

@@ -9,6 +9,43 @@
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
   outline: 0 none;
 }
+.form-checkbox {
+  border-radius: 0;
+  box-shadow: none;
+  float: left;
+}
+input.form-checkbox {
+  display: none;
+}
+label {
+  cursor: pointer;
+  color: #666;
+  font-size: 1.3rem;
+}
+input.form-checkbox + label:before {
+  border: 1px solid #DCE4EC;
+  content: "\00a0";
+  display: inline-block;
+  font: 16px/1em sans-serif;
+  height: 16px;
+  margin: 0 .25em 0 0;
+  padding:0;
+  vertical-align: top;
+  width: 16px;
+}
+input.form-checkbox:checked + label:before {
+  background: #fff;
+  color: #909090;;
+  content: "\2713";
+  text-align: center;
+  font-weight: bold;
+}
+input.form-checkbox:checked + label:after {
+  font-weight: bold;
+}
+label.form-checkbox{
+  margin: 2px 0px 0px;
+}
 /* HOME QUERO VENDER */
 .form-quero-vender input{
 
