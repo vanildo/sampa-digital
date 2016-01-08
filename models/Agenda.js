@@ -9,6 +9,7 @@ var Agenda = new keystone.List('Agenda', {
     map: {name: 'titulo'},
     track: true,
     autokey: {path: 'titulo', from: 'titulo'},
+	label:'Eventos',
 });
 Agenda.add({
     titulo: {type: String, required: true, initial: true, note: 'This field is required.'},

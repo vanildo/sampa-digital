@@ -1,0 +1,46 @@
+extends ../layouts/default
+
+block content
+		if pendencias.length
+			.page-header
+				h1 "Aprovação de Empresas no Sistema"
+			.row
+				.col-sm-8
+					form(method='post', id='frmPendencia').form-horizontal
+						input(type='hidden', name='action', value='aprovacao')
+						input(type='hidden', name='id', id='id', value='')
+						input(type='hidden', name='empresaSituacaoSistema', id='empresaSituacaoSistema', value='')
+						table(id="tbPendencia", class="false table items-list")
+							tr
+								th Razão Social
+								th CNPJ
+								th Responsável Legal
+							each pendencia, i in pendencias
+								tr.side-link(value=pendencia.razaoSocial)
+									td #{pendencia.razaoSocial}
+									td #{pendencia.cnpj}
+									td #{pendencia.responsavelLegal.nome}
+									td
+										button(id='#{pendencia.id}', type='button', name='btnAprove', onclick="requestFormAprove('#{pendencia.id}')") Aprovar
+										
+									td
+										button(id='#{pendencia.id}', type='button', name='btnDesaprove', onclick="requestFormDesaprove('#{pendencia.id}')") Rejeitar
+							td(id=i) 
+							
+					.row
+		else
+			.jumbotron.text-center
+				h3(style="margin-bottom:0;margin-top:0;") Nenhuma empresa pendente.	
+		
+block page-js
+	script.
+			function requestFormAprove(value) {
+				$("#id").val(value);
+				$("#empresaSituacaoSistema").val(1);
+				$("#frmPendencia").submit();
+			};
+			function requestFormDesaprove(value) {				
+				$("#id").val(value);
+				$("#empresaSituacaoSistema").val(2);				
+				$("#frmPendencia").submit();
+			};

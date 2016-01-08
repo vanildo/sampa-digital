@@ -1,57 +1,88 @@
 extends ../layouts/default
 
 block content
-	if pessoaSubmitted
-		.jumbotron.text-center
-			h1 Success!
-			if user
-				p Head over to the Admin UI to see your empresa:
-				a(href='/keystone/pessoas').btn.btn-lg.btn-primary Admin UI 
-			else
-				p(style="margin-left: 10vw; margin-right: 10vw;") To see your pessoa, sign in with the username 
-					code demo@keystonejs.com
-					|  and the password 
-					code demo
-					|  then go to the pessoas list.
-				a(href='/keystone/signin').btn.btn-lg.btn-primary Sign In
+	if cpfCheck
+		.container
+			.row
+				.col-md-12.text-center
+					h2.orange Nova Empresa por aqui?
+					p
+						i 
+							strong Comprador ou Vendedor:
+							|  Fique por dentro do que movimenta São Paulo
+			.row
+				.col-md-12.rule-bottom.text-center
+					h3 Responsavel Legal
+			.row
+				.col-sm-8
+					form(method='post').form-horizontal
+						input(type='hidden', name='action', value='isCpf').
+						.row
+							.col-xm-12.col-md-6
+								.col-md-12
+									.form-group
+										label.control-label.sr-only CPF:
+										input(type='text' name='cpf' placeholder="CPF (Ex. 00.000.000-0)").form-control
+						.row
+							.col-md-12.text-center
+								button(type='submit').btn.green.small Enviar
 	else
-		.page-header
-			a(href='/keystone/pessoas').btn.btn-default.pull-right= user ? 'View Pessoas' : 'Sign in to View Pessoas'
-			h1 Representante Legal
-		.row
-			.col-sm-8
-				form(method='post').form-horizontal
-					input(type='hidden', name='action', value='cadastro').
-					.form-group
-						label.col-sm-2.text-left.control-label Nome
-						.col-sm-10
-							input(type='text' name='nome').form-control
-					.form-group
-						label.col-sm-2.text-left.control-label Endereço
-						.col-sm-10
-							input(type='text' name='endereco.street1').form-control
-					.form-group
-						label.col-sm-2.text-left.control-label Número
-						.col-sm-10
-							input(type='text' name='endereco.number').form-control
-					.form-group
-						label.col-sm-2.text-left.control-label CEP
-						.col-sm-10
-							input(type='text' name='endereco.postcode').form-control
-					.form-group
-						label.col-sm-2.text-left.control-label CPF
-						.col-sm-10
-							input(type='text' name='cpf').form-control
-					.form-group
-						.col-sm-10.col-sm-offset-2
-							p.help-block Note: others can see your pessoa in the <a href='/keystone/pessoas'>Admin UI</a>
-							button(type='submit').btn.btn-primary Submit
-			.col-sm-4
-				.panel.panel-default
-					.panel-heading
-						h3.panel-title Resources
-					.panel-body Well that's it for the demo, but you can find out more from these links:
-					.list-group
-						a(href='http://github.com/KeystoneJS/keystone-demo', target='_blank').list-group-item GitHub Repo
-						a(href='http://www.keystonejs.com/guide', target='_blank').list-group-item Documentation
-						a(href='https://groups.google.com/d/forum/keystonejs', target='_blank').list-group-item Google Group
+		.container
+			.row
+				.col-md-12.text-center
+					h2.orange Nova Empresa por aqui?
+					p
+						i 
+							strong Comprador ou Vendedor:
+							|  Fique por dentro do que movimenta São Paulo
+			.row
+				.col-md-12.rule-bottom.text-center
+					h3 Responsavel Legal
+				
+			form(method='post').form-horizontal
+				input(type='hidden' name='cpf' value = cpf)
+				input(type='hidden', name='action', value='cadastro').
+				.row
+					.col-xm-12.col-md-6
+						.col-md-12
+							.form-group
+								label.control-label.sr-only Nome:
+								input(type='text' name='nome' placeholder="Nome").form-control
+					.col-xm-12.col-md-6
+						.col-md-12
+							.form-group
+								label.control-label.sr-only CEP:
+								input(type='text' name='cep' placeholder="CEP (Ex. 000.00-000)").form-control
+					
+				.row
+					.col-xm-12.col-md-6
+						.col-md-12
+							.form-group
+								label.control-label.sr-only Endereço:
+								input(type='text' name='endereco' placeholder="Endereço").form-control
+					.col-xm-12.col-md-6
+						.form-group
+							.col-sm-3
+								label.control-label.sr-only Número:
+								input(type='text' name='enderecoNumero' placeholder="Nº (Ex.999)").form-control
+								
+							.col-sm-9
+								label.control-label.sr-only Estado:
+								input(type='text' name='bairro' placeholder="Bairro").form-control
+				.row
+					.col-xm-12.col-md-6
+						.col-md-12
+							.form-group
+								label.control-label.sr-only Bairro:
+								input(type='text' name='cidade' placeholder='Cidade').form-control
+								
+								
+					.col-xm-12.col-md-6
+						.col-md-12
+							.form-group
+								label.control-label.sr-only Cidade:
+								input(type='text' name='estado' placeholder='Estado' ).form-control
+
+				.row
+					.col-md-12.text-center
+						button(type='submit').btn.green.small Enviar
