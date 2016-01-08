@@ -1,0 +1,48 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Users\\IBM_ADMIN\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'run-script',
+1 verbose cli   'start' ]
+2 info using npm@3.5.2
+3 info using node@v4.2.3
+4 verbose run-script [ 'prestart', 'start', 'poststart' ]
+5 info lifecycle sampa-digital@0.0.1~prestart: sampa-digital@0.0.1
+6 silly lifecycle sampa-digital@0.0.1~prestart: no script for prestart, continuing
+7 info lifecycle sampa-digital@0.0.1~start: sampa-digital@0.0.1
+8 verbose lifecycle sampa-digital@0.0.1~start: unsafe-perm in lifecycle true
+9 verbose lifecycle sampa-digital@0.0.1~start: PATH: C:\Users\IBM_ADMIN\AppData\Roaming\npm\node_modules\npm\bin\node-gyp-bin;C:\Projetos\adeSampa\node_modules\.bin;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\IBM\Infoprint Select;C:\Program Files (x86)\IBM\Personal Communications\;C:\Program Files (x86)\IBM\Trace Facility\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Users\IBM_ADMIN\AppData\Roaming\npm
+10 verbose lifecycle sampa-digital@0.0.1~start: CWD: C:\Projetos\adeSampa
+11 silly lifecycle sampa-digital@0.0.1~start: Args: [ '/d /s /c', 'node keystone.js' ]
+12 silly lifecycle sampa-digital@0.0.1~start: Returned: code: 4294967295  signal: null
+13 info lifecycle sampa-digital@0.0.1~start: Failed to exec start script
+14 verbose stack Error: sampa-digital@0.0.1 start: `node keystone.js`
+14 verbose stack Exit status 4294967295
+14 verbose stack     at EventEmitter.<anonymous> (C:\Users\IBM_ADMIN\AppData\Roaming\npm\node_modules\npm\lib\utils\lifecycle.js:232:16)
+14 verbose stack     at emitTwo (events.js:87:13)
+14 verbose stack     at EventEmitter.emit (events.js:172:7)
+14 verbose stack     at ChildProcess.<anonymous> (C:\Users\IBM_ADMIN\AppData\Roaming\npm\node_modules\npm\lib\utils\spawn.js:24:14)
+14 verbose stack     at emitTwo (events.js:87:13)
+14 verbose stack     at ChildProcess.emit (events.js:172:7)
+14 verbose stack     at maybeClose (internal/child_process.js:818:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
+15 verbose pkgid sampa-digital@0.0.1
+16 verbose cwd C:\Projetos\adeSampa
+17 error Windows_NT 6.1.7601
+18 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Users\\IBM_ADMIN\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js" "run-script" "start"
+19 error node v4.2.3
+20 error npm  v3.5.2
+21 error code ELIFECYCLE
+22 error sampa-digital@0.0.1 start: `node keystone.js`
+22 error Exit status 4294967295
+23 error Failed at the sampa-digital@0.0.1 start script 'node keystone.js'.
+23 error Make sure you have the latest version of node.js and npm installed.
+23 error If you do, this is most likely a problem with the sampa-digital package,
+23 error not with npm itself.
+23 error Tell the author that this fails on your system:
+23 error     node keystone.js
+23 error You can get information on how to open an issue for this project with:
+23 error     npm bugs sampa-digital
+23 error Or if that isn't available, you can get their info via:
+23 error     npm owner ls sampa-digital
+23 error There is likely additional logging output above.
+24 verbose exit [ 1, true ]

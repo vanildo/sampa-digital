@@ -12,7 +12,6 @@ exports = module.exports = function (req, res) {
     locals.validationErrors = {};
     locals.cpfCheck = true;
     locals.cpf = Pessoa;
-    locals.cpfNumero;
 
 
     // Load the current category filter
