@@ -31,5 +31,5 @@ Pessoa.add({
 /**
  * Registration
  */
-Pessoa.defaultColumns = 'nome';
+Pessoa.defaultColumns = 'nome,cpf';
 Pessoa.register();
