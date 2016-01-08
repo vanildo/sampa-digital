@@ -10,7 +10,6 @@ var Pessoa = new keystone.List('Pessoa', {
     track: true,
     //autokey: {path: 'nome', from: 'nome'},
 	label: 'Responsavel',
-	nodelete:'true',
 });
 Pessoa.add({
     nome: {type: String, required: true, initial:true},

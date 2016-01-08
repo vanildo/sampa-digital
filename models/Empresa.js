@@ -9,10 +9,10 @@ var Types = keystone.Field.Types;
 var Empresa = new keystone.List('Empresa', {
 	map: {name: 'razaoSocial'},
     nocreate: true,
-	nodelete:true,
 });
 
 Empresa.add({
+	controlData: {type: String, hidden:true, noedit:true},
     nomeFantasia: {type: String, required: true, index: true},
     razaoSocial: {type: String, unique: true, required: true, initial: true, index: true},
     descricao: {type: String, index: true},
