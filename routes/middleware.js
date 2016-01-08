@@ -52,32 +52,35 @@ exports.initLocals = function (req, res, next) {
 
     var locals = res.locals;
     if (req.user) {
-        if (!req.user.empresa) {
+        if (req.user.sampaAdmin) {
             locals.navLinks = [
                 {label: 'Home', key: 'home', href: '/'},
                 {label: 'Blog', key: 'blog', href: '/blog'},
                 {label: 'Galeria', key: 'gallery', href: '/gallery'},
                 {label: 'Contato', key: 'contact', href: '/contact'},
-                {label: 'Cadastro Empresa', key: 'pessoa', href: '/pessoa'}
+                {label: 'Cadastro Empresa', key: 'pessoa', href: '/pessoa'},
+                {label: 'Aprovaçao de Empresa', key: 'aprovacao', href: '/aprovacao'}
             ];
 
             keystone.set('nav', {
-                'posts': ['posts', 'post-comments', 'post-categories'],
-                'galleries': 'galleries',
-                'enquiries': 'enquiries',
-                'usuarios': 'usuarios',
-                'field-tests': 'things',
-                'empresas': 'empresas'
+				'Empresa': 'empresas',
+				'Oportunidades': 'oportunidades',
+				'Contas': ['usuarios','pessoas'],
+                'Noticias': ['posts', 'post-comments', 'post-categories'],
+				'Agenda': 'Agenda',
+                'Galerias': 'galleries',
+                'Messagem': 'enquiries',
+				'CNAEs':'CNAE',
             });
 
             locals.user = req.user;
 
             next();
         } else {
-            keystone.set('nav', {
-                'posts': ['posts', 'post-comments', 'post-categories'],
-                'galleries': 'galleries',              
-                'usuarios': 'usuarios'               
+
+            keystone.set('nav', {  
+				'Empresas': ['empresas','oportunidades'],
+				'Conta':['usuarios','pessoas']
             });
 
             locals.navLinks = [
@@ -85,7 +88,6 @@ exports.initLocals = function (req, res, next) {
                 {label: 'Blog', key: 'blog', href: '/blog'},
                 {label: 'Galeria', key: 'gallery', href: '/gallery'},
                 {label: 'Contato', key: 'contact', href: '/contact'},
-                {label: 'Cadastro Empresa', key: 'pessoa', href: '/pessoa'}
             ];
 
             locals.user = req.user;
@@ -99,7 +101,7 @@ exports.initLocals = function (req, res, next) {
             {label: 'Blog', key: 'blog', href: '/blog'},
             {label: 'Galeria', key: 'gallery', href: '/gallery'},
             {label: 'Contato', key: 'contact', href: '/contact'},
-            {label: 'Cadastro Empresa', key: 'pessoa', href: '/pessoa'}          
+            {label: 'Cadastro Empresa', key: 'pessoa', href: '/pessoa'}
         ];
 
         locals.user = req.user;

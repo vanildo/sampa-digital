@@ -53,4 +53,4 @@ User.schema.path('password').set(function (value) {
 
 User.track = true;
 User.defaultColumns = 'name, email, phone, photo';
-User.register();
+//User.register();

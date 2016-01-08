@@ -29,4 +29,4 @@ Noticia.add({
 
 Noticia.defaultColumns = 'noticia';
 
-Noticia.register();
+//Noticia.register();
