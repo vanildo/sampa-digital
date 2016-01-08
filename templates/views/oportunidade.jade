@@ -2,7 +2,8 @@ extends ../layouts/default
 
 block intro
 	.container
-		.row
+		.row				
+			//h1=oportunidades[0]			
 			.col-md-12.text-center
 				if oportunidades[0].tipoOportunidade == "VENDA"
 					h2.orange Quero Vender!!
@@ -12,10 +13,27 @@ block intro
 					h2.orange Quero Comprar!! 
 					p
 						i Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit
-
+						//
+							_id
+							updatedBy
+							updatedAt
+							createdBy
+							createdAt
+							nome
+							descricao
+							quantidade
+							tipoOportunidade
 block content
 	.bg-pb
 		.container
+			p Ordenar por: 
+				a(href='#') Mais recentes
+				|&nbsp;/&nbsp;
+				a(href='#') Mais antigas
+				| &nbsp;/&nbsp;
+				a(href='#') A-Z
+				|&nbsp; /&nbsp;
+				a(href='#') Z-A
 			if oportunidades.length
 				each oportunidade in oportunidades
 					.row
@@ -25,13 +43,26 @@ block content
 							else
 								img.fit(src='/images/noticia_padrao.png')
 						.col-md-10
-							h3.no-margin: = oportunidade.title
-							p Publicado em:
-								if oportunidade.publishedDate
+							h3.no-margin: = oportunidade.nome
+							p 
+								if oportunidade.empresa
+									span.orange
+										| Empresa #{oportunidade.empresa}
+								else
+									span.orange
+										| Empresa da bananinha
+								| &nbsp;| Publicado em:
+								if oportunidade.createdAt
 										span.orange 
-											| #{oportunidade.publishedDate.format('DD')} de #{oportunidade.publishedDate.format('MMMM')} de #{oportunidade.publishedDate.format('YYYY')}
-							p!= oportunidade.descricaoBrief
-								p.btn.small.orange: a(href='/blog/post/' + oportunidade.key) Leia mais
+											| #{oportunidade._.createdAt.format('DD')} de #{oportunidade._.createdAt.format('MMMM')} de #{oportunidade._.createdAt.format('YYYY')}
+								else
+										span.orange 
+											| Bananas
+							if oportunidade.descricaoBrief
+								p!= oportunidade.descricaoBrief
+							else
+								p Bananosas bananudas!
+							p.btn.small.orange: a(href='/blog/post/' + oportunidade.key) Leia mais
 			else
 				.row
 					.col-md-12
