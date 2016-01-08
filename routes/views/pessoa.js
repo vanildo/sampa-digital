@@ -20,7 +20,6 @@ exports = module.exports = function (req, res) {
             Pessoa.model.findOne({'cpf': req.body.cpf}).exec(function (err, result) {
                 if (result) {
                     locals.cpf = result;
-                    console.log(locals.cpf.id);
                     return res.redirect('/empresa/' + locals.cpf.id);
                 } else
                 {
@@ -31,9 +30,7 @@ exports = module.exports = function (req, res) {
         } else {
             next();
         }
-        console.log(req.body.cpf);
-        console.log(locals.cpf.id);
-
+        locals.cpf = req.body.cpf;
     });
 
 
