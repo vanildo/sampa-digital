@@ -7,13 +7,15 @@ var Types = keystone.Field.Types;
  */
 
 var Empresa = new keystone.List('Empresa', {
-    nocreate: true
+	map: {name: 'razaoSocial'},
+    nocreate: true,
+	nodelete:true,
 });
 
 Empresa.add({
-    nomeFantasia: {type: String, required: true},
-    razaoSocial: {type: String, unique: true, required: true, initial: true},
-    descricao: {type: String},
+    nomeFantasia: {type: String, required: true, index: true},
+    razaoSocial: {type: String, unique: true, required: true, initial: true, index: true},
+    descricao: {type: String, index: true},
     responsavelLegal: {type: Types.Relationship, ref: 'Pessoa'},
     contato: {type: String},
     contatoComercial: {type: String},
@@ -52,6 +54,7 @@ Empresa.relationship({ref: 'Oportunidade', path: 'oportunidades', refPath: 'opor
 Empresa.relationship({ref: 'CNAE', path: 'codigos', refPath: 'codigo'});
 Empresa.relationship({ref: 'Pessoa', path: 'nomes', refPath: 'nome'});
 Empresa.relationship({ref: 'Usuario', path: 'usuarios', refPath: 'usuario'});
+
 
 
 /**

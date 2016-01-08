@@ -113,7 +113,6 @@ keystone.set('nav', {
     'galleries': 'galleries',
     'enquiries': 'enquiries',
     'usuarios': 'usuarios',
-    'field-tests': 'things',
     'empresas': 'empresas'
 });
 

@@ -63,11 +63,13 @@ exports.initLocals = function (req, res, next) {
 
             keystone.set('nav', {
 				'Empresa': 'empresas',
-				'Oportunidades':'opotunidades',
-				'Contas':['usuarios','pessoas'],
+				'Oportunidades': 'oportunidades',
+				'Contas': ['usuarios','pessoas'],
                 'Noticias': ['posts', 'post-comments', 'post-categories'],
+				'Agenda': 'Agenda',
                 'Galerias': 'galleries',
                 'Messagem': 'enquiries',
+				'CNAEs':'CNAE',
             });
 
             locals.user = req.user;
@@ -75,8 +77,8 @@ exports.initLocals = function (req, res, next) {
             next();
         } else {
             keystone.set('nav', {  
-				'empresas': ['empresas','oportunidades'],
-				'conta':['usuarios','pessoas']
+				'Empresas': ['empresas','oportunidades'],
+				'Conta':['usuarios','pessoas']
             });
 
             locals.navLinks = [

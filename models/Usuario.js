@@ -13,8 +13,8 @@ Usuario.add({
 	email: { type: Types.Email, initial: true, required: true, index: true },
 	password: { type: Types.Password, initial: true, required: true }
 }, 'Permissions', { 
-	isAdmin: { type: Types.Boolean, default:true, hidden:true, noedit:true,  index: true },
-	sampaAdmin: {type: Boolean, label:'Manutenção de Empresa', index:true}
+	isAdmin: { type: Types.Boolean, default:true, hidden:false,  index: true },
+	sampaAdmin: {type: Boolean, default:false, hidden:true, label:'Manutenção de Empresa', index:true}
 });
 
 // Provide access to Keystone
@@ -28,7 +28,7 @@ Usuario.schema.virtual('canAccessKeystone').get(function() {
  */
 
 Usuario.relationship({ ref: 'Post', path: 'posts', refPath: 'author' });
-
+Usuario.relationship({ref: 'Empresa', path: 'razaoSocial', refPath: 'razaoSocial'});
 
 /**
  * Registration
