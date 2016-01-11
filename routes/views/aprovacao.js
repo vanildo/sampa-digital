@@ -19,7 +19,7 @@ exports = module.exports = function (req, res) {
                         locals.usuario = result.usuario;
                         Usuario.model.findById(locals.usuario, function (err, usuariof) {
                             if (usuariof) {
-                                usuariof.empresa = true;
+                                usuariof.isAdmin = true;
                                 usuariof.save();
                             }
                         });
