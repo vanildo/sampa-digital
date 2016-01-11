@@ -1,11 +1,21 @@
 extends ../layouts/default
 
+block intro
+	.container
+		.row
+			.col-md-12.text-center
+				if pendencias.length
+					.page-header
+						h2.orange Aprovação de Empresas no Sistema
+				else
+					.jumbotron.text-center
+						h3(style="margin-bottom:0;margin-top:0;") Nenhuma empresa pendente.
+
 block content
-		if pendencias.length
-			.page-header
-				h1 "Aprovação de Empresas no Sistema"
-			.row
-				.col-sm-8
+	.container
+		.row
+			if pendencias.length
+				.col-md-12
 					form(method='post', id='frmPendencia').form-horizontal
 						input(type='hidden', name='action', value='aprovacao')
 						input(type='hidden', name='id', id='id', value='')
@@ -15,22 +25,25 @@ block content
 								th Razão Social
 								th CNPJ
 								th Responsável Legal
+								th Telefone de contato
 							each pendencia, i in pendencias
 								tr.side-link(value=pendencia.razaoSocial)
 									td #{pendencia.razaoSocial}
 									td #{pendencia.cnpj}
 									td #{pendencia.responsavelLegal.nome}
+									td #{pendencia.telefone}
 									td
-										button(id='#{pendencia.id}', type='button', name='btnAprove', onclick="requestFormAprove('#{pendencia.id}')") Aprovar
+										p.btn.small.green: a(href='/blog/post/', onclick="requestFormAprove('#{pendencia.id}')") Aprovar
+										//button(id='#{pendencia.id}', type='button', name='btnAprove') Aprovar
 										
 									td
-										button(id='#{pendencia.id}', type='button', name='btnDesaprove', onclick="requestFormDesaprove('#{pendencia.id}')") Rejeitar
+										p.btn.small.orange: a(href='/blog/post/', onclick="requestFormDesaprove('#{pendencia.id}')") Rejeitar
+										//button(id='#{pendencia.id}', type='button', name='btnDesaprove') Rejeitar
+								
 							td(id=i) 
-							
-					.row
-		else
-			.jumbotron.text-center
-				h3(style="margin-bottom:0;margin-top:0;") Nenhuma empresa pendente.	
+
+			else
+			
 		
 block page-js
 	script.
