@@ -51,41 +51,46 @@ exports = module.exports = function (req, res) {
     view.on('post', {action: 'cadastroEmpresa'}, function (next) {
         
         
-        //Cadastro de usuario
-        var usuario = new Usuario.model({
-            isAdmin: false,
-            empresa:false,
-            password: randomValueBase64(8),
-        });
+	//Cadastro de usuario
+			var usuario = new Usuario.model({
+				isAdmin: false,
+				sampaAdmin:false,
+				password: randomValueBase64(8),
+				controlData:locals.filters.pessoa,
+			});
 
-        var updaterU = usuario.getUpdateHandler(req);
-        updaterU.process(req.body, {
-            flashErrors: true
-        }, function (err) {
-            if (err) {
-                locals.validationErrors = err.errors;
-            } else {
-                locals.usuarioSubmitted = true;
-            }
-        });        
+			var updaterU = usuario.getUpdateHandler(req);
+			updaterU.process(req.body, {
+				flashErrors: true
+			}, function (err) {
+				if (err) {
+					locals.validationErrors = err.errors;
+				} else {
+					locals.usuarioSubmitted = true;
+				}
+			});        
 
-        var empresa = new Empresa.model({
-            responsavelLegal: locals.filters.pessoa,
-            empresaSituacaoSistema: 'pendente',
-            usuario: usuario,
-        });
+			var empresa = new Empresa.model({
+				responsavelLegal: locals.filters.pessoa,
+				empresaSituacaoSistema: 'pendente',
+				usuario: usuario,
+				controlData:locals.filters.pessoa,
+			});
 
-        var updaterE = empresa.getUpdateHandler(req);
-        updaterE.process(req.body, {
-            flashErrors: true
-        }, function (err) {
-            if (err) {
-                locals.validationErrors = err.errors;
-            } else {
-                locals.empresaSubmitted = true;
-            }
-            next();
-        });
+			var updaterE = empresa.getUpdateHandler(req);
+			updaterE.process(req.body, {
+				flashErrors: true
+			}, function (err) {
+				if (err) {
+					locals.validationErrors = err.errors;
+				} else {
+					locals.empresaSubmitted = true;
+				}
+				next();
+			});
+		
+		 
+		
     });
 
 

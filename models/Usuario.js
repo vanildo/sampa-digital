@@ -9,11 +9,12 @@ var Types = keystone.Field.Types;
 var Usuario = new keystone.List('Usuario');
 
 Usuario.add({
-	name: { type: Types.Name, required: true, index: true },
+	controlData: {type: String, hidden:true, noedit:true},
+	name: { type: Types.Name, required: true, index: true, unique:true },
 	email: { type: Types.Email, initial: true, required: true, index: true },
-	password: { type: Types.Password, initial: true, required: true }
+	password: { type: Types.Password, initial: true, required: true },
 }, 'Permissions', { 
-	isAdmin: { type: Types.Boolean, default:true, hidden:false,  index: true },
+	isAdmin: { type: Types.Boolean, default:true, hidden:true,  index: true },
 	sampaAdmin: {type: Boolean, default:false, hidden:true, label:'Manutenção de Empresa', index:true}
 });
 
@@ -28,7 +29,6 @@ Usuario.schema.virtual('canAccessKeystone').get(function() {
  */
 
 Usuario.relationship({ ref: 'Post', path: 'posts', refPath: 'author' });
-Usuario.relationship({ref: 'Empresa', path: 'razaoSocial', refPath: 'razaoSocial'});
 
 /**
  * Registration
