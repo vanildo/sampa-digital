@@ -16,7 +16,7 @@ Usuario.add({
 	email: { type: Types.Email, initial: true, required: true, index: true },
 	password: { type: Types.Password, initial: true, required: true },
 	isAdmin: { type: Types.Boolean, default:true, index: true },
-	sampaAdmin: {type: Boolean, default:false, hidden:true, index:true, noedit:true},
+	sampaAdmin: {type: Boolean, default:false, index:true},
 });
 
 // Provide access to Keystone
