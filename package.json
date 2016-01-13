@@ -9,7 +9,8 @@
     "async": "^1.4.2",
     "underscore": "^1.8.3",
     "dotenv": "^1.1.0",
-    "cfenv": "1.0.x"
+    "cfenv": "1.0.x",
+    "nodemailer": "2.0.0"
   },
   "devDependencies": {
     "gulp": "^3.7.0",

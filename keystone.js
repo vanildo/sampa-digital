@@ -116,6 +116,10 @@ keystone.set('nav', {
     'empresas': 'empresas'
 });
 
+keystone.set('email nodemailer', {
+    // Nodemailer configuration
+});
+
 // Start Keystone to connect to your database and initialise the web server
 
 keystone.start();
