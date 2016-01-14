@@ -58,9 +58,8 @@ exports.initLocals = function (req, res, next) {
                 {label: 'Blog', key: 'blog', href: '/blog'},
                 {label: 'Galeria', key: 'gallery', href: '/gallery'},
                 {label: 'Contato', key: 'contact', href: '/contact'},
-                {label: 'Cadastro Empresa', key: 'pessoa', href: '/pessoa'},
-                {label: 'Aprovaçao de Empresa', key: 'aprovacao', href: '/aprovacao'},
-                {label: 'mail', key: 'mail', href: '/mail'}
+                {label: 'Cadastro', key: 'pessoa', href: '/pessoa'},
+                {label: 'Aprovaçao', key: 'aprovacao', href: '/aprovacao'}               
             ];
 
             keystone.set('nav', {
@@ -71,7 +70,8 @@ exports.initLocals = function (req, res, next) {
                 'Agenda': 'Agenda',
                 'Galerias': 'galleries',
                 'Messagem': 'enquiries',
-                'CNAEs': 'CNAE',
+                'CNAE': 'CNAE',
+                'EmailConfig': 'EmailConfig'    
             });
 
             locals.user = req.user;
@@ -102,7 +102,7 @@ exports.initLocals = function (req, res, next) {
             {label: 'Blog', key: 'blog', href: '/blog'},
             {label: 'Galeria', key: 'gallery', href: '/gallery'},
             {label: 'Contato', key: 'contact', href: '/contact'},
-            {label: 'Cadastro Empresa', key: 'pessoa', href: '/pessoa'}
+            {label: 'Cadastro', key: 'pessoa', href: '/pessoa'}
         ];
 
         locals.user = req.user;

@@ -6,8 +6,7 @@ var Types = keystone.Field.Types;
  */
 
 var Agenda = new keystone.List('Agenda', {
-    map: {name: 'titulo'},
-    track: true,
+    map: {name: 'titulo'},    
     autokey: {path: 'titulo', from: 'titulo'},
 	label:'Eventos',
 });

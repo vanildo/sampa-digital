@@ -113,7 +113,7 @@ keystone.set('nav', {
     'galleries': 'galleries',
     'enquiries': 'enquiries',
     'usuarios': 'usuarios',
-    'empresas': 'empresas'
+    'empresas': 'empresas'   
 });
 
 keystone.set('email nodemailer', {

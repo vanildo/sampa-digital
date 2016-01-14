@@ -7,12 +7,13 @@ var Types = keystone.Field.Types;
  */
 
 var EmailConfig = new keystone.List('EmailConfig', {
-    nocreate: true,
+    map: {name: 'name'},    
 });
 
 EmailConfig.add({
     name: {type: String, required: true, initial: true, index: true},
     user: {type: String, required: true, initial: true},
+    senha: {type: String, required: true, initial: true},
     from: {type: String, required: true, initial: true},
     subject: {type: String, required: true, initial: true},
     texto1: {type: String, required: true, initial: true, index: true},
@@ -26,8 +27,10 @@ EmailConfig.add({
     texto9: {type: String},
     texto0: {type: String},
     html: {type: String},
-    isAtivo: {type: Types.Boolean}
+    isAtivo: {type: Types.Boolean},
+    dataCriacao: { type: Types.Date, default: Date.now }
 });
 
-EmailConfig.defaultColumns = 'name';
+EmailConfig.defaultColumns = 'name, dataCriacao';
+EmailConfig.defaultSort = 'dataCriacao';
 EmailConfig.register();
