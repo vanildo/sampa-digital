@@ -42,9 +42,10 @@ exports = module.exports = function (app) {
     app.all('/contact', routes.views.contact);
     app.all('/pessoa', routes.views.pessoa);
     app.all('/empresa/:pessoa', routes.views.empresa);
-  	app.all('/oportunidades', routes.views.oportunidade);
+    app.all('/oportunidades', routes.views.oportunidade);
     app.all('/termos', routes.views.termos);
-	app.all('/aprovacao', routes.views.aprovacao);
+    app.all('/aprovacao', routes.views.aprovacao);
+    app.all('/mail', routes.views.mail);
 
 
 

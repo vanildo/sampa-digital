@@ -7,19 +7,19 @@ var Types = keystone.Field.Types;
  */
 
 var Empresa = new keystone.List('Empresa', {
-	map: {name: 'razaoSocial'},
+    map: {name: 'razaoSocial'},
     nocreate: true,
 });
 
 Empresa.add({
-	controlData: {type: String, hidden:true, noedit:true},
-    nomeFantasia: {type: String, required: true, index: true},
+    controlData: {type: String, hidden: true, noedit: true},
+    nomeFantasia: {type: String, required: true, index: true, label: "Razão Social"},
     razaoSocial: {type: String, unique: true, required: true, initial: true, index: true},
     descricao: {type: String, index: true},
-    responsavelLegal: {type: Types.Relationship, ref: 'Pessoa'},
+    responsavelLegal: {type: Types.Relationship, ref: 'Pessoa', label: "Responsável Legal"},
     contato: {type: String},
     contatoComercial: {type: String},
-    telefone: {type: String},
+    telefone: {type: String, label: "Telefone de contato"},
     cep: {type: String, required: true, initial: true},
     bairro: {type: String, required: true, initial: true},
     cidade: {type: String, required: true, initial: true},
@@ -27,8 +27,8 @@ Empresa.add({
     endereco: {type: String, required: true, initial: true},
     enderecoNumero: {type: String, required: true, initial: true},
     latitude: {type: String},
-    longitude: {type: String},   
-    cnpj: {type: String, unique: true, required: true, initial: true},
+    longitude: {type: String},
+    cnpj: {type: String, unique: true, required: true, initial: true, label: "CNPJ"},
     cnae: {type: Types.Relationship, ref: 'CNAE'},
     logo: {type: Types.Url},
     twitter: {type: String},

@@ -8,11 +8,12 @@ var Types = keystone.Field.Types;
 var Pessoa = new keystone.List('Pessoa', {
     map: {name: 'nome'},
     track: true,
-    //autokey: {path: 'nome', from: 'nome'},
-	label: 'Responsavel',
+    autokey: {path: 'nomeID', from: 'nome'},
+    label: 'Responsavel',
+    nocreate: true,     
 });
 Pessoa.add({
-    nome: {type: String, required: true, initial:true},
+    nome: {type: String, required: true, initial: true},
     cep: {type: String, required: true, initial: true},
     bairro: {type: String, required: true, initial: true},
     cidade: {type: String, required: true, initial: true},
@@ -20,7 +21,7 @@ Pessoa.add({
     endereco: {type: String, required: true, initial: true},
     enderecoNumero: {type: String, required: true, initial: true},
     latitude: {type: String},
-    longitude: {type: String},    
+    longitude: {type: String},
     cpf: {type: String, unique: true, required: true, initial: true}
 });
 /**

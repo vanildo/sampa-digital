@@ -4,6 +4,9 @@ var CNAE = keystone.list('CNAE');
 var Oportunidade = keystone.list('Oportunidade');
 var Usuario = keystone.list('Usuario');
 var crypto = require('crypto');
+var nodemailer = require('nodemailer');
+var EmailConfig = keystone.list('EmailConfig');
+
 
 function randomValueBase64(len) {
     return crypto.randomBytes(Math.ceil(len * 3 / 4))
@@ -27,7 +30,18 @@ exports = module.exports = function (req, res) {
     locals.filters = {
         pessoa: req.params.pessoa
     };
-    
+
+//    //Mail
+//    var transporter = nodemailer.createTransport('smtps://ogataricardo2010%40gmail.com:wshwwfvgxohoxqhn@smtp.gmail.com');
+//    var mailOptions = {
+//        from: 'ogataricardo2010@gmail.com', // sender address
+//        to: 'rogata@br.ibm.com', // list of receivers
+//        subject: 'Hello ✔', // Subject line
+//        text: 'Hello world 🐴', // plaintext body
+//        html: '<b>Hello world 🐴</b>' // html body
+//    };
+
+
     // Load Oportunidades
     view.on('init', function (next) {
 
@@ -38,6 +52,7 @@ exports = module.exports = function (req, res) {
         });
     });
 
+
     // Load CNAE
     view.on('init', function (next) {
 
@@ -47,50 +62,80 @@ exports = module.exports = function (req, res) {
             next(err);
         });
     });
-    
+
     view.on('post', {action: 'cadastroEmpresa'}, function (next) {
-        
-        
-	//Cadastro de usuario
-			var usuario = new Usuario.model({
-				isAdmin: false,
-				sampaAdmin:false,
-				password: randomValueBase64(8),
-				controlData:locals.filters.pessoa,
-			});
 
-			var updaterU = usuario.getUpdateHandler(req);
-			updaterU.process(req.body, {
-				flashErrors: true
-			}, function (err) {
-				if (err) {
-					locals.validationErrors = err.errors;
-				} else {
-					locals.usuarioSubmitted = true;
-				}
-			});        
+        //Cadastro de usuario
+        var usuario = new Usuario.model({
+            isAdmin: false,
+            sampaAdmin: false,
+            password: randomValueBase64(8),
+            controlData: locals.filters.pessoa,
+        });
 
-			var empresa = new Empresa.model({
-				responsavelLegal: locals.filters.pessoa,
-				empresaSituacaoSistema: 'pendente',
-				usuario: usuario,
-				controlData:locals.filters.pessoa,
-			});
+        var empresa = new Empresa.model({
+            responsavelLegal: locals.filters.pessoa,
+            empresaSituacaoSistema: 'pendente',
+            usuario: usuario,
+            controlData: locals.filters.pessoa,
+        });
 
-			var updaterE = empresa.getUpdateHandler(req);
-			updaterE.process(req.body, {
-				flashErrors: true
-			}, function (err) {
-				if (err) {
-					locals.validationErrors = err.errors;
-				} else {
-					locals.empresaSubmitted = true;
-				}
-				next();
-			});
-		
-		 
-		
+        var updaterE = empresa.getUpdateHandler(req);
+        var updaterU = usuario.getUpdateHandler(req);
+        var emailConfigs;
+        var emailConfig = EmailConfig.model.findOne().where('isAtivo', true);
+
+        emailConfig.exec(function (err, results) {
+            if (results) {
+                emailConfigs = results;
+            }
+            updaterE.process(req.body, {
+                flashErrors: true
+            }, function (err) {
+                if (err) {
+                    locals.validationErrors = err.errors;
+                } else {
+                    locals.empresaSubmitted = true;
+                }
+                if (locals.empresaSubmitted)
+                {
+                    console.log("aqui" + locals.empresaSubmitted);
+                    updaterU.process(req.body, {
+                        flashErrors: true
+                    }, function (err) {
+                        if (err) {
+                            locals.validationErrors = err.errors;
+                        } else {
+                            locals.usuarioSubmitted = true;
+                            console.log(locals.empresaSubmitted + " - empresa - " + locals.usuarioSubmitted);
+                            if (locals.empresaSubmitted && locals.usuarioSubmitted && emailConfigs) {
+                                var smtps = 'smtps://' + emailConfigs.user + '%40gmail.com:' + emailConfigs.senha + '@smtp.gmail.com';
+                                console.log(smtps);
+                                var transporter = nodemailer.createTransport(smtps);
+                                var mailOptions = {
+                                    from: emailConfigs.from, // sender address
+                                    to: 'rogata@br.ibm.com', // list of receivers
+                                    subject: emailConfigs.subject, // Subject line
+                                    text: emailConfigs.text1, // plaintext body                                   
+                                    html: '<b>' + emailConfigs.text2 + '</b>' // html body
+                                };
+                                console.log(emailConfigs.user);
+                                transporter.sendMail(mailOptions, function (error, info) {
+                                    if (error) {
+                                        return console.log(error);
+                                    }
+                                    console.log('Message sent: ' + info.response);
+                                });
+                            }
+                        }
+                        next();
+                    });
+                } else {
+                    next();
+                }
+            });
+        });
+
     });
 
 

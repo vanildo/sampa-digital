@@ -9,6 +9,7 @@ require('./Oportunidade');
 require('./CNAE');
 require('./Pessoa');
 require('./Agenda');
+require('./EmailConfig');
 
 
 
