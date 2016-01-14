@@ -8,9 +8,9 @@ var Types = keystone.Field.Types;
 var Pessoa = new keystone.List('Pessoa', {
     map: {name: 'nome'},
     track: true,
-    autokey: {path: 'nome', from: 'nome'},
+    autokey: {path: 'nomeID', from: 'nome'},
     label: 'Responsavel',
-    nocreate: true,
+    nocreate: true,     
 });
 Pessoa.add({
     nome: {type: String, required: true, initial: true},
