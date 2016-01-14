@@ -5,9 +5,11 @@ block content
 		$('body').on('change', '.form-checkbox', function(){
 			if ($('#termos').prop('checked')){
 				$('#sendButton').removeClass('disabled');
+				$('#sendButton').prop('disabled', false);
 			}
 			else {
 				$('#sendButton').addClass('disabled');
+				$('#sendButton').prop('disabled', true);
 			};
 		});
 	if cpfCheck
@@ -99,4 +101,4 @@ block content
 							a(href='termos') Termos de Uso
 				.row
 					.col-md-12.text-center
-						button(type='submit').btn.green.small.disabled#sendButton Enviar
+						button(type='submit' disabled='true').btn.green.small.disabled#sendButton Enviar

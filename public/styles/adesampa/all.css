@@ -39,7 +39,7 @@ a:hover {
 }
 .btn a{
     color: #ffffff;
-    text-decoration: none;
+    text-decoration: none !important;
 }
 .btn.green{
     background-color: #66b980;
