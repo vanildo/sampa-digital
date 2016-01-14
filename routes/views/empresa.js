@@ -96,10 +96,10 @@ exports = module.exports = function (req, res) {
                     locals.validationErrors = err.errors;
                 } else {
                     locals.empresaSubmitted = true;
+                    console.log("Cadastrado cnpj: " + req.body.cnpj);
                 }
                 if (locals.empresaSubmitted)
                 {
-                    console.log("aqui" + locals.empresaSubmitted);
                     updaterU.process(req.body, {
                         flashErrors: true
                     }, function (err) {
@@ -107,10 +107,9 @@ exports = module.exports = function (req, res) {
                             locals.validationErrors = err.errors;
                         } else {
                             locals.usuarioSubmitted = true;
-                            console.log(locals.empresaSubmitted + " - empresa - " + locals.usuarioSubmitted);
+                            console.log("Cadastrado email: " + req.body.email);
                             if (locals.empresaSubmitted && locals.usuarioSubmitted && emailConfigs) {
                                 var smtps = 'smtps://' + emailConfigs.user + '%40gmail.com:' + emailConfigs.senha + '@smtp.gmail.com';
-                                console.log(smtps);
                                 var transporter = nodemailer.createTransport(smtps);
                                 var mailOptions = {
                                     from: emailConfigs.from, // sender address
@@ -118,8 +117,7 @@ exports = module.exports = function (req, res) {
                                     subject: emailConfigs.subject, // Subject line
                                     text: emailConfigs.text1, // plaintext body                                   
                                     html: '<b>' + emailConfigs.text2 + '</b>' // html body
-                                };
-                                console.log(emailConfigs.user);
+                                };                               
                                 transporter.sendMail(mailOptions, function (error, info) {
                                     if (error) {
                                         return console.log(error);
@@ -137,7 +135,6 @@ exports = module.exports = function (req, res) {
         });
 
     });
-
 
     view.render('empresa');
 }
