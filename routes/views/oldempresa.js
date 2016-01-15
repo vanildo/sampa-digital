@@ -27,6 +27,8 @@ exports = module.exports = function (req, res) {
     locals.validationErrors = {};
     locals.empresaSubmitted = false;
     locals.usuarioSubmitted = false;
+    locals.cnpjCheck = true;
+    locals.empresaTypes = Empresa.fields.empresaType.ops;
     locals.filters = {
         pessoa: req.params.pessoa
     };
@@ -61,6 +63,25 @@ exports = module.exports = function (req, res) {
             locals.cnaes = results;
             next(err);
         });
+    });
+    
+    // Load the current cnpj 
+    view.on('post', {action: 'isCnpj'}, function (next) {
+        if (req.body.cnpj) {
+            Empresa.model.findOne({'cnpj': req.body.cnpj}).exec(function (err, result) {
+                if (result) {
+                    locals.cnpj = result;
+                    return res.redirect('/empresa' );
+                } else
+                {
+                    locals.cpfCheck = false;
+                }
+                next(err);
+            });
+        } else {
+            next();
+        }
+        locals.cpf = req.body.cpf;
     });
 
     view.on('post', {action: 'cadastroEmpresa'}, function (next) {

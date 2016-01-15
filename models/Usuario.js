@@ -12,7 +12,7 @@ var Usuario = new keystone.List('Usuario', {
 
 Usuario.add({
 	controlData: {type: String, hidden:true, noedit:true},	
-        email: {type: String, required: true, initial: true,index:true},	
+        email: { type: Types.Email, initial: true, required: true, index: true },       	
 	password: { type: Types.Password, initial: true, required: true },
 	isAdmin: { type: Types.Boolean, default:true, index: true },
 	sampaAdmin: {type: Boolean, default:false, index:true},

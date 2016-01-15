@@ -36,7 +36,14 @@ Empresa.add({
     linkedin: {type: String},
     webSite: {type: String},
     oportunidades: {type: Types.Relationship, ref: 'Oportunidade', many: true},
-    usuario: {type: Types.Relationship, ref: 'Usuario'}
+    usuario: {type: Types.Relationship, ref: 'Usuario'},
+    empresaType: {type: Types.Select, options: [
+            {value: 'instituicao', label: "Instituição"},
+            {value: 'startup', label: "Start-up"},
+            {value: 'workplace', label: "Workplace"},
+            {value: 'incubadora', label: "Incubadora"},
+            {value: 'universidade', label: "Universidade"},
+        ], required: true}
 }
 , 'Situação da Empresa no Sistema', {
     empresaSituacaoSistema: {type: Types.Select, options: [

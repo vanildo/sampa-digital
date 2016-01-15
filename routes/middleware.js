@@ -58,8 +58,9 @@ exports.initLocals = function (req, res, next) {
                 {label: 'Blog', key: 'blog', href: '/blog'},
                 {label: 'Galeria', key: 'gallery', href: '/gallery'},
                 {label: 'Contato', key: 'contact', href: '/contact'},
-                {label: 'Cadastro', key: 'pessoa', href: '/pessoa'},
-                {label: 'Aprovaçao', key: 'aprovacao', href: '/aprovacao'},
+                {label: 'Cadastro', key: 'cadastro', href: '/cadastro'},
+//                {label: 'Cadastro', key: 'pessoa', href: '/pessoa'},
+                {label: 'Aprovaçao', key: 'aprovacao', href: '/aprovacao'},                
 //                {label: 'Mail', key: 'mail', href: '/mail'}               
             ];
 
@@ -103,7 +104,8 @@ exports.initLocals = function (req, res, next) {
             {label: 'Blog', key: 'blog', href: '/blog'},
             {label: 'Galeria', key: 'gallery', href: '/gallery'},
             {label: 'Contato', key: 'contact', href: '/contact'},
-            {label: 'Cadastro', key: 'pessoa', href: '/pessoa'}
+            {label: 'Cadastro', key: 'cadastro', href: '/cadastro'},
+//            {label: 'Cadastro', key: 'pessoa', href: '/pessoa'}
         ];
 
         locals.user = req.user;
