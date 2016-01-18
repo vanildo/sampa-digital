@@ -35,6 +35,7 @@ exports = module.exports = function (req, res) {
     locals.empresaType;
     locals.cnpj;
     locals.pessoa;
+    locals.endereco = Empresa;
 
     locals.cadastroInstituicao = true;
     locals.cadastroUsuario = true;
@@ -93,6 +94,8 @@ exports = module.exports = function (req, res) {
         locals.cnpj = req.body.cnpj;
         locals.empresaType = req.body.empresaType;
         locals.cadastroCnpj = false;
+        
+        console.log(Empresa);
 
         var pessoa = new Pessoa.model();
         var updaterP = pessoa.getUpdateHandler(req);
@@ -124,6 +127,7 @@ exports = module.exports = function (req, res) {
             }, function (err) {
                 if (err) {
                     locals.validationErrors = err.errors;
+                    next(err);
                 } else {
                     console.log("Cadastrado cpf: " + req.body.cpf);
                     locals.pessoaSubmitted = true;
@@ -137,6 +141,7 @@ exports = module.exports = function (req, res) {
                     }, function (err) {
                         if (err) {
                             locals.validationErrors = err.errors;
+                            next(err);
                         } else {
                             locals.empresaSubmitted = true;
                             locals.cadastroInstituicao = false;
@@ -149,6 +154,7 @@ exports = module.exports = function (req, res) {
                             }, function (err) {
                                 if (err) {
                                     locals.validationErrors = err.errors;
+                                    next(err);
                                 } else {
                                     locals.usuarioSubmitted = true;
                                     locals.cadastroUsuario = true;
