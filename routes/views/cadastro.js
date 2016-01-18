@@ -29,11 +29,13 @@ exports = module.exports = function (req, res) {
     locals.empresaSubmitted = false;
     locals.usuarioSubmitted = false;
     locals.pessoaSubmitted = false;
+    locals.cadastroCnpj = true;
+    locals.empresaExistente = false;
     locals.empresaTypes = Empresa.fields.empresaType.ops;
     locals.empresaType;
     locals.cnpj;
     locals.pessoa;
-    locals.cadastroCnpj = true;
+
     locals.cadastroInstituicao = true;
     locals.cadastroUsuario = true;
     locals.cadstroCpf = true;
@@ -43,18 +45,6 @@ exports = module.exports = function (req, res) {
     locals.filters = {
         pessoa: req.params.pessoa
     };
-
-
-//    //Mail
-//    var transporter = nodemailer.createTransport('smtps://ogataricardo2010%40gmail.com:wshwwfvgxohoxqhn@smtp.gmail.com');
-//    var mailOptions = {
-//        from: 'ogataricardo2010@gmail.com', // sender address
-//        to: 'rogata@br.ibm.com', // list of receivers
-//        subject: 'Hello ✔', // Subject line
-//        text: 'Hello world 🐴', // plaintext body
-//        html: '<b>Hello world 🐴</b>' // html body
-//    };
-
 
     // Load Oportunidades
     view.on('init', function (next) {
@@ -84,8 +74,8 @@ exports = module.exports = function (req, res) {
         if (req.body.cnpj) {
             Empresa.model.findOne({'cnpj': req.body.cnpj}).exec(function (err, result) {
                 if (result) {
-                    locals.cnpj = result;
-                    return res.redirect('/cadastro');
+                    locals.cadastroCnpj = true;
+                    locals.empresaExistente = true;
                 } else
                 {
                     locals.cadastroCnpj = false;
@@ -104,7 +94,7 @@ exports = module.exports = function (req, res) {
         locals.empresaType = req.body.empresaType;
         locals.cadastroCnpj = false;
 
-        var pessoa = new Pessoa.model();        
+        var pessoa = new Pessoa.model();
         var updaterP = pessoa.getUpdateHandler(req);
         var usuario = new Usuario.model({
             isAdmin: false,
@@ -124,7 +114,7 @@ exports = module.exports = function (req, res) {
         var emailConfigs;
         var emailConfig = EmailConfig.model.findOne().where('isAtivo', true);
 
-        emailConfig.exec(function (err,results) {
+        emailConfig.exec(function (err, results) {
             if (results) {
                 emailConfigs = results;
                 locals.email = emailConfigs;
@@ -151,7 +141,7 @@ exports = module.exports = function (req, res) {
                             locals.empresaSubmitted = true;
                             locals.cadastroInstituicao = false;
                             console.log("Cadastrado cnpj: " + req.body.cnpj);
-                        }                       
+                        }
                         if (locals.empresaSubmitted)
                         {
                             updaterU.process(req.body, {
@@ -162,23 +152,32 @@ exports = module.exports = function (req, res) {
                                 } else {
                                     locals.usuarioSubmitted = true;
                                     locals.cadastroUsuario = true;
-                                    console.log("Cadastrado email: " + req.body.email);                                    
-                                    if (locals.empresaSubmitted && locals.usuarioSubmitted && emailConfigs && locals.pessoaSubmitted) {
-                                        var smtps = 'smtps://' + emailConfigs.user + '%40gmail.com:' + emailConfigs.senha + '@smtp.gmail.com';
-                                        var transporter = nodemailer.createTransport(smtps);
-                                        var mailOptions = {
-                                            from: emailConfigs.from, // sender address
-                                            to: 'ogata_ricardo@hotmail.com', // list of receivers
-                                            subject: emailConfigs.subject, // Subject line
-                                            text: emailConfigs.text1, // plaintext body                                   
-                                            html: '<b>' + emailConfigs.text2 + '</b>' // html body
-                                        };
-                                        transporter.sendMail(mailOptions, function (error, info) {
-                                            if (error) {
-                                                return console.log(error);
-                                            }
-                                            console.log('Message sent: ' + info.response);
-                                        });
+                                    console.log("Cadastrado email: " + req.body.email);
+                                    //console.log(locals.empresaSubmitted + " - " + locals.usuarioSubmitted + " - " + emailConfigs + " - " + locals.pessoaSubmitted);
+                                    if (locals.empresaSubmitted && locals.usuarioSubmitted && locals.pessoaSubmitted) {
+                                        if (emailConfigs) {
+                                            var smtps = 'smtps://' + emailConfigs.user + '%40gmail.com:' + emailConfigs.senha + '@smtp.gmail.com';
+                                            var transporter = nodemailer.createTransport(smtps);
+                                            var mailOptions = {
+                                                from: emailConfigs.from, // sender address//                                             
+                                                to: req.body.email, // list of receivers
+                                                subject: emailConfigs.subjectCadastro, // Subject line                                                                        
+                                                html: '<b>' + '<p>' + emailConfigs.saudacao + ' ' + req.body.nome + '</p>' +  '<p>' + emailConfigs.corpoCadastro + '</p>' + '</b>' // html body
+                                            };
+                                            transporter.sendMail(mailOptions, function (error, info) {
+                                                if (error) {
+                                                    //fila de email nao enviado
+                                                    return console.log(error);
+                                                }
+                                                console.log('Message sent: ' + info.response);
+                                            });
+                                        }
+                                        else{
+                                            //fila de email nao enviado
+                                        }
+                                    }
+                                    else {
+                                        //houve algum erro no cadastro
                                     }
                                 }
                                 next();

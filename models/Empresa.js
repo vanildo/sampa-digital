@@ -29,7 +29,7 @@ Empresa.add({
     latitude: {type: String},
     longitude: {type: String},
     cnpj: {type: String, unique: true, required: true, initial: true, label: "CNPJ"},
-    cnae: {type: Types.Relationship, ref: 'CNAE'},
+    cnae: {type: Types.Relationship, ref: 'CNAE', many: true},
     logo: {type: Types.Url},
     twitter: {type: String},
     facebook: {type: String},

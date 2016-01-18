@@ -59,9 +59,7 @@ exports.initLocals = function (req, res, next) {
                 {label: 'Galeria', key: 'gallery', href: '/gallery'},
                 {label: 'Contato', key: 'contact', href: '/contact'},
                 {label: 'Cadastro', key: 'cadastro', href: '/cadastro'},
-//                {label: 'Cadastro', key: 'pessoa', href: '/pessoa'},
-                {label: 'Aprovaçao', key: 'aprovacao', href: '/aprovacao'},                
-//                {label: 'Mail', key: 'mail', href: '/mail'}               
+                {label: 'Aprovaçao', key: 'aprovacao', href: '/aprovacao'}, 
             ];
 
             keystone.set('nav', {
@@ -105,7 +103,6 @@ exports.initLocals = function (req, res, next) {
             {label: 'Galeria', key: 'gallery', href: '/gallery'},
             {label: 'Contato', key: 'contact', href: '/contact'},
             {label: 'Cadastro', key: 'cadastro', href: '/cadastro'},
-//            {label: 'Cadastro', key: 'pessoa', href: '/pessoa'}
         ];
 
         locals.user = req.user;
