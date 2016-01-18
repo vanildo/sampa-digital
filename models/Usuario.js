@@ -7,12 +7,13 @@ var Types = keystone.Field.Types;
  */
 
 var Usuario = new keystone.List('Usuario', {
+	map: {name: 'email'},
 	nocreate:true,
 });
 
 Usuario.add({
 	controlData: {type: String, hidden:true, noedit:true},	
-        email: { type: Types.Email, initial: true, required: true, index: true },       	
+    email: { type: Types.Email, initial: true, required: true, index: true },       	
 	password: { type: Types.Password, initial: true, required: true },
 	isAdmin: { type: Types.Boolean, default:true, index: true },
 	sampaAdmin: {type: Boolean, default:false, index:true},
@@ -34,5 +35,5 @@ Usuario.relationship({ ref: 'Post', path: 'posts', refPath: 'author' });
  * Registration
  */
 
-Usuario.defaultColumns = 'name, email, empresa';
+Usuario.defaultColumns = 'email';
 Usuario.register();

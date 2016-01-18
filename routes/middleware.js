@@ -55,9 +55,9 @@ exports.initLocals = function (req, res, next) {
         if (req.user.sampaAdmin) {
             locals.navLinks = [
                 {label: 'Home', key: 'home', href: '/'},
-                {label: 'Blog', key: 'blog', href: '/blog'},
-                {label: 'Galeria', key: 'gallery', href: '/gallery'},
-                {label: 'Contato', key: 'contact', href: '/contact'},
+                {label: 'Noticias', key: 'blog', href: '/blog'},
+ //               {label: 'Galeria', key: 'gallery', href: '/gallery'},
+ //               {label: 'Contato', key: 'contact', href: '/contact'},
                 {label: 'Cadastro', key: 'cadastro', href: '/cadastro'},
 //                {label: 'Cadastro', key: 'pessoa', href: '/pessoa'},
                 {label: 'Aprovaçao', key: 'aprovacao', href: '/aprovacao'},                
@@ -88,9 +88,9 @@ exports.initLocals = function (req, res, next) {
 
             locals.navLinks = [
                 {label: 'Home', key: 'home', href: '/'},
-                {label: 'Blog', key: 'blog', href: '/blog'},
-                {label: 'Galeria', key: 'gallery', href: '/gallery'},
-                {label: 'Contato', key: 'contact', href: '/contact'},
+                {label: 'Noticias', key: 'blog', href: '/blog'},
+ //               {label: 'Galeria', key: 'gallery', href: '/gallery'},
+ //               {label: 'Contato', key: 'contact', href: '/contact'},
             ];
 
             locals.user = req.user;
@@ -101,9 +101,9 @@ exports.initLocals = function (req, res, next) {
     } else {
         locals.navLinks = [
             {label: 'Home', key: 'home', href: '/'},
-            {label: 'Blog', key: 'blog', href: '/blog'},
-            {label: 'Galeria', key: 'gallery', href: '/gallery'},
-            {label: 'Contato', key: 'contact', href: '/contact'},
+            {label: 'Noticias', key: 'blog', href: '/blog'},
+            //{label: 'Galeria', key: 'gallery', href: '/gallery'},
+            //{label: 'Contato', key: 'contact', href: '/contact'},
             {label: 'Cadastro', key: 'cadastro', href: '/cadastro'},
 //            {label: 'Cadastro', key: 'pessoa', href: '/pessoa'}
         ];

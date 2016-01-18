@@ -6,16 +6,15 @@ var Types = keystone.Field.Types;
  */
 
 var Oportunidade = new keystone.List('Oportunidade', {
-    map: {name: 'nome'},
-    track: true,
-    autokey: {path: 'key', from: 'nome'}
+    map: {name: 'Nome'},
+	track: true,
+	autokey: {path: 'key', from: 'Nome'}
 });
 Oportunidade.add({
-    nome: {type: String, initial: true, required: true},
-    descricao: {type: String, initial: true, required:true},
-    tipoOportunidade: {type: Types.Select, options: ['COMPRA', 'VENDA'], initial: true, required:true},
-    quantidade: {type: Types.Number, initial: true, required:true},
-    preco: {type: Types.Money, initial: true, required:true},
+    Nome: {type: String, initial: true, required: true},
+    tipoOportunidade: {type: Types.Select, options: ['COMPRA', 'VENDA'], label: "Tipo de Oportunidade", initial: true, required:true},
+    Quantidade: {type: Types.Number, initial: true, required:true},
+    Preco: {type: Types.Money, initial: true, required:true},
 });
 /**
  * Relationships
@@ -25,5 +24,5 @@ Oportunidade.add({
 /**
  * Registration
  */
-Oportunidade.defaultColumns = 'descricao, tipoOportunidade, quantidade , preco';
+Oportunidade.defaultColumns = 'Nome, tipoOportunidade, Quantidade , Preco';
 Oportunidade.register();

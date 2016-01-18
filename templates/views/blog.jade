@@ -34,8 +34,12 @@ block content
 								li.disabled: a(href='?page=' + posts.totalPages): span.glyphicon.glyphicon-chevron-right
 				else
 					if category
-						.jumbotron.text-center
-							h3(style="margin-bottom:0;margin-top:0;") No posts in the category #{category.name}.
+						.container
+							.row
+								.col-md-12
+									h3 Nenhuma notícia na categoria #{category.name}.
 					else
-						.jumbotron.text-center
-							h3(style="margin-bottom:0;margin-top:0;") There are no posts yet.
+						.container
+							.row
+								.col-md-12
+									h3 Nenhuma notícia!
