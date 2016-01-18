@@ -1,51 +1,57 @@
 extends ../layouts/default
 
 block content	
-	.container-fluid.slider.text-center
-		.carousel.slide.carousel-fade#mainCarousel(data-ride="carousel")
-			//Wrapper for slides
-			.carousel-inner(role="listbox")
-				div.item.active
-					.container
-						.row
-							.col-xm-12.col-md-offset-2.col-md-8
-								h2.upp Conheça a São Paulo Aberta
-								p São Paulo é uma das primeiras cidades do mundo a incorporar, de forma integrada, a transparência, participação social, inovação tecnológica e integridade nas políticas públicas.
-								p.btn.purple
-									a(href="#") Leia Mais
-				div.item
-					.container
-						.row
-							.col-xm-12.col-md-6
-								h2.upp Programa Vai Tec
-								p Se você tem mais de 14 anos, vive em São Paulo e tem uma ideia para mudar a cidade, chegou a sua vez! 
-								p.btn.green
-									a(href="#") Leia Mais
-							.col-xm-12.col-md-6
-								h2.upp Empreendedorismo
-								p A Adesampa e o British Council fecharam parceria para um curso de gestão na metodologia desenvolvida pelo Newton Fund no Reino Unido.
-								p.btn.orange
-									a(href="#") Leia Mais
-				div.item
-					.container
-						.row
-							.col-xm-12.col-md-offset-2.col-md-8
-								h2.upp Novo decreto
-								p Iniciativa inédita traz mecanismos facilitadores para que segmento cresça, incrementando a economia, a geração de renda e o emprego formal.
-								p.btn.orange
-									a(href="#") Leia Mais
-			//Left and right controls
-			a.left.carousel-control(href="#mainCarousel", role="button", data-slide="prev")
-				span.glyphicon.glyphicon-chevron-left(aria-hidden="true")
-				span.sr-only Previous
-			a.right.carousel-control(href="#mainCarousel", role="button", data-slide="next")
-				span.glyphicon.glyphicon-chevron-right(aria-hidden="true")
-				span.sr-only Next
-			//Indicators
-			ol.carousel-indicators
-				li.active(data-target="#mainCarousel" data-slide-to="0")
-				li(data-target="#mainCarousel" data-slide-to="1")
-				li(data-target="#mainCarousel" data-slide-to="2")
+	.row#leadspace
+		.col-xm-12.col-md-offset-2.col-md-8
+			h2.upp Venha conhecer a São Paulo Aberta
+			p.btn.purple
+				a(href="cadastro") Cadastre-se
+	//
+		.container-fluid.slider.text-center
+			.carousel.slide.carousel-fade#mainCarousel(data-ride="carousel")
+				//Wrapper for slides
+				.carousel-inner(role="listbox")
+					div.item.active
+						.container
+							.row
+								.col-xm-12.col-md-offset-2.col-md-8
+									h2.upp Conheça a São Paulo Aberta
+									p São Paulo é uma das primeiras cidades do mundo a incorporar, de forma integrada, a transparência, participação social, inovação tecnológica e integridade nas políticas públicas.
+									p.btn.purple
+										a(href="#") Leia Mais
+					div.item
+						.container
+							.row
+								.col-xm-12.col-md-6
+									h2.upp Programa Vai Tec
+									p Se você tem mais de 14 anos, vive em São Paulo e tem uma ideia para mudar a cidade, chegou a sua vez! 
+									p.btn.green
+										a(href="#") Leia Mais
+								.col-xm-12.col-md-6
+									h2.upp Empreendedorismo
+									p A Adesampa e o British Council fecharam parceria para um curso de gestão na metodologia desenvolvida pelo Newton Fund no Reino Unido.
+									p.btn.orange
+										a(href="#") Leia Mais
+					div.item
+						.container
+							.row
+								.col-xm-12.col-md-offset-2.col-md-8
+									h2.upp Novo decreto
+									p Iniciativa inédita traz mecanismos facilitadores para que segmento cresça, incrementando a economia, a geração de renda e o emprego formal.
+									p.btn.orange
+										a(href="#") Leia Mais
+				//Left and right controls
+				a.left.carousel-control(href="#mainCarousel", role="button", data-slide="prev")
+					span.glyphicon.glyphicon-chevron-left(aria-hidden="true")
+					span.sr-only Previous
+				a.right.carousel-control(href="#mainCarousel", role="button", data-slide="next")
+					span.glyphicon.glyphicon-chevron-right(aria-hidden="true")
+					span.sr-only Next
+				//Indicators
+				ol.carousel-indicators
+					li.active(data-target="#mainCarousel" data-slide-to="0")
+					li(data-target="#mainCarousel" data-slide-to="1")
+					li(data-target="#mainCarousel" data-slide-to="2")
 	.oportunidades.separation-rule
 		.container
 			.row
