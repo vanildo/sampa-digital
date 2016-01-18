@@ -55,11 +55,10 @@ exports = module.exports = function (req, res) {
                 }
             }).populate('responsavelLegal');
         }
-      
-        function two() {          
-            if (usuario && empresa) {              
+
+        function two() {
+            if (usuario && empresa) {
                 if (req.body.empresaSituacaoSistema == 1) {
-                    console.log("if aprovar");
                     empresa.save();
                     usuario.save();
                     console.log("Empresa salva: " + empresa.id);
@@ -85,6 +84,8 @@ exports = module.exports = function (req, res) {
                         //fila de email nao enviado
                     }
                 } else if (req.body.empresaSituacaoSistema == 2) {
+                    empresa.empresaSituacaoSistema = 'rejeitado';
+                    empresa.save();
                     console.log("Empresa rejeitada: " + empresa.id);
                     if (emailConfigs) {
                         var smtps = 'smtps://' + emailConfigs.user + '%40gmail.com:' + emailConfigs.senha + '@smtp.gmail.com';
