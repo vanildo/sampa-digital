@@ -7,28 +7,23 @@ var Types = keystone.Field.Types;
  */
 
 var EmailConfig = new keystone.List('EmailConfig', {
-    map: {name: 'name'},    
+    map: {name: 'name'},
 });
 
 EmailConfig.add({
     name: {type: String, required: true, initial: true, index: true},
     user: {type: String, required: true, initial: true},
-    senha: {type: String, required: true, initial: true},
+    senha: { type: String, required: true, initial: true, hidden: true, password: true},  
     from: {type: String, required: true, initial: true},
-    subject: {type: String, required: true, initial: true},
-    texto1: {type: String, required: true, initial: true, index: true},
-    texto2: {type: String, required: true, initial: true, index: true},
-    texto3: {type: String},
-    texto4: {type: String},
-    texto5: {type: String},
-    texto6: {type: String},
-    texto7: {type: String},
-    texto8: {type: String},
-    texto9: {type: String},
-    texto0: {type: String},
-    html: {type: String},
+    subjectCadastro: {type: String, required: true, initial: true, label: "Título do email de cadastro"},
+    subjectAprovacao: {type: String, required: true, initial: true, label: "Título do email de aprovação"},
+    subjectRejeicao: {type: String, required: true, initial: true, label: "Título do email de rejeição"},
+    saudacao: {type: String, required: true, initial: true},
+    corpoCadastro: {type: Types.Textarea, required: true, initial: true, label: "Corpo do email de cadastro"},
+    corpoAprovacao: {type: Types.Textarea, required: true, initial: true, label: "Corpo do email de aprovação"},
+    corpoRejeicao: {type: Types.Textarea, required: true, initial: true, label: "Corpo do email de rejeição"},    
     isAtivo: {type: Types.Boolean},
-    dataCriacao: { type: Types.Date, default: Date.now }
+    dataCriacao: {type: Types.Date, default: Date.now}
 });
 
 EmailConfig.defaultColumns = 'name, dataCriacao';
