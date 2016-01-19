@@ -25,7 +25,7 @@ block content
 								th Razão Social
 								th CNPJ
 								th Responsável Legal
-								th Telefone de contato
+								th Telefone de Contato
 							each pendencia, i in pendencias
 								tr.side-link(value=pendencia.razaoSocial)
 									td #{pendencia.razaoSocial}
@@ -33,11 +33,13 @@ block content
 									td #{pendencia.responsavelLegal.nome}
 									td #{pendencia.telefone}
 									td
-										p.btn.small.green: a(href='/blog/post/', onclick="requestFormAprove('#{pendencia.id}')") Aprovar
+										button(id='#{pendencia.id}', type='button', name='btnAprove', onclick="requestFormAprove('#{pendencia.id}')").btn.small.green Aprovar
+										//p.btn.small.green: a(href='/blog/post/', onclick="requestFormAprove('#{pendencia.id}')") Aprovar
 										//button(id='#{pendencia.id}', type='button', name='btnAprove') Aprovar
 										
 									td
-										p.btn.small.orange: a(href='/blog/post/', onclick="requestFormDesaprove('#{pendencia.id}')") Rejeitar
+										button(id='#{pendencia.id}', type='button', name='btnDesaprove', onclick="requestFormDesaprove('#{pendencia.id}')").btn.small.orange Rejeitar
+										//p.btn.small.orange: a(href='/blog/post/', onclick="requestFormDesaprove('#{pendencia.id}')") Rejeitar
 										//button(id='#{pendencia.id}', type='button', name='btnDesaprove') Rejeitar
 								
 							td(id=i) 
