@@ -10,7 +10,4 @@ require('./CNAE');
 require('./Pessoa');
 require('./Agenda');
 require('./EmailConfig');
-
-
-
-
+require('./EmailsAdeSampa');

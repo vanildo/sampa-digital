@@ -7,8 +7,7 @@ var crypto = require('crypto');
 var nodemailer = require('nodemailer');
 var EmailConfig = keystone.list('EmailConfig');
 var Pessoa = keystone.list('Pessoa');
-
-
+var EmailsAdeSampa = keystone.list('EmailsAdeSampa');
 function randomValueBase64(len) {
     return crypto.randomBytes(Math.ceil(len * 3 / 4))
             .toString('base64')   // convert to base64 format
@@ -36,7 +35,6 @@ exports = module.exports = function (req, res) {
     locals.cnpj;
     locals.pessoa;
     locals.endereco = Empresa;
-
     locals.cadastroInstituicao = true;
     locals.cadastroUsuario = true;
     locals.cadstroCpf = true;
@@ -46,7 +44,6 @@ exports = module.exports = function (req, res) {
     locals.filters = {
         pessoa: req.params.pessoa
     };
-
     // Load Oportunidades
     view.on('init', function (next) {
 
@@ -56,8 +53,6 @@ exports = module.exports = function (req, res) {
             next(err);
         });
     });
-
-
     // Load CNAE
     view.on('init', function (next) {
 
@@ -67,7 +62,6 @@ exports = module.exports = function (req, res) {
             next(err);
         });
     });
-
     // Load the current cnpj 
     view.on('post', {action: 'isCnpj'}, function (next) {
         locals.cnpj = req.body.cnpj;
@@ -87,16 +81,12 @@ exports = module.exports = function (req, res) {
             next();
         }
     });
-
     // Cadastro Empresa e Usuario
     view.on('post', {action: 'cadastroEmpresa'}, function (next) {
 
         locals.cnpj = req.body.cnpj;
         locals.empresaType = req.body.empresaType;
         locals.cadastroCnpj = false;
-        
-        console.log(Empresa);
-
         var pessoa = new Pessoa.model();
         var updaterP = pessoa.getUpdateHandler(req);
         var usuario = new Usuario.model({
@@ -113,10 +103,8 @@ exports = module.exports = function (req, res) {
             controlData: pessoa.id,
         });
         var updaterE = empresa.getUpdateHandler(req);
-
         var emailConfigs;
         var emailConfig = EmailConfig.model.findOne().where('isAtivo', true);
-
         emailConfig.exec(function (err, results) {
             if (results) {
                 emailConfigs = results;
@@ -127,7 +115,6 @@ exports = module.exports = function (req, res) {
             }, function (err) {
                 if (err) {
                     locals.validationErrors = err.errors;
-                    next(err);
                 } else {
                     console.log("Cadastrado cpf: " + req.body.cpf);
                     locals.pessoaSubmitted = true;
@@ -141,7 +128,6 @@ exports = module.exports = function (req, res) {
                     }, function (err) {
                         if (err) {
                             locals.validationErrors = err.errors;
-                            next(err);
                         } else {
                             locals.empresaSubmitted = true;
                             locals.cadastroInstituicao = false;
@@ -154,35 +140,39 @@ exports = module.exports = function (req, res) {
                             }, function (err) {
                                 if (err) {
                                     locals.validationErrors = err.errors;
-                                    next(err);
                                 } else {
                                     locals.usuarioSubmitted = true;
                                     locals.cadastroUsuario = true;
                                     console.log("Cadastrado email: " + req.body.email);
-                                    //console.log(locals.empresaSubmitted + " - " + locals.usuarioSubmitted + " - " + emailConfigs + " - " + locals.pessoaSubmitted);
                                     if (locals.empresaSubmitted && locals.usuarioSubmitted && locals.pessoaSubmitted) {
                                         if (emailConfigs) {
                                             var smtps = 'smtps://' + emailConfigs.user + '%40gmail.com:' + emailConfigs.senha + '@smtp.gmail.com';
                                             var transporter = nodemailer.createTransport(smtps);
                                             var mailOptions = {
-                                                from: emailConfigs.from, // sender address//                                             
-                                                to: req.body.email, // list of receivers
+                                                from: emailConfigs.from, // sender address//      
                                                 subject: emailConfigs.subjectCadastro, // Subject line                                                                        
-                                                html: '<b>' + '<p>' + emailConfigs.saudacao + ' ' + req.body.nome + '</p>' +  '<p>' + emailConfigs.corpoCadastro + '</p>' + '</b>' // html body
+                                                html: '<b>' + '<p>' + emailConfigs.saudacao + '</p> <p>' + emailConfigs.corpoCadastro + req.body.cnpj +'</p>' + '</b>' // html body
                                             };
-                                            transporter.sendMail(mailOptions, function (error, info) {
-                                                if (error) {
-                                                    //fila de email nao enviado
-                                                    return console.log(error);
+                                            EmailsAdeSampa.model.find({}, function (err, docs) {
+                                                var emails = [];
+                                                for (i = 0; i < docs.length; i++) {
+                                                    emails[i] = docs[i].email;
                                                 }
-                                                console.log('Message sent: ' + info.response);
+                                                mailOptions.to = emails;
+                                                {
+                                                    transporter.sendMail(mailOptions, function (error, info) {
+                                                        if (error) {
+                                                            //fila de email nao enviado
+                                                            return console.log(error);
+                                                        }
+                                                        console.log('Message sent AdeSampa: ' + info.response);
+                                                    });
+                                                }
                                             });
-                                        }
-                                        else{
+                                        } else {
                                             //fila de email nao enviado
                                         }
-                                    }
-                                    else {
+                                    } else {
                                         //houve algum erro no cadastro
                                     }
                                 }
