@@ -21,7 +21,7 @@ exports = module.exports = function (req, res) {
     var view = new keystone.View(req, res);
     var locals = res.locals;
     locals.section = 'cadastro';
-    locals.cnaes = [];
+//    locals.cnaes = [];
     locals.oportunidades = [];
     locals.formData = req.body || {};
     locals.validationErrors = {};
@@ -32,18 +32,9 @@ exports = module.exports = function (req, res) {
     locals.empresaExistente = false;
     locals.empresaTypes = Empresa.fields.empresaType.ops;
     locals.empresaType;
-    locals.cnpj;
-    locals.pessoa;
-    locals.endereco = Empresa;
-    locals.cadastroInstituicao = true;
-    locals.cadastroUsuario = true;
-    locals.cadstroCpf = true;
-    locals.cadastroRepresentante = true;
-    locals.cpf;
-    locals.email;
-    locals.filters = {
-        pessoa: req.params.pessoa
-    };
+    locals.cnpj;    
+    locals.cadastroInstituicao = true;    
+  
     // Load Oportunidades
     view.on('init', function (next) {
 
@@ -54,14 +45,14 @@ exports = module.exports = function (req, res) {
         });
     });
     // Load CNAE
-    view.on('init', function (next) {
-
-        var q = CNAE.model.find().sort('sortOrder');
-        q.exec(function (err, results) {
-            locals.cnaes = results;
-            next(err);
-        });
-    });
+//    view.on('init', function (next) {
+//
+//        var q = CNAE.model.find().sort('sortOrder');
+//        q.exec(function (err, results) {
+//            locals.cnaes = results;
+//            next(err);
+//        });
+//    });
     // Load the current cnpj 
     view.on('post', {action: 'isCnpj'}, function (next) {
         locals.cnpj = req.body.cnpj;
