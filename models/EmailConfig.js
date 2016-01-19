@@ -13,7 +13,7 @@ var EmailConfig = new keystone.List('EmailConfig', {
 EmailConfig.add({
     name: {type: String, required: true, initial: true, index: true},
     user: {type: String, required: true, initial: true},
-    senha: { type: Types.Password, initial: true, required: true },    
+    senha: { type: String, required: true, initial: true, hidden: true, password: true},  
     from: {type: String, required: true, initial: true},
     subjectCadastro: {type: String, required: true, initial: true, label: "Título do email de cadastro"},
     subjectAprovacao: {type: String, required: true, initial: true, label: "Título do email de aprovação"},
