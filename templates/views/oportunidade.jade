@@ -43,26 +43,26 @@ block content
 							else
 								img.fit(src='/images/noticia_padrao.png')
 						.col-md-10
-							h3.no-margin: = oportunidade.nome
+							h3.no-margin: = oportunidade.Nome
 							p 
 								if oportunidade.empresa
 									span.orange
 										| Empresa #{oportunidade.empresa}
 								else
 									span.orange
-										| Empresa da bananinha
+										| Nome da Empresa
 								| &nbsp;| Publicado em:
 								if oportunidade.createdAt
 										span.orange 
 											| #{oportunidade._.createdAt.format('DD')} de #{oportunidade._.createdAt.format('MMMM')} de #{oportunidade._.createdAt.format('YYYY')}
 								else
 										span.orange 
-											| Bananas
+											| Super Bananas
 							if oportunidade.descricaoBrief
 								p!= oportunidade.descricaoBrief
 							else
-								p Bananosas bananudas!
-							p.btn.small.orange: a(href='/blog/post/' + oportunidade.key) Leia mais
+								p Bananas!
+							p.btn.small.orange: a(href='/blog/post/' + oportunidade.id) Leia mais
 			else
 				.row
 					.col-md-12

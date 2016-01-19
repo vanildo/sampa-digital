@@ -12,9 +12,11 @@ var Oportunidade = new keystone.List('Oportunidade', {
 });
 Oportunidade.add({
     Nome: {type: String, initial: true, required: true},
+	descricaoBrief: {type: String, initial: true, required: true, label:"Descricao Resumida: "},
     tipoOportunidade: {type: Types.Select, options: ['COMPRA', 'VENDA'], label: "Tipo de Oportunidade", initial: true, required:true},
     Quantidade: {type: Types.Number, initial: true, required:true},
     Preco: {type: Types.Money, initial: true, required:true},
+	descricaoBrief: {type: String, initial: true, required: true},
 });
 /**
  * Relationships

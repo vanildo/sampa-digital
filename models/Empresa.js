@@ -16,7 +16,7 @@ Empresa.add({
     nomeFantasia: {type: String, required: true, index: true, label: "Razão Social"},
     razaoSocial: {type: String, unique: true, required: true, initial: true, index: true},
     descricao: {type: String, index: true},
-    responsavelLegal: {type: Types.Relationship, ref: 'Pessoa', label: "Responsável Legal"},
+    responsavelLegal: {type: Types.Relationship, ref: 'Pessoa', label: "Responsável Legal", hidden: true},
     contatoComercial: {type: String},
     telefone: {type: String, label: "Telefone de contato"},
     endereco: {type: Types.Location},
@@ -27,7 +27,7 @@ Empresa.add({
     facebook: {type: String},
     webSite: {type: String},
     oportunidades: {type: Types.Relationship, ref: 'Oportunidade', many: true},
-    usuario: {type: Types.Relationship, ref: 'Usuario'},
+    usuario: {type: Types.Relationship, ref: 'Usuario', hidden: true},
     empresaType: {type: Types.Select, options: [
             {value: 'instituicao', label: "Instituição"},
             {value: 'startup', label: "Start-up"},

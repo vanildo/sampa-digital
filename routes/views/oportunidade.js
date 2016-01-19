@@ -19,7 +19,11 @@ exports = module.exports = function(req, res) {
 	}else if(tipo == "vender"){
 		view.query('oportunidades', keystone.list('Oportunidade').model.find().where('tipoOportunidade', 'VENDA' ));
 		
+	}else{
+		view.query('oportunidades', keystone.list('Oportunidade').model.find().where('_id', tipo ));
+		
 	}
+	
 	
 	// Render the view
 	view.render('oportunidade');
