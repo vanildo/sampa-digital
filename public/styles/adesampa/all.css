@@ -229,4 +229,26 @@ img.fit {
   border: 1px solid #EFEFEF;
   padding: 15px;
 }
-/* SMALL */
+/* INDEX */
+
+#leadspace{
+  background-image: url(../../images/templatemo_carousel_bg.jpg);
+  background-size: cover;
+  height: 400px;
+  /*Font*/
+  color: #FFFFFF;
+  /*Put it away from the nav*/
+  margin-top: 0;
+  /*centraliaze all content*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#leadspace p{
+  font-size: 21px;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+#leadspace h2{
+  font-size: 36px;
+}

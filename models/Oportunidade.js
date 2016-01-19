@@ -12,7 +12,8 @@ var Oportunidade = new keystone.List('Oportunidade', {
 });
 Oportunidade.add({
     nome: {type: String, initial: true, required: true},
-    descricao: {type: String, initial: true, required:true},
+    descricao: {type: String},
+	descCurta: {type: String, initial: true, required:true},
     tipoOportunidade: {type: Types.Select, options: ['COMPRA', 'VENDA'], initial: true, required:true},
     quantidade: {type: Types.Number, initial: true, required:true},
     preco: {type: Types.Money, initial: true, required:true},
@@ -25,5 +26,5 @@ Oportunidade.add({
 /**
  * Registration
  */
-Oportunidade.defaultColumns = 'descricao, tipoOportunidade, quantidade , preco';
+Oportunidade.defaultColumns = 'descricao, descCurta, tipoOportunidade, quantidade , preco';
 Oportunidade.register();
