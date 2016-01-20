@@ -52,28 +52,18 @@ exports.initLocals = function (req, res, next) {
 
     var locals = res.locals;
     if (req.user) {
-        if (req.user.sampaAdmin) {
+        if (req.user.isAdmin) {
             locals.navLinks = [
                 {label: 'Home', key: 'home', href: '/'},
-                {label: 'Noticias', key: 'blog', href: '/blog'},
-                //               {label: 'Galeria', key: 'gallery', href: '/gallery'},
-                //               {label: 'Contato', key: 'contact', href: '/contact'},
-                {label: 'Cadastro', key: 'cadastro', href: '/cadastro'},
-                {label: 'Aprovaçao', key: 'aprovacao', href: '/aprovacao'},
+                {label: 'Oportunidades', key: 'tecnologia', href: '/oportunidades'},
+                {label: 'Noticias', href: '/blog'},
+                {label: 'agenda', href: '/agenda'},
+                /*{label: 'Home', key: 'home', href: '/'},
+                 {label: 'Noticias', key: 'blog', href: '/blog'},
+                 {label: 'Galeria', key: 'gallery', href: '/gallery'},
+                 {label: 'Contato', key: 'contact', href: '/contact'},
+                 {label: 'Aprovaçao', key: 'aprovacao', href: '/aprovacao'},*/
             ];
-
-            keystone.set('nav', {
-                'Empresa': 'empresas',
-                'Oportunidades': 'oportunidades',
-                'Contas': ['usuarios', 'pessoas'],
-                'Noticias': ['posts', 'post-comments', 'post-categories'],
-                'Agenda': 'Agenda',
-                'Galerias': 'galleries',
-                'Messagem': 'enquiries',
-                'CNAE': 'CNAE',
-                'EmailConfig': 'EmailConfig',
-                'EmailsAdeSampa': 'EmailsAdeSampa',
-            });
 
             locals.user = req.user;
 
@@ -82,9 +72,9 @@ exports.initLocals = function (req, res, next) {
 
             locals.navLinks = [
                 {label: 'Home', key: 'home', href: '/'},
-                {label: 'Noticias', key: 'blog', href: '/blog'},
-                {label: 'Conta', key: 'conta', href: '/conta'},
-                {label: 'Oportunidade', key: 'oportunidade', href: '/cadastroOportunidade'},
+                {label: 'Oportunidades', key: 'tecnologia', href: '/oportunidades'},
+                {label: 'Noticias', href: '/blog'},
+                {label: 'agenda', href: '/agenda'},
             ];
 
             locals.user = req.user;
@@ -94,9 +84,9 @@ exports.initLocals = function (req, res, next) {
     } else {
         locals.navLinks = [
             {label: 'Home', key: 'home', href: '/'},
-            {label: 'Noticias', key: 'blog', href: '/blog'},
-            //{label: 'Galeria', key: 'gallery', href: '/gallery'},
-            //{label: 'Contato', key: 'contact', href: '/contact'},
+            {label: 'Oportunidades', key: 'tecnologia', href: '/oportunidades'},
+            {label: 'Noticias', href: '/blog'},
+            {label: 'agenda', href: '/agenda'},
             {label: 'Cadastro', key: 'cadastro', href: '/cadastro'},
         ];
 
