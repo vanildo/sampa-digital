@@ -26,7 +26,7 @@ Empresa.add({
     twitter: {type: String},
     facebook: {type: String},
     webSite: {type: String},
-    oportunidades: {type: Types.Relationship, ref: 'Oportunidade', many: true},
+//    oportunidades: {type: Types.Relationship, ref: 'Oportunidade', many: true},
     usuario: {type: Types.Relationship, ref: 'Usuario', hidden: true},
     empresaType: {type: Types.Select, options: [
             {value: 'instituicao', label: "Instituição"},
@@ -48,10 +48,14 @@ Empresa.add({
  * Relationships
  */
 
-Empresa.relationship({ref: 'Oportunidade', path: 'oportunidades', refPath: 'oportunidade'});
+Empresa.relationship({ref: 'Oportunidade', path: 'oportunidades', refPath: 'empresa'});
 Empresa.relationship({ref: 'CNAE', path: 'codigos', refPath: 'codigo'});
 Empresa.relationship({ref: 'Pessoa', path: 'nomes', refPath: 'nome'});
 Empresa.relationship({ref: 'Usuario', path: 'usuarios', refPath: 'usuario'});
+
+
+
+
 
 
 

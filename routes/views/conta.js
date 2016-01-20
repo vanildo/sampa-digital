@@ -30,10 +30,10 @@ exports = module.exports = function (req, res) {
                     locals.usuariof = resultU;
                     next(err);
                 });
-
             });
         });
     });
+    
     // Cadastro Empresa e Usuario
     view.on('post', {action: 'update'}, function (next) {
 

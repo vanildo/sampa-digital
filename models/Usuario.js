@@ -6,8 +6,7 @@ var Types = keystone.Field.Types;
  * ==========
  */
 
-var Usuario = new keystone.List('Usuario', {
-    map: {name: 'email'},
+var Usuario = new keystone.List('Usuario', {    
     nocreate: true,
 });
 
