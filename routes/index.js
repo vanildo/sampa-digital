@@ -44,6 +44,7 @@ exports = module.exports = function (app) {
     app.all('/termos', routes.views.termos);
     app.all('/aprovacao', routes.views.aprovacao);  
     app.all('/cadastro', routes.views.cadastro);
+    app.all('/conta', routes.views.conta);
 
 
 

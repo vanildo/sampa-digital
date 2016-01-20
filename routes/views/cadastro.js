@@ -83,6 +83,7 @@ exports = module.exports = function (req, res) {
         var usuario = new Usuario.model({
             isAdmin: false,
             sampaAdmin: false,
+            responsavel: false,
             password: randomValueBase64(8),
             controlData: pessoa.id,
         });

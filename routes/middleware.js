@@ -56,8 +56,8 @@ exports.initLocals = function (req, res, next) {
             locals.navLinks = [
                 {label: 'Home', key: 'home', href: '/'},
                 {label: 'Noticias', key: 'blog', href: '/blog'},
- //               {label: 'Galeria', key: 'gallery', href: '/gallery'},
- //               {label: 'Contato', key: 'contact', href: '/contact'},
+                //               {label: 'Galeria', key: 'gallery', href: '/gallery'},
+                //               {label: 'Contato', key: 'contact', href: '/contact'},
                 {label: 'Cadastro', key: 'cadastro', href: '/cadastro'},
                 {label: 'Aprovaçao', key: 'aprovacao', href: '/aprovacao'},
             ];
@@ -78,24 +78,17 @@ exports.initLocals = function (req, res, next) {
             locals.user = req.user;
 
             next();
-        } else {
-
-            keystone.set('nav', {
-                'Empresas': ['empresas', 'oportunidades'],
-                'Conta': ['usuarios', 'pessoas']
-            });
+        } else if (req.user.responsavel) {
 
             locals.navLinks = [
                 {label: 'Home', key: 'home', href: '/'},
                 {label: 'Noticias', key: 'blog', href: '/blog'},
- //               {label: 'Galeria', key: 'gallery', href: '/gallery'},
- //               {label: 'Contato', key: 'contact', href: '/contact'},
+                {label: 'Conta', key: 'conta', href: '/conta'},
             ];
 
             locals.user = req.user;
 
             next();
-
         }
     } else {
         locals.navLinks = [
