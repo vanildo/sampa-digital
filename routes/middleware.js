@@ -54,12 +54,15 @@ exports.initLocals = function (req, res, next) {
     if (req.user) {
         if (req.user.isAdmin) {
             locals.navLinks = [
-                {label: 'Home', key: 'home', href: '/'},
+				{label: 'Home', key: 'home', href: '/'},
+				{label: 'Oportunidades', key: 'tecnologia', href: '/oportunidades'},
+				{label: 'Noticias', href: '/blog'},
+				{label: 'agenda', href: '/agenda'},
+               /*{label: 'Home', key: 'home', href: '/'},
                 {label: 'Noticias', key: 'blog', href: '/blog'},
-                //{label: 'Galeria', key: 'gallery', href: '/gallery'},
-                //{label: 'Contato', key: 'contact', href: '/contact'},
-                //{label: 'Cadastro', key: 'cadastro', href: '/cadastro'},
-                {label: 'Aprovaçao', key: 'aprovacao', href: '/aprovacao'},
+                {label: 'Galeria', key: 'gallery', href: '/gallery'},
+                {label: 'Contato', key: 'contact', href: '/contact'},
+                {label: 'Aprovaçao', key: 'aprovacao', href: '/aprovacao'},*/
             ];
 
             locals.user = req.user;
@@ -68,9 +71,10 @@ exports.initLocals = function (req, res, next) {
         } else if (req.user.responsavel) {
 
             locals.navLinks = [
-                {label: 'Home', key: 'home', href: '/'},
-                {label: 'Noticias', key: 'blog', href: '/blog'},
-                {label: 'Minha Conta', key: 'conta', href: '/conta'},
+				{label: 'Home', key: 'home', href: '/'},
+				{label: 'Oportunidades', key: 'tecnologia', href: '/oportunidades'},
+				{label: 'Noticias', href: '/blog'},
+				{label: 'agenda', href: '/agenda'},
             ];
 
             locals.user = req.user;
@@ -80,11 +84,9 @@ exports.initLocals = function (req, res, next) {
     } else {
         locals.navLinks = [
             {label: 'Home', key: 'home', href: '/'},
-            {label: 'Noticias', key: 'blog', href: '/#noticias'},
-            {label: 'Mapa', key: 'mapa', href: '/#noticias'},
-			{label: 'agenda', key: 'agenda', href: '#noticias'},
-			{label: 'Tecnologia', key: 'tecnologia', href: '#noticias'},
-            //{label: 'Contato', key: 'contact', href: '/#noticias'},
+			{label: 'Oportunidades', key: 'tecnologia', href: '/oportunidades'},
+            {label: 'Noticias', href: '/blog'},
+			{label: 'agenda', href: '/agenda'},
             {label: 'Cadastro', key: 'cadastro', href: '/cadastro'},
         ];
 
