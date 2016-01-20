@@ -52,28 +52,15 @@ exports.initLocals = function (req, res, next) {
 
     var locals = res.locals;
     if (req.user) {
-        if (req.user.sampaAdmin) {
+        if (req.user.isAdmin) {
             locals.navLinks = [
                 {label: 'Home', key: 'home', href: '/'},
                 {label: 'Noticias', key: 'blog', href: '/blog'},
-                //               {label: 'Galeria', key: 'gallery', href: '/gallery'},
-                //               {label: 'Contato', key: 'contact', href: '/contact'},
-                {label: 'Cadastro', key: 'cadastro', href: '/cadastro'},
+                //{label: 'Galeria', key: 'gallery', href: '/gallery'},
+                //{label: 'Contato', key: 'contact', href: '/contact'},
+                //{label: 'Cadastro', key: 'cadastro', href: '/cadastro'},
                 {label: 'Aprovaçao', key: 'aprovacao', href: '/aprovacao'},
             ];
-
-            keystone.set('nav', {
-                'Empresa': 'empresas',
-                'Oportunidades': 'oportunidades',
-                'Contas': ['usuarios', 'pessoas'],
-                'Noticias': ['posts', 'post-comments', 'post-categories'],
-                'Agenda': 'Agenda',
-                'Galerias': 'galleries',
-                'Messagem': 'enquiries',
-                'CNAE': 'CNAE',
-                'EmailConfig': 'EmailConfig',
-                'EmailsAdeSampa': 'EmailsAdeSampa',
-            });
 
             locals.user = req.user;
 
@@ -83,7 +70,7 @@ exports.initLocals = function (req, res, next) {
             locals.navLinks = [
                 {label: 'Home', key: 'home', href: '/'},
                 {label: 'Noticias', key: 'blog', href: '/blog'},
-                {label: 'Conta', key: 'conta', href: '/conta'},
+                {label: 'Minha Conta', key: 'conta', href: '/conta'},
             ];
 
             locals.user = req.user;
@@ -93,9 +80,11 @@ exports.initLocals = function (req, res, next) {
     } else {
         locals.navLinks = [
             {label: 'Home', key: 'home', href: '/'},
-            {label: 'Noticias', key: 'blog', href: '/blog'},
-            //{label: 'Galeria', key: 'gallery', href: '/gallery'},
-            //{label: 'Contato', key: 'contact', href: '/contact'},
+            {label: 'Noticias', key: 'blog', href: '/#noticias'},
+            {label: 'Mapa', key: 'mapa', href: '/#noticias'},
+			{label: 'agenda', key: 'agenda', href: '#noticias'},
+			{label: 'Tecnologia', key: 'tecnologia', href: '#noticias'},
+            //{label: 'Contato', key: 'contact', href: '/#noticias'},
             {label: 'Cadastro', key: 'cadastro', href: '/cadastro'},
         ];
 
