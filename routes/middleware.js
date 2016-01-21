@@ -54,7 +54,7 @@ exports.initLocals = function (req, res, next) {
     if (req.user) {
         if (req.user.isAdmin) {
             locals.navLinks = [
-                {label: 'Home', key: 'home', href: '/'},
+                {label: 'Inicio', key: 'home', href: '/'},
                 {label: 'Oportunidades', key: 'tecnologia', href: '/oportunidades'},
                 {label: 'Noticias', href: '/blog'},
                 {label: 'agenda', href: '/agenda'},
@@ -71,7 +71,7 @@ exports.initLocals = function (req, res, next) {
         } else if (req.user.responsavel) {
 
             locals.navLinks = [
-                {label: 'Home', key: 'home', href: '/'},
+                {label: 'Inicio', key: 'home', href: '/'},
                 {label: 'Oportunidades', key: 'tecnologia', href: '/oportunidades'},
                 {label: 'Noticias', href: '/blog'},
                 {label: 'agenda', href: '/agenda'},
@@ -84,7 +84,7 @@ exports.initLocals = function (req, res, next) {
         }
     } else {
         locals.navLinks = [
-            {label: 'Home', key: 'home', href: '/'},
+            {label: 'Inicio', key: 'home', href: '/'},
             {label: 'Oportunidades', key: 'tecnologia', href: '/oportunidades'},
             {label: 'Noticias', href: '/blog'},
             {label: 'agenda', href: '/agenda'},
@@ -127,8 +127,8 @@ exports.flashMessages = function (req, res, next) {
 exports.requireUser = function (req, res, next) {
 
     if (!req.user) {
-        req.flash('error', 'Please sign in to access this page.');
-        res.redirect('/keystone/signin');
+        req.flash('error', 'Voce nao tem acesso a esta pagina.');
+        res.redirect('/q4qrsd5khd11bw');
     } else {
         next();
     }
@@ -138,8 +138,8 @@ exports.requireUser = function (req, res, next) {
 exports.requireAdmin = function (req, res, next) {
 
     if (!req.user.isAdmin) {
-        req.flash('error', 'You dont have permission to access this page.');
-        res.redirect('/keystone');
+        req.flash('error', 'Voce nao tem acesso a esta pagina.');
+        res.redirect('/q4qrsd5khd11bw');
     } else {
         next();
     }
