@@ -15,10 +15,10 @@ Empresa.add({
     controlData: {type: String, hidden: true, noedit: true},
     nomeFantasia: {type: String, required: true, index: true, label: "Razão Social"},
     razaoSocial: {type: String, unique: true, required: true, initial: true, index: true},
-    descricao: {type: String, index: true},
+    descricao: {type: String, index: true, required: true, initial: true},
     responsavelLegal: {type: Types.Relationship, ref: 'Pessoa', label: "Responsável Legal", hidden: true},
-    contatoComercial: {type: String},
-    telefone: {type: String, label: "Telefone de contato"},
+    contatoComercial: {type: String, required: true, initial: true},
+    telefone: {type: String, label: "Telefone de contato", required: true, initial: true},
     endereco: {type: Types.Location},
     cnpj: {type: String, unique: true, required: true, initial: true, label: "CNPJ"},
     cnae: {type: Types.Relationship, ref: 'CNAE', many: true},
@@ -29,6 +29,7 @@ Empresa.add({
 //    oportunidades: {type: Types.Relationship, ref: 'Oportunidade', many: true},
     usuario: {type: Types.Relationship, ref: 'Usuario', hidden: true},
     empresaType: {type: Types.Select, options: [
+            {value: 'empresa', label: "Empresa"},
             {value: 'instituicao', label: "Instituição"},
             {value: 'startup', label: "Start-up"},
             {value: 'workplace', label: "Workplace"},
@@ -52,12 +53,6 @@ Empresa.relationship({ref: 'Oportunidade', path: 'oportunidades', refPath: 'empr
 Empresa.relationship({ref: 'CNAE', path: 'codigos', refPath: 'codigo'});
 Empresa.relationship({ref: 'Pessoa', path: 'nomes', refPath: 'nome'});
 Empresa.relationship({ref: 'Usuario', path: 'usuarios', refPath: 'usuario'});
-
-
-
-
-
-
 
 /**
  * Registration
