@@ -1,0 +1,61 @@
+extends ../layouts/default
+
+block intro
+	.container
+		.row
+			.col-md-12.text-center
+				if pendencias.length
+					.page-header
+						h2.orange Aprovação de Empresas no Sistema
+				else
+					.jumbotron.text-center
+						h3(style="margin-bottom:0;margin-top:0;") Nenhuma empresa pendente.
+
+block content
+	.container
+		.row
+			if pendencias.length
+				.col-md-12
+					form(method='post', id='frmPendencia').form-horizontal
+						input(type='hidden', name='action', value='aprovacao')
+						input(type='hidden', name='id', id='id', value='')
+						input(type='hidden', name='empresaSituacaoSistema', id='empresaSituacaoSistema', value='')
+						table(id="tbPendencia", class="false table items-list")
+							tr
+								th Razão Social
+								th CNPJ
+								th Responsável Legal
+								th Telefone de Contato
+							each pendencia, i in pendencias
+								tr.side-link(value=pendencia.razaoSocial)
+									td #{pendencia.razaoSocial}
+									td #{pendencia.cnpj}
+									td #{pendencia.responsavelLegal.nome}
+									td #{pendencia.telefone}
+									td
+										button(id='#{pendencia.id}', type='button', name='btnAprove', onclick="requestFormAprove('#{pendencia.id}')").btn.small.green Aprovar
+										//p.btn.small.green: a(href='/blog/post/', onclick="requestFormAprove('#{pendencia.id}')") Aprovar
+										//button(id='#{pendencia.id}', type='button', name='btnAprove') Aprovar
+										
+									td
+										button(id='#{pendencia.id}', type='button', name='btnDesaprove', onclick="requestFormDesaprove('#{pendencia.id}')").btn.small.orange Rejeitar
+										//p.btn.small.orange: a(href='/blog/post/', onclick="requestFormDesaprove('#{pendencia.id}')") Rejeitar
+										//button(id='#{pendencia.id}', type='button', name='btnDesaprove') Rejeitar
+								
+							td(id=i) 
+
+			else
+			
+		
+block page-js
+	script.
+			function requestFormAprove(value) {
+				$("#id").val(value);
+				$("#empresaSituacaoSistema").val(1);
+				$("#frmPendencia").submit();
+			};
+			function requestFormDesaprove(value) {				
+				$("#id").val(value);
+				$("#empresaSituacaoSistema").val(2);				
+				$("#frmPendencia").submit();
+			};
