@@ -54,15 +54,15 @@ exports.initLocals = function (req, res, next) {
     if (req.user) {
         if (req.user.isAdmin) {
             locals.navLinks = [
-				{label: 'Home', key: 'home', href: '/'},
-				{label: 'Oportunidades', key: 'tecnologia', href: '/oportunidades'},
-				{label: 'Noticias', href: '/blog'},
-				{label: 'agenda', href: '/agenda'},
-               /*{label: 'Home', key: 'home', href: '/'},
-                {label: 'Noticias', key: 'blog', href: '/blog'},
-                {label: 'Galeria', key: 'gallery', href: '/gallery'},
-                {label: 'Contato', key: 'contact', href: '/contact'},
-                {label: 'Aprovaçao', key: 'aprovacao', href: '/aprovacao'},*/
+                {label: 'Home', key: 'home', href: '/'},
+                {label: 'Oportunidades', key: 'tecnologia', href: '/oportunidades'},
+                {label: 'Noticias', href: '/blog'},
+                {label: 'agenda', href: '/agenda'},
+                /*{label: 'Home', key: 'home', href: '/'},
+                 {label: 'Noticias', key: 'blog', href: '/blog'},
+                 {label: 'Galeria', key: 'gallery', href: '/gallery'},
+                 {label: 'Contato', key: 'contact', href: '/contact'},
+                 {label: 'Aprovaçao', key: 'aprovacao', href: '/aprovacao'},*/
             ];
 
             locals.user = req.user;
@@ -71,10 +71,11 @@ exports.initLocals = function (req, res, next) {
         } else if (req.user.responsavel) {
 
             locals.navLinks = [
-				{label: 'Home', key: 'home', href: '/'},
-				{label: 'Oportunidades', key: 'tecnologia', href: '/oportunidades'},
-				{label: 'Noticias', href: '/blog'},
-				{label: 'agenda', href: '/agenda'},
+                {label: 'Home', key: 'home', href: '/'},
+                {label: 'Oportunidades', key: 'tecnologia', href: '/oportunidades'},
+                {label: 'Noticias', href: '/blog'},
+                {label: 'agenda', href: '/agenda'},
+                {label: 'Cadastro Oportunidade', href: '/cadastroOportunidade'},
             ];
 
             locals.user = req.user;
@@ -84,9 +85,9 @@ exports.initLocals = function (req, res, next) {
     } else {
         locals.navLinks = [
             {label: 'Home', key: 'home', href: '/'},
-			{label: 'Oportunidades', key: 'tecnologia', href: '/oportunidades'},
+            {label: 'Oportunidades', key: 'tecnologia', href: '/oportunidades'},
             {label: 'Noticias', href: '/blog'},
-			{label: 'agenda', href: '/agenda'},
+            {label: 'agenda', href: '/agenda'},
             {label: 'Cadastro', key: 'cadastro', href: '/cadastro'},
         ];
 
