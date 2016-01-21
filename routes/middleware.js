@@ -134,3 +134,17 @@ exports.requireUser = function (req, res, next) {
     }
 
 };
+
+exports.requireAdmin = function (req, res, next) {
+
+    if (!req.user.isAdmin) {
+        req.flash('error', 'You dont have permission to access this page.');
+        res.redirect('/keystone');
+    } else {
+        next();
+    }
+
+};
+
+
+
