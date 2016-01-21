@@ -8,6 +8,7 @@ var nodemailer = require('nodemailer');
 var EmailConfig = keystone.list('EmailConfig');
 var Pessoa = keystone.list('Pessoa');
 var EmailsAdeSampa = keystone.list('EmailsAdeSampa');
+
 function randomValueBase64(len) {
     return crypto.randomBytes(Math.ceil(len * 3 / 4))
             .toString('base64')   // convert to base64 format
@@ -21,7 +22,6 @@ exports = module.exports = function (req, res) {
     var view = new keystone.View(req, res);
     var locals = res.locals;
     locals.section = 'cadastro';
-//    locals.cnaes = [];
     locals.oportunidades = [];
     locals.formData = req.body || {};
     locals.validationErrors = {};
@@ -32,9 +32,9 @@ exports = module.exports = function (req, res) {
     locals.empresaExistente = false;
     locals.empresaTypes = Empresa.fields.empresaType.ops;
     locals.empresaType;
-    locals.cnpj;    
-    locals.cadastroInstituicao = true;    
-  
+    locals.cnpj;
+    locals.cadastroInstituicao = true;
+
     // Load Oportunidades
     view.on('init', function (next) {
 
@@ -44,15 +44,7 @@ exports = module.exports = function (req, res) {
             next(err);
         });
     });
-    // Load CNAE
-//    view.on('init', function (next) {
-//
-//        var q = CNAE.model.find().sort('sortOrder');
-//        q.exec(function (err, results) {
-//            locals.cnaes = results;
-//            next(err);
-//        });
-//    });
+
     // Load the current cnpj 
     view.on('post', {action: 'isCnpj'}, function (next) {
         locals.cnpj = req.body.cnpj;
@@ -74,7 +66,6 @@ exports = module.exports = function (req, res) {
     });
     // Cadastro Empresa e Usuario
     view.on('post', {action: 'cadastroEmpresa'}, function (next) {
-
         locals.cnpj = req.body.cnpj;
         locals.empresaType = req.body.empresaType;
         locals.cadastroCnpj = false;
@@ -83,6 +74,7 @@ exports = module.exports = function (req, res) {
         var usuario = new Usuario.model({
             isAdmin: false,
             sampaAdmin: false,
+            responsavel: false,
             password: randomValueBase64(8),
             controlData: pessoa.id,
         });
@@ -142,7 +134,7 @@ exports = module.exports = function (req, res) {
                                             var mailOptions = {
                                                 from: emailConfigs.from, // sender address//      
                                                 subject: emailConfigs.subjectCadastro, // Subject line                                                                        
-                                                html: '<b>' + '<p>' + emailConfigs.saudacao + '</p> <p>' + emailConfigs.corpoCadastro + req.body.cnpj +'</p>' + '</b>' // html body
+                                                html: '<b>' + '<p>' + emailConfigs.saudacao + '</p> <p>' + emailConfigs.corpoCadastro + req.body.cnpj + '</p>' + '</b>' // html body
                                             };
                                             EmailsAdeSampa.model.find({}, function (err, docs) {
                                                 var emails = [];

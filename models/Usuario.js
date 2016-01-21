@@ -6,21 +6,25 @@ var Types = keystone.Field.Types;
  * ==========
  */
 
+
 var Usuario = new keystone.List('Usuario', {
-	nocreate:true,
+    map: {name: 'email'},
+    autokey: {path: 'key', from: 'email', unique: true},
+
 });
 
 Usuario.add({
-	controlData: {type: String, hidden:true, noedit:true},	
-        email: { type: Types.Email, initial: true, required: true, index: true },       	
-	password: { type: Types.Password, initial: true, required: true },
-	isAdmin: { type: Types.Boolean, default:true, index: true },
-	sampaAdmin: {type: Boolean, default:false, index:true},
+    name: {type: Types.Name, index: true, hidden: true},
+    controlData: {type: String, hidden: true, noedit: true},
+    email: {type: Types.Email, initial: true, required: true, index: true, unique: true},
+    password: {type: Types.Password, initial: true, required: true},
+    isAdmin: {type: Types.Boolean, default: true, index: true},
+    responsavel: {type: Types.Boolean, default: false},
 });
 
 // Provide access to Keystone
-Usuario.schema.virtual('canAccessKeystone').get(function() {
-	return this.isAdmin;
+Usuario.schema.virtual('canAccessKeystone').get(function () {
+    return this.isAdmin;
 });
 
 
@@ -28,11 +32,11 @@ Usuario.schema.virtual('canAccessKeystone').get(function() {
  * Relationships
  */
 
-Usuario.relationship({ ref: 'Post', path: 'posts', refPath: 'author' });
+Usuario.relationship({ref: 'Post', path: 'posts', refPath: 'author'});
 
 /**
  * Registration
  */
 
-Usuario.defaultColumns = 'name, email, empresa';
+Usuario.defaultColumns = 'email';
 Usuario.register();

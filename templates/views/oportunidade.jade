@@ -223,25 +223,19 @@ block content
 							else
 								img.fit(src='/images/noticia_padrao.png')
 						.col-md-10
-							h3.no-margin: = umaOportunidade.nome
+
+							h3.no-margin: = oportunidade.Nome
+
 							p 
 								if umaOportunidade.empresa
 									span.orange
 										| Empresa #{umaOportunidade.empresa}
 								else
 									span.orange
-										| Empresa da bananinha
+										| Nome da Empresa
 								| &nbsp;| Publicado em:
 								if umaOportunidade.createdAt
 										span.orange 
 											| #{umaOportunidade._.createdAt.format('DD')} de #{umaOportunidade._.createdAt.format('MMMM')} de #{umaOportunidade._.createdAt.format('YYYY')}
 								else
 										span.orange 
-											| Bananas
-							if umaOportunidade.descCurta
-								p!= umaOportunidade.descCurta
-
-	else
-		.row
-			.col-md-12
-				h3 Nenhuma oportunidade!

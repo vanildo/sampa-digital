@@ -52,57 +52,42 @@ exports.initLocals = function (req, res, next) {
 
     var locals = res.locals;
     if (req.user) {
-        if (req.user.sampaAdmin) {
+        if (req.user.isAdmin) {
             locals.navLinks = [
-                {label: 'Home', key: 'home', href: '/'},
-                {label: 'Blog', key: 'blog', href: '/blog'},
-                {label: 'Galeria', key: 'gallery', href: '/gallery'},
-                {label: 'Contato', key: 'contact', href: '/contact'},
-                {label: 'Cadastro', key: 'cadastro', href: '/cadastro'},
-                {label: 'Aprovaçao', key: 'aprovacao', href: '/aprovacao'},
-            ];
-
-            keystone.set('nav', {
-                'Empresa': 'empresas',
-                'Oportunidades': 'oportunidades',
-                'Contas': ['usuarios', 'pessoas'],
-                'Noticias': ['posts', 'post-comments', 'post-categories'],
-                'Agenda': 'Agenda',
-                'Galerias': 'galleries',
-                'Messagem': 'enquiries',
-                'CNAE': 'CNAE',
-                'EmailConfig': 'EmailConfig',
-                'EmailsAdeSampa': 'EmailsAdeSampa',
-            });
-
-            locals.user = req.user;
-
-            next();
-        } else {
-
-            keystone.set('nav', {
-                'Empresas': ['empresas', 'oportunidades'],
-                'Conta': ['usuarios', 'pessoas']
-            });
-
-            locals.navLinks = [
-                {label: 'Home', key: 'home', href: '/'},
-                {label: 'Blog', key: 'blog', href: '/blog'},
-                {label: 'Galeria', key: 'gallery', href: '/gallery'},
-                {label: 'Contato', key: 'contact', href: '/contact'},
+                {label: 'Inicio', key: 'home', href: '/'},
+                {label: 'Oportunidades', key: 'tecnologia', href: '/oportunidades'},
+                {label: 'Noticias', href: '/blog'},
+                {label: 'agenda', href: '/agenda'},
+                /*{label: 'Home', key: 'home', href: '/'},
+                 {label: 'Noticias', key: 'blog', href: '/blog'},
+                 {label: 'Galeria', key: 'gallery', href: '/gallery'},
+                 {label: 'Contato', key: 'contact', href: '/contact'},
+                 {label: 'Aprovaçao', key: 'aprovacao', href: '/aprovacao'},*/
             ];
 
             locals.user = req.user;
 
             next();
+        } else if (req.user.responsavel) {
 
+            locals.navLinks = [
+                {label: 'Inicio', key: 'home', href: '/'},
+                {label: 'Oportunidades', key: 'tecnologia', href: '/oportunidades'},
+                {label: 'Noticias', href: '/blog'},
+                {label: 'agenda', href: '/agenda'},
+                {label: 'Cadastro Oportunidade', href: '/cadastroOportunidade'},
+            ];
+
+            locals.user = req.user;
+
+            next();
         }
     } else {
         locals.navLinks = [
-            {label: 'Home', key: 'home', href: '/'},
-            {label: 'Blog', key: 'blog', href: '/blog'},
-            {label: 'Galeria', key: 'gallery', href: '/gallery'},
-            {label: 'Contato', key: 'contact', href: '/contact'},
+            {label: 'Inicio', key: 'home', href: '/'},
+            {label: 'Oportunidades', key: 'tecnologia', href: '/oportunidades'},
+            {label: 'Noticias', href: '/blog'},
+            {label: 'agenda', href: '/agenda'},
             {label: 'Cadastro', key: 'cadastro', href: '/cadastro'},
         ];
 
@@ -142,10 +127,24 @@ exports.flashMessages = function (req, res, next) {
 exports.requireUser = function (req, res, next) {
 
     if (!req.user) {
-        req.flash('error', 'Please sign in to access this page.');
-        res.redirect('/keystone/signin');
+        req.flash('error', 'Voce nao tem acesso a esta pagina.');
+        res.redirect('/q4qrsd5khd11bw');
     } else {
         next();
     }
 
 };
+
+exports.requireAdmin = function (req, res, next) {
+
+    if (!req.user.isAdmin) {
+        req.flash('error', 'Voce nao tem acesso a esta pagina.');
+        res.redirect('/q4qrsd5khd11bw');
+    } else {
+        next();
+    }
+
+};
+
+
+

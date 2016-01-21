@@ -57,7 +57,7 @@ exports = module.exports = function (req, res) {
                 if (req.body.empresaSituacaoSistema == 1) {
                     empresa.empresaSituacaoSistema = 'aprovado';
                     empresa.save();
-                    usuario.isAdmin = true;
+                    usuario.responsavel = true;
                     senha = randomValueBase64(8);
                     usuario.password = senha;
                     usuario.save();

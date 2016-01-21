@@ -6,6 +6,7 @@ exports = module.exports = function(req, res) {
 
 	var viewLocals = {
 		validationErrors: {},
+		showCreateForm: _.has(req.query, 'new')
 	};
 
 	var sort = { by: req.query.sort || req.list.defaultSort };
@@ -53,42 +54,11 @@ exports = module.exports = function(req, res) {
 	}
 
 	var renderView = function() {
-		
-		
-		if(req.list.key === "Empresa"){
-			if(!req.user.sampaAdmin){
-				var query = req.list.paginate({ filters: queryFilters, page: req.params.page, perPage: req.list.get('perPage') }).where('controlData', req.user.controlData ).sort(sort.by);
-			}else{
-				viewLocals.showCreateForm = _.has(req.query, 'new');
-				var query = req.list.paginate({ filters: queryFilters, page: req.params.page, perPage: req.list.get('perPage') }).sort(sort.by);	
-			}
-		}else if(req.list.key === "Pessoa"){
-			if(!req.user.sampaAdmin){
-				var query = req.list.paginate({ filters: queryFilters, page: req.params.page, perPage: req.list.get('perPage') }).where('_id', req.user.controlData ).sort(sort.by);
-			}else{
-				viewLocals.showCreateForm = _.has(req.query, 'new');
-				var query = req.list.paginate({ filters: queryFilters, page: req.params.page, perPage: req.list.get('perPage') }).sort(sort.by);	
-			}
-		}else if(req.list.key === "Usuario"){
-			if(!req.user.sampaAdmin){
-				var query = req.list.paginate({ filters: queryFilters, page: req.params.page, perPage: req.list.get('perPage') }).where('_id', req.user.id ).sort(sort.by);
-			}else{
-				viewLocals.showCreateForm = _.has(req.query, 'new');
-				var query = req.list.paginate({ filters: queryFilters, page: req.params.page, perPage: req.list.get('perPage') }).sort(sort.by);	
-			}
-		}else{
-			if(!req.user.sampaAdmin){
-				viewLocals.showCreateForm = _.has(req.query, 'new');
-				var query = req.list.paginate({ filters: queryFilters, page: req.params.page, perPage: req.list.get('perPage') }).where('createdBy', req.user.id ).sort(sort.by);
-			}else{
-				viewLocals.showCreateForm = _.has(req.query, 'new');
-				var query = req.list.paginate({ filters: queryFilters, page: req.params.page, perPage: req.list.get('perPage') }).sort(sort.by);	
-			}
-			
-		}
-		
+
+		var query = req.list.paginate({ filters: queryFilters, page: req.params.page, perPage: req.list.get('perPage') }).sort(sort.by);
+
 		req.list.selectColumns(query, columns);
-		
+
 		var link_to = function(params) {
 			var p = params.page || '';
 			delete params.page;
@@ -109,7 +79,7 @@ exports = module.exports = function(req, res) {
 				console.log(err);
 				return res.status(500).send('Error querying items:<br><br>' + JSON.stringify(err));
 			}
-			
+
 			// if there were results but not on this page, reset the page
 			if (req.params.page && items.total && !items.results.length) {
 				return res.redirect('/keystone/' + req.list.path);
@@ -138,7 +108,7 @@ exports = module.exports = function(req, res) {
 			if (downloadParams) {
 				download_link += '?' + downloadParams;
 			}
-			
+
 			var appName = keystone.get('name') || 'Keystone';
 
 			keystone.render(req, res, 'list', _.extend(viewLocals, {
@@ -170,6 +140,7 @@ exports = module.exports = function(req, res) {
 		}
 		return pass;
 	};
+
 	var item;
 	if ('update' in req.query) {
 
@@ -249,7 +220,7 @@ exports = module.exports = function(req, res) {
 		item = new req.list.model();
 		var updateHandler = item.getUpdateHandler(req);
 
-		viewLocals.showCreateForm = false; // always show the create form after a create. success will redirect.
+		viewLocals.showCreateForm = true; // always show the create form after a create. success will redirect.
 
 		if (req.list.nameIsInitial) {
 			if (!req.list.nameField.validateInput(req.body, true, item)) {
@@ -267,7 +238,6 @@ exports = module.exports = function(req, res) {
 				viewLocals.createErrors = err;
 				return renderView();
 			}
-
 			req.flash('success', 'New ' + req.list.singular + ' ' + req.list.getDocumentName(item) + ' created.');
 			return res.redirect('/keystone/' + req.list.path + '/' + item.id);
 		});

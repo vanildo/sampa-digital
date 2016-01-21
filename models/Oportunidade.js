@@ -12,19 +12,23 @@ var Oportunidade = new keystone.List('Oportunidade', {
 });
 Oportunidade.add({
     nome: {type: String, initial: true, required: true},
-    descricao: {type: String},
-	descCurta: {type: String, initial: true, required:true},
-    tipoOportunidade: {type: Types.Select, options: ['COMPRA', 'VENDA'], initial: true, required:true},
-    quantidade: {type: Types.Number, initial: true, required:true},
-    preco: {type: Types.Money, initial: true, required:true},
+    breveDescricao: {type: String, initial: true, required: true, label: "Descrição Resumida: "},
+    tipoOportunidade: {type: Types.Select, options: ['COMPRA', 'VENDA'], label: "Tipo de Oportunidade", initial: true, required: true},
+    quantidade: {type: Types.Number},
+    preco: {type: Types.Money},
+    descricaoDetalhada: { type: Types.Textarea, required: true , initial: true},
+    empresa: { type: Types.Relationship, ref: 'Empresa', index: true },
 });
 /**
  * Relationships
  */
 
+Oportunidade.relationship({ref: 'Empresa', refPath: 'oportunidades'});
+
 
 /**
  * Registration
  */
-Oportunidade.defaultColumns = 'descricao, descCurta, tipoOportunidade, quantidade , preco';
+Oportunidade.defaultColumns = 'nome, tipoOportunidade, quantidade , preco';
+
 Oportunidade.register();

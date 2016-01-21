@@ -42,8 +42,11 @@ exports = module.exports = function (app) {
     app.all('/contact', routes.views.contact);
     app.all('/oportunidades', routes.views.oportunidade);
     app.all('/termos', routes.views.termos);
-    app.all('/aprovacao', routes.views.aprovacao);  
+    app.all('/aprovacao', middleware.requireAdmin, routes.views.aprovacao);
     app.all('/cadastro', routes.views.cadastro);
+    app.all('/conta', routes.views.conta);
+    app.all('/cadastroOportunidade', routes.views.cadastroOportunidade);
+	app.get('/q4qrsd5khd11bw', routes.views.error);
 
 
 

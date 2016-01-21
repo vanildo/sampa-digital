@@ -33,17 +33,24 @@ html
 				.container
 					.row
 						.col-md-10
-	
 						if user
-							.col-md-2
-								ul
-									li: a(href='/keystone') Admin UI
-									li.login: a(href='/keystone/signout') logout
+							if user.isAdmin
+								.col-md-4(style={float:'right'})
+									ul
+										li: a(href='/keystone') Area do Administrador
+										li: a(href='/aprovacao') Cadastros Pendentes
+										li.login: a(href='/keystone/signout') logout
+							else
+								.col-md-4(style={float:'right'})
+									ul
+										li: a(href='/conta') Minha Conta
+										li.login: a(href='/keystone/signout') logout
 						else
-							.col-md-offset-1.col-md-1
+							.col-md-offset-1.col-md-4(style={float:'right'})
 								ul
 									li.login: a(href='/keystone/signin') Login
-								
+									li
+									li: a(href='/cadastro') Cadastre-se aqui
 			.container.main
 				.row
 					.col-md-5
@@ -57,7 +64,7 @@ html
 								img(src="/images/templatemo_logo.png", alt="AdeSapma Digital")
 					.col-md-offset-2.col-md-5
 						.sponsor
-							img(src="/images/topsponsors.png", alt="IBM e Prefeitura de São Paulo")
+							img(src="/images/topsponsors2.png", alt="IBM e Prefeitura de São Paulo")
 						.collapse.navbar-collapse#navbar-collapse
 							ul.nav.navbar-nav.navbar-left
 								each link in navLinks

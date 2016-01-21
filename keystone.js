@@ -109,11 +109,16 @@ keystone.set('email tests', require('./routes/emails'));
 // Configure the navigation bar in Keystone's Admin UI
 
 keystone.set('nav', {
-    'posts': ['posts', 'post-comments', 'post-categories'],
-    'galleries': 'galleries',
-    'enquiries': 'enquiries',
-    'usuarios': 'usuarios',
-    'empresas': 'empresas'   
+                'Empresa': 'empresas',
+                'Oportunidades': 'oportunidades',
+                'Contas': ['usuarios', 'pessoas'],
+                'Noticias': ['posts', 'post-comments', 'post-categories'],
+                'Agenda': 'Agenda',
+                'Galerias': 'galleries',
+                'Messagem': 'enquiries',
+                'CNAE': 'CNAE',
+                'EmailConfig': 'EmailConfig',
+                'EmailsAdeSampa': 'EmailsAdeSampa',
 });
 
 keystone.set('email nodemailer', {
