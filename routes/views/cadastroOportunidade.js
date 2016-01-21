@@ -1,23 +1,14 @@
 var keystone = require('keystone');
 var Empresa = keystone.list('Empresa');
-var CNAE = keystone.list('CNAE');
 var Oportunidade = keystone.list('Oportunidade');
-var Usuario = keystone.list('Usuario');
-var crypto = require('crypto');
-var nodemailer = require('nodemailer');
-var EmailConfig = keystone.list('EmailConfig');
-var Pessoa = keystone.list('Pessoa');
-var EmailsAdeSampa = keystone.list('EmailsAdeSampa');
+
 exports = module.exports = function (req, res) {
 
     var view = new keystone.View(req, res);
     var locals = res.locals;
     locals.section = 'cadastroOportunidade';
-//    locals.cnaes = [];
-//    locals.oportunidades = [];
     locals.formData = req.body || {};
     locals.validationErrors = {};
-    locals.oportunidadeSubmitted = false;
     locals.compra = false;
     locals.venda = false;
 
