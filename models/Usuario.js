@@ -9,7 +9,6 @@ var Types = keystone.Field.Types;
 var Usuario = new keystone.List('Usuario', {
     map: {name: 'email'},
 	autokey: { path: 'key', from: 'email', unique: true },
-    nocreate: true,
 });
 
 Usuario.add({

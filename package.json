@@ -5,7 +5,7 @@
   "description": "A sample nodejs app for Bluemix",
   "main": "keystone.js",
   "dependencies": {
-	"keystone": "https://github.com/Ftonso/keystone/tarball/5a4961908411c0e7b35c354ba5d50e07072acb5d",
+	"keystone": "^0.3.14",
     "async": "^1.4.2",
     "underscore": "^1.8.3",
     "dotenv": "^1.1.0",
