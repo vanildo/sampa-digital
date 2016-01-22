@@ -39,6 +39,8 @@ exports = module.exports = function (app) {
     app.get('/blog/:category?', routes.views.blog);
     app.get('/blog/post/:post', routes.views.post);
     app.get('/gallery', routes.views.gallery);
+	app.get('/painel', routes.views.painel);
+    app.get('/q4qrsd5khd11bw', routes.views.error);
     app.all('/contact', routes.views.contact);
     app.all('/oportunidades', routes.views.oportunidade);
     app.all('/termos', routes.views.termos);
@@ -48,7 +50,7 @@ exports = module.exports = function (app) {
     app.all('/cadastroOportunidade', routes.views.cadastroOportunidade);
     app.all('/minhasOportunidades', routes.views.minhasOportunidades);
     app.all('/manutencaoOportunidade/:oportunidade', routes.views.manutencaoOportunidade);   
-    app.get('/q4qrsd5khd11bw', routes.views.error);
+
 
 
 
