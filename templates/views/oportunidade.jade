@@ -1,18 +1,160 @@
 extends ../layouts/default
 
+
+
 block intro
-	.container
-		.row				
-			//h1=oportunidades[0]			
-			.col-md-12.text-center
-				if oportunidades
-					h2.orange Quero Vender!!
-					p
-						i Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit
+	if locals.oportunidades
+		.container
+			.row
+				.col-md-12.text-center
+					if oportunidades.length
+						if oportunidades[0].tipoOportunidade == 'VENDA'
+							h2.orange Quero Vender!!
+							p
+								i Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit
+						else
+							h2.orange Quero Comprar!! 
+							p
+								i Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit
+					else
+						h2.orange Nada cadastrado no momento!!
+						p
+							i Maqui porra quista conteceno qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit
+	else if locals.umaOportunidade
+		.container
+			.row						
+				.col-md-12.text-center
+						if umaOportunidade.length
+							if umaOportunidade.tipoOportunidade == 'VENDA'
+								h2.orange Quero Vender!!
+								p
+									i Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit
+							else
+								h2.orange Quero Comprar!! 
+								p
+									i Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit
+						else
+							h2.orange Oportunidade não encontrada!!
+	else
+		.container
+			.row						
+				.col-md-12.text-center
+					h2.orange Deu ruim!!
+
+
+
+
+
+block content
+	if locals.oportunidades
+		.bg-pb
+			.container
+				p Ordenar por: 
+					a(href='#') Mais recentes
+					|&nbsp;/&nbsp;
+					a(href='#') Mais antigas
+					| &nbsp;/&nbsp;
+					a(href='#') A-Z
+					|&nbsp; /&nbsp;
+					a(href='#') Z-A
+				if oportunidades.length
+					each oportunidade in oportunidades
+						.row
+							.col-md-2.text-center
+								if oportunidade.image
+									img.fit(oportunidade.image.fit(160,160))
+								else
+									img.fit(src='/images/noticia_padrao.png')
+							.col-md-10
+								h3.no-margin: = oportunidade.nome
+								p 
+									if oportunidade.empresa
+										span.orange
+											| Empresa #{oportunidade.empresa}
+									else
+										span.orange
+											| Empresa da bananinha
+									| &nbsp;| Publicado em:
+									if oportunidade.createdAt
+											span.orange 
+												| #{oportunidade._.createdAt.format('DD')} de #{oportunidade._.createdAt.format('MMMM')} de #{oportunidade._.createdAt.format('YYYY')}
+									else
+											span.orange 
+												| Bananas
+								if oportunidade.descCurta
+									p!= oportunidade.descCurta
+								else
+									p Bananosas bananudas!
+								p.btn.small.orange: a(href='oportunidades?id=' + oportunidade.key) Leia mais
 				else
-					h2.orange Quero Comprar!! 
-					p
-						i Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit
+					.row
+						.col-md-12
+							h3 Nenhuma oportunidade!
+	else if locals.umaOportunidade
+		.bg-pb
+			.container
+				.row
+					.col-md-2.text-center
+						if umaOportunidade.image
+							img.fit(umaOportunidade.image.fit(160,160))
+						else
+							img.fit(src='/images/noticia_padrao.png')
+					.col-md-10
+						h3.no-margin: = umaOportunidade.nome
+						p 
+							if umaOportunidade.empresa
+								span.orange
+									| Empresa #{umaOportunidade.empresa}
+							else
+								span.orange
+									| Empresa da bananinha
+							| &nbsp;| Publicado em:
+							if umaOportunidade.createdAt
+									span.orange 
+										| #{umaOportunidade._.createdAt.format('DD')} de #{umaOportunidade._.createdAt.format('MMMM')} de #{umaOportunidade._.createdAt.format('YYYY')}
+							else
+									span.orange 
+										| Bananas
+						if umaOportunidade.descCurta
+							p!= umaOportunidade.descCurta
+
+	else
+		.bg-pb
+			.container
+				.row
+					.col-md-12
+						h3 Nenhuma oportunidade!
+//
+	block intro
+		.container
+			.row				
+				//h1=oportunidades[0]			
+				.col-md-12.text-center
+					
+						if oportunidades.length
+							if oportunidades[0].tipoOportunidade == 'VENDA'
+								h2.orange Quero Vender!!
+								p
+									i Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit
+							else
+								h2.orange Quero Comprar!! 
+								p
+									i Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit
+						else
+							h2.orange Nada cadastrado no momento!!
+							p
+								i Maqui porra quista conteceno qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit
+					
+						if oportunidades[0].tipoOportunidade == 'VENDA'
+							h2.orange Quero Vender!!
+							p
+								i Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit
+						else
+							h2.orange Quero Comprar!! 
+							p
+								i Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit
+					
+						h2.orange Oportunidade não encontrada!!
 						//
 							_id
 							updatedBy
@@ -23,47 +165,77 @@ block intro
 							descricao
 							quantidade
 							tipoOportunidade
-block content
-	.bg-pb
-		.container
-			p Ordenar por: 
-				a(href='#') Mais recentes
-				|&nbsp;/&nbsp;
-				a(href='#') Mais antigas
-				| &nbsp;/&nbsp;
-				a(href='#') A-Z
-				|&nbsp; /&nbsp;
-				a(href='#') Z-A
-			if oportunidades.length
-				each oportunidade in oportunidades
+//
+	if 'oportunidades' in this
+		block content
+			.bg-pb
+				.container
+					p Ordenar por: 
+						a(href='#') Mais recentes
+						|&nbsp;/&nbsp;
+						a(href='#') Mais antigas
+						| &nbsp;/&nbsp;
+						a(href='#') A-Z
+						|&nbsp; /&nbsp;
+						a(href='#') Z-A
+					if oportunidades.length
+						each oportunidade in oportunidades
+							.row
+								.col-md-2.text-center
+									if oportunidade.image
+										img.fit(oportunidade.image.fit(160,160))
+									else
+										img.fit(src='/images/noticia_padrao.png')
+								.col-md-10
+									h3.no-margin: = oportunidade.nome
+									p 
+										if oportunidade.empresa
+											span.orange
+												| Empresa #{oportunidade.empresa}
+										else
+											span.orange
+												| Empresa da bananinha
+										| &nbsp;| Publicado em:
+										if oportunidade.createdAt
+												span.orange 
+													| #{oportunidade._.createdAt.format('DD')} de #{oportunidade._.createdAt.format('MMMM')} de #{oportunidade._.createdAt.format('YYYY')}
+										else
+												span.orange 
+													| Bananas
+									if oportunidade.descCurta
+										p!= oportunidade.descCurta
+									else
+										p Bananosas bananudas!
+									p.btn.small.orange: a(href='oportunidades?id=' + oportunidade.key) Leia mais
+					else
+						.row
+							.col-md-12
+								h3 Nenhuma oportunidade!
+
+	else if 'umaOportunidade' in this
+		block content
+			.bg-pb
+				.container
 					.row
 						.col-md-2.text-center
-							if oportunidade.image
-								img.fit(oportunidade.image.fit(160,160))
+							if umaOportunidade.image
+								img.fit(umaOportunidade.image.fit(160,160))
 							else
 								img.fit(src='/images/noticia_padrao.png')
 						.col-md-10
+
 							h3.no-margin: = oportunidade.Nome
+
 							p 
-								if oportunidade.empresa
+								if umaOportunidade.empresa
 									span.orange
-										| Empresa #{oportunidade.empresa}
+										| Empresa #{umaOportunidade.empresa}
 								else
 									span.orange
 										| Nome da Empresa
 								| &nbsp;| Publicado em:
-								if oportunidade.createdAt
+								if umaOportunidade.createdAt
 										span.orange 
-											| #{oportunidade._.createdAt.format('DD')} de #{oportunidade._.createdAt.format('MMMM')} de #{oportunidade._.createdAt.format('YYYY')}
+											| #{umaOportunidade._.createdAt.format('DD')} de #{umaOportunidade._.createdAt.format('MMMM')} de #{umaOportunidade._.createdAt.format('YYYY')}
 								else
 										span.orange 
-											| Super Bananas
-							if oportunidade.descricaoBrief
-								p!= oportunidade.descricaoBrief
-							else
-								p Bananas!
-							p.btn.small.orange: a(href='/blog/post/' + oportunidade.id) Leia mais
-			else
-				.row
-					.col-md-12
-						h3 Nenhuma oportunidade!

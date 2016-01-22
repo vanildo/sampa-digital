@@ -16,8 +16,8 @@ Oportunidade.add({
     tipoOportunidade: {type: Types.Select, options: ['COMPRA', 'VENDA'], label: "Tipo de Oportunidade", initial: true, required: true},
     quantidade: {type: Types.Number},
     preco: {type: Types.Money},
-    descricaoDetalhada: { type: Types.Textarea, required: true , initial: true},   
-    empresa: { type: Types.Relationship, ref: 'Empresa', index: true },  
+    descricaoDetalhada: { type: Types.Textarea, required: true , initial: true},
+    empresa: { type: Types.Relationship, ref: 'Empresa', index: true },
 });
 /**
  * Relationships
@@ -30,4 +30,5 @@ Oportunidade.relationship({ref: 'Empresa', refPath: 'oportunidades'});
  * Registration
  */
 Oportunidade.defaultColumns = 'nome, tipoOportunidade, quantidade , preco';
+
 Oportunidade.register();
