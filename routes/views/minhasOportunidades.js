@@ -28,13 +28,12 @@ exports = module.exports = function (req, res) {
 
     //view.query('oportunidades', Oportunidade.model.find().populate('empresa').where('empresa.usuario', locals.user.id));
 
-    view.on('post', {action: 'manutencao'}, function (next) { 
+    view.on('post', {action: 'manutencao'}, function (next) {
         function one(callback) {
             locals.oportunidade = req.body.id;
             callback();
         }
         function two() {
-            res.oportunidade = req.body.id;           
             return res.redirect('/manutencaoOportunidade/' + req.body.id);
         }
         one(two);

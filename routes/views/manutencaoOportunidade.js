@@ -16,12 +16,11 @@ exports = module.exports = function (req, res) {
     };
 
     // Load dados oportunidade
-    view.on('init', function (next) {        
+    view.on('init', function (next) {
         var oportunidade = null;
         Oportunidade.model.findById(locals.filters.oportunidade, function (err, oportunidadef) {
             oportunidade = oportunidadef;
             locals.oportunidade = oportunidadef;
-            console.log(locals.filters.oportunidade);
             next();
         });
     });
@@ -43,7 +42,7 @@ exports = module.exports = function (req, res) {
                 if (err) {
                     locals.validationErrors = err.errors;
                 }
-                locals.oportunidadeSubmmited = true;
+                locals.oportunidadeSubmmited = true;                
                 return res.redirect('/minhasOportunidades');
             });
             console.log("oportunidade atualizada: " + oportunidade.id);
