@@ -76,6 +76,7 @@ exports.initLocals = function (req, res, next) {
                 {label: 'Noticias', href: '/blog'},
                 {label: 'agenda', href: '/agenda'},
                 {label: 'Cadastro Oportunidade', href: '/cadastroOportunidade'},
+                {label: 'Minhas Oportunidades', href: '/minhasOportunidades'},
             ];
 
             locals.user = req.user;

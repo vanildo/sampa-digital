@@ -1,0 +1,41 @@
+extends ../layouts/default
+
+block intro
+	.container
+		.row
+			.col-md-12.text-center
+				if oportunidades.length
+					.page-header
+						h2.orange Suas Oportunidades no Sistema.
+				else
+					.jumbotron.text-center
+						h3(style="margin-bottom:0;margin-top:0;") Nenhuma oportunidade cadastrada.
+
+block content
+	.container
+		.row
+			if oportunidades.length
+				.col-md-12
+					form(method='post', id='frmOportunidade').form-horizontal
+						input(type='hidden', name='action', value='manutencao')
+						input(type='hidden', name='id', id='id', value='')
+						input(type='hidden', name='empresa', value=empresa)
+						table(id="tbPendencia", class="false table items-list")
+							tr
+								th Nome
+								th Tipo Oportunidade
+								th Breve Descrição
+							each oportunidade, i in oportunidades
+								tr.side-link(value=oportunidade.nome)
+									td #{oportunidade.nome}
+									td #{oportunidade.tipoOportunidade}
+									td #{oportunidade.breveDescricao}
+									td
+										button(id='#{oportunidade.id}', type='button', name='btnEditar', onclick="requestFormEditar('#{oportunidade.id}')").btn.small.orange Editar
+							td(id=i)
+block page-js
+	script.
+			function requestFormEditar(value) {
+				$("#id").val(value);
+				$("#frmOportunidade").submit();
+			};

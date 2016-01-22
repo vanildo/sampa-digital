@@ -4,11 +4,8 @@ block content
 	.container
 		.row
 			.col-md-12.text-center
-				h2.orange Nova Empresa por aqui?
-				p
-					i
-						strong Comprador ou Vendedor:
-						|  Fique por dentro do que movimenta São Paulo
+				h2.orange Sua Conta
+
 		.row
 			.col-md-12.rule-bottom.text-center
 				h3 Dados do Cadastro
@@ -19,14 +16,18 @@ block content
 						.col-xs-12.col-md-6
 							.col-md-12
 								.form-group
+
 									label.col-sm-4.text-left.padding-0 Nome Fantasia
-									input(type='text' name='nomeFantasia' placeholder='Nome Fantasia' value = empresaf.nomeFantasia).form-control
+									input(type='text' name='nomeFantasia' required x-moz-errormessage="Por favor preencha esse campo." placeholder='Nome Fantasia' value = empresaf.nomeFantasia).form-control
+
 								.form-group
 									label.col-sm-4.text-left.padding-0 Descrição
-									input(type='text' name='descricao' placeholder="Breve Descrição" value = empresaf.descricao).form-control
+									input(type='text' name='descricao' placeholder="Breve Descrição" required x-moz-errormessage="Por favor preencha esse campo." value = empresaf.descricao).form-control
+								
 								.form-group
 									label.col-sm-4.text-left.padding-0 Nome:
 									input(type='text' name='nome' required x-moz-errormessage="Por favor preencha esse campo." placeholder="Nome" value = pessoaf.nome).form-control
+								
 								.form-group
 									label.col-sm-4.text-left.padding-0 CPF:
 									input(type='text' name='cpf' required x-moz-errormessage="Por favor preencha esse campo." placeholder="CPF (Ex. 000.000.000-00)" value = pessoaf.cpf).form-control
@@ -36,18 +37,15 @@ block content
 									label.col-sm-4.text-left.padding-0 Email
 									input(type='email' name='email' required x-moz-errormessage="Por favor preencha com um email válido." placeholder='Email' value = usuariof.email).form-control
 								.form-group
-									label.col-sm-4.text-left.padding-0 Contato Comercial
-									input(type='text' name='contatoComercial' placeholder='Contato Comercial' value = empresaf.contatoComercial).form-control
+									label.col-sm-4.text-left.padding-0 Nome do Contato Comercial
+									input(type='text' name='contatoComercial' placeholder='Nome do Contato Comercial' required x-moz-errormessage="Por favor preencha esse campo." value = empresaf.contatoComercial).form-control
 								.form-group
 									label.col-sm-4.text-left.padding-0 Telefone
-									input(type='text' name='telefone' placeholder='Telefone (Ex. (00)0000-0000) - Ramal' value = empresaf.telefone).form-control
-								.col-md-8.text-left.padding-left-0
-									.form-group
-										label.col-sm-4.text-left.padding-0 Logo
-										input(type='text' name='logo' placeholder='Url da imagem do logo' value = empresaf.logo).form-control
-								.col-md-4
-									.form-group
-										button(type='' style='margin-top:23px;').btn.green Enviar arquivo...
+									input(type='text' name='telefone' required x-moz-errormessage="Por favor preencha esse campo." placeholder='Telefone (Ex. (00)0000-0000) - Ramal' value = empresaf.telefone).form-control
+								.form-group
+									label.col-sm-4.text-left.padding-0 Logo
+									input(type='text' name='logo' placeholder='Url da imagem do logo' value = empresaf.logo).form-control
+					
 					.row
 						.col-md-12.rule-bottom.text-center
 							h3 Localização
@@ -72,7 +70,7 @@ block content
 							.col-md-12
 								.form-group
 									label.col-sm-4.text-left.padding-0 Complemento:
-									input(type='text' name='endereco.name' required x-moz-errormessage="Por favor preencha esse campo." placeholder="Complemento" value = empresaf.endereco.name).form-control
+									input(type='text' name='endereco.name' placeholder="Complemento" value = empresaf.endereco.name).form-control
 								.form-group
 									label.col-sm-4.text-left.padding-0 Bairro:
 									input(type='text' name='endereco.street2' required x-moz-errormessage="Por favor preencha esse campo." placeholder='Bairro' value = empresaf.endereco.street2).form-control
@@ -85,4 +83,4 @@ block content
 					.row
 						.col-md-12.text-center
 							.form-group
-								button(type='submit').btn.green Enviar
+								button(type='submit').btn.green Salvar
