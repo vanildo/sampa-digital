@@ -14,12 +14,12 @@ exports = module.exports = function(req, res) {
 
 	// Load the galleries
 	if(tipo == "comprar"){
-		view.query('oportunidades', keystone.list('Oportunidade').model.find().where('tipoOportunidade', 'COMPRA' ));
+		view.query('oportunidades', keystone.list('Oportunidade').model.find().where('tipoOportunidade', 'COMPRA' ).populate('empresa'));
 		console.log("paçocas");
 	}else if(tipo == "vender"){
-		view.query('oportunidades', keystone.list('Oportunidade').model.find().where('tipoOportunidade', 'VENDA' ));
+		view.query('oportunidades', keystone.list('Oportunidade').model.find().where('tipoOportunidade', 'VENDA' ).populate('empresa'));
 	}else{
-		view.query('oportunidades', keystone.list('Oportunidade').model.find().where('_id', tipo ));
+		view.query('oportunidades', keystone.list('Oportunidade').model.find().where('_id', tipo ).populate('empresa'));
 
 	}
 

@@ -70,10 +70,10 @@ block content
 								p 
 									if oportunidade.empresa
 										span.orange
-											| Empresa #{oportunidade.empresa}
+											| Empresa #{oportunidade.empresa.nomeFantasia}
 									else
 										span.orange
-											| Empresa da bananinha
+											| Empresa de Gatinhos
 									| &nbsp;| Publicado em:
 									if oportunidade.createdAt
 											span.orange 
@@ -81,8 +81,8 @@ block content
 									else
 											span.orange 
 												| Bananas
-								if oportunidade.descCurta
-									p!= oportunidade.descCurta
+								if oportunidade.breveDescricao
+									p!= oportunidade.breveDescricao
 								else
 									p Bananosas bananudas!
 								p.btn.small.orange: a(href='oportunidades?id=' + oportunidade.key) Leia mais
@@ -104,7 +104,7 @@ block content
 						p 
 							if umaOportunidade.empresa
 								span.orange
-									| Empresa #{umaOportunidade.empresa}
+									| Empresa #{umaOportunidade.empresa.nomeFantasia}
 							else
 								span.orange
 									| Empresa da bananinha
@@ -115,8 +115,8 @@ block content
 							else
 									span.orange 
 										| Bananas
-						if umaOportunidade.descCurta
-							p!= umaOportunidade.descCurta
+						if umaOportunidade.breveDescricao
+							p!= umaOportunidade.breveDescricao
 
 	else
 		.bg-pb
@@ -191,7 +191,7 @@ block content
 									p 
 										if oportunidade.empresa
 											span.orange
-												| Empresa #{oportunidade.empresa}
+												| Empresa #{oportunidade.empresa.nomeFantasia}
 										else
 											span.orange
 												| Empresa da bananinha
@@ -202,8 +202,8 @@ block content
 										else
 												span.orange 
 													| Bananas
-									if oportunidade.descCurta
-										p!= oportunidade.descCurta
+									if oportunidade.breveDescricao
+										p!= oportunidade.breveDescricao
 									else
 										p Bananosas bananudas!
 									p.btn.small.orange: a(href='oportunidades?id=' + oportunidade.key) Leia mais
@@ -229,7 +229,7 @@ block content
 							p 
 								if umaOportunidade.empresa
 									span.orange
-										| Empresa #{umaOportunidade.empresa}
+										| Empresa #{umaOportunidade.empresa.nomeFantasia}
 								else
 									span.orange
 										| Nome da Empresa

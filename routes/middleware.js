@@ -72,7 +72,7 @@ exports.initLocals = function (req, res, next) {
 
             locals.navLinks = [
                 {label: 'Inicio', key: 'home', href: '/'},
-                {label: 'Oportunidades', key: 'tecnologia', href: '/oportunidades'},
+                {label: 'Oportunidades', key: 'tecnologia', href: '/oportunidades?comprar'},
                 {label: 'Noticias', href: '/blog'},
                 {label: 'agenda', href: '/agenda'},
                 {label: 'Cadastro Oportunidade', href: '/cadastroOportunidade'},
@@ -86,7 +86,7 @@ exports.initLocals = function (req, res, next) {
     } else {
         locals.navLinks = [
             {label: 'Inicio', key: 'home', href: '/'},
-            {label: 'Oportunidades', key: 'tecnologia', href: '/oportunidades'},
+            {label: 'Oportunidades', key: 'tecnologia', href: '/oportunidades?comprar'},
             {label: 'Noticias', href: '/blog'},
             {label: 'agenda', href: '/agenda'},
             {label: 'Cadastro', key: 'cadastro', href: '/cadastro'},
