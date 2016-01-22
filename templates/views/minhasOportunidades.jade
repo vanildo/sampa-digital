@@ -4,58 +4,38 @@ block intro
 	.container
 		.row
 			.col-md-12.text-center
-				if pendencias.length
+				if oportunidades.length
 					.page-header
-						h2.orange Aprovação de Empresas no Sistema
+						h2.orange Suas Oportunidades no Sistema.
 				else
 					.jumbotron.text-center
-						h3(style="margin-bottom:0;margin-top:0;") Nenhuma empresa pendente.
+						h3(style="margin-bottom:0;margin-top:0;") Nenhuma oportunidade cadastrada.
 
 block content
 	.container
 		.row
-			if pendencias.length
+			if oportunidades.length
 				.col-md-12
-					form(method='post', id='frmPendencia').form-horizontal
-						input(type='hidden', name='action', value='aprovacao')
+					form(method='post', id='frmOportunidade').form-horizontal
+						input(type='hidden', name='action', value='manutencao')
 						input(type='hidden', name='id', id='id', value='')
-						input(type='hidden', name='empresaSituacaoSistema', id='empresaSituacaoSistema', value='')
+						input(type='hidden', name='empresa', value=empresa)
 						table(id="tbPendencia", class="false table items-list")
 							tr
-								th Razão Social
-								th CNPJ
-								th Responsável Legal
-								th Telefone de Contato
-							each pendencia, i in pendencias
-								tr.side-link(value=pendencia.razaoSocial)
-									td #{pendencia.razaoSocial}
-									td #{pendencia.cnpj}
-									td #{pendencia.responsavelLegal.nome}
-									td #{pendencia.telefone}
+								th Nome
+								th Tipo Oportunidade
+								th Breve Descrição
+							each oportunidade, i in oportunidades
+								tr.side-link(value=oportunidade.nome)
+									td #{oportunidade.nome}
+									td #{oportunidade.tipoOportunidade}
+									td #{oportunidade.breveDescricao}
 									td
-										button(id='#{pendencia.id}', type='button', name='btnAprove', onclick="requestFormAprove('#{pendencia.id}')").btn.small.green Aprovar
-										//p.btn.small.green: a(href='/blog/post/', onclick="requestFormAprove('#{pendencia.id}')") Aprovar
-										//button(id='#{pendencia.id}', type='button', name='btnAprove') Aprovar
-										
-									td
-										button(id='#{pendencia.id}', type='button', name='btnDesaprove', onclick="requestFormDesaprove('#{pendencia.id}')").btn.small.orange Rejeitar
-										//p.btn.small.orange: a(href='/blog/post/', onclick="requestFormDesaprove('#{pendencia.id}')") Rejeitar
-										//button(id='#{pendencia.id}', type='button', name='btnDesaprove') Rejeitar
-								
-							td(id=i) 
-
-			else
-			
-		
+										button(id='#{oportunidade.id}', type='button', name='btnEditar', onclick="requestFormEditar('#{oportunidade.id}')").btn.small.orange Editar
+							td(id=i)
 block page-js
 	script.
-			function requestFormAprove(value) {
+			function requestFormEditar(value) {
 				$("#id").val(value);
-				$("#empresaSituacaoSistema").val(1);
-				$("#frmPendencia").submit();
-			};
-			function requestFormDesaprove(value) {				
-				$("#id").val(value);
-				$("#empresaSituacaoSistema").val(2);				
-				$("#frmPendencia").submit();
+				$("#frmOportunidade").submit();
 			};

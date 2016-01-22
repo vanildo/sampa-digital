@@ -13,7 +13,7 @@ var EmailConfig = new keystone.List('EmailConfig', {
 EmailConfig.add({
     name: {type: String, required: true, initial: true, index: true},
     user: {type: String, required: true, initial: true},
-    senha: { type: String, required: true, initial: true, hidden: true, password: true},  
+    senha: {type: String, required: true, initial: true, hidden: true, password: true},
     from: {type: String, required: true, initial: true},
     subjectCadastro: {type: String, required: true, initial: true, label: "Título do email de cadastro"},
     subjectAprovacao: {type: String, required: true, initial: true, label: "Título do email de aprovação"},
@@ -21,7 +21,7 @@ EmailConfig.add({
     saudacao: {type: String, required: true, initial: true},
     corpoCadastro: {type: Types.Textarea, required: true, initial: true, label: "Corpo do email de cadastro"},
     corpoAprovacao: {type: Types.Textarea, required: true, initial: true, label: "Corpo do email de aprovação"},
-    corpoRejeicao: {type: Types.Textarea, required: true, initial: true, label: "Corpo do email de rejeição"},    
+    corpoRejeicao: {type: Types.Textarea, required: true, initial: true, label: "Corpo do email de rejeição"},
     isAtivo: {type: Types.Boolean},
     dataCriacao: {type: Types.Date, default: Date.now}
 });
