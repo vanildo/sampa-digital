@@ -22,14 +22,19 @@ block content
 						input(type='hidden', name='empresa', value=empresa)
 						table(id="tbPendencia", class="false table items-list")
 							tr
-								th Nome
-								th Tipo Oportunidade
+								th Título da oportunidade
+								th Tipo de Oportunidade
+								th Publicado em:
 								th Breve Descrição
+								th Ativo
 							each oportunidade, i in oportunidades
 								tr.side-link(value=oportunidade.nome)
 									td #{oportunidade.nome}
 									td #{oportunidade.tipoOportunidade}
+									td #{oportunidade._.createdAt.format('DD')} de #{oportunidade._.createdAt.format('MMMM')} de #{oportunidade._.createdAt.format('YYYY')}
 									td #{oportunidade.breveDescricao}
+									td 
+										input(type='checkbox' name='isAtivo' checked = oportunidade.isAtivo disabled="disabled")
 									td
 										button(id='#{oportunidade.id}', type='button', name='btnEditar', onclick="requestFormEditar('#{oportunidade.id}')").btn.small.orange Editar
 							td(id=i)

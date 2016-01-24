@@ -18,7 +18,8 @@ exports = module.exports = function (req, res) {
         var empresa = Empresa.model.findOne().where('usuario', locals.user.id);
         empresa.exec(function (err, resultE) {
             var oportunidade = new Oportunidade.model({
-                empresa: resultE.id,
+                isAtivo: true,
+                empresa: resultE.id,                
             });
             var updaterO = oportunidade.getUpdateHandler(req);
             updaterO.process(req.body, {
@@ -26,9 +27,11 @@ exports = module.exports = function (req, res) {
             }, function (err) {
                 if (err) {
                     locals.validationErrors = err.errors;
-                } else {
+                } else {                        
                     console.log("Oportunidade: " + req.body.nome);
                     locals.oportunidadeSubmitted = true;
+                    oportunidade.isAtivo = true;
+                    oportunidade.save();
                 }
                 next();
             });

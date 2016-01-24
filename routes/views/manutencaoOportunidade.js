@@ -20,6 +20,7 @@ exports = module.exports = function (req, res) {
         var oportunidade = null;
         Oportunidade.model.findById(locals.filters.oportunidade, function (err, oportunidadef) {
             oportunidade = oportunidadef;
+            console.log(oportunidadef);
             locals.oportunidade = oportunidadef;
             next();
         });

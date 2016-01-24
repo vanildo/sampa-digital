@@ -22,11 +22,11 @@ block content
 
 								.form-group
 									label.col-sm-4.text-left.padding-0 Descrição
-									input(type='text' name='descricao' placeholder="Breve Descrição" required x-moz-errormessage="Por favor preencha esse campo." value = empresaf.descricao).form-control
+									input(type='text' name='descricao' placeholder="Breve Descrição" value = empresaf.descricao).form-control
 								
 								.form-group
-									label.col-sm-4.text-left.padding-0 Nome:
-									input(type='text' name='nome' required x-moz-errormessage="Por favor preencha esse campo." placeholder="Nome" value = pessoaf.nome).form-control
+									label.col-sm-7.text-left Nome do Representante Legal:
+									input(type='text' name='nome' required x-moz-errormessage="Por favor preencha esse campo." placeholder="Nome do Representante Legal" value = pessoaf.nome).form-control
 								
 								.form-group
 									label.col-sm-4.text-left.padding-0 CPF:
@@ -80,6 +80,20 @@ block content
 								.form-group
 									label.col-sm-4.text-left.padding-0 Cidade:
 									input(type='text' name='endereco.suburb' required x-moz-errormessage="Por favor preencha esse campo." placeholder='Cidade' value = empresaf.endereco.suburb).form-control
+										
+						.col-xm-12.col-md-6
+							.col-md-12
+								.rule-bottom.text-center.margin-bottom-15
+									h3 Sua Empresa na Web
+								.form-group
+									label.col-sm-4.text-left WebSite
+									input(type='text' name='webSite' placeholder='Web Site' value = empresaf.webSite).form-control
+								.form-group
+									label.col-sm-4.text-left Facebook
+									input(type='text' name='facebook' placeholder='Facebook' value = empresaf.facebook).form-control
+								.form-group
+									label.col-sm-4.text-left Twitter
+									input(type='text' name='twitter' placeholder='Twitter' value = empresaf.twitter).form-control
 					.row
 						.col-md-12.text-center
 							.form-group
