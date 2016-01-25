@@ -34,6 +34,7 @@ exports = module.exports = function (req, res) {
     locals.empresaType;
     locals.cnpj;
     locals.cadastroInstituicao = true;
+    locals.googlekey = keystone.get('google api key');
 
     // Load Oportunidades
     view.on('init', function (next) {
@@ -114,6 +115,10 @@ exports = module.exports = function (req, res) {
                         } else {
                             locals.empresaSubmitted = true;
                             locals.cadastroInstituicao = false;
+                            console.log(req.body.latitude);
+                            empresa.endereco.geo = [req.body.longitude, req.body.latitude];
+                            empresa.save();
+                            console.log(empresa);
                             console.log("Cadastrado cnpj: " + req.body.cnpj);
                         }
                         if (locals.empresaSubmitted)
@@ -148,6 +153,7 @@ exports = module.exports = function (req, res) {
                                                             //fila de email nao enviado
                                                             return console.log(error);
                                                         }
+                                                        console.log(empresa);
                                                         console.log('Message sent AdeSampa: ' + info.response);
                                                     });
                                                 }

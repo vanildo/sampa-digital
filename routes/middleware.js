@@ -55,7 +55,7 @@ exports.initLocals = function (req, res, next) {
         if (req.user.isAdmin) {
             locals.navLinks = [
                 {label: 'Inicio', key: 'home', href: '/'},
-				{label: 'Painel de Controle', href: '/painel'},
+                {label: 'Painel de Controle', href: '/painel'},
                 {label: 'Oportunidades', key: 'tecnologia', href: '/oportunidades'},
                 {label: 'Noticias', href: '/blog'},
                 {label: 'agenda', href: '/agenda'},
@@ -73,12 +73,10 @@ exports.initLocals = function (req, res, next) {
 
             locals.navLinks = [
                 {label: 'Inicio', key: 'home', href: '/'},
-				{label: 'Painel de Controle', href: '/painel'},
+                {label: 'Painel de Controle', href: '/painel'},
                 {label: 'Oportunidades', key: 'tecnologia', href: '/oportunidades?comprar'},
                 {label: 'Noticias', href: '/blog'},
                 {label: 'Agenda', href: '/agenda'},
-				
-				
             ];
 
             locals.user = req.user;

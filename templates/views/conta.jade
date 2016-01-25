@@ -9,14 +9,16 @@ block content
 		.row
 			.col-md-12.rule-bottom.text-center
 				h3 Dados do Cadastro
-				form(method='post').form-horizontal
+				form(method='post', id='frmConta' , name='frmConta').form-horizontal
 					input(type='hidden', name='action', value='update')
-					input(type='hidden' name='id' value = empresaf.id)					
+					input(type='hidden' name='id' value = empresaf.id)
+					input(type='hidden', name='latitude', id='latitude', value='')
+					input(type='hidden' name='longitude', id='longitude',value='')
+					input(type='hidden' name='key', id='key',value=googlekey)
 					.row.no-bottom-margin
 						.col-xs-12.col-md-6
 							.col-md-12
 								.form-group
-
 									label.col-sm-4.text-left.padding-0 Nome Fantasia
 									input(type='text' name='nomeFantasia' required x-moz-errormessage="Por favor preencha esse campo." placeholder='Nome Fantasia' value = empresaf.nomeFantasia).form-control
 
@@ -54,15 +56,15 @@ block content
 							.col-md-12
 								.form-group
 									label.col-sm-4.text-left.padding-0 Endereço:
-									input(type='text' name='endereco.street1' required x-moz-errormessage="Por favor preencha esse campo." placeholder="Endereço" value = empresaf.endereco.street1).form-control
+									input(id='endereco' type='text' name='endereco.street1' required x-moz-errormessage="Por favor preencha esse campo." placeholder="Endereço" value = empresaf.endereco.street1).form-control
 						.col-xs-12.col-md-6
 							.form-group
 								.col-sm-3
 									label.col-sm-4.text-left.padding-0 Número:
-									input(type='text' name='endereco.number' required x-moz-errormessage="Por favor preencha esse campo." placeholder='Nº (Ex.999)' value = empresaf.endereco.number).form-control
+									input(id='numero' type='text' name='endereco.number' required x-moz-errormessage="Por favor preencha esse campo." placeholder='Nº (Ex.999)' value = empresaf.endereco.number).form-control
 								.col-sm-6
 									label.col-sm-4.text-left.padding-0 CEP:
-									input(type='text' name='endereco.postcode' required x-moz-errormessage="Por favor preencha esse campo." placeholder='CEP (Ex. 00000-000)' value = empresaf.endereco.postcode).form-control
+									input(id='cep' type='text' name='endereco.postcode' required x-moz-errormessage="Por favor preencha esse campo." placeholder='CEP (Ex. 00000-000)' value = empresaf.endereco.postcode).form-control
 								.col-sm-3
 									label.col-sm-4.text-left.padding-0 Estado:
 									input(type='text' name='endereco.state' required x-moz-errormessage="Por favor preencha esse campo." placeholder='Estado' value = empresaf.endereco.state).form-control
@@ -97,4 +99,24 @@ block content
 					.row
 						.col-md-12.text-center
 							.form-group
-								button(type='submit').btn.green Salvar
+								button(type='button', name='salvar', onclick="longlat()").btn.green Salvar
+
+block page-js
+	script.
+		function longlat() {
+			var rua = $("#endereco").val();
+			var num = $("#numero").val();
+			var cep = $("#cep").val();
+			var key = $("#key").val();
+			var url = 'https://maps.googleapis.com/maps/api/geocode/json?address='+rua+' '+num+' '+ cep +'&key=' + key;
+			$.getJSON(url, function(data) {
+				if (data.status == 'OK'){
+					$("#latitude").val(data.results[0].geometry.location.lat);
+					$("#longitude").val(data.results[0].geometry.location.lng);
+				} else{
+					$("#latitude").val('');
+					$("#longitude").val('');
+				}
+				$("#frmConta").submit();
+			});
+		}

@@ -125,6 +125,10 @@ keystone.set('email nodemailer', {
     // Nodemailer configuration
 });
 
+keystone.set('google api key', '');
+//keystone.set('google api key', 'AIzaSyBeLlSc4xte31Wttx8CxFLFuVl5Ob1FOlU');
+keystone.set('google server api key', 'AIzaSyChidbLI_Qg-Ni_PhJcykdkPD-BVxOGTo0');
+
 // Start Keystone to connect to your database and initialise the web server
 
 keystone.start();

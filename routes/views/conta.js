@@ -1,7 +1,10 @@
 var keystone = require('keystone');
+//var $ = require('jQuery');
 var Empresa = keystone.list('Empresa');
 var Usuario = keystone.list('Usuario');
 var Pessoa = keystone.list('Pessoa');
+
+
 
 exports = module.exports = function (req, res) {
 
@@ -12,6 +15,7 @@ exports = module.exports = function (req, res) {
     locals.validationErrors = {};
     locals.empresaTypes = Empresa.fields.empresaType.ops;
     locals.updateSubmmited = false;
+    locals.googlekey = keystone.get('google api key');
 
     // Load dados empresa
     view.on('init', function (next) {
@@ -57,10 +61,18 @@ exports = module.exports = function (req, res) {
                     if (err) {
                         locals.validationErrors = err.errors;
                     }
+//                    var jsonLtdLng = "https://maps.googleapis.com/maps/api/geocode/json?address=Winnetka&bounds=34.172684,-118.604794|34.236144,-118.500938&key=AIzaSyBeLlSc4xte31Wttx8CxFLFuVl5Ob1FOlU";
+//                    $.getJSON(jsonLtdLng, function (data) {
+//                        console.log(data.results[0].geometry.location.lat);
+//                    });
+//                    console.log(jsonLtdLng);
+                    console.log(req.body.latitude);
                     pessoa.nome = req.body.nome;
                     pessoa.cpf = req.body.cpf;
                     usuario.email = req.body.email;
+                    empresa.endereco.geo = [req.body.longitude, req.body.latitude];
 
+                    empresa.save();
                     usuario.save();
                     pessoa.save();
                     locals.updateSubmmited = true;
