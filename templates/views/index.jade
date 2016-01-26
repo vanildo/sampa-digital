@@ -2,10 +2,11 @@ extends ../layouts/default
 
 block content	
 	.row#leadspace
-		.col-xm-12.col-md-offset-2.col-md-8
+		.col-xs-12.col-md-12.text-center
 			h2.upp Venha conhecer a São Paulo Aberta
 			p.btn.purple
 				a(href="cadastro") Cadastre-se
+	//Carrossel desativado
 	//
 		.container-fluid.slider.text-center
 			.carousel.slide.carousel-fade#mainCarousel(data-ride="carousel")
@@ -14,7 +15,7 @@ block content
 					div.item.active
 						.container
 							.row
-								.col-xm-12.col-md-offset-2.col-md-8
+								.col-xs-12.col-md-offset-2.col-md-8
 									h2.upp Conheça a São Paulo Aberta
 									p São Paulo é uma das primeiras cidades do mundo a incorporar, de forma integrada, a transparência, participação social, inovação tecnológica e integridade nas políticas públicas.
 									p.btn.purple
@@ -22,12 +23,12 @@ block content
 					div.item
 						.container
 							.row
-								.col-xm-12.col-md-6
+								.col-xs-12.col-md-6
 									h2.upp Programa Vai Tec
 									p Se você tem mais de 14 anos, vive em São Paulo e tem uma ideia para mudar a cidade, chegou a sua vez! 
 									p.btn.green
 										a(href="#") Leia Mais
-								.col-xm-12.col-md-6
+								.col-xs-12.col-md-6
 									h2.upp Empreendedorismo
 									p A Adesampa e o British Council fecharam parceria para um curso de gestão na metodologia desenvolvida pelo Newton Fund no Reino Unido.
 									p.btn.orange
@@ -35,7 +36,7 @@ block content
 					div.item
 						.container
 							.row
-								.col-xm-12.col-md-offset-2.col-md-8
+								.col-xs-12.col-md-offset-2.col-md-8
 									h2.upp Novo decreto
 									p Iniciativa inédita traz mecanismos facilitadores para que segmento cresça, incrementando a economia, a geração de renda e o emprego formal.
 									p.btn.orange
@@ -60,107 +61,93 @@ block content
 						p.small.gray
 							i Para você que quer comprar ou vender		
 			.row
-				.col-xm-12.col-md-6
+				.col-xs-12.col-md-6
 					img(src="/images/querocomprar.png", alt="Quero Comprar")
-					.row
-						.col-md-3
-							img.fit(src="/images/blog-image-1.jpg", atl="Oferta #1")
-						.col-md-9
-							h3.no-margin
-								a(href="#") Merenda Escolar
-							p.no-top-margin
-								span.orange Empresa ABC 
-								&#124; Publicado em: 08 de Novembro de 2015
-							p Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.  
-					.row
-						.col-md-3
-							img.fit(src="/images/blog-image-2.jpg", atl="Oferta #1")
-						.col-md-9
-							h3.no-margin
-								a(href="#") Uniformes
-							p.no-top-margin
-								span.orange Popload 
-								&#124; Publicado em: 07 de Novembro de 2015
-							p Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.  
-					.row
-						.col-md-3
-							img.fit(src="/images/blog-image-3.jpg", atl="Oferta #1")
-						.col-md-9
-							h3.no-margin
-								a(href="#") Material de Escritório
-							p.no-top-margin
-								span.orange Ampfy 
-								&#124; Publicado em: 06 de Novembro de 2015
-							p	Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit. 
-					.row
-						.col-md-3
-							img.fit(src="/images/blog-image-4.jpg", atl="Oferta #1")
-						.col-md-9
-							h3.no-margin
-								a(href="#") Consertos em geral
-							p.no-top-margin
-								span.orange Personare 
-								&#124; Publicado em: 02 de Novembro de 2015
-							p Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit. 
+					if oportunidades1.length
+						each oportunidade in oportunidades1
+							.row
+								.col-md-3
+									if oportunidade.image
+										img.fit(oportunidade.image.fit(160,160))
+									else
+										img.fit(src='/images/noticia_padrao.png')
+								.col-md-9
+									h3.no-margin
+										a(href='oportunidades?=' + oportunidade.id): = oportunidade.nome
+									p 
+										if oportunidade.empresa
+											span.orange
+												| #{oportunidade.empresa.nomeFantasia}
+										else
+											span.orange
+												| Empresa de Gatinhos
+										| &nbsp;| Publicado em:
+										if oportunidade.createdAt
+												span.orange 
+													| #{oportunidade._.createdAt.format('DD')} de #{oportunidade._.createdAt.format('MMMM')} de #{oportunidade._.createdAt.format('YYYY')}
+										else
+												span.orange 
+													| Bananas
+									if oportunidade.breveDescricao
+										p!= oportunidade.breveDescricao
+									else
+										p Bananosas bananudas!	
+					else
+						.row
+							.col-md-12
+								h3 Nenhuma oportunidade cadastrada!
 					br
 					.row.text-center
-						.col-xm-12.col-md-6
+						.col-xs-12.col-md-6
 							p.btn.green
 								a(href="oportunidades?comprar") [+] Oportunidades...
-						.col-xm-12.col-md-6
+						.col-xs-12.col-md-6
 							p.btn.green
 								a(href="pessoa?comprar") Anuncie como Comprador
 					br
 					br
 					br
-				.col-xm-12.col-md-6
+				.col-xs-12.col-md-6
 					img(src="/images/querovender.png", alt="Quero Vender")
-					.row
-						.col-md-3
-							img.fit(src="/images/vender01.png", atl="Oferta #1")
-						.col-md-9
-							h3.no-margin
-								a(href="#") Reparos Elétricos
-							p.no-top-margin
-								span.orange Lorem ipsum 
-								&#124; Publicado em: 08 de Novembro de 2015
-							p Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.  
-					.row
-						.col-md-3
-							img.fit(src="/images/vender02.png", atl="Oferta #1")
-						.col-md-9
-							h3.no-margin
-								a(href="#") Auditoria para Startups
-							p.no-top-margin
-								span.orange Lorem ipsum
-								&#124; Publicado em: 04 de Agosto de 2015
-							p Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.  
-					.row
-						.col-md-3
-							img.fit(src="/images/vender03.png", atl="Oferta #1")
-						.col-md-9
-							h3.no-margin
-								a(href="#") Consultoria
-							p.no-top-margin
-								span.orange Lorem ipsum 
-								&#124; Publicado em: 21 de Julho de 2015
-							p	Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit. 
-					.row
-						.col-md-3
-							img.fit(src="/images/vender04.png", atl="Oferta #1")
-						.col-md-9
-							h3.no-margin
-								a(href="#") Soluções de TI
-							p.no-top-margin
-								span.orange Lorem ipsum 
-								&#124; Publicado em: 22 de Novembro de 2015
-							p Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit. 
+					if oportunidades2.length
+						each oportunidade in oportunidades2
+							.row
+								.col-md-3
+									if oportunidade.image
+										img.fit(oportunidade.image.fit(160,160))
+									else
+										img.fit(src='/images/noticia_padrao.png')
+								.col-md-9
+									h3.no-margin
+										a(href='oportunidades?=' + oportunidade.id): = oportunidade.nome
+									p 
+										if oportunidade.empresa
+											span.orange
+												| #{oportunidade.empresa.nomeFantasia}
+										else
+											span.orange
+												| Empresa de Gatinhos
+										| &nbsp;| Publicado em:
+										if oportunidade.createdAt
+												span.orange 
+													| #{oportunidade._.createdAt.format('DD')} de #{oportunidade._.createdAt.format('MMMM')} de #{oportunidade._.createdAt.format('YYYY')}
+										else
+												span.orange 
+													| Bananas
+									if oportunidade.breveDescricao
+										p!= oportunidade.breveDescricao
+									else
+										p Bananosas bananudas!
+					else
+						.row
+							.col-md-12
+								h3 Nenhuma oportunidade cadastrada!	
 					br
 					.row.text-center
-						.col-xm-12.col-md-6
+						.col-xs-12.col-md-6
 							p.btn.purple
 								a(href="oportunidades?vender") [+] Oportunidades...
-						.col-xm-12.col-md-6
+						.col-xs-12.col-md-6
 							p.btn.purple
 								a(href="pessoa?vender") Anuncie como Vendedor						
 					br
@@ -196,46 +183,55 @@ block content
 						h2.orange Notícias
 						p.small.gray
 							i Fique por dentro do que movimenta São Paulo
-			.row
-				.col-md-2.text-center
-					img.fit(src="/images/noticia1.jpg", alt="Blog 1")
-				.col-md-4
-					h3.no-margin Decreto incentiva participação de micro e pequenas empresas em compras públicas
-					p.no-top-margin Publicado em:
-						span.orange 05 de Outubro de 2015
-					p Iniciativa inédita traz mecanismos facilitadores para que segmento cresça, incrementando a economia, a geração de renda e o emprego formal. Empresas localizadas em distritos em desenvolvimento serão as maiores beneficiadas 
-					p.btn.small.orange.right-align
-						a(href="#") Leia Mais
-				.col-md-2.text-center
-					img.fit(src="/images/noticia3.jpg", alt="Blog 2")
-				.col-md-4
-					h3.no-margin Conheça a São Paulo Aberta
-					p.no-top-margin Publicado em:
-						span.orange 10 de Dezembro de 2015
-					p A Prefeitura de São Paulo inovou ao construir uma agenda de governo aberto municipal. É uma das primeiras cidades do mundo a incorporar, de forma integrada, a transparência, participação social, inovação tecnológica e integridade nas políticas públicas.   
-					p.btn.small.orange.right-align
-						a(href="#") Leia Mais
-			.row
-				.col-md-2.text-center
-					img.fit(src="/images/noticia2.jpg", alt="Blog 3")
-				.col-md-4
-					h3.no-margin Curso de gestão para empreendedores da Economia Criativa e das Culturas
-					p.no-top-margin Publicado em:
-						span.orange 09 de Dezembro de 2015
-					p A Adesampa e o British Council fecharam parceria para oferecer aos empreendedores da Economia Criativa e das Culturas um curso de gestão na metodologia desenvolvida pelo Newton Fund no Reino Unido[...]  
-					p.btn.small.orange.right-align
-						a(href="#") Leia Mais
-				.col-md-2.text-center
-					img.fit(src="/images/noticia4.jpg", alt="Blog 4")
-				.col-md-4
-					h3.no-margin Programa VaiTEC.
-						br
-						| A palavra da vez: COLABORAÇÃO
-					p.no-top-margin Publicado em:
-						span.orange 10 de Novembro de 2015
-					p Todos trabalhando em produtos digitais para encontrar soluções e melhorias para serviços de mobilidade, acessibilidade, inclusão social, turismo, lazer, entre outros. Assim ocorreu a terceira edição do #HackathonPOA, promovida pela prefeitura de Porto Alegre [...] 
-					p.btn.small.orange.right-align
-						a(href="#") Leia Mais
+			- var total = noticias.length
+			- var counter = 0
+			if noticias.length
+				while counter < total
+					.row
+						.col-md-2.text-center
+							if noticias.image
+								img.fit(noticias[counter].image.fit(160,160))
+							else
+								img.fit(src='/images/noticia_padrao.png')
+						.col-md-4
+							h3.no-margin: = noticias[counter].nome
+							p.no-top-margin Publicado em:
+								if noticias[counter].createdAt
+									span.orange
+										| #{noticias[counter]._.createdAt.format('DD')} de #{noticias[counter]._.createdAt.format('MMMM')} de #{noticias[counter]._.createdAt.format('YYYY')}
+								else
+									span.orange 
+										| Bananas
+							if noticias[counter].breveDescricao
+								p!= noticias[counter].breveDescricao
+							else
+								p Bananosas bananudas!
+							p.btn.small.orange.right-align
+								a(href='blog?=' + noticias[counter].id) Leia Mais
+						counter++
+						if noticias[counter]
+							.col-md-2.text-center
+								if noticias.image
+									img.fit(noticias[counter].image.fit(160,160))
+								else
+									img.fit(src='/images/noticia_padrao.png')
+							.col-md-4
+								h3.no-margin: = noticias[counter].nome
+								p.no-top-margin Publicado em:
+									if noticias[counter].createdAt
+										span.orange
+											| #{noticias[counter]._.createdAt.format('DD')} de #{noticias[counter]._.createdAt.format('MMMM')} de #{noticias[counter]._.createdAt.format('YYYY')}
+									else
+										span.orange 
+											| Bananas
+								if noticias[counter].breveDescricao
+									p!= noticias[counter].breveDescricao
+								else
+									p Bananosas bananudas!
+								p.btn.small.orange.right-align
+									a(href='blog?=' + noticias[counter].id) Leia Mais
+							counter++
+			
 			br
 			br
 			br
@@ -243,7 +239,7 @@ block content
 				.row
 					.col-md-12
 						p.btn.green
-							a(href="#") [+] Notícias...
+							a(href="blog") [+] Notícias...
 			br
 			br
 			br
@@ -255,7 +251,7 @@ block content
 						p.small.gray
 							i Tudo o que você pode encontrar na AdeSampa Digital	
 			.row
-				.col-xm-12.col-md-8
+				.col-xs-12.col-md-8
 					.text-center
 						p.filters 
 							span
@@ -273,12 +269,12 @@ block content
 							span
 								a(href="#") Universidades
 			.row
-				.col-xm-12.col-md-8
+				.col-xs-12.col-md-8
 					iframe( src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d139144.80806118745!2d-46.718124664172294!3d-23.588222367503537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce448183a461d1%3A0x9ba94b08ff335bae!2zU8OjbyBQYXVsbywgU1A!5e0!3m2!1spt-BR!2sbr!4v1449777416956", width="100%", frameborder="0", style="border:0; height:500px", allowfullscreen)
 					p.subtitle Rua Lorem Ipsum, 123 - Bairro ABCD, São Paulo/SP - CEP 00000-000 - Tel.: (11) 1234-5678
 						br
 						| Horário de atendimento: segunda a sexta-feira, das 8h. as 18h. 	
-				.col-xm-12.col-md-4
+				.col-xs-12.col-md-4
 					a(href="#")
 						img.fit(src="/images/placeholder_1.jpg", alt="Quer divulgar um evento? Cadastre-se.")
 					br
@@ -293,7 +289,7 @@ block content
 						p.small.gray
 							i Fique por dentro do que movimenta São Paulo		
 			.row
-				.col-xm-12.col-md-4
+				.col-xs-12.col-md-4
 					.col-md-4.text-center
 						img.fit(src="/images/191115_sp_tech_interna_1447953871.jpg", alt="")
 					.col-md-8
@@ -304,7 +300,7 @@ block content
 						p Novas tecnologias, inovação e empreendedorismo são tema de 120 atividades realizadas em vários pontos da cidade.  
 						p.btn.small.green
 							a(href="#") Mais detalhes
-				.col-xm-12.col-md-4
+				.col-xs-12.col-md-4
 					.col-md-4.text-center
 						img.fit(src="/images/jornada.gif", alt="Blog 1")
 					.col-md-8
@@ -315,7 +311,7 @@ block content
 						p   A iniciativa que convida a todos a conhecer a história da cidade representada no vasto patrimônio histórico, cultural e ambiental espalhado em todas as regiões. Imóveis públicos e privados abrirão suas portas para receber visitantes. 
 						p.btn.small.green
 							a(href="#") Mais detalhes
-				.col-xm-12.col-md-4
+				.col-xs-12.col-md-4
 					.col-md-4.text-center
 						img.fit(src="/images/blog-image-2.jpg", alt="Blog 1")
 					.col-md-8
