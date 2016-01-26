@@ -10,8 +10,8 @@ exports = module.exports = function(req, res) {
 	locals.section = 'home';
 	
 	view.query('noticias', keystone.list('Post').model.find());
-	view.query('oportunidades1', keystone.list('Oportunidade').model.find().where('tipoOportunidade', 'COMPRA' ));
-	view.query('oportunidades2', keystone.list('Oportunidade').model.find().where('tipoOportunidade', 'VENDA' ));
+	view.query('oportunidades1', keystone.list('Oportunidade').model.find().where('tipoOportunidade', 'COMPRA' ).where('isAtivo', true).populate('empresa')));
+	view.query('oportunidades2', keystone.list('Oportunidade').model.find().where('tipoOportunidade', 'VENDA' ).where('isAtivo', true).populate('empresa')));
 	
 	
 	// Render the view
