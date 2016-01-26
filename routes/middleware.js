@@ -54,9 +54,9 @@ exports.initLocals = function (req, res, next) {
     if (req.user) {
         if (req.user.isAdmin) {
             locals.navLinks = [
+				{label: 'Painel de Controle', href: '/painel'},
                 {label: 'Inicio', key: 'home', href: '/'},
-                {label: 'Painel de Controle', href: '/painel'},
-                {label: 'Oportunidades', key: 'tecnologia', href: '/oportunidades'},
+                {label: 'Oportunidades', key: 'tecnologia', href: '/#op'},
                 {label: 'Noticias', href: '/blog'},
                 {label: 'agenda', href: '/agenda'},
                 /*{label: 'Home', key: 'home', href: '/'},
@@ -72,9 +72,9 @@ exports.initLocals = function (req, res, next) {
         } else if (req.user.responsavel) {
 
             locals.navLinks = [
+				{label: 'Painel de Controle', href: '/painel'},
                 {label: 'Inicio', key: 'home', href: '/'},
-                {label: 'Painel de Controle', href: '/painel'},
-                {label: 'Oportunidades', key: 'tecnologia', href: '/oportunidades?comprar'},
+                {label: 'Oportunidades', key: 'tecnologia', href: '/#op'},
                 {label: 'Noticias', href: '/blog'},
                 {label: 'Agenda', href: '/agenda'},
             ];
@@ -86,7 +86,7 @@ exports.initLocals = function (req, res, next) {
     } else {
         locals.navLinks = [
             {label: 'Inicio', key: 'home', href: '/'},
-            {label: 'Oportunidades', key: 'tecnologia', href: '/oportunidades?comprar'},
+            {label: 'Oportunidades', key: 'tecnologia', href: '/#op'},
             {label: 'Noticias', href: '/blog'},
             {label: 'agenda', href: '/agenda'},
             {label: 'Cadastro', key: 'cadastro', href: '/cadastro'},

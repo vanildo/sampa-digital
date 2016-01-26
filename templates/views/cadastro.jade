@@ -42,14 +42,10 @@ block content
 										.form-group
 											label.sr-only.col-sm-2.control-label.sr-only CNPJ
 											input(type='text' name='cnpj' required x-moz-errormessage="Por favor preencha esse campo." placeholder='CNPJ').form-control
-							.row
-								.col-md-12
-									input(type='checkbox', name='termos', id='termos', checked=false, class='form-checkbox')
-									label(for='termos', class='form-checkbox')&nbsp;Li e concordo com os 
-										a(href='termos') Termos de Uso
+							
 							.row
 								.col-md-12.text-center
-									button(type='submit', disabled='true').btn.green.small.disabled#sendButton Enviar
+									button(type='submit').btn.green.small Enviar
 
 	else if cadastroInstituicao
 		.container
@@ -60,9 +56,11 @@ block content
 						i
 							strong Comprador ou Vendedor:
 							|  Fique por dentro do que movimenta São Paulo
+							
 			.row
 				.col-md-12.rule-bottom.text-center
 					h3 Dados do Cadastro
+					|Atenção! campos com asterisco (*) são obrigatorios e devem ser preenchidos.
 					form(method='post', id='frmConta' , name='frmConta').form-horizontal
 						input(type='hidden', name='action', value='cadastroEmpresa')
 						input(type='hidden' name='cnpj' value = cnpj)
@@ -74,10 +72,10 @@ block content
 							.col-xm-12.col-md-7
 								.col-md-12
 									.form-group										
-										label.col-sm-4.text-left.padding-0 Nome Fantasia
+										label.col-sm-4.text-left.padding-0 *Nome Fantasia
 										input(type='text' name='nomeFantasia' required x-moz-errormessage="Por favor preencha esse campo." placeholder='Nome Fantasia').form-control
 									.form-group
-										label.col-sm-4.text-left.padding-0 Razão Social
+										label.col-sm-4.text-left.padding-0 *Razão Social
 										input(type='text' name='razaoSocial' required x-moz-errormessage="Por favor preencha esse campo." placeholder='Razão Social').form-control
 									.form-group
 										label.col-sm-4.text-left.padding-0 Breve Descrição
@@ -86,13 +84,13 @@ block content
 							.col-xm-12.col-md-5
 								.col-md-12
 									.form-group
-										label.col-sm-7.text-left.padding-0 Nome do Contato Comercial
+										label.col-sm-7.text-left.padding-0 *Nome do Contato Comercial
 										input(type='text' name='contatoComercial' required x-moz-errormessage="Por favor preencha esse campo." placeholder='Nome do Contato Comercial').form-control
 									.form-group
-										label.col-sm-4.text-left.padding-0 Telefone
+										label.col-sm-4.text-left.padding-0 *Telefone
 										input(type='text' name='telefone' required x-moz-errormessage="Por favor preencha esse campo." placeholder='Telefone (Ex. (00)0000-0000) - Ramal').form-control
 									.form-group(class=validationErrors.email ? 'has-error' : null)
-										label.col-sm-4.text-left.padding-0 Email
+										label.col-sm-4.text-left.padding-0 *Email
 										input(type='email' name='email' required x-moz-errormessage="Por favor preencha com um email válido." placeholder='Email').form-control
 						.row
 							.col-md-12.rule-bottom.text-center
@@ -101,19 +99,19 @@ block content
 							.col-xm-12.col-md-6
 								.col-md-12
 									.form-group
-										label.col-sm-4.text-left.padding-0 Endereço:
+										label.col-sm-4.text-left.padding-0 *Endereço:
 										input(type='text' name='endereco.street1' required x-moz-errormessage="Por favor preencha esse campo." placeholder="Endereço").form-control
 							.col-xm-12.col-md-6
 								.form-group
 									.col-sm-3
-										label.col-sm-4.text-left.padding-0 Número:
+										label.col-sm-4.text-left.padding-0 *Número:
 										input(type='text' name='endereco.number' required x-moz-errormessage="Por favor preencha esse campo." placeholder='Nº (Ex.999)').form-control
 									.col-sm-6
-										label.col-sm-4.text-left.padding-0 CEP:
+										label.col-sm-4.text-left.padding-0 *CEP:
 										input(type='text' name='endereco.postcode' required x-moz-errormessage="Por favor preencha esse campo." placeholder='CEP (Ex. 00000-000)').form-control
 
 									.col-sm-3
-										label.col-sm-4.text-left.padding-0 Estado:
+										label.col-sm-4.text-left.padding-0 *Estado:
 										input(type='text' name='endereco.state' required x-moz-errormessage="Por favor preencha esse campo." placeholder='Estado').form-control
 							.col-xm-12.col-md-6
 								.col-md-12
@@ -121,13 +119,13 @@ block content
 										label.col-sm-4.text-left.padding-0 Complemento:
 										input(type='text' name='endereco.name' placeholder="Complemento").form-control
 									.form-group
-										label.col-sm-4.text-left.padding-0 Bairro:
+										label.col-sm-4.text-left.padding-0 *Bairro:
 										input(type='text' name='endereco.street2' required x-moz-errormessage="Por favor preencha esse campo." placeholder='Bairro').form-control
 										
 							.col-xm-12.col-md-6
 								.col-md-12
 									.form-group
-										label.col-sm-4.text-left.padding-0 Cidade:
+										label.col-sm-4.text-left.padding-0 *Cidade:
 										input(type='text' name='endereco.suburb' required x-moz-errormessage="Por favor preencha esse campo." placeholder='Cidade').form-control
 									
 						.row
@@ -136,11 +134,11 @@ block content
 									.rule-bottom.text-center.margin-bottom-15
 										h3 Representante Legal
 									.form-group
-										label.col-sm-4.text-left.padding-0 Nome do Representante Legal:
+										label.col-sm-4.text-left.padding-0 *Nome do Representante Legal:
 										input(type='text' name='nome' required x-moz-errormessage="Por favor preencha esse campo." placeholder="Nome do Representante Legal").form-control
 
 									.form-group
-										label.col-sm-4.text-left.padding-0 CPF:
+										label.col-sm-4.text-left.padding-0 *CPF:
 										input(type='text' name='cpf' required x-moz-errormessage="Por favor preencha esse campo." placeholder="CPF (Ex. 000.000.000-00)").form-control
 										
 							.col-xm-12.col-md-6
@@ -156,10 +154,17 @@ block content
 									.form-group
 										label.col-sm-4.text-left.padding-0 Twitter
 										input(type='text' name='twitter' placeholder='Twitter').form-control
+						
+						.row
+								.col-md-12
+									input(type='checkbox', name='termos', id='termos', checked=false, class='form-checkbox')
+									label(for='termos', class='form-checkbox')&nbsp;Li e concordo com os 
+										a(href='termos') Termos de Uso
+										
 						.row
 							.col-md-12.text-center
 								.form-group
-									button(type='button', name='salvar', onclick='longlatcad()').btn.green Salvar
+									button(type='button', disabled='true', name='salvar', onclick='longlatcad()').btn.green.disabled#sendButton Salvar
 
 
 block page-js

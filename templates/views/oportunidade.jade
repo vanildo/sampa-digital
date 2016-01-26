@@ -99,24 +99,48 @@ block content
 							img.fit(umaOportunidade.image.fit(160,160))
 						else
 							img.fit(src='/images/noticia_padrao.png')
-					.col-md-10
-						h3.no-margin: = umaOportunidade[0].nome
-						p 
-							if umaOportunidade[0].empresa
-								span.orange
-									| #{umaOportunidade[0].empresa.nomeFantasia}
-							else
-								span.orange
-									| Empresa da bananinha
-							| &nbsp;| Publicado em:
-							if umaOportunidade.createdAt
-									span.orange 
-										| #{umaOportunidade._.createdAt.format('DD')} de #{umaOportunidade._.createdAt.format('MMMM')} de #{umaOportunidade._.createdAt.format('YYYY')}
-							else
-									span.orange 
-										| Bananas
-						if umaOportunidade[0].descricaoDetalhada
-							p!= umaOportunidade[0].descricaoDetalhada
+					.col-xm-12.col-md-7
+						.col-md-7
+							h3.no-margin: = umaOportunidade[0].nome
+							p 
+								if umaOportunidade[0].empresa
+									span.orange
+										| #{umaOportunidade[0].empresa.nomeFantasia}
+								else
+									span.orange
+										| Empresa da bananinha
+								| &nbsp;| Publicado em:
+								if umaOportunidade.createdAt
+										span.orange 
+											| #{umaOportunidade._.createdAt.format('DD')} de #{umaOportunidade._.createdAt.format('MMMM')} de #{umaOportunidade._.createdAt.format('YYYY')}
+								else
+										span.orange 
+											| Bananas
+							if umaOportunidade[0].descricaoDetalhada
+								p!= umaOportunidade[0].descricaoDetalhada
+					
+					.col-xm-12.col-md-3
+						.col-md-12
+							h3.rule-bottom.text-center Informações adicionais
+							
+							if umaOportunidade[0].empresa.nomeFantasia
+								p 
+									<strong>Empresa: </strong> #{umaOportunidade[0].empresa.nomeFantasia}
+									
+							if umaOportunidade[0].empresa.telefone
+								p 
+									<strong>Preco: </strong> #{umaOportunidade[0].empresa.telefone}
+							
+							if umaOportunidade[0].preco
+								p 
+									<strong>Preço: </strong> #{umaOportunidade[0].preco}
+							
+							if umaOportunidade[0].linkProposta
+								p
+									strong Link para proposta: 
+									a(href=umaOportunidade[0].linkProposta)= umaOportunidade[0].linkProposta
+									
+						
 
 	else
 		.bg-pb

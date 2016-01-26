@@ -19,8 +19,10 @@ block content
 				.col-md-12.rule-bottom.text-center
 					if compra
 						h3 Cadastro de Oportunidade de Compra
+						|Atenção! campos com asterisco (*) são obrigatorios e devem ser preenchidos.
 					else if venda
 						h3 Cadastro de Oportunidade de Venda
+						|Atenção! campos com asterisco (*) são obrigatorios e devem ser preenchidos.
 					form(method='post').form-horizontal
 						input(type='hidden', name='action', value='cadastroOportunidade')
 						if compra
@@ -31,10 +33,10 @@ block content
 							.col-xm-12.col-md-7
 								.col-md-12
 									.form-group										
-										label.col-sm-4.text-left Título da Oportunidade
+										label.col-sm-4.text-left *Título da Oportunidade
 										input(type='text' name='nome' placeholder='Título da Oportunidade').form-control
 									.form-group
-										label.col-sm-4.text-left Breve Descrição
+										label.col-sm-4.text-left *Breve Descrição
 										input(type='text' name='breveDescricao' required x-moz-errormessage="Por favor preencha esse campo." placeholder='Breve Descrição').form-control
 									.form-group
 										label.col-sm-4.text-left Descrição detalhada
