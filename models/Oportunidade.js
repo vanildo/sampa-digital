@@ -15,7 +15,7 @@ Oportunidade.add({
     breveDescricao: {type: String, initial: true, required: true, label: "Descrição Resumida: "},
     tipoOportunidade: {type: Types.Select, options: ['COMPRA', 'VENDA'], label: "Tipo de Oportunidade", initial: true, required: true},
     quantidade: {type: Types.Number},
-    preco: {type: Types.Money},
+    preco: {type: Types.Money, currency: 'pt-br', format: '$0,0.00'},
     descricaoDetalhada: {type: Types.Textarea, required: true, initial: true},
     empresa: {type: Types.Relationship, ref: 'Empresa', index: true},
     isAtivo: {type: Types.Boolean},
