@@ -132,7 +132,7 @@ exports = module.exports = function (req, res) {
                                     console.log("Cadastrado email: " + req.body.email);
                                     if (locals.empresaSubmitted && locals.usuarioSubmitted && locals.pessoaSubmitted) {
                                         if (emailConfigs) {
-                                            var smtps = 'smtps://' + emailConfigs.user + '%40gmail.com:' + emailConfigs.senha + '@smtp.gmail.com';
+                                            var smtps = 'smtps://' + emailConfigs.user + '%40gmail.com:' + emailConfigs.senha + '@smtp-relay.gmail.com';
                                             var transporter = nodemailer.createTransport(smtps);
                                             var mailOptions = {
                                                 from: emailConfigs.from, // sender address//      

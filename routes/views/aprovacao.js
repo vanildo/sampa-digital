@@ -91,7 +91,7 @@ exports = module.exports = function (req, res) {
                     empresa.save();
                     console.log("Empresa rejeitada: " + empresa.id);
                     if (emailConfigs) {
-                        var smtps = 'smtps://' + emailConfigs.user + '%40gmail.com:' + emailConfigs.senha + '@smtp.gmail.com';
+                        var smtps = 'smtps://' + emailConfigs.user + '%40gmail.com:' + emailConfigs.senha + '@smtp-relay.gmail.com';
                         var transporter = nodemailer.createTransport(smtps);
                         var mailOptions = {
                             from: emailConfigs.from, // sender address//                                            
