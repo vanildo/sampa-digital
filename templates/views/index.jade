@@ -95,7 +95,7 @@ block content
 					else
 						.row
 							.col-md-12
-								h3 Nenhuma oportunidade cadastrada!
+								h3.text-center Nenhuma oportunidade cadastrada!
 					br
 					.row.text-center
 						.col-xs-12.col-md-6
@@ -141,7 +141,7 @@ block content
 					else
 						.row
 							.col-md-12
-								h3 Nenhuma oportunidade cadastrada!	
+								h3.text-center Nenhuma oportunidade cadastrada!	
 					br
 					.row.text-center
 						.col-xs-12.col-md-6
@@ -206,9 +206,9 @@ block content
 								p!= noticias[counter].breveDescricao
 							else
 								p Bananosas bananudas!
-							p.btn.small.orange.right-align
-								a(href='blog?=' + noticias[counter].id) Leia Mais
-						counter++
+							p.btn.small.orange
+								a(href='blog/post/' + noticias[counter].key) Leia Mais
+					- counter++
 						if noticias[counter]
 							.col-md-2.text-center
 								if noticias.image
@@ -228,10 +228,14 @@ block content
 									p!= noticias[counter].breveDescricao
 								else
 									p Bananosas bananudas!
-								p.btn.small.orange.right-align
-									a(href='blog?=' + noticias[counter].id) Leia Mais
-							counter++
-			
+								p.btn.small.orange
+									a(href='blog/post/' + noticias[counter].key) Leia Mais
+					- counter++
+			else
+				.row
+					.col-md-12
+						h3.text-center Nenhuma oportunidade cadastrada!	
+				
 			br
 			br
 			br
@@ -289,36 +293,68 @@ block content
 						p.small.gray
 							i Fique por dentro do que movimenta São Paulo		
 			.row
-				.col-xs-12.col-md-4
-					.col-md-4.text-center
-						img.fit(src="/images/191115_sp_tech_interna_1447953871.jpg", alt="")
-					.col-md-8
-						h3.no-top-margin
-							span.orange 03 a 09 de Novembro
-							br
-							| São Paulo Tech Week
-						p Novas tecnologias, inovação e empreendedorismo são tema de 120 atividades realizadas em vários pontos da cidade.  
-						p.btn.small.green
-							a(href="#") Mais detalhes
-				.col-xs-12.col-md-4
-					.col-md-4.text-center
-						img.fit(src="/images/jornada.gif", alt="Blog 1")
-					.col-md-8
-						h3.no-top-margin
-							span.orange  12 e 13 de Dezembro
-							br
-							| 1a Jornada do Patrimônio em São Paulo 
-						p   A iniciativa que convida a todos a conhecer a história da cidade representada no vasto patrimônio histórico, cultural e ambiental espalhado em todas as regiões. Imóveis públicos e privados abrirão suas portas para receber visitantes. 
-						p.btn.small.green
-							a(href="#") Mais detalhes
-				.col-xs-12.col-md-4
-					.col-md-4.text-center
-						img.fit(src="/images/blog-image-2.jpg", alt="Blog 1")
-					.col-md-8
-						h3.no-top-margin  Empreendedorismo Feminino – WOW
-						p  A WOW Aceleradora de Startups convida empreendedoras, empreendedores e interessados no ecossistema de inovação e startup – para o primeiro evento da aceleradora voltado para o empreendedorismo feminino. 
-						p.btn.small.green
-							a(href="#") Mais detalhes
+				if eventos.length
+					each evento in eventos
+						.col-xs-12.col-md-4
+							.col-md-4.text-center
+								if evento.img
+									img.fit(src="/images/191115_sp_tech_interna_1447953871.jpg", alt="")
+								else
+									img.fit(src='/images/noticia_padrao.png')
+							.col-md-8
+								h3.no-top-margin
+									if evento.createdAt
+										span.orange
+											| #{evento._.createdAt.format('DD')} de #{evento._.createdAt.format('MMMM')} de #{evento._.createdAt.format('YYYY')}
+									else
+										span.orange
+											| Bananas!
+									br
+									if evento.nome
+										p!= evento.nome
+									else
+										p Bananosas bananudas!
+								if evento.breveDescricao
+									p!= evento.breveDescricao
+								else
+									p Bananosas bananudas!
+								p.btn.small.green
+									a(href="#") Mais detalhes
+				else
+					h3.text-center
+						Nenhum evento cadastrado!
+			//
+				.row
+					.col-xs-12.col-md-4
+						.col-md-4.text-center
+							img.fit(src="/images/191115_sp_tech_interna_1447953871.jpg", alt="")
+						.col-md-8
+							h3.no-top-margin
+								span.orange 03 a 09 de Novembro
+								br
+								| São Paulo Tech Week
+							p Novas tecnologias, inovação e empreendedorismo são tema de 120 atividades realizadas em vários pontos da cidade.  
+							p.btn.small.green
+								a(href="#") Mais detalhes
+					.col-xs-12.col-md-4
+						.col-md-4.text-center
+							img.fit(src="/images/jornada.gif", alt="Blog 1")
+						.col-md-8
+							h3.no-top-margin
+								span.orange  12 e 13 de Dezembro
+								br
+								| 1a Jornada do Patrimônio em São Paulo 
+							p   A iniciativa que convida a todos a conhecer a história da cidade representada no vasto patrimônio histórico, cultural e ambiental espalhado em todas as regiões. Imóveis públicos e privados abrirão suas portas para receber visitantes. 
+							p.btn.small.green
+								a(href="#") Mais detalhes
+					.col-xs-12.col-md-4
+						.col-md-4.text-center
+							img.fit(src="/images/blog-image-2.jpg", alt="Blog 1")
+						.col-md-8
+							h3.no-top-margin  Empreendedorismo Feminino – WOW
+							p  A WOW Aceleradora de Startups convida empreendedoras, empreendedores e interessados no ecossistema de inovação e startup – para o primeiro evento da aceleradora voltado para o empreendedorismo feminino. 
+							p.btn.small.green
+								a(href="#") Mais detalhes
 			br
 			br
 			br
