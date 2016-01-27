@@ -20,7 +20,7 @@ exports = module.exports = function(req, res) {
 		view.query('oportunidades', keystone.list('Oportunidade').model.find().where('tipoOportunidade', 'VENDA' ).where('isAtivo', true).populate('empresa'));
 	}else{
 		valor = tipo.substr(tipo.indexOf("=") + 1);
-		console.log(valor)
+		console.log(valor);
 		view.query('umaOportunidade', keystone.list('Oportunidade').model.find().where('_id', valor).populate('empresa'));
 
 	}

@@ -37,11 +37,13 @@ html
 							if user.isAdmin
 								.col-md-4(style={float:'right'})
 									ul
+										li: a(href='/') Home
 										li: a(href='/painel') Painel de Controle
 										li.login: a(href='/keystone/signout') logout
 							else
 								.col-md-4(style={float:'right'})
 									ul
+										li: a(href='/') Home
 										li: a(href='/painel') Painel de Controle
 										li.login: a(href='/keystone/signout') logout
 						else
