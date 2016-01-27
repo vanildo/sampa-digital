@@ -1,25 +1,26 @@
 extends ../layouts/default
 
 block content
-	if user
-		if user.isAdmin
-			.container
-				.row
-					.col-md-12.text-center
-						h1.orange Painel de Controle
-						h3.no-margin: a(href='/keystone') Area do Administrador
-						h3.no-margin: a(href='/aprovacao') Cadastros Pendentes
-						h3.no-margin: a(href='/keystone/signout') logout
-		else
-			container
-				.row
-					.col-md-12.text-center
-						h1.orange Painel de Controle
-							h3.no-margin: a(href='/conta') Minha Conta
-							h3.no-margin: a(href='/cadastroOportunidade') Cadastro de Oportunidade
-							h3.no-margin: a(href='/minhasOportunidades') Minhas Oportunidades
+	.bg-pb
+		if user
+			if user.isAdmin
+				.container
+					.row
+						.col-md-12.text-center
+							h1.orange Painel de Controle
+							h3.no-margin: a(href='/keystone') Area do Administrador
+							h3.no-margin: a(href='/aprovacao') Cadastros Pendentes
 							h3.no-margin: a(href='/keystone/signout') logout
-	else
-		h2 Painel de Controle
-		h3.no-margin: a(href='/keystone/signin') Login
-		h3.no-margin: a(href='/cadastro') Cadastre-se aqui
+			else
+				container
+					.row
+						.col-md-12.text-center
+							h1.orange Painel de Controle
+								h3.no-margin: a(href='/conta') Minha Conta
+								h3.no-margin: a(href='/cadastroOportunidade') Cadastro de Oportunidade
+								h3.no-margin: a(href='/minhasOportunidades') Minhas Oportunidades
+								h3.no-margin: a(href='/keystone/signout') logout
+		else
+			h2 Painel de Controle
+			h3.no-margin: a(href='/keystone/signin') Login
+			h3.no-margin: a(href='/cadastro') Cadastre-se aqui

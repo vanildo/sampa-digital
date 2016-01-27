@@ -38,6 +38,20 @@ block content
 									td
 										button(id='#{oportunidade.id}', type='button', name='btnEditar', onclick="requestFormEditar('#{oportunidade.id}')").btn.small.orange Editar
 							td(id=i)
+			.col-md-12.text-center
+				h3 Cadastrar nova oportunidade
+			.row
+				.col-sm-8
+						.row
+							.col-md-12.text-center
+								p.btn.green
+									a(href="cadastroOportunidade?compra") Compra
+				.col-sm-8
+						.row
+							.col-md-12.text-center
+								p.btn.green
+									a(href="cadastroOportunidade?venda") Venda
+								
 block page-js
 	script.
 			function requestFormEditar(value) {

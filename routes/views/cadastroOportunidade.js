@@ -6,6 +6,8 @@ exports = module.exports = function (req, res) {
 
     var view = new keystone.View(req, res);
     var locals = res.locals;
+	var url = view.req.originalUrl;
+	locals.tipo = url.substr(url.indexOf("?") + 1);
     locals.section = 'cadastroOportunidade';
     locals.tipoOfertas = Oportunidade.fields.tipoOferta.ops;
     locals.formData = req.body || {};
@@ -40,16 +42,13 @@ exports = module.exports = function (req, res) {
     });
 
     //Cadastro de compra
-    view.on('post', {action: 'compra'}, function (next) {
+	if(locals.tipo == "compra"){
         locals.compra = true;
-        next();
-    });
+	}
+	else if (locals.tipo == "venda"){
+		locals.venda = true;
+	}
 
-    //Cadastro de venda
-    view.on('post', {action: 'venda'}, function (next) {
-        locals.venda = true;
-        next();
-    });
 
     view.render('cadastroOportunidade');
 }

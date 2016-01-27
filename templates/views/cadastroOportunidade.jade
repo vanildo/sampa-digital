@@ -55,7 +55,7 @@ block content
 											each tipo in tipoOfertas
 												option(value=tipo.value selected=formData.tipoOferta === tipo.value)= tipo.label
 									.form-group
-										label.col-sm-4.text-left Link da Ofeta
+										label.col-sm-4.text-left Link da Oferta
 										input(type='text' name='linkProposta' placeholder='Link da Ofeta').form-control
 									.form-group
 										label.col-sm-4.text-left Url da imagem da oportunidade
@@ -64,28 +64,3 @@ block content
 							.col-md-12.text-center
 								.form-group
 									button(type='submit').btn.green Enviar
-	else 
-		.container
-			.row
-				.col-md-12.text-center
-					h2.orange Nova Empresa por aqui?
-					p
-						i 
-							strong Comprador ou Vendedor:
-							|  Fique por dentro do que movimenta São Paulo
-			.row
-				.col-md-12.rule-bottom.text-center
-					h3 Cadastro Oportunidade
-			.row
-				.col-sm-8
-					form(method='post').form-horizontal
-						input(type='hidden', name='action', value='compra')
-						.row
-							.col-md-12.text-center
-								button(type='submit').btn.green.small Compra
-				.col-sm-8
-					form(method='post').form-horizontal
-						input(type='hidden', name='action', value='venda')
-						.row
-							.col-md-12.text-center
-								button(type='submit').btn.green.small Venda
