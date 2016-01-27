@@ -61,12 +61,6 @@ exports = module.exports = function (req, res) {
                     if (err) {
                         locals.validationErrors = err.errors;
                     }
-//                    var jsonLtdLng = "https://maps.googleapis.com/maps/api/geocode/json?address=Winnetka&bounds=34.172684,-118.604794|34.236144,-118.500938&key=AIzaSyBeLlSc4xte31Wttx8CxFLFuVl5Ob1FOlU";
-//                    $.getJSON(jsonLtdLng, function (data) {
-//                        console.log(data.results[0].geometry.location.lat);
-//                    });
-//                    console.log(jsonLtdLng);
-                    console.log(req.body.latitude);
                     pessoa.nome = req.body.nome;
                     pessoa.cpf = req.body.cpf;
                     usuario.email = req.body.email;

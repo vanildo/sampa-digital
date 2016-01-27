@@ -115,10 +115,8 @@ exports = module.exports = function (req, res) {
                         } else {
                             locals.empresaSubmitted = true;
                             locals.cadastroInstituicao = false;
-                            console.log(req.body.latitude);
                             empresa.endereco.geo = [req.body.longitude, req.body.latitude];
                             empresa.save();
-                            console.log(empresa);
                             console.log("Cadastrado cnpj: " + req.body.cnpj);
                         }
                         if (locals.empresaSubmitted)
