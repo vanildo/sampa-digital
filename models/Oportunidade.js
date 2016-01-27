@@ -14,7 +14,7 @@ Oportunidade.add({
     nome: {type: String, initial: true, required: true},
     breveDescricao: {type: String, initial: true, required: true, label: "Descrição Resumida: "},
     tipoOportunidade: {type: Types.Select, options: ['COMPRA', 'VENDA'], label: "Tipo de Oportunidade", initial: true, required: true},
-    quantidade: {type: Types.Number},
+    quantidade: {type: String},
     preco: {type: Types.Money, currency: 'pt-br', format: '$0,0.00'},
     descricaoDetalhada: {type: Types.Textarea, required: true, initial: true},
     empresa: {type: Types.Relationship, ref: 'Empresa', index: true},
@@ -26,10 +26,14 @@ Oportunidade.add({
     visibilidade: {type: String},
     linkProposta: {type: String},
     imagem: {type: String},
+    tipoOferta: {type: Types.Select, options: [
+            {value: 'produto', label: "Produto"},
+            {value: 'servico', label: "Serviço"},
+        ], required: true, label: "Tipo de Oferta", initial: true},
 });
 /**
  * Relationships
- */ 
+ */
 
 Oportunidade.relationship({ref: 'Empresa', refPath: 'oportunidades'});
 

@@ -7,6 +7,7 @@ exports = module.exports = function (req, res) {
     var view = new keystone.View(req, res);
     var locals = res.locals;
     locals.section = 'cadastroOportunidade';
+    locals.tipoOfertas = Oportunidade.fields.tipoOferta.ops;
     locals.formData = req.body || {};
     locals.validationErrors = {};
     locals.compra = false;
@@ -19,7 +20,7 @@ exports = module.exports = function (req, res) {
         empresa.exec(function (err, resultE) {
             var oportunidade = new Oportunidade.model({
                 isAtivo: true,
-                empresa: resultE.id,                
+                empresa: resultE.id,
             });
             var updaterO = oportunidade.getUpdateHandler(req);
             updaterO.process(req.body, {
@@ -27,7 +28,7 @@ exports = module.exports = function (req, res) {
             }, function (err) {
                 if (err) {
                     locals.validationErrors = err.errors;
-                } else {                        
+                } else {
                     console.log("Oportunidade: " + req.body.nome);
                     locals.oportunidadeSubmitted = true;
                     oportunidade.isAtivo = true;

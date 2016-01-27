@@ -25,30 +25,24 @@ block content
 									input(type='text' name='breveDescricao' required x-moz-errormessage="Por favor preencha esse campo." placeholder='Breve Descrição' value = oportunidade.breveDescricao).form-control
 								.form-group
 									label.col-sm-4.text-left Descrição detalhada
-									textarea(type='text' name='descricaoDetalhada' rows=4 placeholder="Descrição Detalhada").form-control #{oportunidade.descricaoDetalhada}
+									textarea(type='text' required x-moz-errormessage="Por favor preencha esse campo." name='descricaoDetalhada' rows=4 placeholder="Descrição Detalhada").form-control #{oportunidade.descricaoDetalhada}
 								if (oportunidade.tipoOportunidade =='COMPRA')
 									.form-group
 										label.col-sm-4.text-left Quantidade
-										input(type='text' name='quantidade' required x-moz-errormessage="Por favor preencha esse campo." placeholder='Quantidade' value = oportunidade.quantidade).form-control
+										input(type='text' name='quantidade' placeholder='Quantidade' value = oportunidade.quantidade).form-control
 								else if (oportunidade.tipoOportunidade =='VENDA')
 									.form-group
-										label.col-sm-4.text-left preço
-										input(type='text' name='preco' required x-moz-errormessage="Por favor preencha esse campo." placeholder='Preço' value = oportunidade.preco).form-control
-								.form-group
-									label.col-sm-4.text-left Categoria
-									input(type='text' name='categoria' placeholder='Categoria' value = oportunidade.categoria).form-control
-								.form-group
-									label.col-sm-4.text-left Subcategoria
-									input(type='text' name='subCategoria' placeholder='SubCategoria' value = oportunidade.subCategoria).form-control
-								.form-group
-									label.col-sm-4.text-left Orçamento
-									input(type='text' name='orcamento' placeholder='Orçamento' value = oportunidade.orcamento).form-control
-								.form-group
-									label.col-sm-4.text-left Nível de experiência
-									input(type='text' name='nivelExperiencia' placeholder='Nível de experiência' value = oportunidade.nivelExperiencia).form-control
-								.form-group
-									label.col-sm-4.text-left Visibilidade
-									input(type='text' name='visibilidade' placeholder='Visibilidade' value = oportunidade.visibilidade).form-control
+										label.col-sm-4.text-left Preço
+										input(type='text' name='preco' placeholder='Preço' value = oportunidade.preco).form-control
+								.form-group(class=validationErrors.tipoOferta ? 'has-error' : null required)
+									label.col-sm-4.text-left Tipo de Oferta 
+									select(name='tipoOferta' required x-moz-errormessage="Por favor selecione um tipo de Oferta.").form-control
+										each tipo in tipoOfertas
+											if (tipo.value == oportunidade.tipoOferta)
+												option(value=tipo.value selected=formData.tipoOferta === tipo.value)= tipo.label
+										each tipo in tipoOfertas
+											if (tipo.value != oportunidade.tipoOferta)
+												option(value=tipo.value selected=formData.tipoOferta === tipo.value)= tipo.label
 								.form-group
 									label.col-sm-4.text-left Link da Ofeta
 									input(type='text' name='linkProposta' placeholder='Link da Ofeta' value = oportunidade.linkProposta).form-control

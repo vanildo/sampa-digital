@@ -19,10 +19,9 @@ block content
 				.col-md-12.rule-bottom.text-center
 					if compra
 						h3 Cadastro de Oportunidade de Compra
-						|Atenção! campos com asterisco (*) são obrigatorios e devem ser preenchidos.
 					else if venda
 						h3 Cadastro de Oportunidade de Venda
-						|Atenção! campos com asterisco (*) são obrigatorios e devem ser preenchidos.
+					|Atenção! campos com asterisco (*) são obrigatorios e devem ser preenchidos.
 					form(method='post').form-horizontal
 						input(type='hidden', name='action', value='cadastroOportunidade')
 						if compra
@@ -39,31 +38,22 @@ block content
 										label.col-sm-4.text-left *Breve Descrição
 										input(type='text' name='breveDescricao' required x-moz-errormessage="Por favor preencha esse campo." placeholder='Breve Descrição').form-control
 									.form-group
-										label.col-sm-4.text-left Descrição detalhada
-										textarea(type='text' name='descricaoDetalhada' rows=4 placeholder="Descrição Detalhada").form-control
+										label.col-sm-4.text-left *Descrição detalhada
+										textarea(type='text' name='descricaoDetalhada' rows=4 required x-moz-errormessage="Por favor preencha esse campo." placeholder="Descrição Detalhada").form-control
 									if compra
 										.form-group
 											label.col-sm-4.text-left Quantidade
 											input(type='text' name='quantidade' placeholder='Quantidade').form-control
 									else if venda
 										.form-group
-												label.col-sm-4.text-left Preço
-												input(type='text' name='preco' placeholder='Preço').form-control
-									.form-group
-										label.col-sm-4.text-left Categoria
-										input(type='text' name='categoria' placeholder='Categoria').form-control
-									.form-group
-										label.col-sm-4.text-left Subcategoria
-										input(type='text' name='subCategoria' placeholder='SubCategoria').form-control
-									.form-group
-										label.col-sm-4.text-left Orçamento
-										input(type='text' name='orcamento' placeholder='Orçamento').form-control
-									.form-group
-										label.col-sm-4.text-left Nível de experiência
-										input(type='text' name='nivelExperiencia' placeholder='Nível de experiência').form-control
-									.form-group
-										label.col-sm-4.text-left Visibilidade
-										input(type='text' name='visibilidade' placeholder='Visibilidade').form-control
+											label.col-sm-4.text-left Preço
+											input(type='text' name='preco' placeholder='Preço').form-control
+									.form-group(class=validationErrors.tipoOferta ? 'has-error' : null required)
+										label.col-sm-4.text-left Tipo de Oferta 
+										select(name='tipoOferta' required x-moz-errormessage="Por favor selecione um tipo de Oferta.").form-control
+											option(value='') Tipo de Oferta
+											each tipo in tipoOfertas
+												option(value=tipo.value selected=formData.tipoOferta === tipo.value)= tipo.label
 									.form-group
 										label.col-sm-4.text-left Link da Ofeta
 										input(type='text' name='linkProposta' placeholder='Link da Ofeta').form-control

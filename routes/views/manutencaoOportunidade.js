@@ -1,6 +1,4 @@
 var keystone = require('keystone');
-var Empresa = keystone.list('Empresa');
-var Usuario = keystone.list('Usuario');
 var Oportunidade = keystone.list('Oportunidade');
 
 exports = module.exports = function (req, res) {
@@ -11,6 +9,7 @@ exports = module.exports = function (req, res) {
     locals.formData = req.body || {};
     locals.validationErrors = {};
     locals.oportunidadeSubmmited = false;
+    locals.tipoOfertas = Oportunidade.fields.tipoOferta.ops;
     locals.filters = {
         oportunidade: req.params.oportunidade
     };
@@ -20,7 +19,6 @@ exports = module.exports = function (req, res) {
         var oportunidade = null;
         Oportunidade.model.findById(locals.filters.oportunidade, function (err, oportunidadef) {
             oportunidade = oportunidadef;
-            console.log(oportunidadef);
             locals.oportunidade = oportunidadef;
             next();
         });
@@ -43,7 +41,7 @@ exports = module.exports = function (req, res) {
                 if (err) {
                     locals.validationErrors = err.errors;
                 }
-                locals.oportunidadeSubmmited = true;                
+                locals.oportunidadeSubmmited = true;
                 return res.redirect('/minhasOportunidades');
             });
             console.log("oportunidade atualizada: " + oportunidade.id);
