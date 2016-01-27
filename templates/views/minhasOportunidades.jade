@@ -6,7 +6,7 @@ block intro
 			.col-md-12.text-center
 				if oportunidades.length
 					.page-header
-						h2.orange Suas Oportunidades no Sistema.
+						h2.orange Suas Oportunidades Cadastradas
 				else
 					.jumbotron.text-center
 						h3(style="margin-bottom:0;margin-top:0;") Nenhuma oportunidade cadastrada.
@@ -39,18 +39,18 @@ block content
 										button(id='#{oportunidade.id}', type='button', name='btnEditar', onclick="requestFormEditar('#{oportunidade.id}')").btn.small.orange Editar
 							td(id=i)
 			.col-md-12.text-center
-				h3 Cadastrar nova oportunidade
+				h3 Cadastrar nova oportunidade ?
 			.row
-				.col-sm-8
+				.col-xm-12.col-md-6
 						.row
-							.col-md-12.text-center
+							.col-md-12.text-right
 								p.btn.green
 									a(href="cadastroOportunidade?compra") Compra
-				.col-sm-8
+				.col-xm-12.col-md-3.text-center
 						.row
-							.col-md-12.text-center
+							.col-md-3
 								p.btn.green
-									a(href="cadastroOportunidade?venda") Venda
+									a(href="cadastroOportunidade?venda") Venda 
 								
 block page-js
 	script.

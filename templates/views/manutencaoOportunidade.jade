@@ -7,7 +7,8 @@ block content
 				h2.orange O que deseja editar?
 				p
 
-						|  Ao terminar suas alterações clique em salvar.
+						|  Ao terminar suas alterações clique em salvar.<br />
+						|  Campos com asterisco (*) sao obrigatorios e devem ser preenchidos
 		.row
 			.col-md-12.rule-bottom.text-center
 				h3 Dados da oportunidade
@@ -18,13 +19,13 @@ block content
 						.col-xm-12.col-md-7
 							.col-md-12
 								.form-group
-									label.col-sm-4.text-left Nome
-									input(type='text' name='nome' placeholder='Nome' value = oportunidade.nome).form-control
+									label.col-sm-4.text-left *Titulo
+									input(type='text' name='nome' placeholder='Titulo' value = oportunidade.nome).form-control
 								.form-group
-									label.col-sm-4.text-left Breve Descrição
+									label.col-sm-4.text-left *Breve Descrição
 									input(type='text' name='breveDescricao' required x-moz-errormessage="Por favor preencha esse campo." placeholder='Breve Descrição' value = oportunidade.breveDescricao).form-control
 								.form-group
-									label.col-sm-4.text-left Descrição detalhada
+									label.col-sm-4.text-left *Descrição Detalhada
 									textarea(type='text' required x-moz-errormessage="Por favor preencha esse campo." name='descricaoDetalhada' rows=4 placeholder="Descrição Detalhada").form-control #{oportunidade.descricaoDetalhada}
 								if (oportunidade.tipoOportunidade =='COMPRA')
 									.form-group
@@ -35,7 +36,7 @@ block content
 										label.col-sm-4.text-left Preço
 										input(type='text' name='preco' placeholder='Preço' value = oportunidade.preco).form-control
 								.form-group(class=validationErrors.tipoOferta ? 'has-error' : null required)
-									label.col-sm-4.text-left Tipo de Oferta 
+									label.col-sm-4.text-left *Tipo de Oferta 
 									select(name='tipoOferta' required x-moz-errormessage="Por favor selecione um tipo de Oferta.").form-control
 										each tipo in tipoOfertas
 											if (tipo.value == oportunidade.tipoOferta)
@@ -50,9 +51,9 @@ block content
 									label.col-sm-4.text-left Url da imagem da oportunidade
 									input(type='text' name='imagem' placeholder='Url da imagem da oportunidade' value = oportunidade.imagem).form-control
 					.row
-						.col-md-12
-								input(type='checkbox' name='isAtivo' checked = oportunidade.isAtivo)
-								&nbsp;Ativo
+						.col-md-12.text-left
+								input(type='checkbox' name='isAtivo' checked = oportunidade.isAtivo class='form-checkbox') 
+								label ATIVAR?
 					.row
 						.col-md-12.text-center
 							.form-group

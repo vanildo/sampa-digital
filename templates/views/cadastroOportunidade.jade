@@ -10,18 +10,17 @@ block content
 		.container
 			.row
 				.col-md-12.text-center
-					h2.orange Nova Empresa por aqui?
-					p
-						i
-							strong Comprador ou Vendedor:
-							|  Fique por dentro do que movimenta São Paulo
+				
+					if compra
+						h2.orange Cadastro de Oportunidade de Compra
+						p Atenção! campos com asterisco (*) são obrigatorios e devem ser preenchidos.
+					else if venda
+						h2.orange Cadastro de Oportunidade de Venda
+						p Atenção! campos com asterisco (*) são obrigatorios e devem ser preenchidos.
+				
 			.row
 				.col-md-12.rule-bottom.text-center
-					if compra
-						h3 Cadastro de Oportunidade de Compra
-					else if venda
-						h3 Cadastro de Oportunidade de Venda
-					|Atenção! campos com asterisco (*) são obrigatorios e devem ser preenchidos.
+					
 					form(method='post').form-horizontal
 						input(type='hidden', name='action', value='cadastroOportunidade')
 						if compra
@@ -49,7 +48,7 @@ block content
 											label.col-sm-4.text-left Preço
 											input(type='text' name='preco' placeholder='Preço').form-control
 									.form-group(class=validationErrors.tipoOferta ? 'has-error' : null required)
-										label.col-sm-4.text-left Tipo de Oferta 
+										label.col-sm-4.text-left *Tipo de Oferta 
 										select(name='tipoOferta' required x-moz-errormessage="Por favor selecione um tipo de Oferta.").form-control
 											option(value='') Tipo de Oferta
 											each tipo in tipoOfertas
