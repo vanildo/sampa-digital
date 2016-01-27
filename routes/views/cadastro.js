@@ -151,7 +151,6 @@ exports = module.exports = function (req, res) {
                                                             //fila de email nao enviado
                                                             return console.log(error);
                                                         }
-                                                        console.log(empresa);
                                                         console.log('Message sent AdeSampa: ' + info.response);
                                                     });
                                                 }
