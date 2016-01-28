@@ -70,7 +70,7 @@ block content
 									if oportunidade.image
 										img.fit(oportunidade.image.fit(160,160))
 									else
-										img.img-responsive(src='/images/icon_500x500.svg')
+										img.img-responsive(src='/images/icon_500x500.svg' , width="80", height="80")
 								.col-md-9
 									h3.no-margin
 										a(href='oportunidades?=' + oportunidade.id): = oportunidade.nome
@@ -116,7 +116,7 @@ block content
 									if oportunidade.image
 										img.fit(oportunidade.image.fit(160,160))
 									else
-										img.img-responsive(src='/images/icon_500x500.svg')
+										img.img-responsive(src='/images/icon_500x500.svg', width="80", height="80")
 								.col-md-9
 									h3.no-margin
 										a(href='oportunidades?=' + oportunidade.id): = oportunidade.nome
@@ -189,23 +189,23 @@ block content
 				while counter < total
 					.row
 						.col-md-2.text-center
-							if noticias.image
+							if noticias[counter].image
 								img.fit(noticias[counter].image.fit(160,160))
 							else
-								img.img-responsive(src='/images/icon_500x500.svg')
+								img.img-responsive(src='/images/icon_500x500.svg', width="80", height="80")
 						.col-md-4
-							h3.no-margin: = noticias[counter].nome
+							h3.no-margin: = noticias[counter].name
 							p.no-top-margin Publicado em:
-								if noticias[counter].createdAt
+								if noticias[counter].publishedDate
 									span.orange
-										| #{noticias[counter]._.createdAt.format('DD')} de #{noticias[counter]._.createdAt.format('MMMM')} de #{noticias[counter]._.createdAt.format('YYYY')}
+										| #{noticias[counter]._.publishedDate.format('DD')} de #{noticias[counter]._.publishedDate.format('MMMM')} de #{noticias[counter]._.publishedDate.format('YYYY')}
 								else
 									span.orange 
 										| Bananas
-							if noticias[counter].breveDescricao
-								p!= noticias[counter].breveDescricao
+							if noticias[counter].content.brief
+								p!= noticias[counter].content.brief
 							else
-								p Bananosas bananudas!
+								p ´Sem Descricao
 							p.btn.small.orange
 								a(href='blog/post/' + noticias[counter].key) Leia Mais
 					- counter++
@@ -214,13 +214,13 @@ block content
 								if noticias.image
 									img.fit(noticias[counter].image.fit(160,160))
 								else
-									img.img-responsive(src='/images/icon_500x500.svg')
+									img.img-responsive(src='/images/icon_500x500.svg', width="80", height="80")
 							.col-md-4
-								h3.no-margin: = noticias[counter].nome
+								h3.no-margin: = noticias[counter].name
 								p.no-top-margin Publicado em:
-									if noticias[counter].createdAt
+									if noticias[counter].publishedDate
 										span.orange
-											| #{noticias[counter]._.createdAt.format('DD')} de #{noticias[counter]._.createdAt.format('MMMM')} de #{noticias[counter]._.createdAt.format('YYYY')}
+											| #{noticias[counter]._.publishedDate.format('DD')} de #{noticias[counter]._.publishedDate.format('MMMM')} de #{noticias[counter]._.publishedDate.format('YYYY')}
 									else
 										span.orange 
 											| Bananas

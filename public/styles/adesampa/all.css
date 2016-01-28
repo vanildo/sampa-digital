@@ -133,14 +133,14 @@ img.fit {
 .social-icon-twitter:hover {
     background: rgba(0, 0, 0, 0) url("/images/social-icon-twitter-over.png") no-repeat scroll 0 0;
 }
-.social-icon-rss {
-    background: rgba(0, 0, 0, 0) url("/images/social-icon-rss.png") no-repeat scroll 0 0;
+.social-icon-yt {
+    background: rgba(0, 0, 0, 0) url("/images/social-icon-yt.png") no-repeat scroll 0 0;
     display: block;
     height: 42px;
     width: 42px;
 }
-.social-icon-rss:hover {
-    background: rgba(0, 0, 0, 0) url("/images/social-icon-rss-over.png") no-repeat scroll 0 0;
+.social-icon-yt:hover {
+    background: rgba(0, 0, 0, 0) url("/images/social-icon-yt-over.png") no-repeat scroll 0 0;
 }
 .rule-bottom{
   border-bottom: 2px solid #CCCCCC;
