@@ -1,25 +1,56 @@
 extends ../layouts/default
 
 block content
-	.bg-pb
-		if user
-			if user.isAdmin
-				.container
-					.row
-						.col-md-12.text-center
-							h1.orange Painel de Controle
-							h3.no-margin: a(href='/keystone') Area do Administrador
-							h3.no-margin: a(href='/aprovacao') Cadastros Pendentes
-							h3.no-margin: a(href='/keystone/signout') logout
-			else
-				container
-					.row
-						.col-md-12.text-center
-							h1.orange Painel de Controle
-								h3.no-margin: a(href='/conta') Minha Conta
-								h3.no-margin: a(href='/minhasOportunidades') Minhas Oportunidades
-								h3.no-margin: a(href='/keystone/signout') logout
+	if user
+		if user.isAdmin
+			.container
+				.row
+					.col-md-12.text-center
+						h1.orange Painel de Controle
+				.row
+					.col-md-4
+					.col-md-4
+						h3.no-margin: a(href='/keystone'): span.
+							span.glyphicon.glyphicon-cog
+							| &nbsp;Area do Administrador
+						h3.no-margin: a(href='/aprovacao')
+							span.glyphicon.glyphicon-list-alt
+							| &nbsp;Cadastros Pendentes
+						h3.no-margin: a(href='/keystone/signout') 
+							span.glyphicon.glyphicon-off
+							| &nbsp;logout
+					.col-md-4
 		else
-			h2 Painel de Controle
-			h3.no-margin: a(href='/keystone/signin') Login
-			h3.no-margin: a(href='/cadastro') Cadastre-se aqui
+			.container
+				.row
+					.col-md-12.text-center
+						h1.orange Painel de Controle
+				.row
+					.col-md-4
+					.col-md-4
+						h3.no-margin: a(href='/conta')
+							span.glyphicon.glyphicon-user
+							| &nbsp;Minha Conta
+						h3.no-margin: a(href='/minhasOportunidades')
+							span.glyphicon.glyphicon-edit
+							| &nbsp;Minhas Oportunidades
+						h3.no-margin: a(href='/keystone/signout') 
+							span.glyphicon.glyphicon-off
+							| &nbsp;logout
+					.col-md-4
+	else
+		.container
+			.row
+				.col-md-12.text-center
+					h1.orange Painel de Controle
+			.row
+				.col-md-4
+				.col-md-4
+					h3.no-margin: a(href='/keystone/signin')
+						span.glyphicon.glyphicon-log-in
+						| &nbsp;Login
+					h3.no-margin: a(href='/cadastro')
+						span.glyphicon.glyphicon-file
+						| &nbsp;Cadastre-se aqui
+				.col-md-4
+
