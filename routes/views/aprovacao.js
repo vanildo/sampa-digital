@@ -69,11 +69,13 @@ exports = module.exports = function (req, res) {
                             from: emailConfigs.from, // sender address//                                             
                             to: usuario.email, // list of receivers
                             subject: emailConfigs.subjectAprovacao, // Subject line                                                     
-                            html: '<b>' + '<p>' + emailConfigs.saudacao + ' ' + empresa.responsavelLegal.nome + '</p>'
+                            html: '<b>'
+                                    + '<p>' + '*NÃO RESPONDA A ESTE E-MAIL. ELE É GERADO AUTOMATICAMENTE.' + '</p>'
+                                    + '<p>' + emailConfigs.saudacao + ' ' + empresa.responsavelLegal.nome + '</p>'
                                     + '<p>' + emailConfigs.corpoAprovacao + '</p>'
                                     + '<p>' + 'Usuario: ' + ' ' + usuario.email
                                     + '<p>' + 'Senha: ' + ' ' + senha
-                                    + '<p>' + 'Este é um e-mail automático, você não precisa responder' + '</p>' + '</b>' // html body
+                                    + '</b>' // html body
                         };
                         transporter.sendMail(mailOptions, function (error, info) {
                             if (error) {
@@ -96,10 +98,12 @@ exports = module.exports = function (req, res) {
                             from: emailConfigs.from, // sender address//                                            
                             to: usuario.email, // list of receivers
                             subject: emailConfigs.subjectRejeicao, // Subject line                                                  
-                            html: '<b>' + '<p>' + emailConfigs.saudacao + ' ' +
-                                    empresa.responsavelLegal.nome + '</p>' + '<p>' + emailConfigs.corpoRejeicao +
+                            html: '<b>'
+                                    + '<p>' + '*NÃO RESPONDA A ESTE E-MAIL. ELE É GERADO AUTOMATICAMENTE.' + '</p>'
+                                    + '<p>' + emailConfigs.saudacao + ' ' + empresa.responsavelLegal.nome + '</p>'
+                                    + '<p>' + emailConfigs.corpoRejeicao +
                                     '</p>' + '</p>'
-                                    + '<p>' + 'Este é um e-mail automático, você não precisa responder' + '</p>' + '</b>' // html body
+                                    + '</p>' + '</b>' // html body
                         };
                         transporter.sendMail(mailOptions, function (error, info) {
                             if (error) {
