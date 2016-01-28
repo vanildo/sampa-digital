@@ -12,7 +12,7 @@ exports = module.exports = function(req, res) {
 	view.query('noticias', keystone.list('Post').model.find());
 	view.query('oportunidades1', keystone.list('Oportunidade').model.find().where('tipoOportunidade', 'COMPRA' ).where('isAtivo', true).populate('empresa'));
 	view.query('oportunidades2', keystone.list('Oportunidade').model.find().where('tipoOportunidade', 'VENDA' ).where('isAtivo', true).populate('empresa'));
-	
+	view.query('eventos', keystone.list('Evento').model.find());
 	
 	// Render the view
 	view.render('index');

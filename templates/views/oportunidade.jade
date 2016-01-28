@@ -20,20 +20,12 @@ block intro
 							i Maqui porra quista conteceno qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit
 	else if locals.umaOportunidade
 		.container
-			.row						
+			.row
 				.col-md-12.text-center
 						if umaOportunidade.length
 
 						else
 							h2.orange Oportunidade não encontrada!!
-	else
-		.container
-			.row						
-				.col-md-12.text-center
-					h2.orange Deu ruim!!
-
-
-
 
 
 block content
@@ -53,9 +45,9 @@ block content
 						.row
 							.col-md-2.text-center
 								if oportunidade.image
-									img.fit(oportunidade.image.fit(160,160))
+									img.img-responsive(oportunidade.image.fit(160,160))
 								else
-									img.fit(src='/images/noticia3.jpg')
+									img.img-responsive(src='/images/icon_500x500.svg')
 							.col-md-10
 								h3.no-margin: = oportunidade.nome
 								p 
@@ -87,9 +79,9 @@ block content
 				.row
 					.col-md-2.text-center
 						if umaOportunidade.image
-							img.fit(umaOportunidade.image.fit(160,160))
+							img.img-responsive(umaOportunidade.image.fit(160,160))
 						else
-							img.fit(src='/images/noticia3.jpg')
+							img.img-responsive(src='/images/icon_500x500.svg')
 					.col-xm-12.col-md-7
 						.col-md-12
 							h3.no-margin
@@ -98,31 +90,10 @@ block content
 									| #{umaOportunidade[0].nome}
 							p
 								
-								if umaOportunidade[0].createdAt
-									| Publicado em:
-									span.orange 
-										| #{umaOportunidade[0]._.createdAt.format('DD')} de #{umaOportunidade[0]._.createdAt.format('MMMM')} de #{umaOportunidade[0]._.createdAt.format('YYYY')}
-								else
-								
 								if umaOportunidade[0].tipoOferta
 									| &nbsp;| Tipo de oferta:
 									span.orange 
 										| #{umaOportunidade[0].tipoOferta}
-								else
-
-								
-								if umaOportunidade[0].preco
-									| &nbsp;| Preço
-									span.orange 
-										|R$: |#{umaOportunidade[0].preco}
-									
-								else
-								
-								if umaOportunidade[0].quantidade
-									| &nbsp;| Quantidade:
-									span.orange 
-										| #{umaOportunidade[0].quantidade}
-									
 								else
 								
 							if umaOportunidade[0].linkProposta
@@ -131,6 +102,15 @@ block content
 										| Link para proposta: </strong>
 										a(href=umaOportunidade[0].linkProposta)= umaOportunidade[0].linkProposta
 								
+							if umaOportunidade[0].quantidade
+								p
+									span <strong>
+										|Quantidade: </strong>#{umaOportunidade[0].quantidade}
+							
+							if umaOportunidade[0].preco
+								p
+									span <strong>
+										|Preço: </strong>R$:#{umaOportunidade[0].preco}
 								
 							if umaOportunidade[0].descricaoDetalhada
 								span <strong>detalhes desta oportunidade:</strong>
@@ -140,7 +120,7 @@ block content
 					
 					.col-xm-12.col-md-3
 						.col-md-12
-							h3.rule-bottom.text-center Informações adicionais
+							h3.rule-bottom.text-center Informações do Anunciante
 							
 							if umaOportunidade[0].empresa.nomeFantasia
 								p 
@@ -161,10 +141,6 @@ block content
 							if umaOportunidade[0].empresa.twitter
 								p 
 									<strong>Twitter: </strong> #{umaOportunidade[0].empresa.twitter}
-							
-							
-									
-						
 
 	else
 		.bg-pb
@@ -233,7 +209,7 @@ block content
 									if oportunidade.image
 										img.fit(oportunidade.image.fit(160,160))
 									else
-										img.fit(src='/images/noticia3.jpg')
+										img.fit(src='/favicon.ico')
 								.col-md-10
 									h3.no-margin: = oportunidade.nome
 									p 
@@ -269,7 +245,7 @@ block content
 							if umaOportunidade.image
 								img.fit(umaOportunidade.image.fit(160,160))
 							else
-								img.fit(src='/images/noticia3.jpg')
+								img.fit(src='/favicon.ico')
 						.col-md-10
 
 							h3.no-margin: = oportunidade.Nome

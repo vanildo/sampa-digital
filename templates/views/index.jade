@@ -70,7 +70,7 @@ block content
 									if oportunidade.image
 										img.fit(oportunidade.image.fit(160,160))
 									else
-										img.fit(src='/images/noticia3.jpg')
+										img.img-responsive(src='/images/icon_500x500.svg')
 								.col-md-9
 									h3.no-margin
 										a(href='oportunidades?=' + oportunidade.id): = oportunidade.nome
@@ -116,7 +116,7 @@ block content
 									if oportunidade.image
 										img.fit(oportunidade.image.fit(160,160))
 									else
-										img.fit(src='/images/noticia3.jpg')
+										img.img-responsive(src='/images/icon_500x500.svg')
 								.col-md-9
 									h3.no-margin
 										a(href='oportunidades?=' + oportunidade.id): = oportunidade.nome
@@ -192,7 +192,7 @@ block content
 							if noticias.image
 								img.fit(noticias[counter].image.fit(160,160))
 							else
-								img.fit(src='/images/noticia3.jpg')
+								img.img-responsive(src='/images/icon_500x500.svg')
 						.col-md-4
 							h3.no-margin: = noticias[counter].nome
 							p.no-top-margin Publicado em:
@@ -214,7 +214,7 @@ block content
 								if noticias.image
 									img.fit(noticias[counter].image.fit(160,160))
 								else
-									img.fit(src='/images/noticia3.jpg')
+									img.img-responsive(src='/images/icon_500x500.svg')
 							.col-md-4
 								h3.no-margin: = noticias[counter].nome
 								p.no-top-margin Publicado em:
