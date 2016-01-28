@@ -63,18 +63,17 @@ exports = module.exports = function (req, res) {
                     usuario.save();
                     console.log("Empresa salva: " + empresa.id);
                     if (emailConfigs) {
-                        var smtps = 'smtps://' + emailConfigs.user + '%40gmail.com:' + emailConfigs.senha + '@smtp.gmail.com';
+                        var smtps = 'smtps://' + emailConfigs.user + '%40adesampa.com.br:' + emailConfigs.senha + '@smtp.gmail.com';
                         var transporter = nodemailer.createTransport(smtps);
                         var mailOptions = {
                             from: emailConfigs.from, // sender address//                                             
                             to: usuario.email, // list of receivers
                             subject: emailConfigs.subjectAprovacao, // Subject line                                                     
-                            html: '<b>' + '<p>' + emailConfigs.saudacao + ' ' + empresa.responsavelLegal.nome +
-                                    '</p>' + '<p>' + emailConfigs.corpoAprovacao + '</p>'                             
-                                    + '<p>' + 'Usuario: ' + ' ' +
-                                    usuario.email                                    
-                                    + '<p>' + 'Senha: ' + ' ' +
-                                    senha + '</b>' // html body
+                            html: '<b>' + '<p>' + emailConfigs.saudacao + ' ' + empresa.responsavelLegal.nome + '</p>'
+                                    + '<p>' + emailConfigs.corpoAprovacao + '</p>'
+                                    + '<p>' + 'Usuario: ' + ' ' + usuario.email
+                                    + '<p>' + 'Senha: ' + ' ' + senha
+                                    + '<p>' + 'Este é um e-mail automático, você não precisa responder' + '</p>' + '</b>' // html body
                         };
                         transporter.sendMail(mailOptions, function (error, info) {
                             if (error) {
@@ -91,7 +90,7 @@ exports = module.exports = function (req, res) {
                     empresa.save();
                     console.log("Empresa rejeitada: " + empresa.id);
                     if (emailConfigs) {
-                        var smtps = 'smtps://' + emailConfigs.user + '%40gmail.com:' + emailConfigs.senha + '@smtp.gmail.com';
+                        var smtps = 'smtps://' + emailConfigs.user + '%40adesampa.com.br:' + emailConfigs.senha + '@smtp.gmail.com';
                         var transporter = nodemailer.createTransport(smtps);
                         var mailOptions = {
                             from: emailConfigs.from, // sender address//                                            
@@ -99,7 +98,8 @@ exports = module.exports = function (req, res) {
                             subject: emailConfigs.subjectRejeicao, // Subject line                                                  
                             html: '<b>' + '<p>' + emailConfigs.saudacao + ' ' +
                                     empresa.responsavelLegal.nome + '</p>' + '<p>' + emailConfigs.corpoRejeicao +
-                                    '</p>' + '</p>' + '</b>' // html body
+                                    '</p>' + '</p>'
+                                    + '<p>' + 'Este é um e-mail automático, você não precisa responder' + '</p>' + '</b>' // html body
                         };
                         transporter.sendMail(mailOptions, function (error, info) {
                             if (error) {
