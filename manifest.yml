@@ -7,4 +7,4 @@ applications:
   host: adeSampa
   disk_quota: 1024M
   services:
-  - MongoAdeSampa
+#  - MongoAdeSampa
