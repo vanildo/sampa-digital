@@ -9,12 +9,11 @@ var keystone = require('keystone');
 var mongoUri;
 // var mongoURI = "mongodb://IbmCloud_66msqd73_rc5oqcc5_185k3qgu:MFZUjy0hWwgc_PMPBkpQma4ZU1hnkHeV@ds041053.mongolab.com:41053/IbmCloud_66msqd73_rc5oqcc5";
 
-if (process.env.VCAP_SERVICES) {
-    var services = JSON.parse(process.env.VCAP_SERVICES);
-    mongoUri = services.mongolab[0].credentials.uri;
+if (process.env.mongoDB) {
+    mongoUri = process.env.mongoDB;
 } else {
     mongoUri = "mongodb://localhost/keystone";
-}
+} 
 
 // Initialise Keystone with your project's configuration.
 // See http://keystonejs.com/guide/config for available options

@@ -135,7 +135,8 @@ block content
 							if umaOportunidade[0].descricaoDetalhada
 								span <strong>detalhes desta oportunidade:</strong>
 								<br/>
-								p= umaOportunidade[0].descricaoDetalhada
+								p(style="word-wrap: break-word;")
+									|#{umaOportunidade[0].descricaoDetalhada}
 					
 					.col-xm-12.col-md-3
 						.col-md-12
