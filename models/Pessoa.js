@@ -14,7 +14,7 @@ var Pessoa = new keystone.List('Pessoa', {
 });
 Pessoa.add({
     nome: {type: String, initial: true},   
-    cpf: {type: String, required: true, initial: true}
+    cpf: {type: String, initial: true}
 });
 /**
  * Relationships
