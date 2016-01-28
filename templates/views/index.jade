@@ -142,6 +142,7 @@ block content
 						.row
 							.col-md-12
 								h3.text-center Nenhuma oportunidade cadastrada!	
+
 					br
 					.row.text-center
 						.col-xs-12.col-md-6
@@ -186,7 +187,7 @@ block content
 			- var total = noticias.length
 			- var counter = 0
 			if noticias.length
-				while counter < total
+				while counter < 4
 					.row
 						.col-md-2.text-center
 							if noticias[counter].image
@@ -255,36 +256,49 @@ block content
 						p.small.gray
 							i Tudo o que você pode encontrar na AdeSampa Digital	
 			.row
-				.col-xs-12.col-md-8
+				.col-xs-12.col-md-12
 					.text-center
 						p.filters 
 							span
-								a.selected(href="#") Ver tudo
+								a.selected(href="#VerTudo", onclick="filterMap(this.href, this);return false;") Ver tudo
 							|  / 
 							span
-								a(href="#") Start-ups
+								a(href="#empresa", onclick="filterMap(this.href, this);return false;") Empresa
 							|  / 
 							span
-								a(href="#") Workplaces
+								a(href="#instituicao", onclick="filterMap(this.href, this);return false;") Instituição
 							|  / 
 							span
-								a(href="#") Incubadoras
+								a(href="#startup", onclick="filterMap(this.href, this);return false;") Start-up
 							|  / 
 							span
-								a(href="#") Universidades
+								a(href="#workplace", onclick="filterMap(this.href, this);return false;") Workplace
+							|  / 
+							span
+								a(href="#incubadora", onclick="filterMap(this.href, this);return false;") Incubadora
+							|  / 
+							span
+								a(href="#universidade", onclick="filterMap(this.href, this);return false;") Universidade
+						h3.red#no-company(style="display: none;") Nemnhuma empresa cadastrada
 			.row
-				.col-xs-12.col-md-8
-					iframe( src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d139144.80806118745!2d-46.718124664172294!3d-23.588222367503537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce448183a461d1%3A0x9ba94b08ff335bae!2zU8OjbyBQYXVsbywgU1A!5e0!3m2!1spt-BR!2sbr!4v1449777416956", width="100%", frameborder="0", style="border:0; height:500px", allowfullscreen)
-					p.subtitle Rua Lorem Ipsum, 123 - Bairro ABCD, São Paulo/SP - CEP 00000-000 - Tel.: (11) 1234-5678
+				.col-xs-12.col-md-12
+					- var empresasTotal = empresas.length
+					- var empresasCounter = 0
+					while empresasCounter < empresasTotal
+						if empresas[empresasCounter].endereco.geo
+							input(type='hidden', name='company', value=empresas[empresasCounter].endereco.geo, data-name=empresas[empresasCounter].nomeFantasia, data-description=empresas[empresasCounter].descricao, data-telefone=empresas[empresasCounter].telefone, data-face=empresas[empresasCounter].facebook, data-website=empresas[empresasCounter].webSite, data-twitter=empresas[empresasCounter].twitter, data-tipo=empresas[empresasCounter].empresaType).empresaListada
+						- empresasCounter++
+					div#map(style="height: 320px; max-height: 320px; width: 100%;")
+					include ../../public/js/map.js
+					script(src=googlesrc, async="true")
+				//
+					.col-xs-12.col-md-4
+						a(href="#")
+							img.fit(src="/images/placeholder_1.jpg", alt="Quer divulgar um evento? Cadastre-se.")
 						br
-						| Horário de atendimento: segunda a sexta-feira, das 8h. as 18h. 	
-				.col-xs-12.col-md-4
-					a(href="#")
-						img.fit(src="/images/placeholder_1.jpg", alt="Quer divulgar um evento? Cadastre-se.")
-					br
-					br
-					a(href="#")
-						img.fit(src="/images/placeholder_2.jpg", alt="Coloque sua start-up no mapa.")
+						br
+						a(href="#")
+							img.fit(src="/images/placeholder_2.jpg", alt="Coloque sua start-up no mapa.")
 	.agenda.separation-rule
 		.container
 			#agenda.row

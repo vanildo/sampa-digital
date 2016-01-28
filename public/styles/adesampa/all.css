@@ -26,6 +26,9 @@ h3{
     font-size: 16px;
     font-weight: bold;
 }
+.red{
+  color: red;
+}
 a {
   color: #428bca;
 }
@@ -246,6 +249,8 @@ img.fit {
   display: flex;
   align-items: center;
   justify-content: center;
+  /*remove bottom margin from bootstrap row class*/
+  margin-bottom: 0 !important;
 }
 #leadspace p{
   font-size: 21px;
