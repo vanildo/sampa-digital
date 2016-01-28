@@ -187,7 +187,7 @@ block content
 			- var total = noticias.length
 			- var counter = 0
 			if noticias.length
-				while counter < total
+				while counter < 4
 					.row
 						.col-md-2.text-center
 							if noticias.image
@@ -256,29 +256,41 @@ block content
 						p.small.gray
 							i Tudo o que você pode encontrar na AdeSampa Digital	
 			.row
-				.col-xs-12.col-md-8
+				.col-xs-12.col-md-12
 					.text-center
-						input(type='hidden' name='empresa-id', id='empresa-id',value=empresas[0].id)
 						p.filters 
 							span
-								a.selected(href="#") Ver tudo
+								a.selected(href="#VerTudo", onclick="filterMap(this.href, this);return false;") Ver tudo
 							|  / 
 							span
-								a(href="#") Start-ups
+								a(href="#empresa", onclick="filterMap(this.href, this);return false;") Empresa
 							|  / 
 							span
-								a(href="#") Workplaces
+								a(href="#instituicao", onclick="filterMap(this.href, this);return false;") Instituição
 							|  / 
 							span
-								a(href="#") Incubadoras
+								a(href="#startup", onclick="filterMap(this.href, this);return false;") Start-up
 							|  / 
 							span
-								a(href="#") Universidades
+								a(href="#workplace", onclick="filterMap(this.href, this);return false;") Workplace
+							|  / 
+							span
+								a(href="#incubadora", onclick="filterMap(this.href, this);return false;") Incubadora
+							|  / 
+							span
+								a(href="#universidade", onclick="filterMap(this.href, this);return false;") Universidade
+						h3.red#no-company(style="display: none;") Nemnhuma empresa cadastrada
 			.row
 				.col-xs-12.col-md-12
-					div#map(style="height: 100%;")
-					script(scr=googlesrc, async, defer)
+					- var empresasTotal = empresas.length
+					- var empresasCounter = 0
+					while empresasCounter < empresasTotal
+						if empresas[empresasCounter].endereco.geo
+							input(type='hidden', name='company', value=empresas[empresasCounter].endereco.geo, data-name=empresas[empresasCounter].nomeFantasia, data-description=empresas[empresasCounter].descricao, data-telefone=empresas[empresasCounter].telefone, data-face=empresas[empresasCounter].facebook, data-website=empresas[empresasCounter].webSite, data-twitter=empresas[empresasCounter].twitter, data-tipo=empresas[empresasCounter].empresaType).empresaListada
+						- empresasCounter++
+					div#map(style="height: 320px; max-height: 320px; width: 100%;")
 					include ../../public/js/map.js
+					script(src=googlesrc, async="true")
 				//
 					.col-xs-12.col-md-4
 						a(href="#")
