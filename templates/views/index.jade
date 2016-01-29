@@ -314,13 +314,13 @@ block content
 								h3.no-top-margin
 									if eventos[counterAgenda].dataInicio
 										span.orange
-											| #{eventos[counterAgenda]._.dataInicio.format('DD')} de #{eventos[counterAgenda]._.dataInicio.format('MMMM')} de #{eventos[counterAgenda]._.dataInicio.format('YYYY')}
+											| #{eventos[counterAgenda].dataInicio} a #{eventos[counterAgenda].dataFim}
 									else
 										span.orange
 											| sem data!
 									br
-									if eventos[counterAgenda].nome
-										p!= eventos[counterAgenda].nome
+									if eventos[counterAgenda].name
+										p!= eventos[counterAgenda].name
 									else
 										p Evento!
 								if eventos[counterAgenda].content.brief

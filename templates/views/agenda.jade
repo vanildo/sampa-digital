@@ -12,7 +12,7 @@ block intro
 		.container
 			.row
 				.col-md-12.text-center
-						if umaOportunidade.length
+						if umEvento.length
 
 						else
 							h2.orange Evento não encontrado!!
@@ -55,21 +55,21 @@ block content
 				.row
 					.col-md-12
 						h3.no-top-margin
-							if eventos[counterAgenda].dataInicio
-								span.orange
-									| #{eventos[counterAgenda]._.dataInicio.format('DD')} de #{eventos[counterAgenda]._.dataInicio.format('MMMM')} de #{eventos[counterAgenda]._.dataInicio.format('YYYY')}
+							if umEvento[0].dataInicio
+								span
+									|de #{umEvento[0].dataInicio} ate #{umEvento[0].dataFim}
 							else
-								span.orange
+								span
 									| sem data!
-				.row
+									
 					.col-md-12
-						h2.orange= eventos.name
+						h2.orange= umEvento[0].name
 							
-				.row
+
 					.col-md-12
-						if post.image.exists
-							img(src=eventos._.image.fit(750,500)).img-responsive
-						!= eventos.content.full
+						if umEvento[0].image
+							img(src=umEvento[0]._.image.fit(550,300)).img-responsive
+							!= umEvento[0].content.extended
 
 	else
 		.bg-pb
