@@ -208,13 +208,6 @@ block content
 									img.img-responsive(src='/images/icon_500x500.svg', width='80', height='80')
 							.col-md-4
 								h3.no-margin: = noticias[counter].name
-								p.no-top-margin Publicado em:
-									if noticias[counter].publishedDate
-										span.orange
-											| #{noticias[counter]._.publishedDate.format('DD')} de #{noticias[counter]._.publishedDate.format('MMMM')} de #{noticias[counter]._.publishedDate.format('YYYY')}
-									else
-										span.orange 
-											| sem data
 								if noticias[counter].content.brief
 									p!= noticias[counter].content.brief
 								else
