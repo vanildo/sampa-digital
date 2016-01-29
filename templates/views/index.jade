@@ -203,7 +203,7 @@ block content
 						if noticias[counter]
 							.col-md-2.text-center
 								if noticias[counter].image
-									img.fit(src=noticias[counter]._.image.fit(80,80))
+									img.fit(src=noticias[counter]._.image.fit(160,160))
 								else
 									img.img-responsive(src='/images/icon_500x500.svg', width='80', height='80')
 							.col-md-4
@@ -300,7 +300,7 @@ block content
 						if eventos[counterAgenda]
 							.col-md-2.text-center
 								if eventos[counterAgenda].image
-									img.fit(src=eventos[counterAgenda]._.image.fit(80,80))
+									img.img-responsive(src=eventos[counterAgenda]._.image.fit(116,116))
 								else
 									img.img-responsive(src='/images/icon_500x500.svg', width='80', height='80')
 							.col-md-4
