@@ -73,7 +73,7 @@ block content
 										if oportunidades1[opConter].image
 											img.fit(oportunidades1[opConter].image.fit(160,160))
 										else
-											img.img-responsive(src='/images/icon_500x500.svg')
+											img.img-responsive(src='/images/icon_500x500.svg', width='80', height='80')
 									.col-md-9
 										h3.no-margin
 											a(href='oportunidades?=' + oportunidades1[opConter].id): = oportunidades1[opConter].nome
@@ -123,7 +123,7 @@ block content
 										if oportunidades2[vendCont].image
 											img.fit(oportunidades2[vendCont].image.fit(160,160))
 										else
-											img.img-responsive(src='/images/icon_500x500.svg')
+											img(src='/images/icon_500x500.svg', width='80', height='80').img-responsive
 									.col-md-9
 										h3.no-margin
 											a(href='oportunidades?=' + oportunidades2[vendCont].id): = oportunidades2[vendCont].nome
@@ -202,10 +202,10 @@ block content
 							.row
 						if noticias[counter]
 							.col-md-2.text-center
-								if noticias.image
-									img.fit(noticias[counter].image.fit(160,160))
+								if noticias[counter].image
+									img.fit(src=noticias[counter]._.image.fit(80,80))
 								else
-									img.img-responsive(src='/images/icon_500x500.svg')
+									img.img-responsive(src='/images/icon_500x500.svg', width='80', height='80')
 							.col-md-4
 								h3.no-margin: = noticias[counter].name
 								p.no-top-margin Publicado em:
