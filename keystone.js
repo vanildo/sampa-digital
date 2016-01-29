@@ -111,7 +111,7 @@ keystone.set('nav', {
                 'Empresa': 'empresas',
                 'Oportunidades': 'oportunidades',
                 'Contas': ['usuarios', 'pessoas'],
-                'Noticias': ['posts', 'post-comments', 'post-categories'],
+                'Noticias': ['posts', 'eventos'],
                 'Agenda': 'Agenda',
                 'Galerias': 'galleries',
                 'Messagem': 'enquiries',
