@@ -296,37 +296,40 @@ block content
 						h2.orange Agenda 
 						p.small.gray
 							i Fique por dentro do que movimenta São Paulo		
+			- var totalAgenda = eventos.length
+			- var counterAgenda = 0
 			.row
 				if eventos.length
-					each evento in eventos
-						.col-xs-12.col-md-4
-							.col-md-4.text-center
-								if evento.img
-									img.fit(src="/images/191115_sp_tech_interna_1447953871.jpg", alt="")
+					- eventos.reverse()
+					while counterAgenda < 4
+						if counterAgenda%2 == 0
+							.row
+						if eventos[counterAgenda]
+							.col-md-2.text-center
+								if eventos[counterAgenda].image
+									img.fit(src=eventos[counterAgenda]._.image.fit(80,80))
 								else
-									img.fit(src='/images/noticia_padrao.png')
-							.col-md-8
+									img.img-responsive(src='/images/icon_500x500.svg', width='80', height='80')
+							.col-md-4
 								h3.no-top-margin
-									if evento.createdAt
+									if eventos[counterAgenda].dataInicio
 										span.orange
-											| #{evento._.createdAt.format('DD')} de #{evento._.createdAt.format('MMMM')} de #{evento._.createdAt.format('YYYY')}
+											| #{eventos[counterAgenda]._.dataInicio.format('DD')} de #{eventos[counterAgenda]._.dataInicio.format('MMMM')} de #{eventos[counterAgenda]._.dataInicio.format('YYYY')}
 									else
 										span.orange
 											| sem data!
 									br
-									if evento.nome
-										p!= evento.nome
+									if eventos[counterAgenda].nome
+										p!= eventos[counterAgenda].nome
 									else
 										p Evento!
-								if evento.breveDescricao
-									p!= evento.breveDescricao
+								if eventos[counterAgenda].content.brief
+									p!= eventos[counterAgenda].content.brief
 								else
 									p Sem descrição!
 								p.btn.small.green
-									a(href="#") Mais detalhes
-				else
-					h3.text-center
-						Nenhum evento cadastrado!
+									a(href="agenda?=" + eventos[counterAgenda].id) Mais detalhes
+						- counterAgenda++
 			//
 				.row
 					.col-xs-12.col-md-4
@@ -366,7 +369,7 @@ block content
 				.row
 					.col-md-12
 						p.btn.orange
-							a(href="#") [+] Eventos...
+							a(href="/agenda") [+] Eventos...
 			br
 			br
 			br
