@@ -23,12 +23,15 @@ function initMap() {
     var stringTelefone = '<b>Telefone: </b>'+currentTelefone+' ';
 
     var currentWebSite = $(this).attr('data-website');
+    currentWebSite = checkURL(currentWebSite);
     var stringWebsite = '<a href="'+currentWebSite+'">Website</a> |';
 
     var currentFace = $(this).attr('data-face');
+    currentFace = checkURL(currentFace);
     var stringFace = '<a href="'+currentFace+'">Facebook</a> |';
 
     var currentTwitter = $(this).attr('data-twitter');
+    currentTwitter = checkURL(currentTwitter);
     var stringTwitter = '<a href="'+currentTwitter+'">Twitter</a>';
 
     //create popup
@@ -79,6 +82,19 @@ function filterMap(filter, element) {
   //check if there isn't company to show
   if($(".empresaListada").length <= 0){
     $("#no-company").attr('style','').show();
+  }
+}
+function checkURL(url){
+  if(url == ""){
+    return url;
+  }else if(url.match("^//") || url.match("^http://")){
+    return url;
+  }else if(!url.match("^//") && url.match("^/")){
+    url = "http:/"+url;
+    return url;
+  }else{
+    url = "http://"+url;
+    return url;
   }
 }
 </script>

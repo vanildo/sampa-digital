@@ -56,6 +56,7 @@ block content
 	#op.oportunidades.separation-rule
 		.container
 			.row
+			- var opConter = 0;
 				.col-md-12.text-center
 						h2.orange Oportunidades 
 						p.small.gray 
@@ -64,34 +65,37 @@ block content
 				.col-xs-12.col-md-6
 					img(src="/images/querocomprar.png", alt="Quero Comprar")
 					if oportunidades1.length
-						each oportunidade in oportunidades1
-							.row
-								.col-md-3
-									if oportunidade.image
-										img.fit(oportunidade.image.fit(160,160))
-									else
-										img.img-responsive(src='/images/icon_500x500.svg')
-								.col-md-9
-									h3.no-margin
-										a(href='oportunidades?=' + oportunidade.id): = oportunidade.nome
-									p 
-										if oportunidade.empresa
-											span.orange
-												| #{oportunidade.empresa.nomeFantasia}
+						- oportunidades1.reverse()
+						while opConter < 4
+							if oportunidades1[opConter]
+								.row
+									.col-md-3
+										if oportunidades1[opConter].image
+											img.fit(oportunidades1[opConter].image.fit(160,160))
 										else
-											span.orange
-												| Empresa de Gatinhos
-										| &nbsp;| Publicado em:
-										if oportunidade.createdAt
-												span.orange 
-													| #{oportunidade._.createdAt.format('DD')} de #{oportunidade._.createdAt.format('MMMM')} de #{oportunidade._.createdAt.format('YYYY')}
+											img.img-responsive(src='/images/icon_500x500.svg')
+									.col-md-9
+										h3.no-margin
+											a(href='oportunidades?=' + oportunidades1[opConter].id): = oportunidades1[opConter].nome
+										p 
+											if oportunidades1[opConter].empresa
+												span.orange
+													| #{oportunidades1[opConter].empresa.nomeFantasia}
+											else
+												span.orange
+													| Empresa de Gatinhos
+											| &nbsp;| Publicado em:
+											if oportunidades1[opConter].createdAt
+													span.orange 
+														| #{oportunidades1[opConter]._.createdAt.format('DD')} de #{oportunidades1[opConter]._.createdAt.format('MMMM')} de #{oportunidades1[opConter]._.createdAt.format('YYYY')}
+											else
+													span.orange 
+														| Bananas
+										if oportunidades1[opConter].breveDescricao
+											p!= oportunidades1[opConter].breveDescricao
 										else
-												span.orange 
-													| Bananas
-									if oportunidade.breveDescricao
-										p!= oportunidade.breveDescricao
-									else
-										p Bananosas bananudas!	
+											p Bananosas bananudas!
+							- opConter++	
 					else
 						.row
 							.col-md-12
@@ -109,35 +113,39 @@ block content
 					br
 				.col-xs-12.col-md-6
 					img(src="/images/querovender.png", alt="Quero Vender")
+					- oportunidades2.reverse()
 					if oportunidades2.length
-						each oportunidade in oportunidades2
-							.row
-								.col-md-3
-									if oportunidade.image
-										img.fit(oportunidade.image.fit(160,160))
-									else
-										img.img-responsive(src='/images/icon_500x500.svg')
-								.col-md-9
-									h3.no-margin
-										a(href='oportunidades?=' + oportunidade.id): = oportunidade.nome
-									p 
-										if oportunidade.empresa
-											span.orange
-												| #{oportunidade.empresa.nomeFantasia}
+						- var vendCont = 0
+						while vendCont < 4
+							if oportunidades2[vendCont]
+								.row
+									.col-md-3
+										if oportunidades2[vendCont].image
+											img.fit(oportunidades2[vendCont].image.fit(160,160))
 										else
-											span.orange
-												| Empresa de Gatinhos
-										| &nbsp;| Publicado em:
-										if oportunidade.createdAt
-												span.orange 
-													| #{oportunidade._.createdAt.format('DD')} de #{oportunidade._.createdAt.format('MMMM')} de #{oportunidade._.createdAt.format('YYYY')}
+											img.img-responsive(src='/images/icon_500x500.svg')
+									.col-md-9
+										h3.no-margin
+											a(href='oportunidades?=' + oportunidades2[vendCont].id): = oportunidades2[vendCont].nome
+										p 
+											if oportunidades2[vendCont].empresa
+												span.orange
+													| #{oportunidades2[vendCont].empresa.nomeFantasia}
+											else
+												span.orange
+													| Empresa de Gatinhos
+											| &nbsp;| Publicado em:
+											if oportunidades2[vendCont].createdAt
+													span.orange 
+														| #{oportunidades2[vendCont]._.createdAt.format('DD')} de #{oportunidades2[vendCont]._.createdAt.format('MMMM')} de #{oportunidades2[vendCont]._.createdAt.format('YYYY')}
+											else
+													span.orange 
+														| Bananas
+										if oportunidades2[vendCont].breveDescricao
+											p!= oportunidades2[vendCont].breveDescricao
 										else
-												span.orange 
-													| Bananas
-									if oportunidade.breveDescricao
-										p!= oportunidade.breveDescricao
-									else
-										p Bananosas bananudas!
+											p Sem descrição!
+								- vendCont++
 					else
 						.row
 							.col-md-12
@@ -177,39 +185,21 @@ block content
 						.row.text-center
 							p.btn.purple
 								a(href="#") Enviar
-	noticias.separation-rule
-		.container
-			.row
-				.col-md-12.text-center
-						h2.orange Notícias
-						p.small.gray
-							i Fique por dentro do que movimenta São Paulo
-			- var total = noticias.length
-			- var counter = 0
-			if noticias.length
-				while counter < 4
-					.row
-						.col-md-2.text-center
-							if noticias.image
-								img.fit(noticias[counter].image.fit(160,160))
-							else
-								img.img-responsive(src='/images/icon_500x500.svg')
-						.col-md-4
-							h3.no-margin: = noticias[counter].nome
-							p.no-top-margin Publicado em:
-								if noticias[counter].createdAt
-									span.orange
-										| #{noticias[counter]._.createdAt.format('DD')} de #{noticias[counter]._.createdAt.format('MMMM')} de #{noticias[counter]._.createdAt.format('YYYY')}
-								else
-									span.orange 
-										| Bananas
-							if noticias[counter].breveDescricao
-								p!= noticias[counter].breveDescricao
-							else
-								p Bananosas bananudas!
-							p.btn.small.orange
-								a(href='blog/post/' + noticias[counter].key) Leia Mais
-					- counter++
+	.separation-rule
+		noticias
+			.container
+				.row
+					.col-md-12.text-center
+							h2.orange Notícias
+							p.small.gray
+								i Fique por dentro do que movimenta São Paulo
+				- var total = noticias.length
+				- var counter = 0
+				if noticias.length
+					- noticias.reverse()
+					while counter < 4
+						if counter%2 == 0
+							.row
 						if noticias[counter]
 							.col-md-2.text-center
 								if noticias.image
@@ -217,37 +207,37 @@ block content
 								else
 									img.img-responsive(src='/images/icon_500x500.svg')
 							.col-md-4
-								h3.no-margin: = noticias[counter].nome
+								h3.no-margin: = noticias[counter].name
 								p.no-top-margin Publicado em:
-									if noticias[counter].createdAt
+									if noticias[counter].publishedDate
 										span.orange
-											| #{noticias[counter]._.createdAt.format('DD')} de #{noticias[counter]._.createdAt.format('MMMM')} de #{noticias[counter]._.createdAt.format('YYYY')}
+											| #{noticias[counter]._.publishedDate.format('DD')} de #{noticias[counter]._.publishedDate.format('MMMM')} de #{noticias[counter]._.publishedDate.format('YYYY')}
 									else
 										span.orange 
 											| Bananas
-								if noticias[counter].breveDescricao
-									p!= noticias[counter].breveDescricao
+								if noticias[counter].content.brief
+									p!= noticias[counter].content.brief
 								else
 									p Bananosas bananudas!
 								p.btn.small.orange
 									a(href='blog/post/' + noticias[counter].key) Leia Mais
-					- counter++
-			else
+						- counter++
+				else
+					.row
+						.col-md-12
+							h3.text-center Nenhuma Notícia cadastrada!	
 				.row
-					.col-md-12
-						h3.text-center Nenhuma oportunidade cadastrada!	
-				
-			br
-			br
-			br
-			.container.text-center
-				.row
-					.col-md-12
-						p.btn.green
-							a(href="blog") [+] Notícias...
-			br
-			br
-			br
+				br
+				br
+				br
+				.container.text-center
+					.row
+						.col-md-12
+							p.btn.green
+								a(href="blog") [+] Notícias...
+				br
+				br
+				br
 	.mapa.separation-rule
 		.container
 			#mapa.row
