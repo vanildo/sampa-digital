@@ -56,6 +56,7 @@ block content
 	#op.oportunidades.separation-rule
 		.container
 			.row
+			- var opConter = 0;
 				.col-md-12.text-center
 						h2.orange Oportunidades 
 						p.small.gray 
@@ -64,34 +65,37 @@ block content
 				.col-xs-12.col-md-6
 					img(src="/images/querocomprar.png", alt="Quero Comprar")
 					if oportunidades1.length
-						each oportunidade in oportunidades1
-							.row
-								.col-md-3
-									if oportunidade.image
-										img.fit(oportunidade.image.fit(160,160))
-									else
-										img.img-responsive(src='/images/icon_500x500.svg' , width="80", height="80")
-								.col-md-9
-									h3.no-margin
-										a(href='oportunidades?=' + oportunidade.id): = oportunidade.nome
-									p 
-										if oportunidade.empresa
-											span.orange
-												| #{oportunidade.empresa.nomeFantasia}
+						- oportunidades1.reverse()
+						while opConter < 4
+							if oportunidades1[opConter]
+								.row
+									.col-md-3
+										if oportunidades1[opConter].image
+											img.fit(oportunidades1[opConter].image.fit(160,160))
 										else
-											span.orange
-												| Empresa de Gatinhos
-										| &nbsp;| Publicado em:
-										if oportunidade.createdAt
-												span.orange 
-													| #{oportunidade._.createdAt.format('DD')} de #{oportunidade._.createdAt.format('MMMM')} de #{oportunidade._.createdAt.format('YYYY')}
+											img.img-responsive(src='/images/icon_500x500.svg', width='80', height='80')
+									.col-md-9
+										h3.no-margin
+											a(href='oportunidades?=' + oportunidades1[opConter].id): = oportunidades1[opConter].nome
+										p 
+											if oportunidades1[opConter].empresa
+												span.orange
+													| #{oportunidades1[opConter].empresa.nomeFantasia}
+											else
+												span.orange
+													| Empresa
+											| &nbsp;| Publicado em:
+											if oportunidades1[opConter].createdAt
+													span.orange 
+														| #{oportunidades1[opConter]._.createdAt.format('DD')} de #{oportunidades1[opConter]._.createdAt.format('MMMM')} de #{oportunidades1[opConter]._.createdAt.format('YYYY')}
+											else
+													span.orange 
+														| sem data
+										if oportunidades1[opConter].breveDescricao
+											p!= oportunidades1[opConter].breveDescricao
 										else
-												span.orange 
-													| Bananas
-									if oportunidade.breveDescricao
-										p!= oportunidade.breveDescricao
-									else
-										p Bananosas bananudas!	
+											p Sem descrição!
+							- opConter++	
 					else
 						.row
 							.col-md-12
@@ -109,39 +113,44 @@ block content
 					br
 				.col-xs-12.col-md-6
 					img(src="/images/querovender.png", alt="Quero Vender")
+					- oportunidades2.reverse()
 					if oportunidades2.length
-						each oportunidade in oportunidades2
-							.row
-								.col-md-3
-									if oportunidade.image
-										img.fit(oportunidade.image.fit(160,160))
-									else
-										img.img-responsive(src='/images/icon_500x500.svg', width="80", height="80")
-								.col-md-9
-									h3.no-margin
-										a(href='oportunidades?=' + oportunidade.id): = oportunidade.nome
-									p 
-										if oportunidade.empresa
-											span.orange
-												| #{oportunidade.empresa.nomeFantasia}
+						- var vendCont = 0
+						while vendCont < 4
+							if oportunidades2[vendCont]
+								.row
+									.col-md-3
+										if oportunidades2[vendCont].image
+											img.fit(oportunidades2[vendCont].image.fit(160,160))
 										else
-											span.orange
-												| Empresa de Gatinhos
-										| &nbsp;| Publicado em:
-										if oportunidade.createdAt
-												span.orange 
-													| #{oportunidade._.createdAt.format('DD')} de #{oportunidade._.createdAt.format('MMMM')} de #{oportunidade._.createdAt.format('YYYY')}
+											img(src='/images/icon_500x500.svg', width='80', height='80').img-responsive
+									.col-md-9
+										h3.no-margin
+											a(href='oportunidades?=' + oportunidades2[vendCont].id): = oportunidades2[vendCont].nome
+										p 
+											if oportunidades2[vendCont].empresa
+												span.orange
+													| #{oportunidades2[vendCont].empresa.nomeFantasia}
+											else
+												span.orange
+													| Empresa
+											| &nbsp;| Publicado em:
+											if oportunidades2[vendCont].createdAt
+													span.orange 
+														| #{oportunidades2[vendCont]._.createdAt.format('DD')} de #{oportunidades2[vendCont]._.createdAt.format('MMMM')} de #{oportunidades2[vendCont]._.createdAt.format('YYYY')}
+											else
+													span.orange 
+														| sem data
+										if oportunidades2[vendCont].breveDescricao
+											p!= oportunidades2[vendCont].breveDescricao
 										else
-												span.orange 
-													| Bananas
-									if oportunidade.breveDescricao
-										p!= oportunidade.breveDescricao
-									else
-										p Bananosas bananudas!
+											p Sem descrição!
+								- vendCont++
 					else
 						.row
 							.col-md-12
 								h3.text-center Nenhuma oportunidade cadastrada!	
+
 					br
 					.row.text-center
 						.col-xs-12.col-md-6
@@ -161,7 +170,7 @@ block content
 						img(src="/images/IBM_Bluemix_logo.svg.png", alt="Bluemix logo", width="90")
 					.col-md-5
 						p
-							a.blue(href="#") Você é um profissional de TI ou uma startup? Tenha acesso às informações que podem ajudar no desenvolvimento do seu aplicativo ou na criação da sua empresa.
+							a.blue(href="/bluemix") Você é um profissional de TI ou uma startup? Tenha acesso às informações que podem ajudar no desenvolvimento do seu aplicativo ou na criação da sua empresa.
 					//
 						form.form-quero-vender(action="#")
 							.form-group
@@ -176,115 +185,103 @@ block content
 						.row.text-center
 							p.btn.purple
 								a(href="#") Enviar
-	noticias.separation-rule
-		.container
-			.row
-				.col-md-12.text-center
-						h2.orange Notícias
-						p.small.gray
-							i Fique por dentro do que movimenta São Paulo
-			- var total = noticias.length
-			- var counter = 0
-			if noticias.length
-				while counter < total
-					.row
-						.col-md-2.text-center
-							if noticias[counter].image
-								img.fit(noticias[counter].image.fit(160,160))
-							else
-								img.img-responsive(src='/images/icon_500x500.svg', width="80", height="80")
-						.col-md-4
-							h3.no-margin: = noticias[counter].name
-							p.no-top-margin Publicado em:
-								if noticias[counter].publishedDate
-									span.orange
-										| #{noticias[counter]._.publishedDate.format('DD')} de #{noticias[counter]._.publishedDate.format('MMMM')} de #{noticias[counter]._.publishedDate.format('YYYY')}
-								else
-									span.orange 
-										| Bananas
-							if noticias[counter].content.brief
-								p!= noticias[counter].content.brief
-							else
-								p ´Sem Descricao
-							p.btn.small.orange
-								a(href='blog/post/' + noticias[counter].key) Leia Mais
-					- counter++
+	.separation-rule
+		noticias
+			.container
+				.row
+					.col-md-12.text-center
+							h2.orange Notícias
+							p.small.gray
+								i Fique por dentro do que movimenta São Paulo
+				- var total = noticias.length
+				- var counter = 0
+				if noticias.length
+					- noticias.reverse()
+					while counter < 4
+						if counter%2 == 0
+							.row
 						if noticias[counter]
 							.col-md-2.text-center
-								if noticias.image
-									img.fit(noticias[counter].image.fit(160,160))
+								if noticias[counter].image
+									img.fit(src=noticias[counter]._.image.fit(80,80))
 								else
-									img.img-responsive(src='/images/icon_500x500.svg', width="80", height="80")
+									img.img-responsive(src='/images/icon_500x500.svg', width='80', height='80')
 							.col-md-4
 								h3.no-margin: = noticias[counter].name
-								p.no-top-margin Publicado em:
-									if noticias[counter].publishedDate
-										span.orange
-											| #{noticias[counter]._.publishedDate.format('DD')} de #{noticias[counter]._.publishedDate.format('MMMM')} de #{noticias[counter]._.publishedDate.format('YYYY')}
-									else
-										span.orange 
-											| Bananas
-								if noticias[counter].breveDescricao
-									p!= noticias[counter].breveDescricao
+								if noticias[counter].content.brief
+									p!= noticias[counter].content.brief
 								else
-									p Bananosas bananudas!
+									p Sem descrição!
 								p.btn.small.orange
 									a(href='blog/post/' + noticias[counter].key) Leia Mais
-					- counter++
-			else
+						- counter++
+				else
+					.row
+						.col-md-12
+							h3.text-center Nenhuma Notícia cadastrada!	
 				.row
-					.col-md-12
-						h3.text-center Nenhuma oportunidade cadastrada!	
-				
-			br
-			br
-			br
-			.container.text-center
-				.row
-					.col-md-12
-						p.btn.green
-							a(href="blog") [+] Notícias...
-			br
-			br
-			br
+				br
+				br
+				br
+				.container.text-center
+					.row
+						.col-md-12
+							p.btn.green
+								a(href="blog") [+] Notícias...
+				br
+				br
+				br
 	.mapa.separation-rule
 		.container
 			#mapa.row
 				.col-md-12.text-center
 						h2.orange  Mapa 
 						p.small.gray
-							i Tudo o que você pode encontrar na AdeSampa Digital	
+							i Tudo o que você pode encontrar no Sampa Digital 	
 			.row
-				.col-xs-12.col-md-8
+				.col-xs-12.col-md-12
 					.text-center
 						p.filters 
 							span
-								a.selected(href="#") Ver tudo
+								a.selected(href="#VerTudo", onclick="filterMap(this.href, this);return false;") Ver tudo
 							|  / 
 							span
-								a(href="#") Start-ups
+								a(href="#empresa", onclick="filterMap(this.href, this);return false;") Empresa
 							|  / 
 							span
-								a(href="#") Workplaces
+								a(href="#instituicao", onclick="filterMap(this.href, this);return false;") Instituição
 							|  / 
 							span
-								a(href="#") Incubadoras
+								a(href="#startup", onclick="filterMap(this.href, this);return false;") Start-up
 							|  / 
 							span
-								a(href="#") Universidades
+								a(href="#workplace", onclick="filterMap(this.href, this);return false;") Workplace
+							|  / 
+							span
+								a(href="#incubadora", onclick="filterMap(this.href, this);return false;") Incubadora
+							|  / 
+							span
+								a(href="#universidade", onclick="filterMap(this.href, this);return false;") Universidade
+						h3.red#no-company(style="display: none;") Nemnhuma empresa cadastrada
 			.row
-				.col-xs-12.col-md-8
-					iframe( src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d139144.80806118745!2d-46.718124664172294!3d-23.588222367503537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce448183a461d1%3A0x9ba94b08ff335bae!2zU8OjbyBQYXVsbywgU1A!5e0!3m2!1spt-BR!2sbr!4v1449777416956", width="100%", frameborder="0", style="border:0; height:500px", allowfullscreen)
-					p.subtitle Rua Lorem Ipsum, 123 - Bairro ABCD, São Paulo/SP - CEP 00000-000 - Tel.: (11) 1234-5678
+				.col-xs-12.col-md-12
+					- var empresasTotal = empresas.length
+					- var empresasCounter = 0
+					while empresasCounter < empresasTotal
+						if empresas[empresasCounter].endereco.geo
+							input(type='hidden', name='company', value=empresas[empresasCounter].endereco.geo, data-name=empresas[empresasCounter].nomeFantasia, data-description=empresas[empresasCounter].descricao, data-telefone=empresas[empresasCounter].telefone, data-face=empresas[empresasCounter].facebook, data-website=empresas[empresasCounter].webSite, data-twitter=empresas[empresasCounter].twitter, data-tipo=empresas[empresasCounter].empresaType).empresaListada
+						- empresasCounter++
+					div#map(style="height: 320px; max-height: 320px; width: 100%;")
+					include ../../public/js/map.js
+					script(src=googlesrc, async="true")
+				//
+					.col-xs-12.col-md-4
+						a(href="#")
+							img.fit(src="/images/placeholder_1.jpg", alt="Quer divulgar um evento? Cadastre-se.")
 						br
-						| Horário de atendimento: segunda a sexta-feira, das 8h. as 18h. 	
-				.col-xs-12.col-md-4
-					a(href="#")
-						img.fit(src="/images/placeholder_1.jpg", alt="Quer divulgar um evento? Cadastre-se.")
-					br
-					br
-					a(href="#")
-						img.fit(src="/images/placeholder_2.jpg", alt="Coloque sua start-up no mapa.")
+						br
+						a(href="#")
+							img.fit(src="/images/placeholder_2.jpg", alt="Coloque sua start-up no mapa.")
 	.agenda.separation-rule
 		.container
 			#agenda.row
@@ -292,37 +289,40 @@ block content
 						h2.orange Agenda 
 						p.small.gray
 							i Fique por dentro do que movimenta São Paulo		
+			- var totalAgenda = eventos.length
+			- var counterAgenda = 0
 			.row
 				if eventos.length
-					each evento in eventos
-						.col-xs-12.col-md-4
-							.col-md-4.text-center
-								if evento.img
-									img.fit(src="/images/191115_sp_tech_interna_1447953871.jpg", alt="")
+					- eventos.reverse()
+					while counterAgenda < 4
+						if counterAgenda%2 == 0
+							.row
+						if eventos[counterAgenda]
+							.col-md-2.text-center
+								if eventos[counterAgenda].image
+									img.fit(src=eventos[counterAgenda]._.image.fit(80,80))
 								else
-									img.fit(src='/images/noticia_padrao.png')
-							.col-md-8
+									img.img-responsive(src='/images/icon_500x500.svg', width='80', height='80')
+							.col-md-4
 								h3.no-top-margin
-									if evento.createdAt
+									if eventos[counterAgenda].dataInicio
 										span.orange
-											| #{evento._.createdAt.format('DD')} de #{evento._.createdAt.format('MMMM')} de #{evento._.createdAt.format('YYYY')}
+											| #{eventos[counterAgenda].dataInicio} a #{eventos[counterAgenda].dataFim}
 									else
 										span.orange
-											| Bananas!
+											| sem data!
 									br
-									if evento.nome
-										p!= evento.nome
+									if eventos[counterAgenda].name
+										p!= eventos[counterAgenda].name
 									else
-										p Bananosas bananudas!
-								if evento.breveDescricao
-									p!= evento.breveDescricao
+										p Evento!
+								if eventos[counterAgenda].content.brief
+									p!= eventos[counterAgenda].content.brief
 								else
-									p Bananosas bananudas!
+									p Sem descrição!
 								p.btn.small.green
-									a(href="#") Mais detalhes
-				else
-					h3.text-center
-						Nenhum evento cadastrado!
+									a(href="agenda?=" + eventos[counterAgenda].id) Mais detalhes
+						- counterAgenda++
 			//
 				.row
 					.col-xs-12.col-md-4
@@ -362,7 +362,7 @@ block content
 				.row
 					.col-md-12
 						p.btn.orange
-							a(href="#") [+] Eventos...
+							a(href="/agenda") [+] Eventos...
 			br
 			br
 			br
@@ -374,11 +374,19 @@ block content
 					h2.orange  Tecnologia  
 			.row
 				.col-md-4.text-center
+					a(href="https://www.simbio.com.br/")
 						img(src="/images/simbio.jpg", alt="simbio")
+						
 				.col-md-4.text-center
+					a(href="http://www.adesampa.com.br/")
 						img(src="/images/vaitec.jpg", alt="VAI TEC")
 				.col-md-4.text-center
+					a(href="/bluemix")
 						img(src="/images/bluemix_tec.jpg", alt="IBM Bluemix")
+			.row
+				.col-md-4.text-center
+					a(href="http://www.conethics.net/")
+						img(src="/images/partner6.png", alt="Conethics", width='200px', height= '200px')
 	
 	.separation-rule
 		.container
@@ -389,9 +397,12 @@ block content
 						i Hub do ecossistema de inovação, tecnologia e empreendedorismo de São Paulo
 			.row
 				.col-md-4.text-center
-					img(src="/images/partner1.jpg", alt="IBM")
+					a(href="http://www.ibm.com/br-pt/")
+						img(src="/images/partner1.jpg", alt="IBM")
 				.col-md-4.text-center
-					img(src="/images/partner5.jpg", alt="SEBRAE")
+					a(href="http://www.sebrae.com.br/sites/PortalSebrae?utm_expid=80706426-5.hNGA7s9SR029Hr7RIRj0jw.0&utm_referrer=http%3A%2F%2Fadesampadigital.mybluemix.net%2F")
+						img(src="/images/partner5.jpg", alt="SEBRAE")
 				.col-md-4.text-center
+					a(href="http://ww.integrare.org.br/")
 						img(src="/images/partner4.jpg", alt="integrare")
 						

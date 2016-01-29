@@ -112,7 +112,7 @@ keystone.set('nav', {
                 'Oportunidades': 'oportunidades',
                 'Contas': ['usuarios', 'pessoas'],
                 'Noticias': ['posts', 'post-comments', 'post-categories'],
-                'Agenda': 'Agenda',
+                'Agenda': 'eventos',
                 'Galerias': 'galleries',
                 'Messagem': 'enquiries',
                 'CNAE': 'CNAE',

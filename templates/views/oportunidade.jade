@@ -7,17 +7,13 @@ block intro
 				.col-md-12.text-center
 					if oportunidades.length
 						if oportunidades[0].tipoOportunidade == 'VENDA'
+
 							h2.orange Quero Vender!!
-							p
-								i Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit
 						else
 							h2.orange Quero Comprar!! 
-							p
-								i Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit
 					else
 						h2.orange Nada cadastrado no momento!!
-						p
-							i Maqui porra quista conteceno qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit
+
 	else if locals.umaOportunidade
 		.container
 			.row
@@ -32,14 +28,15 @@ block content
 	if locals.oportunidades
 		.bg-pb
 			.container
-				p Ordenar por: 
-					a(href='#') Mais recentes
-					|&nbsp;/&nbsp;
-					a(href='#') Mais antigas
-					| &nbsp;/&nbsp;
-					a(href='#') A-Z
-					|&nbsp; /&nbsp;
-					a(href='#') Z-A
+				//
+					p Ordenar por: 
+						a(href='#') Mais recentes
+						|&nbsp;/&nbsp;
+						a(href='#') Mais antigas
+						| &nbsp;/&nbsp;
+						a(href='#') A-Z
+						|&nbsp; /&nbsp;
+						a(href='#') Z-A
 				if oportunidades.length
 					each oportunidade in oportunidades
 						.row
@@ -56,18 +53,18 @@ block content
 											| #{oportunidade.empresa.nomeFantasia}
 									else
 										span.orange
-											| Empresa de Gatinhos
+											| Empresa
 									| &nbsp;| Publicado em:
 									if oportunidade.createdAt
 											span.orange 
 												| #{oportunidade._.createdAt.format('DD')} de #{oportunidade._.createdAt.format('MMMM')} de #{oportunidade._.createdAt.format('YYYY')}
 									else
 											span.orange 
-												| Bananas
+												| sem data
 								if oportunidade.breveDescricao
 									p!= oportunidade.breveDescricao
 								else
-									p Bananosas bananudas!
+									p Sem descrição!
 								p.btn.small.orange: a(href='oportunidades?=' + oportunidade.id) Leia mais
 				else
 					.row
@@ -81,7 +78,7 @@ block content
 						if umaOportunidade.image
 							img.img-responsive(oportunidade.image.fit(160,160))
 						else
-							img.img-responsive(src='/images/icon_500x500.svg', width='100', height='100')
+							img.img-responsive(src='/images/icon_500x500.svg', width='80', height='80')
 					.col-xm-12.col-md-7
 						.col-md-12
 							h3.no-margin

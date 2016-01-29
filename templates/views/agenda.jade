@@ -1,0 +1,79 @@
+extends ../layouts/default
+
+block intro
+	if locals.eventos
+		.container
+			.row
+				.col-md-12.text-center
+					h2.orange Agenda
+					p
+						i Fique por dentro do que movimenta São Paulo
+	else if locals.umEvento
+		.container
+			.row
+				.col-md-12.text-center
+						if umEvento.length
+
+						else
+							h2.orange Evento não encontrado!!
+
+block content
+	if locals.eventos
+		.bg-pb
+			.container
+				//
+					p Ordenar por: 
+						a(href='#') Mais recentes
+						|&nbsp;/&nbsp;
+						a(href='#') Mais antigas
+						| &nbsp;/&nbsp;
+						a(href='#') A-Z
+						|&nbsp; /&nbsp;
+						a(href='#') Z-A
+				if eventos.length
+					each evento in eventos
+						.row
+							.col-md-2.text-center
+								if evento.image.public_id
+									img(src=evento._.image.fit(140,140)).img-responsive
+								else
+									img.img-responsive(src='/images/icon_500x500.svg', width='120', height='120')
+							.col-md-10
+								h3.no-margin: = evento.name
+								if evento.content.brief
+									p!= evento.content.brief
+								else
+									p Sem descrição!
+								p.btn.small.orange: a(href='agenda?=' + evento.id) Mais detalhes
+				else
+					.row
+						.col-md-12
+							h3 Nenhum evento!
+	else if locals.umEvento
+		.bg-pb
+			.container
+				.row
+					.col-md-12
+						h3.no-top-margin
+							if umEvento[0].dataInicio
+								span
+									|de #{umEvento[0].dataInicio} ate #{umEvento[0].dataFim}
+							else
+								span
+									| sem data!
+									
+					.col-md-12
+						h2.orange= umEvento[0].name
+							
+
+					.col-md-12
+						if umEvento[0].image
+							img(src=umEvento[0]._.image.fit(550,300)).img-responsive
+							!= umEvento[0].content.extended
+
+	else
+		.bg-pb
+			.container
+				.row
+					.col-md-12
+						h3 Nenhum evento!
