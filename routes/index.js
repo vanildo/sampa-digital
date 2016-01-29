@@ -50,6 +50,7 @@ exports = module.exports = function (app) {
     app.all('/cadastroOportunidade', routes.views.cadastroOportunidade);
     app.all('/minhasOportunidades', routes.views.minhasOportunidades);
     app.all('/manutencaoOportunidade/:oportunidade', routes.views.manutencaoOportunidade);
+    app.get('/forgot', routes.views.forgot);
 
 
 
