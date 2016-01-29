@@ -69,9 +69,9 @@ exports.initLocals = function (req, res, next) {
         }
     } else {
         locals.navLinks = [
-            {label: 'Inicio', key: 'home', href: '/'},
+            {label: 'Início', key: 'home', href: '/'},
             {label: 'Oportunidades', key: 'tecnologia', href: '/#op'},
-            {label: 'Noticias', href: '/blog'},
+            {label: 'Notícias', href: '/blog'},
             {label: 'Agenda', href: '/agenda'},
         ];
 
