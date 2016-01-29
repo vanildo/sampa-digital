@@ -1,0 +1,31 @@
+extends ../layouts/default
+
+block content
+	if (usuarioSubmitted == true)
+		.container
+			.row
+				.col-md-12.text-center
+					h1.green Sua solicitação de reset de senha foi concluida!
+					h3.green Aguarde,  em breve voce receberá um email com instruções de como proceder. 
+	else	
+		.container
+			.row
+				.col-md-12.text-center
+					h2.orange Reset de Senha
+			.row
+				.col-sm-8
+					form(method='post').form-horizontal
+							input(type='hidden', name='action', value='reset')
+							.row.no-bottom-margin
+								.col-xm-12.col-md-7
+									.col-md-12
+										.form-group
+											label.col-sm-4.text-left.padding-0 Email
+											input(type='email' name='email' required x-moz-errormessage="Por favor preencha com um email válido." placeholder='Email').form-control
+										.form-group
+											label.col-sm-4.text-left.padding-0 Cnpj
+											input(type='string' name='cnpj' required x-moz-errormessage="Por favor preencha com um email válido." placeholder='CNPJ').form-control
+							.row
+								.col-md-12.text-center
+									.form-group
+										button(type='submit').btn.green.small Enviar

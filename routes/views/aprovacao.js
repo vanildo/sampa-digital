@@ -73,7 +73,7 @@ exports = module.exports = function (req, res) {
                                     + '<p>' + '*NÃO RESPONDA A ESTE E-MAIL. ELE É GERADO AUTOMATICAMENTE.' + '</p>'
                                     + '<p>' + emailConfigs.saudacao + ' ' + empresa.responsavelLegal.nome + '</p>'
                                     + '<p>' + emailConfigs.corpoAprovacao + '</p>'
-                                    + '<p>' + 'Usuario: ' + ' ' + usuario.email
+                                    + '<p>' + 'Usuário: ' + ' ' + usuario.email
                                     + '<p>' + 'Senha: ' + ' ' + senha
                                     + '</b>' // html body
                         };
