@@ -123,13 +123,14 @@ block content
 								p 
 									<strong>Empresa: </strong> #{umaOportunidade[0].empresa.nomeFantasia}
 							
-							if umaOportunidade[0].empresa.contatoComercial
-								p 
-									<strong>Contato Comercial: </strong> #{umaOportunidade[0].empresa.contatoComercial}
-									
-							if umaOportunidade[0].empresa.telefone
-								p 
-									<strong>Telefone: </strong> #{umaOportunidade[0].empresa.telefone}
+							if umaOportunidade[0].tipoOportunidade == 'VENDA'
+								if umaOportunidade[0].empresa.contatoComercial
+									p 
+										<strong>Contato Comercial: </strong> #{umaOportunidade[0].empresa.contatoComercial}
+										
+								if umaOportunidade[0].empresa.telefone
+									p 
+										<strong>Telefone: </strong> #{umaOportunidade[0].empresa.telefone}
 							
 							if umaOportunidade[0].empresa.webSite
 								p 

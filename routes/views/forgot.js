@@ -20,108 +20,96 @@ exports = module.exports = function (req, res) {
     locals.validationErrors = {};
     locals.section = 'forgot';
 
-    view.query('pendencias', Empresa.model.find().populate('responsavelLegal').sort('razaoSocial').where('empresaSituacaoSistema', 'pendente'));
 
-    view.on('post', {action: 'aprovacao'}, function (next) {
+    locals.usuarioSubmitted = false;
+
+    view.on('post', {action: 'reset'}, function (next) {
 
         var emailConfigs;
         var emailConfig = EmailConfig.model.findOne().where('isAtivo', true);
         var usuario = null;
-        var empresa = null;
         var emailConfigs = null;
         var senha;
 
         function one(callback) {
-            Empresa.model.findById(req.body.id, function (err, empresaf) {
-                if (empresaf) {
-                    empresa = empresaf;
-                    locals.usuario = empresaf.usuario;
-                    usuario = empresaf.usuario;
-                    Usuario.model.findById(empresa.usuario, function (err, usuariof) {
-                        if (usuariof) {
-                            usuario = usuariof;
-                            emailConfig.exec(function (err, emailf) {
-                                if (emailf) {
-                                    emailConfigs = emailf;
-                                    callback();
+
+            var empresa = Empresa.model.findOne().populate('usuario').where('cnpj', req.body.cnpj);
+            empresa.exec(function (err, resultE) {
+                locals.empresaf = resultE;
+                if (resultE) {
+                    if (resultE.usuario) {
+                        Usuario.model.findById(resultE.usuario, function (err, resultU) {
+                            usuario = resultU;
+                            locals.usuariof = resultU;
+                            if (resultU) {
+                                if (resultU.email == req.body.email && resultE.cnpj == req.body.cnpj) {
+                                    emailConfig.exec(function (err, emailf) {
+                                        if (emailf) {
+                                            emailConfigs = emailf;
+                                            locals.usuarioSubmitted = true;
+                                            callback();
+                                        }
+                                    });
+                                } else {
+                                    req.flash('error', 'Dados Inválidos.');
+                                    return res.redirect('/forgot');
                                 }
-                            });
-                        }
-                    });
-                }
-            }).populate('responsavelLegal');
-        }
-
-        function two() {
-            if (usuario && empresa) {
-                if (req.body.empresaSituacaoSistema == 1) {
-                    empresa.empresaSituacaoSistema = 'aprovado';
-                    empresa.save();
-                    usuario.responsavel = true;
-                    senha = randomValueBase64(8);
-                    usuario.password = senha;
-                    usuario.save();
-                    console.log("Empresa salva: " + empresa.id);
-                    if (emailConfigs) {
-                        var smtps = 'smtps://' + emailConfigs.user + '%40adesampa.com.br:' + emailConfigs.senha + '@smtp.gmail.com';
-                        var transporter = nodemailer.createTransport(smtps);
-                        var mailOptions = {
-                            from: emailConfigs.from, // sender address//                                             
-                            to: usuario.email, // list of receivers
-                            subject: emailConfigs.subjectAprovacao, // Subject line                                                     
-                            html: '<b>'
-                                    + '<p>' + '*NÃO RESPONDA A ESTE E-MAIL. ELE É GERADO AUTOMATICAMENTE.' + '</p>'
-                                    + '<p>' + emailConfigs.saudacao + ' ' + empresa.responsavelLegal.nome + '</p>'
-                                    + '<p>' + emailConfigs.corpoAprovacao + '</p>'
-                                    + '<p>' + 'Usuario: ' + ' ' + usuario.email
-                                    + '<p>' + 'Senha: ' + ' ' + senha
-                                    + '</b>' // html body
-                        };
-                        transporter.sendMail(mailOptions, function (error, info) {
-                            if (error) {
-                                //fila de email nao enviado
-                                return console.log(error);
+                                next(err);
+                            } else {
+                                req.flash('error', 'Dados Inválidos.');
+                                return res.redirect('/forgot');
                             }
-                            console.log('Message sent: ' + info.response);
                         });
                     } else {
-                        //fila de email nao enviado
+                        req.flash('error', 'Dados Inválidos.');
+                        return res.redirect('/forgot');
                     }
-                } else if (req.body.empresaSituacaoSistema == 2) {
-                    empresa.empresaSituacaoSistema = 'rejeitado';
-                    empresa.save();
-                    console.log("Empresa rejeitada: " + empresa.id);
-                    if (emailConfigs) {
-                        var smtps = 'smtps://' + emailConfigs.user + '%40adesampa.com.br:' + emailConfigs.senha + '@smtp.gmail.com';
-                        var transporter = nodemailer.createTransport(smtps);
-                        var mailOptions = {
-                            from: emailConfigs.from, // sender address//                                            
-                            to: usuario.email, // list of receivers
-                            subject: emailConfigs.subjectRejeicao, // Subject line                                                  
-                            html: '<b>'
-                                    + '<p>' + '*NÃO RESPONDA A ESTE E-MAIL. ELE É GERADO AUTOMATICAMENTE.' + '</p>'
-                                    + '<p>' + emailConfigs.saudacao + ' ' + empresa.responsavelLegal.nome + '</p>'
-                                    + '<p>' + emailConfigs.corpoRejeicao +
-                                    '</p>' + '</p>'
-                                    + '</p>' + '</b>' // html body
-                        };
-                        transporter.sendMail(mailOptions, function (error, info) {
-                            if (error) {
-                                //fila de email nao enviado
-                                return console.log(error);
-                            }
-                            console.log('Message sent: ' + info.response);
-                        });
-                    } else {
-                        //fila de email nao enviado
-                    }
+                } else {
+                    req.flash('error', 'Dados Inválidos.');
+                    return res.redirect('/forgot');
                 }
-
-                return res.redirect('/aprovacao');
-            }
+            });
         }
         ;
+
+
+        function two() {
+            senha = randomValueBase64(8);
+            usuario.password = senha;
+            usuario.save();
+            locals.usuarioSubmitted = true;
+            console.log("Reset de senha: " + usuario.email);
+            if (emailConfigs) {
+                var smtps = 'smtps://' + emailConfigs.user + '%40adesampa.com.br:' + emailConfigs.senha + '@smtp.gmail.com';
+                var transporter = nodemailer.createTransport(smtps);
+                var mailOptions = {
+                    from: emailConfigs.from, // sender address//                                             
+                    to: usuario.email, // list of receivers
+                    subject: emailConfigs.subjectAprovacao, // Subject line                                                     
+                    html: '<b>'
+                            + '<p>' + '*NÃO RESPONDA A ESTE E-MAIL. ELE É GERADO AUTOMATICAMENTE.' + '</p>'
+                            + '<p>' + emailConfigs.saudacao + '</p>'
+                            + '<p>' + 'Reset de Senha efetuado com sucesso!' + '</p>'
+                            + '<p>' + 'Usuário: ' + ' ' + usuario.email
+                            + '<p>' + 'Senha: ' + ' ' + senha
+                            + '</b>' // html body
+                };
+                transporter.sendMail(mailOptions, function (error, info) {
+                    if (error) {
+                        //fila de email nao enviado
+                        return console.log(error);
+                    }
+                    console.log('Message sent: ' + info.response);
+                    locals.usuarioSubmitted = true;
+                });
+            } else {
+                //fila de email nao enviado
+            }
+        }
+
+        ;
         one(two);
+
     });
 
     view.render('forgot');
