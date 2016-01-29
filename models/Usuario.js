@@ -18,7 +18,7 @@ Usuario.add({
     controlData: {type: String, hidden: true, noedit: true},
     email: {type: Types.Email, initial: true, required: true, index: true, unique: true},
     password: {type: Types.Password, initial: true, required: true},
-    isAdmin: {type: Types.Boolean, default: true, index: true},
+    isAdmin: {type: Types.Boolean, default: false, index: true},
     responsavel: {type: Types.Boolean, default: false},
 });
 
