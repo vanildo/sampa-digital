@@ -32,14 +32,15 @@ block content
 	if locals.oportunidades
 		.bg-pb
 			.container
-				p Ordenar por: 
-					a(href='#') Mais recentes
-					|&nbsp;/&nbsp;
-					a(href='#') Mais antigas
-					| &nbsp;/&nbsp;
-					a(href='#') A-Z
-					|&nbsp; /&nbsp;
-					a(href='#') Z-A
+				//
+					p Ordenar por: 
+						a(href='#') Mais recentes
+						|&nbsp;/&nbsp;
+						a(href='#') Mais antigas
+						| &nbsp;/&nbsp;
+						a(href='#') A-Z
+						|&nbsp; /&nbsp;
+						a(href='#') Z-A
 				if oportunidades.length
 					each oportunidade in oportunidades
 						.row

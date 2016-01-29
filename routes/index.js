@@ -41,6 +41,7 @@ exports = module.exports = function (app) {
     app.get('/gallery', routes.views.gallery);
     app.get('/painel', routes.views.painel);
     app.get('/q4qrsd5khd11bw', routes.views.error);
+	app.get('/bluemix', routes.views.bluemix);
     app.all('/contact', routes.views.contact);
     app.all('/oportunidades', routes.views.oportunidade);
     app.all('/termos', routes.views.termos);
