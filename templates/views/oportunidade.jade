@@ -7,12 +7,13 @@ block intro
 				.col-md-12.text-center
 					if oportunidades.length
 						if oportunidades[0].tipoOportunidade == 'VENDA'
-							h2.orange Quero Vender!!	
+
+							h2.orange Quero Vender!!
 						else
-							h2.orange Quero Comprar!! 	
+							h2.orange Quero Comprar!! 
 					else
 						h2.orange Nada cadastrado no momento!!
-						
+
 	else if locals.umaOportunidade
 		.container
 			.row
@@ -52,18 +53,18 @@ block content
 											| #{oportunidade.empresa.nomeFantasia}
 									else
 										span.orange
-											| Empresa de Gatinhos
+											| Empresa
 									| &nbsp;| Publicado em:
 									if oportunidade.createdAt
 											span.orange 
 												| #{oportunidade._.createdAt.format('DD')} de #{oportunidade._.createdAt.format('MMMM')} de #{oportunidade._.createdAt.format('YYYY')}
 									else
 											span.orange 
-												| Bananas
+												| sem data
 								if oportunidade.breveDescricao
 									p!= oportunidade.breveDescricao
 								else
-									p Bananosas bananudas!
+									p Sem descrição!
 								p.btn.small.orange: a(href='oportunidades?=' + oportunidade.id) Leia mais
 				else
 					.row

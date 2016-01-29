@@ -1,0 +1,79 @@
+extends ../layouts/default
+
+block intro
+	if locals.eventos
+		.container
+			.row
+				.col-md-12.text-center
+					h2.orange Agenda
+					p
+						i Fique por dentro do que movimenta São Paulo
+	else if locals.umEvento
+		.container
+			.row
+				.col-md-12.text-center
+						if umaOportunidade.length
+
+						else
+							h2.orange Evento não encontrado!!
+
+block content
+	if locals.eventos
+		.bg-pb
+			.container
+				//
+					p Ordenar por: 
+						a(href='#') Mais recentes
+						|&nbsp;/&nbsp;
+						a(href='#') Mais antigas
+						| &nbsp;/&nbsp;
+						a(href='#') A-Z
+						|&nbsp; /&nbsp;
+						a(href='#') Z-A
+				if eventos.length
+					each evento in eventos
+						.row
+							.col-md-2.text-center
+								if evento.imagem
+									img.img-responsive.fit(evento.imagem.fit(160,160))
+								else
+									img.img-responsive(src='/images/icon_500x500.svg')
+							.col-md-10
+								h3.no-margin: = evento.name
+								if evento.content.brief
+									p!= evento.content.brief
+								else
+									p Sem descrição!
+								p.btn.small.orange: a(href='agenda?=' + evento.id) Mais detalhes
+				else
+					.row
+						.col-md-12
+							h3 Nenhum evento!
+	else if locals.umEvento
+		.bg-pb
+			.container
+				.row
+					.col-md-12
+						h3.no-top-margin
+							if eventos[counterAgenda].dataInicio
+								span.orange
+									| #{eventos[counterAgenda]._.dataInicio.format('DD')} de #{eventos[counterAgenda]._.dataInicio.format('MMMM')} de #{eventos[counterAgenda]._.dataInicio.format('YYYY')}
+							else
+								span.orange
+									| sem data!
+				.row
+					.col-md-12
+						h2.orange= eventos.name
+							
+				.row
+					.col-md-12
+						if post.image.exists
+							img(src=eventos._.image.fit(750,500)).img-responsive
+						!= eventos.content.full
+
+	else
+		.bg-pb
+			.container
+				.row
+					.col-md-12
+						h3 Nenhum evento!
