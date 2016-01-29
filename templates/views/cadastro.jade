@@ -165,7 +165,13 @@ block content
 							.col-md-12.text-center
 								.form-group
 									button(type='button', disabled='true', name='salvar', onclick='longlatcad()').btn.green.disabled#sendButton Salvar
-
+		
+	else if emailBlock
+		.container
+			.row
+				.col-md-12.text-center
+					h1.green Este email ja existe
+					h3.green Por favor tente cadastrar com um email diferente
 
 block page-js
 	script.
