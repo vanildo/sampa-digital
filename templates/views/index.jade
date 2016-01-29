@@ -83,18 +83,18 @@ block content
 													| #{oportunidades1[opConter].empresa.nomeFantasia}
 											else
 												span.orange
-													| Empresa de Gatinhos
+													| Empresa
 											| &nbsp;| Publicado em:
 											if oportunidades1[opConter].createdAt
 													span.orange 
 														| #{oportunidades1[opConter]._.createdAt.format('DD')} de #{oportunidades1[opConter]._.createdAt.format('MMMM')} de #{oportunidades1[opConter]._.createdAt.format('YYYY')}
 											else
 													span.orange 
-														| Bananas
+														| sem data
 										if oportunidades1[opConter].breveDescricao
 											p!= oportunidades1[opConter].breveDescricao
 										else
-											p Bananosas bananudas!
+											p Sem descrição!
 							- opConter++	
 					else
 						.row
@@ -133,14 +133,14 @@ block content
 													| #{oportunidades2[vendCont].empresa.nomeFantasia}
 											else
 												span.orange
-													| Empresa de Gatinhos
+													| Empresa
 											| &nbsp;| Publicado em:
 											if oportunidades2[vendCont].createdAt
 													span.orange 
 														| #{oportunidades2[vendCont]._.createdAt.format('DD')} de #{oportunidades2[vendCont]._.createdAt.format('MMMM')} de #{oportunidades2[vendCont]._.createdAt.format('YYYY')}
 											else
 													span.orange 
-														| Bananas
+														| sem data
 										if oportunidades2[vendCont].breveDescricao
 											p!= oportunidades2[vendCont].breveDescricao
 										else
@@ -214,11 +214,11 @@ block content
 											| #{noticias[counter]._.publishedDate.format('DD')} de #{noticias[counter]._.publishedDate.format('MMMM')} de #{noticias[counter]._.publishedDate.format('YYYY')}
 									else
 										span.orange 
-											| Bananas
+											| sem data
 								if noticias[counter].content.brief
 									p!= noticias[counter].content.brief
 								else
-									p Bananosas bananudas!
+									p Sem descrição!
 								p.btn.small.orange
 									a(href='blog/post/' + noticias[counter].key) Leia Mais
 						- counter++
@@ -312,16 +312,16 @@ block content
 											| #{evento._.createdAt.format('DD')} de #{evento._.createdAt.format('MMMM')} de #{evento._.createdAt.format('YYYY')}
 									else
 										span.orange
-											| Bananas!
+											| sem data!
 									br
 									if evento.nome
 										p!= evento.nome
 									else
-										p Bananosas bananudas!
+										p Evento!
 								if evento.breveDescricao
 									p!= evento.breveDescricao
 								else
-									p Bananosas bananudas!
+									p Sem descrição!
 								p.btn.small.green
 									a(href="#") Mais detalhes
 				else

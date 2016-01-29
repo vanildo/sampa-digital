@@ -8,16 +8,10 @@ block intro
 					if oportunidades.length
 						if oportunidades[0].tipoOportunidade == 'VENDA'
 							h2.orange Quero Vender!!
-							p
-								i Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit
 						else
 							h2.orange Quero Comprar!! 
-							p
-								i Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit
 					else
 						h2.orange Nada cadastrado no momento!!
-						p
-							i Maqui porra quista conteceno qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit
 	else if locals.umaOportunidade
 		.container
 			.row
@@ -64,11 +58,11 @@ block content
 												| #{oportunidade._.createdAt.format('DD')} de #{oportunidade._.createdAt.format('MMMM')} de #{oportunidade._.createdAt.format('YYYY')}
 									else
 											span.orange 
-												| Bananas
+												| sem data
 								if oportunidade.breveDescricao
 									p!= oportunidade.breveDescricao
 								else
-									p Bananosas bananudas!
+									p Sem descrição!
 								p.btn.small.orange: a(href='oportunidades?=' + oportunidade.id) Leia mais
 				else
 					.row
