@@ -3,7 +3,7 @@ var Types = keystone.Field.Types;
 
 var Evento = new keystone.List('Evento', {
 	autokey: { from: 'name', path: 'key', unique: true },
-	label: 'Noticias',
+	label: 'Evento',
 });
 
 Evento.add({
@@ -19,7 +19,7 @@ Evento.add({
 
 Evento.schema.virtual('content.full').get(function () {
 	return this.content.extended || this.content.brief;
-});
+});;
 
 
 Evento.track = true;
