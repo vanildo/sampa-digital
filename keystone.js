@@ -13,7 +13,7 @@ if (process.env.mongoDB) {
     mongoUri = process.env.mongoDB;
 } else {
     mongoUri = "mongodb://localhost/keystone";
-} 
+}
 
 // Initialise Keystone with your project's configuration.
 // See http://keystonejs.com/guide/config for available options
@@ -34,8 +34,8 @@ keystone.init({
     'auth': true,
     'user model': 'Usuario',
     'cookie secret': process.env.COOKIE_SECRET || 'demo',
-    'ga property': process.env.GA_PROPERTY,
-    'ga domain': process.env.GA_DOMAIN,
+    'ga property': 'UA-73901933-1',
+    'ga domain': 'auto',
     'chartbeat property': process.env.CHARTBEAT_PROPERTY,
     'chartbeat domain': process.env.CHARTBEAT_DOMAIN
 
