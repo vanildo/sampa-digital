@@ -3,8 +3,8 @@ applications:
   memory: 512M
   instances: 1
   domain: mybluemix.net
-  name: adeSampa
-  host: adeSampa
-  disk_quota: 1024M
+  name: sampa-digital
+  host: sampa-digital
+  disk_quota: 512M
 #  services:
 #  - MongoAdeSampa
