@@ -803,3 +803,8 @@ ul.templatemo-project-gallery  li  a img:hover {
     width: 200px;
     z-index: 1;
 }
+
+/* Ricardo started on Mar 29 */
+.navbar-fixed-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse {
+    min-width: 400px !important;
+}
