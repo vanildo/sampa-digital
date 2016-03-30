@@ -495,7 +495,11 @@ h6,
 }
 
 p {
+<<<<<<< Upstream, based on c8f4fb0c5e7f684d94ab78f014f49d5792c26fb5
   margin: 0 0 -5px;
+=======
+  margin: 0px 0px;
+>>>>>>> e5ca8b8 ajustes finais no footer 2
 }
 
 .lead {
