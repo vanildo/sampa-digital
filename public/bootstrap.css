@@ -7169,8 +7169,14 @@ td.visible-print {
 }
 
 @media (min-width: 421px) and (max-width: 767px) {
+	#navbar-collapse{
+		display:block !important;	
+	}
 }
 @media (max-width: 420px) {
+	#navbar-collapse{
+		display:block !important;	
+	}
 	.footer {
 		background: none !important;
 	}
