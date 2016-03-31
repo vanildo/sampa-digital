@@ -63,7 +63,7 @@ block content
 							i Para você que deseja comprar ou vender		
 			.row
 				.col-xs-12.col-md-6
-					img(src="/images/querocomprar.png", alt="Quero Comprar")
+					img.img-responsive(src="/images/querocomprar.png", alt="Quero Comprar")
 					if oportunidades1.length
 						- oportunidades1.reverse()
 						while opConter < 4
@@ -112,7 +112,7 @@ block content
 					br
 					br
 				.col-xs-12.col-md-6
-					img(src="/images/querovender.png", alt="Quero Vender")
+					img.img-responsive(src="/images/querovender.png", alt="Quero Vender")
 					- oportunidades2.reverse()
 					if oportunidades2.length
 						- var vendCont = 0
@@ -156,6 +156,7 @@ block content
 						.col-xs-12.col-md-6
 							p.btn.purple
 								a(href="oportunidades?vender") [+] Oportunidades...
+							br
 						.col-xs-12.col-md-6
 							p.btn.purple
 								a(href="pessoa?vender") Anuncie como Vendedor						
@@ -164,11 +165,11 @@ block content
 					br
 				.row.text-center
 					.col-md-12
-						img(src="/images/querodesenvolver.png", alt="Quero Desenvolver")
+						img.img-responsive(src="/images/querodesenvolver.png", alt="Quero Desenvolver")
 				.row
-					.col-md-offset-3.col-md-1.text-center
-						img(src="/images/IBM_Bluemix_logo.svg.png", alt="Bluemix logo", width="90")
-					.col-md-5
+					.col-md-offset-3.col-md-1.col-sm-3.col-xs-3.text-center
+						img.img-responsive(src="/images/IBM_Bluemix_logo.svg.png", alt="Bluemix logo", width="90")
+					.col-md-5.col-sm-6.col-xs-9
 						p
 							a.blue(href="/bluemix") Você é um profissional de TI ou uma startup? Tenha acesso às informações que podem ajudar no desenvolvimento do seu aplicativo ou na criação da sua empresa.
 					//
@@ -214,6 +215,7 @@ block content
 									p Sem descrição!
 								p.btn.small.orange
 									a(href='blog/post/' + noticias[counter].key) Leia Mais
+								br
 								br
 						- counter++
 				else
@@ -323,6 +325,7 @@ block content
 									p Sem descrição!
 								p.btn.small.green
 									a(href="agenda?=" + eventos[counterAgenda].id) Mais detalhes
+								br
 								br
 						- counterAgenda++
 			//

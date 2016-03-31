@@ -7174,4 +7174,6 @@ td.visible-print {
 	.footer {
 		background: none !important;
 	}
+	.leadspace {
+		max-height:300px !important;
 }
