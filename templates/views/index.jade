@@ -298,12 +298,12 @@ block content
 						if counterAgenda%2 == 0
 							.row
 						if eventos[counterAgenda]
-							.col-md-2.text-center
+							.col-md-2.col-sm-2.col-xs-2.text-center
 								if eventos[counterAgenda].image
 									img.img-responsive(src=eventos[counterAgenda]._.image.fit(116,116))
 								else
 									img.img-responsive(src='/images/icon_500x500.svg', width='80', height='80')
-							.col-md-4
+							.col-md-4.col-sm-4.col-xs-4
 								h3.no-top-margin
 									if eventos[counterAgenda].dataInicio
 										span.orange
