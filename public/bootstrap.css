@@ -7171,7 +7171,7 @@ td.visible-print {
 @media (min-width: 421px) and (max-width: 767px) {
 }
 @media (max-width: 420px) {
-	.templatemo-footer {
+	.footer {
 		background: none !important;
 	}
 }
