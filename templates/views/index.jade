@@ -201,12 +201,12 @@ block content
 						if counter%2 == 0
 							.row
 						if noticias[counter]
-							.col-md-2.text-center
+							.col-md-2.col-sm-3.col-xs-3.text-center
 								if noticias[counter].image
 									img.fit(src=noticias[counter]._.image.fit(160,160))
 								else
 									img.img-responsive(src='/images/icon_500x500.svg', width='80', height='80')
-							.col-md-4
+							.col-md-4.col-sm-9.col-xs-9
 								h3.no-margin: = noticias[counter].name
 								if noticias[counter].content.brief
 									p!= noticias[counter].content.brief
@@ -214,6 +214,7 @@ block content
 									p Sem descrição!
 								p.btn.small.orange
 									a(href='blog/post/' + noticias[counter].key) Leia Mais
+								br
 						- counter++
 				else
 					.row
@@ -322,7 +323,7 @@ block content
 									p Sem descrição!
 								p.btn.small.green
 									a(href="agenda?=" + eventos[counterAgenda].id) Mais detalhes
-								p
+								br
 						- counterAgenda++
 			//
 				.row
