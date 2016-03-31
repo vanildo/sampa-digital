@@ -7151,3 +7151,27 @@ td.visible-print {
     display: none !important;
   }
 }
+
+/*RS */
+
+@media (min-width: 1200px) {
+}
+@media (min-width: 990px) and (max-width: 1199px) {
+
+}
+@media (min-width: 768px) and (max-width: 989px) {
+
+}
+@media (min-width: 768px){
+.navbar-fixed-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse {
+    min-width: 420px !important;
+}
+}
+
+@media (min-width: 421px) and (max-width: 767px) {
+}
+@media (max-width: 420px) {
+	.templatemo-footer {
+		background: none !important;
+	}
+}
