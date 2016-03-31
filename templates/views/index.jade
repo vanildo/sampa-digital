@@ -69,12 +69,12 @@ block content
 						while opConter < 4
 							if oportunidades1[opConter]
 								.row
-									.col-md-3
+									.col-md-3.col-sm-3.col-xs-3
 										if oportunidades1[opConter].image
 											img.fit(oportunidades1[opConter].image.fit(160,160))
 										else
-											img.img-responsive(src='/images/icon_500x500.svg', width='80', height='80')
-									.col-md-9
+											img.img-responsive(src='/images/icon_500x500.svg', width='70', height='70')
+									.col-md-9.col-sm-9.col-xs-9
 										h3.no-margin
 											a(href='oportunidades?=' + oportunidades1[opConter].id): = oportunidades1[opConter].nome
 										p 
@@ -98,7 +98,7 @@ block content
 							- opConter++	
 					else
 						.row
-							.col-md-12
+							.col-md-12.col-sm-12.col-xs-12
 								h3.text-center Nenhuma oportunidade cadastrada!
 					br
 					.row.text-center
@@ -119,12 +119,12 @@ block content
 						while vendCont < 4
 							if oportunidades2[vendCont]
 								.row
-									.col-md-3
+									.col-md-3.col-sm-3.col-xs-3
 										if oportunidades2[vendCont].image
 											img.fit(oportunidades2[vendCont].image.fit(160,160))
 										else
-											img(src='/images/icon_500x500.svg', width='80', height='80').img-responsive
-									.col-md-9
+											img(src='/images/icon_500x500.svg', width='70', height='70').img-responsive
+									.col-md-9.col-sm-9.col-xs-9
 										h3.no-margin
 											a(href='oportunidades?=' + oportunidades2[vendCont].id): = oportunidades2[vendCont].nome
 										p 
