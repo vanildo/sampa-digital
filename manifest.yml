@@ -7,4 +7,4 @@ applications:
   host: sampa-digital
   disk_quota: 512M
 #  services:
-#  - MongoAdeSampa
+#  - MongoAdeSampa 
