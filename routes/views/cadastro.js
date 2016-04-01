@@ -108,7 +108,7 @@ function fieldValidator(value){
         value.cpf == "77777777777" || 
         value.cpf == "88888888888" || 
         value.cpf == "99999999999")
-            cpf = false;       
+        cpf = false;       
 
     add = 0;    
     for (i=0; i < 9; i ++){
