@@ -341,7 +341,7 @@ img {
 }
 
 .img-responsive {
-  display: block;
+  display: table-cell;
   height: auto;
   max-width: 100%;
 }
@@ -7177,6 +7177,7 @@ td.visible-print {
 @media (max-width: 420px) {
 	#navbar-collapse{
 		display:block !important;	
+		float:left !important;
 	}
 	.footer {
 		background: none !important;
