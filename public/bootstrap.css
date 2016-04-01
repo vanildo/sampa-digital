@@ -7170,9 +7170,21 @@ td.visible-print {
 }
 
 @media (min-width: 421px) and (max-width: 767px) {
+	#navbar-collapse{
+		display:block !important;	
+	}
 }
 @media (max-width: 420px) {
-	.templatemo-footer {
+	#navbar-collapse{
+		display:block !important;	
+	}
+	.footer {
 		background: none !important;
+	}
+	.leadspace {
+		max-height:300px !important;
+	}
+	.sponsor {
+		display:none !important;	
 	}
 }
