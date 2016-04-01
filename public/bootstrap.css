@@ -7188,3 +7188,9 @@ td.visible-print {
 		display:none !important;	
 	}
 }
+
+@media (max-width: 768px) {
+.navbar-fixed-top, .navbar-fixed-bottom {
+    position: absolute !important;
+}
+}
