@@ -7187,6 +7187,9 @@ td.visible-print {
 	.sponsor {
 		display:none !important;	
 	}
+	h2 {
+    	font-size: 30px !important;
+	}
 }
 
 @media (max-width: 768px) {

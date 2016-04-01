@@ -105,6 +105,8 @@ block content
 						.col-xs-12.col-md-6
 							p.btn.green
 								a(href="oportunidades?comprar") [+] Oportunidades...
+							br
+							br
 						.col-xs-12.col-md-6
 							p.btn.green
 								a(href="pessoa?comprar") Anuncie como Comprador
@@ -157,6 +159,7 @@ block content
 							p.btn.purple
 								a(href="oportunidades?vender") [+] Oportunidades...
 							br
+							br
 						.col-xs-12.col-md-6
 							p.btn.purple
 								a(href="pessoa?vender") Anuncie como Vendedor						
@@ -202,12 +205,12 @@ block content
 						if counter%2 == 0
 							.row
 						if noticias[counter]
-							.col-md-2.col-sm-3.col-xs-3.text-center
+							.col-md-2.col-sm-3.col-xs-4.text-center
 								if noticias[counter].image
 									img.fit(src=noticias[counter]._.image.fit(160,160))
 								else
 									img.img-responsive(src='/images/icon_500x500.svg', width='80', height='80')
-							.col-md-4.col-sm-9.col-xs-9
+							.col-md-4.col-sm-9.col-xs-8
 								h3.no-margin: = noticias[counter].name
 								if noticias[counter].content.brief
 									p!= noticias[counter].content.brief
