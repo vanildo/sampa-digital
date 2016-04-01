@@ -23,9 +23,9 @@ block content
 						p.orange Publicado em: 
 							if post.publishedDate
 								time(datetime=post.publishedDate)=post._.publishedDate.format('DD')
-								|  de 
-								time(datetime=post.publishedDate)=post._.publishedDate.format('MMMM')
-								|  de 
+								| /
+								time(datetime=post.publishedDate)=post._.publishedDate.format('MM')
+								| /
 								time(datetime=post.publishedDate)=post._.publishedDate.format('YYYY')
 						
 						

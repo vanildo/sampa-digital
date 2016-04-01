@@ -12,7 +12,7 @@ mixin post(post)
 				p Publicado em:
 					if post.publishedDate
 							span.orange 
-								| #{post._.publishedDate.format('DD')} de #{post._.publishedDate.format('MMMM')} de #{post._.publishedDate.format('YYYY')}
+								| #{post._.publishedDate.format('DD')} / #{post._.publishedDate.format('MM')} / #{post._.publishedDate.format('YYYY')}
 					if post.categories && post.categories.length
 						|  
 						each cat, i in post.categories
