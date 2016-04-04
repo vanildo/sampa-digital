@@ -33,12 +33,12 @@ block content
 				if eventos.length
 					each evento in eventos
 						.row
-							.col-md-2.text-center
+							.col-md-2.col-sm-2.col-xs-2.text-center
 								if evento.image.public_id
 									img(src=evento._.image.fit(140,140)).img-responsive
 								else
 									img.img-responsive(src='/images/icon_500x500.svg', width='120', height='120')
-							.col-md-10
+							.col-md-10.col-sm-10.col-xs-10
 								h3.no-margin: = evento.name
 								if evento.content.brief
 									p!= evento.content.brief
