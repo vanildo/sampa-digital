@@ -817,7 +817,23 @@ ul.templatemo-project-gallery  li  a img:hover {
 @media (min-width: 768px) and (max-width: 989px) {
 
 }
+@media (max-width: 768px) {
+	.navbar-fixed-top, .navbar-fixed-bottom {
+		position: absolute !important;
+	}
+}
+@media (min-width: 768px){
+	.navbar-fixed-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse {
+		min-width: 420px !important;
+	}
+}
 @media (min-width: 421px) and (max-width: 767px) {
+	#navbar-collapse{
+		display:block !important;	
+	}
+	.navbar-header button {
+		display:none !important;
+	}
 }
 @media (max-width: 420px) {
 	.templatemo-footer {
@@ -829,4 +845,22 @@ ul.templatemo-project-gallery  li  a img:hover {
 	.navbar-header button {
 		display:none !important;
 	}
+	#navbar-collapse{
+		display:block !important;	
+		float:left !important;
+	}
+	.footer {
+		background: none !important;
+	}
+	.leadspace {
+		max-height:300px !important;
+	}
+	.sponsor {
+		display:none !important;	
+	}
+	h2 {
+    	font-size: 30px !important;
+	}
 }
+
+
