@@ -810,6 +810,12 @@ ul.templatemo-project-gallery  li  a img:hover {
 }
 
 @media (min-width: 1200px) {
+	body {
+		padding-top:0px !important;
+	}
+	.navbar {
+		min-height:150px !important;
+	}
 }
 @media (min-width: 990px) and (max-width: 1199px) {
 
