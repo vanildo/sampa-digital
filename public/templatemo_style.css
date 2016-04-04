@@ -823,4 +823,10 @@ ul.templatemo-project-gallery  li  a img:hover {
 	.templatemo-footer {
 		background: none;
 	}
+	.navbar-fixed-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse {
+		min-width: 200px !important;
+	}
+	.navbar-header button {
+		display:none !important;
+	}
 }
