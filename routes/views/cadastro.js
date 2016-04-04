@@ -88,56 +88,69 @@ function fieldValidator(value){
 	var result = {};
 	
 //Valida Nome Fatasia
-	if(value.nomeFantasia.lenght == "") {nomeFantasia = false;};
+	if(value.Razao){
+		console.log("Foi 2");
+		if(value.Razao.length == "") {nomeFantasia = false; console.log("Nome Fantasia Failed")};		
+	};
+	
 	
 // Valida Telefone
-	value.telefone = value.telefone.replace(/\D+/g,''); 
-	if(value.telefone.length != 10 && value.telefone.length != 11 && value.telefone.lenght != "") {telefone = false;};
-	
+	if(value.telefone){
+		console.log("Foi");
+		value.telefone = value.telefone.replace(/\D+/g,'');	
+		if(value.telefone.length != 10 && value.telefone.length != 11 && value.telefone.length != "") {telefone = false; console.log("Telefone Failed")};
+	};
 // Valida CPF 
-	value.cpf = value.cpf.replace(/[^\d]+/g,'');    
-    if(value.cpf == '') cpf = false;    
-    if (value.cpf.length != 11 || 
-        value.cpf == "00000000000" || 
-        value.cpf == "11111111111" || 
-        value.cpf == "22222222222" || 
-        value.cpf == "33333333333" || 
-        value.cpf == "44444444444" || 
-        value.cpf == "55555555555" || 
-        value.cpf == "66666666666" || 
-        value.cpf == "77777777777" || 
-        value.cpf == "88888888888" || 
-        value.cpf == "99999999999")
-        cpf = false;       
+	if(value.cpf){
+		console.log("Foi 3");
+		value.cpf = value.cpf.replace(/[^\d]+/g,'');    
+		if(value.cpf == '') {cpf = false; console.log("CPF Failed")}   
+		if (value.cpf.length != 11 || 
+			value.cpf == "00000000000" || 
+			value.cpf == "11111111111" || 
+			value.cpf == "22222222222" || 
+			value.cpf == "33333333333" || 
+			value.cpf == "44444444444" || 
+			value.cpf == "55555555555" || 
+			value.cpf == "66666666666" || 
+			value.cpf == "77777777777" || 
+			value.cpf == "88888888888" || 
+			value.cpf == "99999999999")
+			{cpf = false; console.log("CPF Failed")}      
 
-    add = 0;    
-    for (i=0; i < 9; i ++){
-        add += parseInt(value.cpf.charAt(i)) * (10 - i);
+		add = 0;    
+		for (i=0; i < 9; i ++){
+			add += parseInt(value.cpf.charAt(i)) * (10 - i);
+		};
+			rev = 11 - (add % 11);
+			if (rev == 10 || rev == 11){ rev = 0; };
+			if (rev != parseInt(value.cpf.charAt(9))){ cpf = false; console.log("CPF Failed")};
+
+		add = 0;
+		for (i = 0; i < 10; i ++){
+			add += parseInt(value.cpf.charAt(i)) * (11 - i);
+		};
+		rev = 11 - (add % 11);
+		if (rev == 10 || rev == 11) { rev = 0;};
+		if (rev != parseInt(value.cpf.charAt(10))){ cpf = false; console.log("CPF Failed")};
 	};
-        rev = 11 - (add % 11);
-        if (rev == 10 || rev == 11){ rev = 0; };
-        if (rev != parseInt(value.cpf.charAt(9))){ cpf = false; };
-
-    add = 0;
-    for (i = 0; i < 10; i ++){
-        add += parseInt(value.cpf.charAt(i)) * (11 - i);
-	};
-    rev = 11 - (add % 11);
-    if (rev == 10 || rev == 11) { rev = 0;};
-    if (rev != parseInt(value.cpf.charAt(10))){ cpf = false; };
-
 
 //Valida CEP - Se contem apenas 8 numeros
-	value["endereco.postcode"] = value["endereco.postcode"].replace(/\D+/g,''); 
-	if(value["endereco.postcode"].length != 8 || isNaN(value["endereco.postcode"])) {postcode = false;};
-	
+	if(value["endereco.postcode"]){
+		console.log("Foi 3");
+		value["endereco.postcode"] = value["endereco.postcode"].replace(/\D+/g,''); 
+		if(value["endereco.postcode"].length != 8 || isNaN(value["endereco.postcode"])) {postcode = false; console.log("CEP Failed")};
+	};
 //Valida numero de endereco - Se contem apenas numeros no campo
-	if(isNaN(value["endereco.number"])){enderecoNumber = false};
-	
+	if(value["endereco.number"]){
+		if(isNaN(value["endereco.number"])){enderecoNumber = false; console.log("Endereco Failed")};
+	}
 //Valida email
-	var filter = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-	if(!filter.test(value.email)){email = false;};
-
+	if(value.email){
+		console.log("Foi 4");
+		var filter = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+		if(!filter.test(value.email)){email = false; console.log("Email Failed")};
+	}else{email = false; console.log("Email Failed")};
 	
 //Return results of the checks
 	result = {
@@ -207,6 +220,7 @@ exports = module.exports = function (req, res) {
 					next(err);
 				});
 			}else{
+				console.log("CNPJ Failed");
 				next();
 			}
         } else {
