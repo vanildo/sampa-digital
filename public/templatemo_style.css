@@ -818,7 +818,10 @@ ul.templatemo-project-gallery  li  a img:hover {
 
 }
 @media (min-width: 768px) and (max-width: 989px) {
-
+ .navbar > .container .navbar-brand {
+    margin-left: -15px;
+	margin-top: -5px;
+  }
 }
 @media (max-width: 768px) {
 	.navbar-fixed-top, .navbar-fixed-bottom {
@@ -831,6 +834,10 @@ ul.templatemo-project-gallery  li  a img:hover {
 	}
 	body {
 		padding-top:150px !important;
+	}
+	.navbar > .container .navbar-brand {
+		margin-left: -15px;
+		margin-top: 15px;
 	}
 }
 @media (min-width: 421px) and (max-width: 767px) {
