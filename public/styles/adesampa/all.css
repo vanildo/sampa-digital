@@ -223,8 +223,13 @@ img.fit {
 }
 
 .bg-pb{
-  background-image: url("/images/templatemo_content_light_bg.png");
+  /*background-image: url("/images/templatemo_content_light_bg.png");
   background-size: cover;
+  */
+  
+  background-image: url("/images/templatemo_content_light_bg.png");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
 }
 /* TERMOS DE USO */
 .scroll-container{
