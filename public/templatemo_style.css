@@ -814,14 +814,17 @@ ul.templatemo-project-gallery  li  a img:hover {
 		min-height:150px !important;
 	}
 }
-@media (min-width: 990px) and (max-width: 1199px) {
-
+@media (min-width: 990px){
+	.navbar > .container .navbar-brand {
+		margin-left: -15px !important;
+		margin-top: 15px !important;
+	}
 }
 @media (min-width: 768px) and (max-width: 989px) {
- .navbar > .container .navbar-brand {
-    margin-left: -15px;
-	margin-top: -5px;
-  }
+	.navbar > .container .navbar-brand {
+		margin-left: -15px !important;
+		margin-top: -5px !important;
+	}
 }
 @media (max-width: 768px) {
 	.navbar-fixed-top, .navbar-fixed-bottom {
@@ -835,10 +838,7 @@ ul.templatemo-project-gallery  li  a img:hover {
 	body {
 		padding-top:150px !important;
 	}
-	.navbar > .container .navbar-brand {
-		margin-left: -15px;
-		margin-top: 15px;
-	}
+	
 }
 @media (min-width: 421px) and (max-width: 767px) {
 	#navbar-collapse{
@@ -850,7 +850,7 @@ ul.templatemo-project-gallery  li  a img:hover {
 }
 @media (max-width: 420px) {
 	.templatemo-footer {
-		background: none;
+		background: none !important;
 	}
 	.navbar-fixed-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse {
 		min-width: 200px !important;
