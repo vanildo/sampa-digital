@@ -3,7 +3,8 @@ mixin post(post)
 		.row
 			.col-md-2.text-center
 				if post.image.exists
-					img.fit(src=post._.image.fit(160,160))
+					//img.fit(src=post._.image.fit(160,160))
+					img.img.responsive(src=post._.image)
 				else
 					img.img-responsive(src='/images/icon_500x500.svg' , width='80', height='80')
 			.col-md-10
@@ -12,7 +13,7 @@ mixin post(post)
 				p Publicado em:
 					if post.publishedDate
 							span.orange 
-								| #{post._.publishedDate.format('DD')} / #{post._.publishedDate.format('MM')} / #{post._.publishedDate.format('YYYY')}
+								| #{post._.publishedDate.format('DD')}/#{post._.publishedDate.format('MM')}/#{post._.publishedDate.format('YYYY')}
 					if post.categories && post.categories.length
 						|  
 						each cat, i in post.categories

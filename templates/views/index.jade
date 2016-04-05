@@ -87,7 +87,7 @@ block content
 											| &nbsp;| Publicado em:
 											if oportunidades1[opConter].createdAt
 													span.orange 
-														| #{oportunidades1[opConter]._.createdAt.format('DD')} de #{oportunidades1[opConter]._.createdAt.format('MMMM')} de #{oportunidades1[opConter]._.createdAt.format('YYYY')}
+														| #{oportunidades1[opConter]._.createdAt.format('DD')}/#{oportunidades1[opConter]._.createdAt.format('MM')}/#{oportunidades1[opConter]._.createdAt.format('YYYY')}
 											else
 													span.orange 
 														| sem data
@@ -139,7 +139,7 @@ block content
 											| &nbsp;| Publicado em:
 											if oportunidades2[vendCont].createdAt
 													span.orange 
-														| #{oportunidades2[vendCont]._.createdAt.format('DD')} de #{oportunidades2[vendCont]._.createdAt.format('MMMM')} de #{oportunidades2[vendCont]._.createdAt.format('YYYY')}
+														| #{oportunidades2[vendCont]._.createdAt.format('DD')}/#{oportunidades2[vendCont]._.createdAt.format('MM')}/#{oportunidades2[vendCont]._.createdAt.format('YYYY')}
 											else
 													span.orange 
 														| sem data
