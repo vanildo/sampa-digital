@@ -9,26 +9,27 @@ block content
 			h2 Notícia inválida...
 			p Por favor, verifique a URL. 
 	else
-		.container
-			.row
-				.col-md-12
-					ul.breadcrumbs
-						li
-							a(href="/") Início
-						li
-							a(href="/blog") &nbsp;Notícias
-				article
-					header
-						h2.orange= post.title
-						p.orange Publicado em: 
-							if post.publishedDate
-								time(datetime=post.publishedDate)=post._.publishedDate.format('DD')
-								| /
-								time(datetime=post.publishedDate)=post._.publishedDate.format('MM')
-								| /
-								time(datetime=post.publishedDate)=post._.publishedDate.format('YYYY')
-						
-						
-						if post.image.exists
-							img(src=post._.image.fit(300)).img-responsive
-						!= post.content.full
+		.bg-pb
+			.container
+				.row
+					.col-md-12
+						ul.breadcrumbs
+							li
+								a(href="/") Início
+							li
+								a(href="/blog") &nbsp;Notícias
+					article
+						header
+							h2.orange= post.title
+							p.orange Publicado em: 
+								if post.publishedDate
+									time(datetime=post.publishedDate)=post._.publishedDate.format('DD')
+									| /
+									time(datetime=post.publishedDate)=post._.publishedDate.format('MM')
+									| /
+									time(datetime=post.publishedDate)=post._.publishedDate.format('YYYY')
+							
+							
+							if post.image.exists
+								img(src=post._.image.fit(300)).img-responsive
+							!= post.content.full
