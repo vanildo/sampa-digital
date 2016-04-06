@@ -57,7 +57,7 @@ block content
 						h3.no-top-margin
 							if umEvento[0].dataInicio
 								span
-									|de #{umEvento[0].dataInicio} ate #{umEvento[0].dataFim}
+									|De #{umEvento[0].dataInicio} Até #{umEvento[0].dataFim}
 							else
 								span
 									| sem data!
@@ -68,8 +68,9 @@ block content
 
 					.col-md-12
 						if umEvento[0].image
-							img(src=umEvento[0]._.image.fit(550,300)).img-responsive
-							!= umEvento[0].content.extended
+							p
+								img(src=umEvento[0]._.image.fit(550,300), align="left").img-responsive
+								!= umEvento[0].content.extended
 
 	else
 		.bg-pb

@@ -11,7 +11,7 @@ body, html { overflow-x:hidden; }
 body {
     background-color: #ffffff;
     font-family:  'Gotham_Book', Arial, Helvetice Neue, sans-serif;
-    font-size: 12px;
+    font-size: 14px;
 	
 	font-weight: 300; 
 	font-style: normal; 
@@ -842,11 +842,19 @@ ul.templatemo-project-gallery  li  a img:hover {
 }
 @media (min-width: 421px) and (max-width: 767px) {
 	#navbar-collapse{
-		display:block !important;	
+		display:block !important;
+		float:left !important;
 	}
 	.navbar-header button {
 		display:none !important;
 	}
+	.leadspace {
+		max-height:250px !important;
+	}
+	.sponsor {
+		display:none !important;	
+	}
+	
 }
 @media (max-width: 420px) {
 	.templatemo-footer {
