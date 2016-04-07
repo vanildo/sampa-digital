@@ -228,8 +228,9 @@ img.fit {
   */
   
   background-image: url("/images/templatemo_content_light_bg.png");
-  background-position: 50% 50%;
+  background-position: 50% 0%;
   background-repeat: no-repeat;
+  padding: 20px;
 }
 /* TERMOS DE USO */
 .scroll-container{
