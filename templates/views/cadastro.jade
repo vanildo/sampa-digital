@@ -8,48 +8,52 @@ block content
 					h1.green Sua solicitação de cadastro foi concluida!
 					h3.green Aguarde,  em breve voce receberá um email com instruções de como proceder. 
 	else if cadastroCnpj
-		if empresaExistente
-			.container
-				.row
-					.col-md-12.text-center
-						h1.green CNPJ já está cadastrado em nosso sistema!
-		else 
-			.container
-				.row
-					.col-md-12.text-center
-						h2.orange Nova Empresa por aqui?
-						p
-							i 
-								strong Comprador ou Vendedor:
-								|  Fique por dentro do que movimenta São Paulo
-				.row
-					.col-md-12.rule-bottom.text-center
-						h3 Cadastro Instituição
-				.row
-					.col-md-12
-						p#cadastro-instituicao-1-error.red
-				.row
-					.col-sm-8
-						form(method='post').form-horizontal#cadastro-instituicao-1
-							input(type='hidden', name='action', value='isCnpj').
-							.row
-								.col-xm-12.col-md-7
-									.col-xm-12.col-md-6
-										.form-group(class=validationErrors.empresaType ? 'has-error' : null required)
-											label.sr-only.col-sm-2.control-label.sr-only Tipo de Instituição 
-											select(name='empresaType' required x-moz-errormessage="Por favor selecione um tipo de Instituição.").form-control
-												option(value='') Tipo de Instituição
-												each tipo in empresaTypes
-													option(value=tipo.value selected=formData.empresaType === tipo.value)= tipo.label
-									.col-xm-12.col-md-5.col-md-offset-1
-										.form-group
-											label.sr-only.col-sm-2.control-label.sr-only CNPJ
-											input(type='text' name='cnpj' required x-moz-errormessage="Por favor preencha com um CNPJ válido." placeholder='CNPJ').form-control
-							
-							.row
-								.col-md-12.text-center
-									button(type='button', onclick="validarCadastro();").btn.green.small Enviar
-
+		.container
+			.row
+				.col-md-12.text-center
+					h2.orange Nova Empresa por aqui?
+					p
+						i 
+							strong Comprador ou Vendedor:
+							|  Fique por dentro do que movimenta São Paulo
+			.row
+				.col-md-12.rule-bottom.text-center
+					h3 Cadastro Instituição
+			.row
+				.col-md-12
+					p#cadastro-instituicao-1-error.red
+						if !empresaExistente
+							| CNPJ já está cadastrado em nosso sistema!
+						if !tipoEmpresa
+							| *Por favor, seleciona um Tipo de Empresa.
+						if !cnpjCheck
+							| *Por favor, use um CNPJ válido.
+					p=empresaExistente
+					p=tipoEmpresa
+					p=cnpjCheck
+						
+			.row
+				.col-sm-8
+					form(method='post').form-horizontal#cadastro-instituicao-1
+						input(type='hidden', name='action', value='isCnpj').
+						.row
+							.col-xm-12.col-md-7
+								.col-xm-12.col-md-6
+									.form-group(class=validationErrors.empresaType ? 'has-error' : null required)
+										label.sr-only.col-sm-2.control-label.sr-only Tipo de Instituição 
+										select(name='empresaType').form-control
+											option(value='') Tipo de Instituição
+											each tipo in empresaTypes
+												option(value=tipo.value selected=formData.empresaType === tipo.value)= tipo.label
+								.col-xm-12.col-md-5.col-md-offset-1
+									.form-group
+										label.sr-only.col-sm-2.control-label.sr-only CNPJ
+										input(type='text' name='cnpj' placeholder='CNPJ').form-control
+						
+						.row
+							.col-md-12.text-center
+								//button(type='button', onclick="validarCadastro();").btn.green.small Enviar
+								button(type='submit').btn.green.small Enviar
 	else if cadastroInstituicao
 		.container
 			.row
@@ -180,7 +184,7 @@ block content
 
 block page-js
 	//validation
-	script(src='/js/adesampa/validarCadastro.js')
+	//script(src='/js/adesampa/validarCadastro.js')
 	
 	script.
 		function longlatcad() {
