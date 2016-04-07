@@ -1,0 +1,31 @@
+extends ../layouts/default
+
+
+block content
+	if (usuarioSubmitted == true)
+		.container
+			.row
+				.col-md-12.text-center
+					h1.green Ola, sua senha foi alterado com sucesso!
+	else	
+		.container
+			.row
+				.col-md-12.text-center
+					h2.orange Mudança de Senha
+			.row
+				.col-sm-8
+					form(method='post').form-horizontal
+							input(type='hidden', name='action', value='update')
+							.row.no-bottom-margin
+								.col-xm-12.col-md-7
+									.col-md-12
+										.form-group
+											label.col-sm-4.text-left.padding-0 Senha Atual
+											input(type='password' name='senha' required x-moz-errormessage="Por favor preencha com um email válido." placeholder='Senha Atual').form-control
+										.form-group
+											label.col-sm-4.text-left.padding-0 Nova Senha
+											input(type='password' name='nSenha' required x-moz-errormessage="Por favor preencha com um email válido." placeholder='Nova Senha').form-control
+							.row
+								.col-md-12.text-center
+									.form-group
+										button(type='submit').btn.green.small Enviar
