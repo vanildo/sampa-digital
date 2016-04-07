@@ -1,6 +1,6 @@
 var keystone = require('keystone');
 var Empresa = keystone.list('Empresa');
-var CNAE = keystone.list('CNAE');
+// var CNAE = keystone.list('CNAE');
 var Oportunidade = keystone.list('Oportunidade');
 var Usuario = keystone.list('Usuario');
 var crypto = require('crypto');
@@ -31,8 +31,8 @@ exports = module.exports = function (req, res) {
     locals.cadastroCnpj = true;
     locals.empresaExistente = false;
     locals.empresaTypes = Empresa.fields.empresaType.ops;
-    locals.empresaType;
-    locals.cnpj;
+    locals.empresaType = null;
+    locals.cnpj = null;
     locals.cadastroInstituicao = true;
     locals.googlekey = keystone.get('google api key');
 	locals.emailBlock = false;
@@ -46,7 +46,7 @@ exports = module.exports = function (req, res) {
         });
     });
 
-    // Load the current cnpj 
+    // Load the current cnpj
     view.on('post', {action: 'isCnpj'}, function (next) {
         locals.cnpj = req.body.cnpj;
         locals.empresaType = req.body.empresaType;
@@ -89,8 +89,8 @@ exports = module.exports = function (req, res) {
         var updaterE = empresa.getUpdateHandler(req);
         var emailConfigs;
         var emailConfig = EmailConfig.model.findOne().where('isAtivo', true);
-		
-		
+
+
 		///email validation
 		var emailVali = Usuario.model.findOne().where('email', req.body.email);
 		emailVali.exec(function (err, email) {
@@ -99,7 +99,7 @@ exports = module.exports = function (req, res) {
 				locals.cadastroCnpj = false;
 				locals.emailBlock = true;
 				next();
-				
+
 			}else{
 				emailConfig.exec(function (err, results) {
 					if (results) {
@@ -113,7 +113,7 @@ exports = module.exports = function (req, res) {
 						if (err) {
 							locals.validationErrors = err.errors;
 						} else {
-							console.log("Cadastrado cpf: " + req.body.cpf);
+							console.log('Cadastrado cpf: ' + req.body.cpf);
 							locals.pessoaSubmitted = true;
 							locals.cadastroResponsavel = true;
 							locals.pessoa = pessoa;
@@ -130,7 +130,7 @@ exports = module.exports = function (req, res) {
 									locals.cadastroInstituicao = false;
 									empresa.endereco.geo = [req.body.longitude, req.body.latitude];
 									empresa.save();
-									console.log("Cadastrado cnpj: " + req.body.cnpj);
+									console.log('Cadastrado cnpj: ' + req.body.cnpj);
 								}
 								if (locals.empresaSubmitted)
 								{
@@ -142,19 +142,19 @@ exports = module.exports = function (req, res) {
 										} else {
 											locals.usuarioSubmitted = true;
 											locals.cadastroUsuario = true;
-											console.log("Cadastrado email: " + req.body.email);
+											console.log('Cadastrado email: ' + req.body.email);
 											if (locals.empresaSubmitted && locals.usuarioSubmitted && locals.pessoaSubmitted) {
 												if (emailConfigs) {
 													var smtps = 'smtps://' + emailConfigs.user + '%40adesampa.com.br:' + emailConfigs.senha + '@smtp.gmail.com';
 													var transporter = nodemailer.createTransport(smtps);
 													var mailOptions = {
-														from: emailConfigs.from, // sender address//      
-														subject: emailConfigs.subjectCadastro, // Subject line                                                                        
+														from: emailConfigs.from, // sender address//
+														subject: emailConfigs.subjectCadastro, // Subject line
 														html: '<b>' + '<p>' + emailConfigs.saudacao + '</p> <p>' + emailConfigs.corpoCadastro + req.body.cnpj + '</p>' + '</b>' // html body
 													};
 													EmailsAdeSampa.model.find({}, function (err, docs) {
 														var emails = [];
-														for (i = 0; i < docs.length; i++) {
+														for (var i = 0; i < docs.length; i++) {
 															emails[i] = docs[i].email;
 														}
 														mailOptions.to = emails;
@@ -170,9 +170,11 @@ exports = module.exports = function (req, res) {
 													});
 												} else {
 													//fila de email nao enviado
+                          //TODO: tratamento de erro aqui
 												}
 											} else {
 												//houve algum erro no cadastro
+                        //TODO: tratamento de erro aqui
 											}
 										}
 										next();
@@ -190,4 +192,4 @@ exports = module.exports = function (req, res) {
 		});
     });
     view.render('cadastro');
-}
+};
