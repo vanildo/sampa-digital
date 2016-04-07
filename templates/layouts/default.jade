@@ -17,6 +17,8 @@ html
 		link(href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700', rel='stylesheet')
 		link(href="/styles/themes/Flatly.min.css", rel="stylesheet")
 		
+		link(href="/bootstrap.css", rel="stylesheet")
+		link(href="/templatemo_style.css", rel="stylesheet")
 		link(href="/styles/adesampa/all.css", rel="stylesheet")
 		link(href="/styles/adesampa/nav.css", rel="stylesheet")
 		link(href="/styles/adesampa/carousel.css", rel="stylesheet")
@@ -31,7 +33,7 @@ html
 		block head
 	body
 		nav.navbar.navbar-fixed-top
-			.top.hidden-xs
+			.top
 				.container
 					.row
 						.col-md-10
@@ -56,18 +58,18 @@ html
 									li: a(href='/cadastro') Cadastre-se aqui
 			.container.main
 				.row
-					.col-md-5
+					.col-md-8.col-sm-6.col-xs-12
 						.navbar-header
-							button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar-collapse', aria-expanded='false')
-								span.sr-only Toggle navigation
-								span.icon-bar
-								span.icon-bar
-								span.icon-bar
+							//button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar-collapse', aria-expanded='false')
+								//span.sr-only Toggle navigation
+								//span.icon-bar
+								//span.icon-bar
+								//span.icon-bar
 							a.navbar-brand(href='/')
-								img(src="/images/templatemo_logo.png", alt="AdeSapma Digital")
-					.col-md-offset-2.col-md-5
+								img.img-responsive(src="/images/templatemo_logo.png", alt="Sampa.Digital", width="350")
+					.col-md-4.col-sm-6.col-xs-12
 						.sponsor
-							img(src="/images/topsponsors2.png", alt="IBM e Prefeitura de São Paulo")
+							img.img-responsive(src="/images/topsponsors2.png", alt="IBM e Prefeitura de São Paulo")
 						.collapse.navbar-collapse#navbar-collapse
 							ul.nav.navbar-nav.navbar-left
 								each link in navLinks
@@ -103,10 +105,12 @@ html
 							a(href="https://www.youtube.com/user/prefeiturasaopaulo")
 								span.social-icon-yt													
 				.row
-					img(src="/images/topsponsors_bottom.png", alt="ADESAMPA. Agencia São Paulo de Desenvolvimento. Em cooperação, Prefeitura de São PAulo. Desenvolvimento, trabalho e empreendedorismo")
+					ul.list-inline
+						li
+							img.img-responsive(src="/images/topsponsors_bottom.png", alt="ADESAMPA. Agência São Paulo de Desenvolvimento. Em cooperação, Prefeitura de São Paulo. Desenvolvimento, trabalho e empreendedorismo")
 				.row
 					p Adesampa © Todos os Direitos Reservados, 2016
-			img.right-align.bluemix(src="/images/bluemix.png", alt="Desenvolvido com Bluemix")
+			//img.right-align.bluemix(src="/images/bluemix.png", alt="Desenvolvido com Bluemix")
 		//- footer
 		script.
 			!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');

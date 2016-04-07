@@ -3,7 +3,7 @@ extends ../layouts/default
 block content	
 	.row#leadspace
 		.col-xs-12.col-md-12.text-center
-			h2.upp Venha fazer parte do Sampa.digital.
+			h2.upp Venha fazer parte do Sampa.digital
 			p.btn.purple
 				a(href="cadastro") Cadastre-se aqui
 	//Carrossel desativado
@@ -63,18 +63,18 @@ block content
 							i Para você que deseja comprar ou vender		
 			.row
 				.col-xs-12.col-md-6
-					img(src="/images/querocomprar.png", alt="Quero Comprar")
+					img.img-responsive(src="/images/querocomprar.png", alt="Quero Comprar")
 					if oportunidades1.length
 						- oportunidades1.reverse()
 						while opConter < 4
 							if oportunidades1[opConter]
 								.row
-									.col-md-3
+									.col-md-3.col-sm-3.col-xs-3
 										if oportunidades1[opConter].image
 											img.fit(oportunidades1[opConter].image.fit(160,160))
 										else
-											img.img-responsive(src='/images/icon_500x500.svg', width='80', height='80')
-									.col-md-9
+											img.img-responsive(src='/images/icon_500x500.svg', width='70', height='70')
+									.col-md-9.col-sm-9.col-xs-9
 										h3.no-margin
 											a(href='oportunidades?=' + oportunidades1[opConter].id): = oportunidades1[opConter].nome
 										p 
@@ -87,7 +87,7 @@ block content
 											| &nbsp;| Publicado em:
 											if oportunidades1[opConter].createdAt
 													span.orange 
-														| #{oportunidades1[opConter]._.createdAt.format('DD')} de #{oportunidades1[opConter]._.createdAt.format('MMMM')} de #{oportunidades1[opConter]._.createdAt.format('YYYY')}
+														| #{oportunidades1[opConter]._.createdAt.format('DD')}/#{oportunidades1[opConter]._.createdAt.format('MM')}/#{oportunidades1[opConter]._.createdAt.format('YYYY')}
 											else
 													span.orange 
 														| sem data
@@ -98,13 +98,15 @@ block content
 							- opConter++	
 					else
 						.row
-							.col-md-12
+							.col-md-12.col-sm-12.col-xs-12
 								h3.text-center Nenhuma oportunidade cadastrada!
 					br
 					.row.text-center
 						.col-xs-12.col-md-6
 							p.btn.green
 								a(href="oportunidades?comprar") [+] Oportunidades...
+							br
+							br
 						.col-xs-12.col-md-6
 							p.btn.green
 								a(href="pessoa?comprar") Anuncie como Comprador
@@ -112,19 +114,19 @@ block content
 					br
 					br
 				.col-xs-12.col-md-6
-					img(src="/images/querovender.png", alt="Quero Vender")
+					img.img-responsive(src="/images/querovender.png", alt="Quero Vender")
 					- oportunidades2.reverse()
 					if oportunidades2.length
 						- var vendCont = 0
 						while vendCont < 4
 							if oportunidades2[vendCont]
 								.row
-									.col-md-3
+									.col-md-3.col-sm-3.col-xs-3
 										if oportunidades2[vendCont].image
 											img.fit(oportunidades2[vendCont].image.fit(160,160))
 										else
-											img(src='/images/icon_500x500.svg', width='80', height='80').img-responsive
-									.col-md-9
+											img(src='/images/icon_500x500.svg', width='70', height='70').img-responsive
+									.col-md-9.col-sm-9.col-xs-9
 										h3.no-margin
 											a(href='oportunidades?=' + oportunidades2[vendCont].id): = oportunidades2[vendCont].nome
 										p 
@@ -137,7 +139,7 @@ block content
 											| &nbsp;| Publicado em:
 											if oportunidades2[vendCont].createdAt
 													span.orange 
-														| #{oportunidades2[vendCont]._.createdAt.format('DD')} de #{oportunidades2[vendCont]._.createdAt.format('MMMM')} de #{oportunidades2[vendCont]._.createdAt.format('YYYY')}
+														| #{oportunidades2[vendCont]._.createdAt.format('DD')}/#{oportunidades2[vendCont]._.createdAt.format('MM')}/#{oportunidades2[vendCont]._.createdAt.format('YYYY')}
 											else
 													span.orange 
 														| sem data
@@ -156,6 +158,8 @@ block content
 						.col-xs-12.col-md-6
 							p.btn.purple
 								a(href="oportunidades?vender") [+] Oportunidades...
+							br
+							br
 						.col-xs-12.col-md-6
 							p.btn.purple
 								a(href="pessoa?vender") Anuncie como Vendedor						
@@ -164,11 +168,11 @@ block content
 					br
 				.row.text-center
 					.col-md-12
-						img(src="/images/querodesenvolver.png", alt="Quero Desenvolver")
+						img.img-responsive(src="/images/querodesenvolver.png", alt="Quero Desenvolver")
 				.row
-					.col-md-offset-3.col-md-1.text-center
-						img(src="/images/IBM_Bluemix_logo.svg.png", alt="Bluemix logo", width="90")
-					.col-md-5
+					.col-md-offset-3.col-md-1.col-sm-3.col-xs-3.text-center
+						img.img-responsive(src="/images/IBM_Bluemix_logo.svg.png", alt="Bluemix logo", width="90")
+					.col-md-5.col-sm-6.col-xs-9
 						p
 							a.blue(href="/bluemix") Você é um profissional de TI ou uma startup? Tenha acesso às informações que podem ajudar no desenvolvimento do seu aplicativo ou na criação da sua empresa.
 					//
@@ -201,12 +205,12 @@ block content
 						if counter%2 == 0
 							.row
 						if noticias[counter]
-							.col-md-2.text-center
+							.col-md-2.col-sm-3.col-xs-4.text-center
 								if noticias[counter].image
 									img.fit(src=noticias[counter]._.image.fit(160,160))
 								else
 									img.img-responsive(src='/images/icon_500x500.svg', width='80', height='80')
-							.col-md-4
+							.col-md-4.col-sm-9.col-xs-8
 								h3.no-margin: = noticias[counter].name
 								if noticias[counter].content.brief
 									p!= noticias[counter].content.brief
@@ -214,6 +218,8 @@ block content
 									p Sem descrição!
 								p.btn.small.orange
 									a(href='blog/post/' + noticias[counter].key) Leia Mais
+								br
+								br
 						- counter++
 				else
 					.row
@@ -298,12 +304,12 @@ block content
 						if counterAgenda%2 == 0
 							.row
 						if eventos[counterAgenda]
-							.col-md-2.text-center
+							.col-md-2.col-sm-2.col-xs-4.text-center
 								if eventos[counterAgenda].image
 									img.img-responsive(src=eventos[counterAgenda]._.image.fit(116,116))
 								else
 									img.img-responsive(src='/images/icon_500x500.svg', width='80', height='80')
-							.col-md-4
+							.col-md-4.col-sm-4.col-xs-8
 								h3.no-top-margin
 									if eventos[counterAgenda].dataInicio
 										span.orange
@@ -322,6 +328,8 @@ block content
 									p Sem descrição!
 								p.btn.small.green
 									a(href="agenda?=" + eventos[counterAgenda].id) Mais detalhes
+								br
+								br
 						- counterAgenda++
 			//
 				.row
@@ -356,8 +364,6 @@ block content
 							p.btn.small.green
 								a(href="#") Mais detalhes
 			br
-			br
-			br
 			.container.text-center
 				.row
 					.col-md-12
@@ -373,19 +379,19 @@ block content
 				.col-md-12.text-center
 					h2.orange  Tecnologia  
 			.row
-				.col-md-3.text-center
+				.col-md-3.col-sm-3.col-xs-3.text-center
 					a(href="https://www.simbio.com.br/")
-						img(src="/images/simbio.jpg", alt="simbio")
+						img.img-responsive(src="/images/simbio.jpg", alt="simbio")
 						
-				.col-md-3.text-center
+				.col-md-3.col-sm-3.col-xs-3.text-center
 					a(href="http://www.adesampa.com.br/")
-						img(src="/images/vaitec.jpg", alt="VAI TEC")
-				.col-md-3.text-center
+						img.img-responsive(src="/images/vaitec.jpg", alt="VAI TEC")
+				.col-md-3.col-sm-3.col-xs-3.text-center
 					a(href="/bluemix")
-						img(src="/images/bluemix_tec.jpg", alt="IBM Bluemix")
-				.col-md-3.text-center
+						img.img-responsive(src="/images/bluemix_tec.jpg", alt="IBM Bluemix")
+				.col-md-3.col-sm-3.col-xs-3.text-center
 					a(href="http://www.conethics.net/")
-						img(src="/images/partner6.png", alt="Conethics", width='200px', height= '200px')
+						img.img-responsive(src="/images/partner6.png", alt="Conethics", width='200px', height= '200px')
 	
 	.separation-rule
 		.container
@@ -395,13 +401,12 @@ block content
 					p.small.gray
 						i Hub do ecossistema de inovação, tecnologia e empreendedorismo de São Paulo
 			.row
-				.col-md-4.text-center
+				.col-md-4.col-sm-4.col-xs-4.text-center
 					a(href="http://www.ibm.com/br-pt/")
-						img(src="/images/partner1.jpg", alt="IBM")
-				.col-md-4.text-center
+						img.img-responsive(src="/images/partner1.jpg", alt="IBM")
+				.col-md-4.col-sm-4.col-xs-4.text-center
 					a(href="http://www.sebrae.com.br/sites/PortalSebrae?utm_expid=80706426-5.hNGA7s9SR029Hr7RIRj0jw.0&utm_referrer=http%3A%2F%2Fadesampadigital.mybluemix.net%2F")
-						img(src="/images/partner5.jpg", alt="SEBRAE")
-				.col-md-4.text-center
-					a(href="http://ww.integrare.org.br/")
-						img(src="/images/partner4.jpg", alt="integrare")
-						
+						img.img-responsive(src="/images/partner5.jpg", alt="SEBRAE")
+				.col-md-4.col-sm-4.col-xs-4.text-center
+					a(href="http://www.integrare.org.br/")
+						img.img-responsive(src="/images/partner4.jpg", alt="Integrare")

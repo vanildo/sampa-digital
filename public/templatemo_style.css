@@ -281,6 +281,7 @@ h1, h2, h3, h4, h5, h6, span, p { font-family: 'Gotham_Book', Arial, Helvetice N
 
 .navbar {
     margin-bottom: 0px;
+	border-bottom: 1px solid cyan !important;
 }
 
 .templatemo-service-item-header {
@@ -791,15 +792,87 @@ ul.templatemo-project-gallery  li  a img:hover {
 }
 
 
- #apDiv1 {
-	display:block;
-    float: right;
-    height: 72px;
-    margin-right: -123px;
-	margin-top: 106px;
-    position: inherit;
-    right: 1245px;
-    top: 8561px;
-    width: 200px;
-    z-index: 1;
+/* Ricardo started on Mar 29 */
+.navbar-fixed-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse {
+    min-width: 400px !important;
 }
+
+@media (min-width: 1200px) {
+	.navbar {
+		min-height:150px !important;
+	}
+}
+@media (min-width: 990px){
+	.navbar > .container .navbar-brand {
+		margin-left: -15px !important;
+		margin-top: 15px !important;
+	}
+}
+@media (min-width: 768px) and (max-width: 989px) {
+	.navbar > .container .navbar-brand {
+		margin-left: -15px !important;
+		margin-top: -5px !important;
+	}
+}
+@media (max-width: 768px) {
+	.navbar-fixed-top, .navbar-fixed-bottom {
+		position: absolute !important;
+	}
+}
+@media (min-width: 768px){
+	.navbar-fixed-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse {
+		min-width: 420px !important;
+	}
+	body {
+		padding-top:150px !important;
+	}
+	.navbar {
+		min-height:150px !important;
+	}
+	
+}
+@media (min-width: 421px) and (max-width: 767px) {
+	#navbar-collapse{
+		display:block !important;
+		float:left !important;
+	}
+	.navbar-header button {
+		display:none !important;
+	}
+	.leadspace {
+		max-height:250px !important;
+	}
+	.sponsor {
+		display:none !important;	
+	}
+	
+}
+@media (max-width: 420px) {
+	.templatemo-footer {
+		background: none !important;
+	}
+	.navbar-fixed-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse {
+		min-width: 200px !important;
+	}
+	.navbar-header button {
+		display:none !important;
+	}
+	#navbar-collapse{
+		display:block !important;	
+		float:left !important;
+	}
+	.footer {
+		background: none !important;
+	}
+	.leadspace {
+		max-height:250px !important;
+	}
+	.sponsor {
+		display:none !important;	
+	}
+	h2 {
+    	font-size: 30px !important;
+	}
+}
+
+
