@@ -208,19 +208,23 @@ exports = module.exports = function (req, res) {
 		
         if (req.body.cnpj) {
 			locals.cnpjCheck = validarCNPJ(req.body.cnpj)
-			if (locals.cnpjCheck) {
-				Empresa.model.findOne({'cnpj': req.body.cnpj}).exec(function (err, result) {
-					if (result) {
-						locals.cadastroCnpj = true;
-						locals.empresaExistente = true;
-					} else
-					{
-						locals.cadastroCnpj = false;
-					}
-					next(err);
-				});
+			if(locals.empresaType){
+				if (locals.cnpjCheck) {
+					Empresa.model.findOne({'cnpj': req.body.cnpj}).exec(function (err, result) {
+						if (result) {
+							locals.cadastroCnpj = true;
+							locals.empresaExistente = true;
+						} else
+						{
+							locals.cadastroCnpj = false;
+						}
+						next(err);
+					});
+				}else{
+					next();
+				}
 			}else{
-				console.log("CNPJ Failed");
+				local.tipoEmpresa = false;
 				next();
 			}
         } else {

@@ -1,23 +1,33 @@
 extends ../layouts/default
 
-
 block content
 	if (usuarioSubmitted == true)
 		.container
 			.row
 				.col-md-12.text-center
-					h1.green Ola, sua senha foi alterado com sucesso!
-	else	
+					h1.green Senha alterada com sucesso
+	else 
 		.container
 			.row
 				.col-md-12.text-center
-					h2.orange Mudança de Senha
-			.row
-				.col-sm-8
-					form(method='post').form-horizontal
-							input(type='hidden', name='action', value='update')
-							.row.no-bottom-margin
-								.col-xm-12.col-md-7
+					h2.orange Alterar Senha
+			if(senhaAlterada == true)
+				h2.green Senha alterada com sucesso!
+			else
+				.row
+					.col-md-12.text-center
+						p.red#erro_alterar_senha
+							if(missingFields == true)
+								| *Por favor, todos campos são obrigatórios.
+							if(senhasDiferentes == true)
+								| *Campos Nova Senha e Confirmar Nova Senha devem ser iguais.
+							if(igualAtual == true)
+								| *A Nova Senha deve ser diferente da Senha Atual
+				.row
+					.col-xm-offset-1.col-sm-offset-2.col-md-offset-3.col-xm-10.col-sm-8.col-md-6 
+						form(method='post').form-horizontal#alterarSenha
+								input(type='hidden', name='action', value='update')
+								.row.no-bottom-margin
 									.col-md-12
 										.form-group
 											label.col-sm-4.text-left.padding-0 Senha Atual
@@ -25,7 +35,12 @@ block content
 										.form-group
 											label.col-sm-4.text-left.padding-0 Nova Senha
 											input(type='password' name='nSenha' required x-moz-errormessage="Por favor preencha com um email válido." placeholder='Nova Senha').form-control
-							.row
-								.col-md-12.text-center
-									.form-group
-										button(type='submit').btn.green.small Enviar
+										.form-group
+											label.col-sm-4.text-left.padding-0 Confirmar Nova Senha
+											input(type='password' name='nSenhaConfirma' required x-moz-errormessage="Por favor preencha com um email válido." placeholder='Confirmar Nova Senha').form-control
+								.row
+									.col-md-12.text-center
+										.form-group
+											button(type='button', onclick="validaAlterarSenha();").btn.green.small Enviar
+	//validation
+	script(src='/js/adesampa/validarAlterarSenha.js')
