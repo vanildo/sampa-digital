@@ -1,7 +1,7 @@
 extends ../layouts/default
 
 block content
-	if (usuarioSubmitted == true)
+	if (updateSubmmited == true)
 		.container
 			.row
 				.col-md-12.text-center
@@ -23,6 +23,8 @@ block content
 								| *Campos Nova Senha e Confirmar Nova Senha devem ser iguais.
 							if(igualAtual == true)
 								| *A Nova Senha deve ser diferente da Senha Atual
+							if(senhaCorreta == false)
+								| *Senha atual digitada errada
 				.row
 					.col-xm-offset-1.col-sm-offset-2.col-md-offset-3.col-xm-10.col-sm-8.col-md-6 
 						form(method='post').form-horizontal#alterarSenha
@@ -31,16 +33,17 @@ block content
 									.col-md-12
 										.form-group
 											label.col-sm-4.text-left.padding-0 Senha Atual
-											input(type='password' name='senha' required x-moz-errormessage="Por favor preencha com um email válido." placeholder='Senha Atual').form-control
+											input(type='password' name='senha' placeholder='Senha Atual').form-control
 										.form-group
 											label.col-sm-4.text-left.padding-0 Nova Senha
-											input(type='password' name='nSenha' required x-moz-errormessage="Por favor preencha com um email válido." placeholder='Nova Senha').form-control
+											input(type='password' name='nSenha' placeholder='Nova Senha').form-control
 										.form-group
 											label.col-sm-4.text-left.padding-0 Confirmar Nova Senha
-											input(type='password' name='nSenhaConfirma' required x-moz-errormessage="Por favor preencha com um email válido." placeholder='Confirmar Nova Senha').form-control
+											input(type='password' name='nSenhaConfirma' placeholder='Confirmar Nova Senha').form-control
 								.row
 									.col-md-12.text-center
 										.form-group
-											button(type='button', onclick="validaAlterarSenha();").btn.green.small Enviar
+											//button(type='button', onclick="validaAlterarSenha();").btn.green.small Enviar
+											button(type='submit').btn.green.small Salvar
 	//validation
 	script(src='/js/adesampa/validarAlterarSenha.js')

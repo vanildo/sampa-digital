@@ -22,15 +22,12 @@ block content
 			.row
 				.col-md-12
 					p#cadastro-instituicao-1-error.red
-						if !empresaExistente
+						if empresaExistente
 							| CNPJ já está cadastrado em nosso sistema!
-						if !tipoEmpresa
+						if tipoEmpresa == false
 							| *Por favor, seleciona um Tipo de Empresa.
 						if !cnpjCheck
 							| *Por favor, use um CNPJ válido.
-					p=empresaExistente
-					p=tipoEmpresa
-					p=cnpjCheck
 						
 			.row
 				.col-sm-8
@@ -170,10 +167,11 @@ block content
 									label(for='termos', class='form-checkbox')&nbsp;Li e concordo com os 
 										a(href='termos') Termos de Uso
 										
-						.row
-							.col-md-12.text-center
-								.form-group
-									button(type='button', disabled='true', name='salvar', onclick='longlatcad(); validaDadosCadastrais(); return false;').btn.green.disabled#sendButton Salvar
+								.col-md-12
+									input(type='checkbox', name='autorizacao', id='autorizacao', checked=false, class='form-checkbox')
+									label(class='form-checkbox')&nbsp;Autorizo o site AdeSampa a me enviar email
+										
+
 		
 	else if emailBlock
 		.container

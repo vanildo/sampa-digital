@@ -188,7 +188,7 @@ exports = module.exports = function (req, res) {
     locals.googlekey = keystone.get('google api key');
 	locals.emailBlock = false;
 	locals.cnpjCheck = true;
-
+	locals.tipoEmpresa = true;
 
     // Load Oportunidades
     view.on('init', function (next) {
@@ -204,34 +204,26 @@ exports = module.exports = function (req, res) {
     view.on('post', {action: 'isCnpj'}, function (next) {
 		req.body.cnpj.replace(/[^\d]+/g,'');
         locals.cnpj = req.body.cnpj;
-        locals.empresaType = req.body.empresaType;
-
-        if (req.body.cnpj) {
-			locals.cnpjCheck = validarCNPJ(req.body.cnpj)
-			if(locals.empresaType){
-				if (locals.cnpjCheck) {
-					Empresa.model.findOne({'cnpj': req.body.cnpj}).exec(function (err, result) {
-						if (result) {
-							locals.cadastroCnpj = true;
-							locals.empresaExistente = true;
-						} else
-						{
-							locals.cadastroCnpj = false;
-						}
-						next(err);
-					});
-				}else{
+        locals.empresaType = req.body.empresaType;	
+		locals.cnpjCheck = validarCNPJ(req.body.cnpj);
+		if(!locals.empresaType){
+			locals.tipoEmpresa = false;			
+		}
+		
+		if(locals.tipoEmpresa && locals.cnpjCheck){
+			Empresa.model.findOne({'cnpj': req.body.cnpj}).exec(function (err, result) {
+				if (result) {
+					locals.cadastroCnpj = true;
+					locals.empresaExistente = true;
+					next();
+				} else {
+					locals.cadastroCnpj = false;
 					next();
 				}
-			}else{
-				console.log(locals.empresaType);
-				locals.tipoEmpresa = false;
+			});
+            
+		}
 
-				next();
-			}
-        } else {
-            next();
-        }
     });
     // Cadastro Empresa e Usuario
     view.on('post', {action: 'cadastroEmpresa'}, function (next) {
