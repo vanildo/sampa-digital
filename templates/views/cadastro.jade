@@ -23,11 +23,14 @@ block content
 				.col-md-12
 					p#cadastro-instituicao-1-error.red
 						if empresaExistente
-							| CNPJ já está cadastrado em nosso sistema!
+							|  *CNPJ já está cadastrado em nosso sistema!
+							br
 						if tipoEmpresa == false
 							| *Por favor, seleciona um Tipo de Empresa.
+							br
 						if !cnpjCheck
 							| *Por favor, use um CNPJ válido.
+							br
 						
 			.row
 				.col-sm-8
@@ -49,8 +52,8 @@ block content
 						
 						.row
 							.col-md-12.text-center
-								//button(type='button', onclick="validarCadastro();").btn.green.small Enviar
-								button(type='submit').btn.green.small Enviar
+								button(type='button', onclick="validarCadastro();").btn.green.small Enviar
+								//button(type='submit').btn.green.small Enviar
 	else if cadastroInstituicao
 		.container
 			.row
@@ -62,7 +65,23 @@ block content
 							|  Fique por dentro do que movimenta São Paulo
 			.row
 				.col-md-12
-					p#cadastro-instituicao-2-error.red				
+					p#cadastro-instituicao-2-error.red
+						//	
+							if !results.nomeFantasia
+								|  *Por favor, entre com uma Razão Social.
+								br
+							if !results.email
+								| *Por favor, coloque um Email válido.
+								br
+							if !results.postcode
+								| *Por favor, coloque um CEP válido.
+								br
+							if !results.cpf
+								| *Por favor, coloque um CPF válido.
+								br
+							if !results.termosDeUso
+								| *Por favor, leia os Termos de Uso, e se aceitá-los, marque o campo.
+								br
 			.row
 				.col-md-12.rule-bottom.text-center
 					h3 Dados do Cadastro
@@ -82,7 +101,7 @@ block content
 										input(type='text' name='nomeFantasia' placeholder='Nome Fantasia').form-control
 									.form-group
 										label.col-sm-4.text-left.padding-0 *Razão Social
-										input(type='text' name='razaoSocial' required x-moz-errormessage="Por favor preencha esse campo." placeholder='Razão Social').form-control
+										input(type='text' name='razaoSocial' placeholder='Razão Social').form-control
 									.form-group
 										label.col-sm-4.text-left.padding-0 Breve Descrição
 										input(type='text' name='descricao' placeholder="Breve Descrição").form-control
@@ -97,7 +116,7 @@ block content
 										input(type='text' name='telefone' placeholder='Telefone (Ex. (00)0000-0000) - Ramal').form-control
 									.form-group
 										label.col-sm-4.text-left.padding-0 *Email
-										input(type='email' name='email' required x-moz-errormessage="Por favor preencha com um email válido." placeholder='Email').form-control
+										input(type='email' name='email' placeholder='Email').form-control
 						.row
 							.col-md-12.rule-bottom.text-center
 								h3 Localização
@@ -111,7 +130,7 @@ block content
 								.form-group
 									.col-sm-3
 										label.col-sm-4.text-left.padding-0 Número:
-										input(id = 'numero' type='text' name='endereco.number' placeholder='Nº (Ex.999)').form-control
+										input(id = 'numero' type='text' name='endereco.number' placeholder='Nº (Ex.999)' pattern="[0-9]*").form-control
 									.col-sm-6
 										label.col-sm-4.text-left.padding-0 CEP:
 										input(id = 'cep' type='text' name='endereco.postcode' placeholder='CEP (Ex. 00000-000)').form-control
@@ -162,16 +181,19 @@ block content
 										input(type='text' name='twitter' placeholder='Twitter').form-control
 						
 						.row
-								.col-md-12
+								.col-sm-12.col-md-3
 									input(type='checkbox', name='termos', id='termos', checked=false, class='form-checkbox')
 									label(for='termos', class='form-checkbox')&nbsp;Li e concordo com os 
 										a(href='termos') Termos de Uso
 										
-								.col-md-12
-									input(type='checkbox', name='autorizacao', id='autorizacao', checked=false, class='form-checkbox')
-									label(class='form-checkbox')&nbsp;Autorizo o site AdeSampa a me enviar email
+								.col-sm-12.col-md-3
+									input(type='checkbox', name='autorizacao', id='autorizacao', checked=true, class='form-checkbox')
+									label(for='autorizacao', class='form-checkbox')&nbsp;Quero receber emails do Sampa-Digital
 										
-
+						.row
+							.col-md-12.text-center
+								button(type='button', onclick="validaDadosCadastrais();").btn.green.small Enviar
+								//button(type='submit').btn.green.small Enviar
 		
 	else if emailBlock
 		.container
@@ -182,7 +204,7 @@ block content
 
 block page-js
 	//validation
-	//script(src='/js/adesampa/validarCadastro.js')
+	script(src='/js/adesampa/validarCadastro.js')
 	
 	script.
 		function longlatcad() {
@@ -212,4 +234,26 @@ block page-js
 				$('#sendButton').addClass('disabled');
 				$('#sendButton').prop("disabled",true);
 			};
+		});
+		
+		$(document).ready(function() {
+		    $("#numero").keydown(function (e) {
+		        // Allow: backspace, delete, tab, escape, enter and .
+		        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+		             // Allow: Ctrl+A
+		            (e.keyCode == 65 && e.ctrlKey === true) ||
+		             // Allow: Ctrl+C
+		            (e.keyCode == 67 && e.ctrlKey === true) ||
+		             // Allow: Ctrl+X
+		            (e.keyCode == 88 && e.ctrlKey === true) ||
+		             // Allow: home, end, left, right
+		            (e.keyCode >= 35 && e.keyCode <= 39)) {
+		                 // let it happen, don't do anything
+		                 return;
+		        }
+		        // Ensure that it is a number and stop the keypress
+		        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+		            e.preventDefault();
+		        }
+		    });
 		});

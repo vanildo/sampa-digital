@@ -18,7 +18,7 @@ exports = module.exports = function (req, res) {
         usuario.exec(function (err, resultU) {
             locals.usuariof = resultU;
             next(err);
-                
+
 		});
     });
 
@@ -29,23 +29,23 @@ exports = module.exports = function (req, res) {
 		var senha = req.body.senha;
 		var senhaNova = req.body.nSenha;
 		var senhaNovaConfirm = req.body.nSenhaConfirma;
-		locals.senhasDiferentes = false;	
+		locals.senhasDiferentes = false;
 		locals.igualAtual = false;
 		locals.missingFields = false;
-		
+
 		//Validacoes dos Campos
-		if(senha != "" || senhaNova != "" || senhaNovaConfirm != ""){
+		if(senha != "" && senhaNova != "" && senhaNovaConfirm != ""){
 			if(senhaNova != senhaNovaConfirm){
-				locals.senhasDiferentes = true;			
-			};			
+				locals.senhasDiferentes = true;
+			};
 			if(senha == senhaNova){
 				locals.igualAtual = true;
 			};
 		}else{
 			locals.missingFields = true
-			
-		};	
-		
+
+		};
+
 		//New and Old passowrd cararission
 		locals.usuariof._.password.compare(senha, function(err, result){
 			if (err) {
@@ -53,7 +53,7 @@ exports = module.exports = function (req, res) {
 			}
 			if (result) {
 				Usuario.model.findOne({'controlData': locals.usuariof.controlData}).exec(function (err, resultU) {
-					if (resultU && !locals.igualAtual  && !locals.missingFields && !locals.senhasDiferentes) {
+					if (resultU && !locals.igualAtual  && !locals.missingFields && !locals.senhasDiferentes && !locals.missingFields) {
 							usuario = resultU;
 							usuario.password = req.body.nSenha;
 							usuario.save();
@@ -66,11 +66,11 @@ exports = module.exports = function (req, res) {
 			}else {
 				locals.updateSubmmited = false;
 				locals.senhaCorreta = false;
-				next();				
+				next();
 			};
-			
-		});			
+
+		});
 	});
-	
+
     view.render('senha');
 }

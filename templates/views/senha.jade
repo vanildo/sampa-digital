@@ -19,12 +19,16 @@ block content
 						p.red#erro_alterar_senha
 							if(missingFields == true)
 								| *Por favor, todos campos são obrigatórios.
+								br
 							if(senhasDiferentes == true)
 								| *Campos Nova Senha e Confirmar Nova Senha devem ser iguais.
+								br
 							if(igualAtual == true)
 								| *A Nova Senha deve ser diferente da Senha Atual
+								br
 							if(senhaCorreta == false)
 								| *Senha atual digitada errada
+								br
 				.row
 					.col-xm-offset-1.col-sm-offset-2.col-md-offset-3.col-xm-10.col-sm-8.col-md-6 
 						form(method='post').form-horizontal#alterarSenha
@@ -43,7 +47,7 @@ block content
 								.row
 									.col-md-12.text-center
 										.form-group
-											//button(type='button', onclick="validaAlterarSenha();").btn.green.small Enviar
-											button(type='submit').btn.green.small Salvar
+											button(type='button', onclick="validaAlterarSenha();").btn.green.small Enviar
+											//button(type='submit').btn.green.small Salvar
 	//validation
 	script(src='/js/adesampa/validarAlterarSenha.js')

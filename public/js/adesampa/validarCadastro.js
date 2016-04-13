@@ -44,7 +44,7 @@ function validaDadosCadastrais(){
   var cep = form.find("input[name='endereco.postcode']").val();
   cep = cep.replace(/[^0-9]|\s/g ,'');
   var cpf = form.find("input[name='cpf']").val();
-  var termosDeUso = form.find("input[name='termos']").val();
+  var termosDeUso = form.find("input[name='termos']").is(':checked');
 
   //mensagem de erro
   var err = new Array();
@@ -76,7 +76,7 @@ function validaDadosCadastrais(){
   if(cpf != "" && !validarCPF(cpf)){
     err.push(errCPF);
   }
-  if(termosDeUso != "on"){
+  if(!termosDeUso){
     err.push(errTermosDeUso);
   }
 
