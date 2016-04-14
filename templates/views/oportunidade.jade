@@ -139,6 +139,9 @@ block content
 							if umaOportunidade[0].empresa.twitter
 								p 
 									<strong>Twitter: </strong> #{umaOportunidade[0].empresa.twitter}
+							
+							p
+								a(href="/empresa?#{umaOportunidade[0].empresa.controlData}") Veja o perfil do Anunciante
 
 	else
 		.bg-pb
