@@ -28,7 +28,6 @@ exports = module.exports = function (req, res) {
         var emailConfig = EmailConfig.model.findOne().where('isAtivo', true);
         var usuario = null;
         var empresa = null;
-        var emailConfigs = null;
         var senha;
 
         function one(callback) {
@@ -38,9 +37,11 @@ exports = module.exports = function (req, res) {
                     locals.usuario = empresaf.usuario;
                     usuario = empresaf.usuario;
                     Usuario.model.findById(empresa.usuario, function (err, usuariof) {
+                      console.log('Usuario: ', usuariof);
                         if (usuariof) {
                             usuario = usuariof;
                             emailConfig.exec(function (err, emailf) {
+                              console.log('Email: %j', emailf);
                                 if (emailf) {
                                     emailConfigs = emailf;
                                     callback();
@@ -54,21 +55,23 @@ exports = module.exports = function (req, res) {
 
         function two() {
             if (usuario && empresa) {
-                if (req.body.empresaSituacaoSistema == 1) {
+                if (req.body.empresaSituacaoSistema === '1'){
+                  console.log('oi');
                     empresa.empresaSituacaoSistema = 'aprovado';
                     empresa.save();
+                    console.log('empresa salva');
                     usuario.responsavel = true;
                     senha = randomValueBase64(8);
                     usuario.password = senha;
                     usuario.save();
-                    console.log("Empresa salva: " + empresa.id);
+                    console.log('usuário salvo');
                     if (emailConfigs) {
                         var smtps = 'smtps://' + emailConfigs.user + '%40adesampa.com.br:' + emailConfigs.senha + '@smtp.gmail.com';
                         var transporter = nodemailer.createTransport(smtps);
                         var mailOptions = {
-                            from: emailConfigs.from, // sender address//                                             
+                            from: emailConfigs.from, // sender address//
                             to: usuario.email, // list of receivers
-                            subject: emailConfigs.subjectAprovacao, // Subject line                                                     
+                            subject: emailConfigs.subjectAprovacao, // Subject line
                             html: '<b>'
                                     + '<p>' + '*NÃO RESPONDA A ESTE E-MAIL. ELE É GERADO AUTOMATICAMENTE.' + '</p>'
                                     + '<p>' + emailConfigs.saudacao + ' ' + empresa.responsavelLegal.nome + '</p>'
@@ -87,17 +90,17 @@ exports = module.exports = function (req, res) {
                     } else {
                         //fila de email nao enviado
                     }
-                } else if (req.body.empresaSituacaoSistema == 2) {
+                } else if (req.body.empresaSituacaoSistema === '2') {
                     empresa.empresaSituacaoSistema = 'rejeitado';
                     empresa.save();
                     console.log("Empresa rejeitada: " + empresa.id);
                     if (emailConfigs) {
-                        var smtps = 'smtps://' + emailConfigs.user + '%40adesampa.com.br:' + emailConfigs.senha + '@smtp.gmail.com';
+                        smtps = 'smtps://' + emailConfigs.user + '%40adesampa.com.br:' + emailConfigs.senha + '@smtp.gmail.com';
                         var transporter = nodemailer.createTransport(smtps);
                         var mailOptions = {
-                            from: emailConfigs.from, // sender address//                                            
+                            from: emailConfigs.from, // sender address//
                             to: usuario.email, // list of receivers
-                            subject: emailConfigs.subjectRejeicao, // Subject line                                                  
+                            subject: emailConfigs.subjectRejeicao, // Subject line
                             html: '<b>'
                                     + '<p>' + '*NÃO RESPONDA A ESTE E-MAIL. ELE É GERADO AUTOMATICAMENTE.' + '</p>'
                                     + '<p>' + emailConfigs.saudacao + ' ' + empresa.responsavelLegal.nome + '</p>'
@@ -120,9 +123,9 @@ exports = module.exports = function (req, res) {
                 return res.redirect('/aprovacao');
             }
         }
-        ;
         one(two);
+        // next();
     });
 
     view.render('aprovacao');
-}
+};

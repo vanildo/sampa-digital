@@ -9,7 +9,7 @@ block intro
 					p
 						i Fique por dentro do que movimenta São Paulo
 	else if locals.umEvento
-		.container
+		.container(style='position:fixed !important')
 			.row
 				.col-md-12.text-center
 						if umEvento.length
@@ -33,12 +33,12 @@ block content
 				if eventos.length
 					each evento in eventos
 						.row
-							.col-md-2.text-center
+							.col-md-2.col-sm-2.col-xs-4.text-center
 								if evento.image.public_id
 									img(src=evento._.image.fit(140,140)).img-responsive
 								else
 									img.img-responsive(src='/images/icon_500x500.svg', width='120', height='120')
-							.col-md-10
+							.col-md-10.col-sm-10.col-xs-8
 								h3.no-margin: = evento.name
 								if evento.content.brief
 									p!= evento.content.brief
@@ -54,10 +54,16 @@ block content
 			.container
 				.row
 					.col-md-12
+						ul.breadcrumbs
+							li
+								a(href="/") Início
+							li
+								a(href="/agenda") &nbsp;Agenda
+					.col-md-12
 						h3.no-top-margin
 							if umEvento[0].dataInicio
 								span
-									|de #{umEvento[0].dataInicio} ate #{umEvento[0].dataFim}
+									|De #{umEvento[0].dataInicio} Até #{umEvento[0].dataFim}
 							else
 								span
 									| sem data!
@@ -68,8 +74,9 @@ block content
 
 					.col-md-12
 						if umEvento[0].image
-							img(src=umEvento[0]._.image.fit(550,300)).img-responsive
-							!= umEvento[0].content.extended
+							p(style='font-size:14px !important')
+								img(src=umEvento[0]._.image.fit(250), align="left", style='margin: 0px 10px 0px 0px !important; border: 1px solid orange !important;').img-responsive
+								!= umEvento[0].content.extended
 
 	else
 		.bg-pb

@@ -76,7 +76,6 @@ img.fit {
     height: auto;
 }
 .img-responsive{
-  float: right;
   margin-left: 2%;
 }
 .row{
@@ -207,7 +206,7 @@ img.fit {
   background-image: url('/images/templatemo_footer_bg.jpg');
   background-position: 0 0;
   background-repeat: no-repeat;
-  padding-top: 5%;
+  padding-top: 2%;
   position: relative;
 }
 .footer-small{
@@ -224,8 +223,14 @@ img.fit {
 }
 
 .bg-pb{
-  background-image: url("/images/templatemo_content_light_bg.png");
+  /*background-image: url("/images/templatemo_content_light_bg.png");
   background-size: cover;
+  */
+  
+  background-image: url("/images/templatemo_content_light_bg.png");
+  background-position: 50% 0%;
+  background-repeat: no-repeat;
+  padding: 20px;
 }
 /* TERMOS DE USO */
 .scroll-container{

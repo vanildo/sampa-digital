@@ -46,7 +46,7 @@ exports = module.exports = function (req, res) {
 
 		};
 
-		//New and Old passowrd cararission
+		//New and Old passowrd comparission
 		locals.usuariof._.password.compare(senha, function(err, result){
 			if (err) {
 				next(err);

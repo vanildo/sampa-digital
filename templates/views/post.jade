@@ -7,28 +7,31 @@ block content
 	if !post
 		.jumbotron.text-center
 			h2 Notícia inválida...
-			p Por favor, verifique a url. 
+			p Por favor, verifique a URL. 
 	else
-		.container
-			.row
-				.col-md-12
-					ul.breadcrumbs
-						li
-							a(href="/") Início
-						li
-							a(href="/blog") Notícias
-				article
-					header
-						h2.orange= post.title
-						p.orange Publicado em: 
-							if post.publishedDate
-								time(datetime=post.publishedDate)=post._.publishedDate.format('DD')
-								|  de 
-								time(datetime=post.publishedDate)=post._.publishedDate.format('MMMM')
-								|  de 
-								time(datetime=post.publishedDate)=post._.publishedDate.format('YYYY')
-						
-						
-						if post.image.exists
-							img(src=post._.image.fit(750,500)).img-responsive
-						!= post.content.full
+		.bg-pb
+			.container
+				.row
+					.col-md-12
+						ul.breadcrumbs
+							li
+								a(href="/") Início
+							li
+								a(href="/blog") &nbsp;Notícias
+					.col-md-12
+						article
+							header
+								h2.orange= post.name
+								p.orange Publicado em: 
+									if post.publishedDate
+										time(datetime=post.publishedDate)=post._.publishedDate.format('DD')
+										| /
+										time(datetime=post.publishedDate)=post._.publishedDate.format('MM')
+										| /
+										time(datetime=post.publishedDate)=post._.publishedDate.format('YYYY')
+								
+								
+								if post.image.exists
+									p(style='font-size:14px !important')
+										img(src=post._.image.fit(250), align="left", style='margin: 0px 10px 0px 0px !important; border: 1px solid orange !important;').img-responsive
+										!= post.content.full

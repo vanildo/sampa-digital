@@ -1,4 +1,4 @@
-/*!
+/*
  * Bootstrap v3.0.3 (http://getbootstrap.com)
  * Copyright 2013 Twitter, Inc.
  * Licensed under http://www.apache.org/licenses/LICENSE-2.0
@@ -341,7 +341,7 @@ img {
 }
 
 .img-responsive {
-  display: block;
+  display: table-cell;
   height: auto;
   max-width: 100%;
 }
@@ -495,7 +495,8 @@ h6,
 }
 
 p {
-  margin: 0 0 10px;
+  margin: 0px 0px;
+
 }
 
 .lead {
@@ -4496,7 +4497,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .navbar-fixed-top,
 .navbar-fixed-bottom {
-  position: fixed;
+  /*position: fixed;*/
+  position:absolute !important;
   right: 0;
   left: 0;
   z-index: 1030;
@@ -4530,13 +4532,6 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar-brand:hover,
 .navbar-brand:focus {
   text-decoration: none;
-}
-
-@media (min-width: 768px) {
-  .navbar > .container .navbar-brand {
-    margin-left: -15px;
-	margin-top: 39px;
-  }
 }
 
 .navbar-toggle {
@@ -7151,3 +7146,5 @@ td.visible-print {
     display: none !important;
   }
 }
+
+

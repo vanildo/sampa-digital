@@ -31,3 +31,4 @@ build/Release
 # Ignore .DS_Store files on OS X
 .DS_Store
 /nbproject/private/
+node_modules
