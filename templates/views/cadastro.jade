@@ -60,6 +60,7 @@ block content
 						i
 							strong Comprador ou Vendedor:
 							|  Fique por dentro do que movimenta São Paulo
+							
 			.row
 				.col-md-12
 					p#cadastro-instituicao-2-error.red				
@@ -82,7 +83,7 @@ block content
 										input(type='text' name='nomeFantasia' placeholder='Nome Fantasia').form-control
 									.form-group
 										label.col-sm-4.text-left.padding-0 *Razão Social
-										input(type='text' name='razaoSocial' required x-moz-errormessage="Por favor preencha esse campo." placeholder='Razão Social').form-control
+										input(type='text' name='razaoSocial' placeholder='Razão Social').form-control
 									.form-group
 										label.col-sm-4.text-left.padding-0 Breve Descrição
 										input(type='text' name='descricao' placeholder="Breve Descrição").form-control
@@ -97,7 +98,7 @@ block content
 										input(type='text' name='telefone' placeholder='Telefone (Ex. (00)0000-0000) - Ramal').form-control
 									.form-group
 										label.col-sm-4.text-left.padding-0 *Email
-										input(type='email' name='email' required x-moz-errormessage="Por favor preencha com um email válido." placeholder='Email').form-control
+										input(type='email' name='email'  placeholder='Email').form-control
 						.row
 							.col-md-12.rule-bottom.text-center
 								h3 Localização
@@ -170,6 +171,11 @@ block content
 								.col-md-12
 									input(type='checkbox', name='autorizacao', id='autorizacao', checked=false, class='form-checkbox')
 									label(class='form-checkbox')&nbsp;Autorizo o site AdeSampa a me enviar email
+						
+						.row
+							.col-md-12.text-center
+								//button(type='button', onclick="validarCadastro();").btn.green.small Enviar
+								button(type='submit').btn.green.small Enviar  
 										
 
 		

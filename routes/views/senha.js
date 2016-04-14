@@ -53,7 +53,7 @@ exports = module.exports = function (req, res) {
 			}
 			if (result) {
 				Usuario.model.findOne({'controlData': locals.usuariof.controlData}).exec(function (err, resultU) {
-					if (resultU && !locals.igualAtual  && !locals.missingFields && !locals.senhasDiferentes) {
+					if (resultU && !locals.igualAtual && !locals.missingFields && !locals.senhasDiferentes) {
 							usuario = resultU;
 							usuario.password = req.body.nSenha;
 							usuario.save();
