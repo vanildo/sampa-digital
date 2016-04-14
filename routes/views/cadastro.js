@@ -198,6 +198,7 @@ exports = module.exports = function (req, res) {
 	locals.emailBlock = false;
 	locals.cnpjCheck = true;
 	locals.tipoEmpresa = true;
+	locals.results = '';
 
     // Load Oportunidades
     view.on('init', function (next) {
