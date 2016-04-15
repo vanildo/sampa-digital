@@ -17,7 +17,7 @@ exports = module.exports = function (req, res) {
     // Load dados empresa
 
 		controlData = url.substr(url.indexOf("?") + 1);
-		view.query('empresa', Empresa.model.find().where('controlData', controlData ).populate('responsavelLegal', 'usuario'));
+		view.query('empresa', Empresa.model.find().where('controlData', controlData ).populate('usuario').populate('responsavelLegal'));
 
 
 
