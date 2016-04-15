@@ -12,16 +12,14 @@ exports = module.exports = function (req, res) {
     var locals = res.locals;
 	var url = view.req.originalUrl;
     locals.section = 'empresa';
-    locals.formData = req.body;
 
 
     // Load dados empresa
-    view.on('init', function (next) {
-		id = url.substr(url.indexOf("?") + 1);
-		
-		locals.empresa = Empresa.model.findOne().populate('responsavelLegal', 'usuario').where('id', id);
-		next();
-	});
+
+		controlData = url.substr(url.indexOf("?") + 1);
+		view.query('empresa', Empresa.model.find().where('controlData', controlData ).populate('responsavelLegal', 'usuario'));
+
+
 
 
     view.render('empresa');

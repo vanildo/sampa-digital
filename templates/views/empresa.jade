@@ -6,6 +6,18 @@ block content
 			.row
 				.col-md-12.text-center
 					h1.orange Empresa
-					h3= razaoSocial 
+					h3 Razao Social
+					p=empresa[0].razaoSocial
+					h3 descricao
+					p=empresa[0].descricao
+					h3 Responsavel Legal
+					p=empresa[0].responsavelLegal.nome
+					h3 Contato Comercial
+					p=empresa[0].contatoComercial
+					h3 Telefone
+					p=empresa[0].telefone
+					h3 Email
+					p=empresa[0].usuario.name
+					
 
 
