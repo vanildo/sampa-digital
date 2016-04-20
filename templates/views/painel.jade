@@ -6,19 +6,19 @@ block content
 			.container
 				.row
 					.col-md-12.text-center
-						h1.orange Painel de Controle
+						h2.orange Painel de Controle
 				.row
 					.col-md-4
 					.col-md-4
-						h3.no-margin: a(href='/keystone')
+						h3: a(href='/keystone')
 							span.glyphicon.glyphicon-cog
 							| &nbsp;Area do Administrador
-						h3.no-margin: a(href='/aprovacao')
+						h3: a(href='/aprovacao')
 							span.glyphicon.glyphicon-list-alt
 							| &nbsp;Cadastros Pendentes
-						h3.no-margin: a(href='/keystone/signout') 
+						h3: a(href='/keystone/signout') 
 							span.glyphicon.glyphicon-off
-							| &nbsp;logout
+							| &nbsp;Logout
 					.col-md-4
 		else
 			.container
@@ -28,31 +28,31 @@ block content
 				.row
 					.col-md-4
 					.col-md-4
-						h3.no-margin: a(href='/conta')
+						h3: a(href='/conta')
 							span.glyphicon.glyphicon-user
 							| &nbsp;Minha Conta
-						h3.no-margin: a(href='/senha')
+						h3: a(href='/senha')
 							span.glyphicon.glyphicon-pencil
 							| &nbsp;Alterar Senha
-						h3.no-margin: a(href='/minhasOportunidades')
+						h3: a(href='/minhasOportunidades')
 							span.glyphicon.glyphicon-edit
 							| &nbsp;Minhas Oportunidades
-						h3.no-margin: a(href='/keystone/signout') 
+						h3: a(href='/keystone/signout') 
 							span.glyphicon.glyphicon-off
-							| &nbsp;logout
+							| &nbsp;Logout
 					.col-md-4
 	else
 		.container
 			.row
 				.col-md-12.text-center
-					h1.orange Painel de Controle
+					h2.orange Painel de Controle
 			.row
 				.col-md-4
 				.col-md-4
-					h3.no-margin: a(href='/keystone/signin')
+					h3: a(href='/keystone/signin')
 						span.glyphicon.glyphicon-log-in
 						| &nbsp;Login
-					h3.no-margin: a(href='/cadastro')
+					h3: a(href='/cadastro')
 						span.glyphicon.glyphicon-file
 						| &nbsp;Cadastre-se aqui
 				.col-md-4

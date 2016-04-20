@@ -15,7 +15,7 @@
   float: left;
 }
 input.form-checkbox {
-  display: none;
+  /*display: none;*/
 }
 label {
   cursor: pointer;
@@ -23,12 +23,12 @@ label {
   font-size: 1.3rem;
 }
 input.form-checkbox + label:before {
-  border: 1px solid #DCE4EC;
+  /*border: 1px solid #DCE4EC;*/
   content: "\00a0";
   display: inline-block;
   font: 16px/1em sans-serif;
   height: 16px;
-  margin: 0 .25em 0 0;
+  /*margin: 0 .25em 0 0;*/
   padding:0;
   vertical-align: top;
   width: 16px;
@@ -36,7 +36,7 @@ input.form-checkbox + label:before {
 input.form-checkbox:checked + label:before {
   background: #fff;
   color: #909090;;
-  content: "\2713";
+  /*content: "\2713";*/
   text-align: center;
   font-weight: bold;
 }

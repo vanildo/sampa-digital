@@ -1,6 +1,6 @@
 var keystone = require('keystone');
 var Empresa = keystone.list('Empresa');
-var CNAE = keystone.list('CNAE');
+// var CNAE = keystone.list('CNAE');
 var Oportunidade = keystone.list('Oportunidade');
 var Usuario = keystone.list('Usuario');
 var crypto = require('crypto');
@@ -11,10 +11,10 @@ var EmailsAdeSampa = keystone.list('EmailsAdeSampa');
 
 function randomValueBase64(len) {
     return crypto.randomBytes(Math.ceil(len * 3 / 4))
-            .toString('base64')   // convert to base64 format
-            .slice(0, len)        // return required number of characters
-            .replace(/\+/g, '0')  // replace '+' with '0'
-            .replace(/\//g, '0'); // replace '/' with '0'
+        .toString('base64') // convert to base64 format
+        .slice(0, len) // return required number of characters
+        .replace(/\+/g, '0') // replace '+' with '0'
+        .replace(/\//g, '0'); // replace '/' with '0'
 }
 
 function validarCNPJ(cnpj) {
@@ -72,7 +72,7 @@ function validarCNPJ(cnpj) {
 
 function fieldValidator(value){
 
-	var nomeFantasia = true;
+	var razaoSocial = true;
 	var telefone = true;
 	var cpf = true;
 	var descricao = true;
@@ -88,22 +88,18 @@ function fieldValidator(value){
 	var result = {};
 
 //Valida Nome Fatasia
-	if(value.Razao){
-		console.log("Foi 2");
-		if(value.Razao.length == "") {nomeFantasia = false; console.log("Nome Fantasia Failed")};
+	if(value.razaoSocial){
+		if(value.razaoSocial.length == "") {razaoSocial = false; console.log("Nome Fantasia Failed")};
 	}else{
-    nomeFantasia = false;
-  };
+		razaoSocial = false;
+	};
 
 
 // Valida Telefone
 	if(value.telefone){
-		console.log("Foi");
 		value.telefone = value.telefone.replace(/\D+/g,'');
 		if(value.telefone.length != 10 && value.telefone.length != 11 && value.telefone.length != "") {telefone = false; console.log("Telefone Failed")};
-	}else{
-    telefone = false;
-  };
+	};
 // Valida CPF
 	if(value.cpf){
 		value.cpf = value.cpf.replace(/[^\d]+/g,'');
@@ -136,34 +132,29 @@ function fieldValidator(value){
 		rev = 11 - (add % 11);
 		if (rev == 10 || rev == 11) { rev = 0;};
 		if (rev != parseInt(value.cpf.charAt(10))){ cpf = false; console.log("CPF Failed")};
-	}else{
-    cpf = false;
-  };
+	}
 
 //Valida CEP - Se contem apenas 8 numeros
 	if(value["endereco.postcode"]){
-		console.log("Foi 3");
 		value["endereco.postcode"] = value["endereco.postcode"].replace(/\D+/g,'');
-		if(value["endereco.postcode"].length != 8 || isNaN(value["endereco.postcode"])) {postcode = false; console.log("CEP Failed")};
-	}else{
-    postcode = false;
-  };
+		if(value["endereco.postcode"].length != 8 || isNaN(value["endereco.postcode"])) {postcode = false;};
+	}
 //Valida numero de endereco - Se contem apenas numeros no campo
 	if(value["endereco.number"]){
 		if(isNaN(value["endereco.number"])){enderecoNumber = false; console.log("Endereco Failed")};
-	}else{
-    enderecoNumber = false;
-  };
+	}
 //Valida email
 	if(value.email){
 		console.log("Foi 4");
 		var filter = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 		if(!filter.test(value.email)){email = false; console.log("Email Failed")};
-	}else{email = false};
+	}else{
+		email = false;
+	};
 
 //Return results of the checks
 	result = {
-		'nomeFantasia':nomeFantasia,
+		'razaoSocial':razaoSocial,
 		'telefone':telefone,
 		'cpf':cpf,
 		'postcode':postcode,
@@ -177,8 +168,6 @@ function fieldValidator(value){
 
 
 exports = module.exports = function (req, res) {
-
-
     var view = new keystone.View(req, res);
     var locals = res.locals;
     locals.section = 'cadastro';
@@ -191,8 +180,8 @@ exports = module.exports = function (req, res) {
     locals.cadastroCnpj = true;
     locals.empresaExistente = false;
     locals.empresaTypes = Empresa.fields.empresaType.ops;
-    locals.empresaType;
-    locals.cnpj;
+    locals.empresaType = null;
+    locals.cnpj = null;
     locals.cadastroInstituicao = true;
     locals.googlekey = keystone.get('google api key');
 	locals.emailBlock = false;
@@ -201,10 +190,10 @@ exports = module.exports = function (req, res) {
 	locals.results = '';
 
     // Load Oportunidades
-    view.on('init', function (next) {
+    view.on('init', function(next) {
 
         var q = Oportunidade.model.find().sort('sortOrder');
-        q.exec(function (err, results) {
+        q.exec(function(err, results) {
             locals.oportunidades = results;
             next(err);
         });
@@ -231,13 +220,10 @@ exports = module.exports = function (req, res) {
 					next();
 				}
 			});
-
 		}else{next();}
-
-    });
+	});
     // Cadastro Empresa e Usuario
     view.on('post', {action: 'cadastroEmpresa'}, function (next) {
-
 		locals.results = fieldValidator(req.body);
         locals.cnpj = req.body.cnpj;
         locals.empresaType = req.body.empresaType;
@@ -261,8 +247,12 @@ exports = module.exports = function (req, res) {
         var updaterE = empresa.getUpdateHandler(req);
         var emailConfigs;
         var emailConfig = EmailConfig.model.findOne().where('isAtivo', true);
-
-		if(locals.results.nomeFantasia && locals.results.telefone && locals.results.cpf && locals.results.postcode && locals.results.enderecoNumber && locals.results.email ){
+		if(locals.results.razaoSocial 
+		  && locals.results.telefone 
+		  && locals.results.cpf 
+		  && locals.results.postcode 
+		  && locals.results.enderecoNumber 
+		  && locals.results.email ){
 			///email validation
 			var emailVali = Usuario.model.findOne().where('email', req.body.email);
 			emailVali.exec(function (err, email) {
@@ -366,3 +356,4 @@ exports = module.exports = function (req, res) {
 	});
     view.render('cadastro');
 }
+
