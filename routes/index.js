@@ -53,9 +53,10 @@ exports = module.exports = function (app) {
     app.all('/minhasOportunidades', routes.views.minhasOportunidades);
     app.all('/manutencaoOportunidade/:oportunidade', routes.views.manutencaoOportunidade);
     app.all('/forgot', routes.views.forgot);
-	app.all('/senha', routes.views.senha);
-	app.all('/empresa', routes.views.empresa);
-	app.all('/faq', routes.views.faq);
+  	app.all('/senha', routes.views.senha);
+  	app.all('/empresa', routes.views.empresa);
+  	app.all('/faq', routes.views.faq);
+
 
 
 

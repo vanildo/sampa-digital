@@ -3,21 +3,145 @@ extends ../layouts/default
 
 block content
 		.container
+			if empresa[0].logo
+				.row
+					.col-sm-12.col-md-2
+						br
+						img.img-responsive(src='#{empresa[0].logo}')
+					.col-sm-12.col-md-10
+						h1.text-center.orange=empresa[0].razaoSocial
+						if orange=empresa[0].nomeFantasia
+							h2.small.text-center=empresa[0].nomeFantasia
+						if orange=empresa[0].descricao
+							p.text-center=empresa[0].descricao
+			else
+				.row
+					.col-md-12
+						h1.text-center.orange=empresa[0].razaoSocial
+						if orange=empresa[0].nomeFantasia
+							h2.small.text-center=empresa[0].nomeFantasia
+						if orange=empresa[0].descricao
+							p.text-center=empresa[0].descricao
+			
+			.row			
+				.col-sm-12.col-md-4
+					if orange=empresa[0].contatoComercial
+						p 
+							strong Contato Comercial
+						p=empresa[0].contatoComercial
+					else
+						p.bold Contato Comercial
+						p -
+				.col-sm-12.col-md-4
+					if orange=empresa[0].telefone
+						p 
+							strong Telefone
+						p=empresa[0].telefone
+					else
+						p.bold Telefone
+						p -
+				.col-sm-12.col-md-4
+						p 
+							strong Email
+						p=empresa[0].responsavelLegal.email
+			
 			.row
-				.col-md-12.text-center
-					h1.orange Empresa
-					h3 Razao Social
-					p=empresa[0].razaoSocial
-					h3 descricao
-					p=empresa[0].descricao
-					h3 Responsavel Legal
-					p=empresa[0].responsavelLegal.nome
-					h3 Contato Comercial
-					p=empresa[0].contatoComercial
-					h3 Telefone
-					p=empresa[0].telefone
-					h3 Email
-					p=empresa[0].usuario.email
+				.col-md-12.rule-bottom.text-center
+					h3 Localização
 					
+			.row
+				.col-sm-12.col-md-6
+					p
+						strong Endereço
+					if empresa[0].endereco.street1
+						p=empresa[0].endereco.street1
+					else
+						p -
+					br
+					p
+						strong Complemento
+					if empresa[0].endereco.name
+						p=empresa[0].endereco.name
+					else
+						p -
+					br
+					p
+						strong Bairro
+					if empresa[0].endereco.street2
+						p=empresa[0].endereco.street2
+					else
+						p -
+					br
+				.col-sm-12.col-md-6
+					.col-sm-12.col-md-3
+						p
+							strong Número
+						if empresa[0].endereco.number
+							p=empresa[0].endereco.number
+						else
+							p -
+						br
+						p
+							strong Cidade
+						if empresa[0].endereco.suburb
+							p=empresa[0].endereco.suburb
+						else
+							p -
+						br
+					.col-sm-12.col-md-6
+						p
+							strong CEP
+						if empresa[0].endereco.postcode
+							p=empresa[0].endereco.postcode
+						else
+							p -
+						br
+					.col-sm-12.col-md-3
+						p
+							strong Estado
+						if empresa[0].endereco.state
+							p=empresa[0].endereco.state
+						else
+							p -
+						br
 
-
+			.row
+				.col-sm-12.col-md-6
+					.col-md-12.rule-bottom.text-center
+						h3 Representante legal
+					
+					.col-md-12
+						br
+						p
+							strong Nome do Representante
+							if empresa[0].endereco.state
+								p=empresa[0].responsavelLegal.nome
+							else
+								p -
+				.col-sm-12.col-md-6
+					.col-md-12.rule-bottom.text-center
+						h3 Na Web
+					
+					.col-sm-12.col-md-12
+						br
+						p
+							strong Website
+						if empresa[0].webSite
+							p=empresa[0].webSite
+						else
+							p -
+						br
+						p
+							strong Facebook
+						if empresa[0].facebook
+							p=empresa[0].facebook
+						else
+							p -
+						br
+						p
+							strong Twitter
+						if empresa[0].twitter
+							p=empresa[0].twitter
+						else
+							p -
+						br
