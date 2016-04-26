@@ -5,26 +5,26 @@ block content
 		.container
 			if empresa[0].logo
 				.row
-					.col-sm-12.col-md-2
+					.col-xs-12.col-sm-12.col-md-2
 						br
 						img.img-responsive(src='#{empresa[0].logo}')
-					.col-sm-12.col-md-10
-						h1.text-center.orange=empresa[0].razaoSocial
+					.col-xs-12.col-sm-12.col-md-10
+						h2.text-center.orange=empresa[0].razaoSocial
 						if orange=empresa[0].nomeFantasia
 							h2.small.text-center=empresa[0].nomeFantasia
 						if orange=empresa[0].descricao
 							p.text-center=empresa[0].descricao
 			else
 				.row
-					.col-md-12
-						h1.text-center.orange=empresa[0].razaoSocial
+					.col-xs-12.col-sm-12.col-md-12
+						h2.text-center.orange=empresa[0].razaoSocial
 						if orange=empresa[0].nomeFantasia
 							h2.small.text-center=empresa[0].nomeFantasia
 						if orange=empresa[0].descricao
 							p.text-center=empresa[0].descricao
 			
 			.row			
-				.col-sm-12.col-md-4
+				.col-xs-12.col-sm-4.col-md-4
 					if orange=empresa[0].contatoComercial
 						p 
 							strong Contato Comercial
@@ -32,7 +32,7 @@ block content
 					else
 						p.bold Contato Comercial
 						p -
-				.col-sm-12.col-md-4
+				.col-xs-12.col-sm-4.col-md-4
 					if orange=empresa[0].telefone
 						p 
 							strong Telefone
@@ -40,17 +40,17 @@ block content
 					else
 						p.bold Telefone
 						p -
-				.col-sm-12.col-md-4
+				.col-xs-12.col-sm-4.col-md-4
 						p 
 							strong Email
 						p=empresa[0].responsavelLegal.email
 			
 			.row
-				.col-md-12.rule-bottom.text-center
+				.col-xs-12.col-sm-12.col-md-12.rule-bottom.text-center
 					h3 Localização
 					
 			.row
-				.col-sm-12.col-md-6
+				.col-xs-12.col-sm-4.col-md-4
 					p
 						strong Endereço
 					if empresa[0].endereco.street1
@@ -58,6 +58,15 @@ block content
 					else
 						p -
 					br
+				.col-xs-12.col-sm-2.col-md-2
+					p
+						strong Número
+					if empresa[0].endereco.number
+						p=empresa[0].endereco.number
+					else
+						p -
+					br
+				.col-xs-12.col-sm-2.col-md-2
 					p
 						strong Complemento
 					if empresa[0].endereco.name
@@ -65,6 +74,7 @@ block content
 					else
 						p -
 					br
+				.col-xs-12.col-sm-2.col-md-2
 					p
 						strong Bairro
 					if empresa[0].endereco.street2
@@ -72,45 +82,39 @@ block content
 					else
 						p -
 					br
-				.col-sm-12.col-md-6
-					.col-sm-12.col-md-3
-						p
-							strong Número
-						if empresa[0].endereco.number
-							p=empresa[0].endereco.number
-						else
-							p -
-						br
-						p
-							strong Cidade
-						if empresa[0].endereco.suburb
-							p=empresa[0].endereco.suburb
-						else
-							p -
-						br
-					.col-sm-12.col-md-6
-						p
-							strong CEP
-						if empresa[0].endereco.postcode
-							p=empresa[0].endereco.postcode
-						else
-							p -
-						br
-					.col-sm-12.col-md-3
-						p
-							strong Estado
-						if empresa[0].endereco.state
-							p=empresa[0].endereco.state
-						else
-							p -
-						br
+			.row
+				.col-xs-12.col-sm-4.col-md-4
+					p
+						strong CEP
+					if empresa[0].endereco.postcode
+						p=empresa[0].endereco.postcode
+					else
+						p -
+					br
+				.col-xs-12.col-sm-4.col-md-4
+					p
+						strong Cidade
+					if empresa[0].endereco.suburb
+						p=empresa[0].endereco.suburb
+					else
+						p -
+					br
+				
+				.col-xs-12.col-sm-4.col-md-4
+					p
+						strong Estado
+					if empresa[0].endereco.state
+						p=empresa[0].endereco.state
+					else
+						p -
+					br
 
 			.row
-				.col-sm-12.col-md-6
-					.col-md-12.rule-bottom.text-center
+				.col-xs-12.col-sm-12.col-md-6
+					.col-xs-12.col-sm-12.col-md-12.rule-bottom.text-center
 						h3 Representante legal
 					
-					.col-md-12
+					.col-xs-12.col-sm-12.col-md-12
 						br
 						p
 							strong Nome do Representante
@@ -118,11 +122,11 @@ block content
 								p=empresa[0].responsavelLegal.nome
 							else
 								p -
-				.col-sm-12.col-md-6
-					.col-md-12.rule-bottom.text-center
+				.col-xs-12.col-sm-12.col-md-6
+					.col-xs-12.col-sm-12.col-md-12.rule-bottom.text-center
 						h3 Na Web
 					
-					.col-sm-12.col-md-12
+					.col-xs-12.col-sm-12.col-md-12
 						br
 						p
 							strong Website
