@@ -145,7 +145,6 @@ function fieldValidator(value){
 	}
 //Valida email
 	if(value.email){
-		console.log("Foi 4");
 		var filter = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 		if(!filter.test(value.email)){email = false; console.log("Email Failed")};
 	}else{
@@ -312,8 +311,9 @@ exports = module.exports = function (req, res) {
 														var mailOptions = {
 															from: emailConfigs.from, // sender address//
 															subject: emailConfigs.subjectCadastro, // Subject line
-															html: '<b>' + '<p>' + emailConfigs.saudacao + '</p> <p>' + emailConfigs.corpoCadastro + req.body.cnpj + '</p>' + '</b>' // html body
+															html: '<b>' + '<p>' + emailConfigs.saudacao + '</p> <p>' + emailConfigs.corpoCadastro + req.body.cnpj + '</p><br /><p>' + 'Telefone: '+req.body.telefone +'</p><br />'+'<p>'+  'Email: '+req.body.email +'</p>'+'</b>' // html body
 														};
+														console.log(mailOptions.html);
 														EmailsAdeSampa.model.find({}, function (err, docs) {
 															var emails = [];
 															for (i = 0; i < docs.length; i++) {
