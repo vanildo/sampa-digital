@@ -794,7 +794,7 @@ ul.templatemo-project-gallery  li  a img:hover {
 
 /* Ricardo started on Mar 29 */
 .navbar-fixed-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse {
-    min-width: 400px !important;
+    min-width: 460px !important;
 }
 
 @media (min-width: 1200px) {
@@ -821,7 +821,7 @@ ul.templatemo-project-gallery  li  a img:hover {
 }
 @media (min-width: 768px){
 	.navbar-fixed-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse {
-		min-width: 420px !important;
+		min-width: 480px !important;
 	}
 	body {
 		padding-top:150px !important;
