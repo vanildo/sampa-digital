@@ -12,7 +12,8 @@ function initializeTabletopObject(dataSpreadsheet){
     Tabletop.init({
         key: dataSpreadsheet,
         callback: writeTableWith,
-        simpleSheet: true,iDisplayLength": 10
+        simpleSheet: true,
+        iDisplayLength: 10,
         debug: false
     });
 }
