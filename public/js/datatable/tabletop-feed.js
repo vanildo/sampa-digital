@@ -12,7 +12,7 @@ function initializeTabletopObject(dataSpreadsheet){
     Tabletop.init({
         key: dataSpreadsheet,
         callback: writeTableWith,
-        simpleSheet: true,
+        simpleSheet: true,iDisplayLength": 10
         debug: false
     });
 }
@@ -25,7 +25,7 @@ function createTableColumns(){
     Remember, tabletop.js strips out spaces from column titles, which
     is what happens with the More Info column header */
 
-    var tableColumns =   [		
+    var tableColumns =   [
 		{"mDataProp": "processo", "sTitle": "Processo", "sClass": "left"},
 		{"mDataProp": "datadeabertura", "sTitle": "Data de Abertura", "sClass": "left"},
 		{"mDataProp": "área", "sTitle": "Área", "sClass": "left"},
@@ -42,12 +42,12 @@ function writeTableWith(dataSource){
 
     var oTable = jqueryNoConflict("#data-table-container").dataTable({
         "sPaginationType": "bootstrap",
-        "iDisplayLength": 10,
+        "iDisplayLength": 5,
         "aaData": dataSource,
         "aoColumns": createTableColumns(),
         "fnRowCallback": function(nRow, aData, iDisplayIndex) {
             //console.log(aData);
-            $("td:eq(0)", nRow).html("<a href='http://" + aData.link + "'>"+$("td:eq(0)", nRow).html()+"</a>");
+            $("td:eq(0)", nRow).html("<strong><a href='http://" + aData.link + "'>"+$("td:eq(0)", nRow).html()+"</a></strong>");
             return nRow;
         },
         "oLanguage": {
