@@ -227,6 +227,8 @@ exports = module.exports = function (req, res) {
         locals.cnpj = req.body.cnpj;
         locals.empresaType = req.body.empresaType;
         locals.cadastroCnpj = false;
+		locals.autorizacao = false;
+		
         var pessoa = new Pessoa.model();
         var updaterP = pessoa.getUpdateHandler(req);
         var usuario = new Usuario.model({
@@ -243,6 +245,7 @@ exports = module.exports = function (req, res) {
             usuario: usuario,
             controlData: pessoa.id,
         });
+		
         var updaterE = empresa.getUpdateHandler(req);
         var emailConfigs;
         var emailConfig = EmailConfig.model.findOne().where('isAtivo', true);

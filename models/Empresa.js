@@ -27,7 +27,7 @@ Empresa.add({
     facebook: {type: String},
     webSite: {type: String},
     usuario: {type: Types.Relationship, ref: 'Usuario'},
-	permicao: {type: Types.Boolean, default: true},
+	autorizacao: {type: Boolean, default: false},
     empresaType: {type: Types.Select, options: [
             {value: 'empresa', label: "Empresa"},
             {value: 'instituicao', label: "Instituição"},
