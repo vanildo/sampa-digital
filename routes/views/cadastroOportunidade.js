@@ -39,8 +39,8 @@ exports = module.exports = function (req, res) {
     locals.venda = false;
 	var emailConfigs;
 	var emailConfig = EmailConfig.model.findOne().where('isAtivo', true);
-	
-	
+	//var empresa = Empresa.model.findOne().where('razaoSocial', "Empresa do Fabio");
+	//console.log(Empresa);
 	
 	
 // Cadastro Empresa e Usuario
@@ -61,6 +61,7 @@ exports = module.exports = function (req, res) {
                 } else {
                     locals.oportunidadeSubmitted = true;
                     oportunidade.isAtivo = true;
+					oportunidade.controlData = res.locals.user.controlData;
                     oportunidade.save();
 					oportunidade._doc.email = res.locals.user.email;
 					
@@ -72,7 +73,6 @@ exports = module.exports = function (req, res) {
 						Mtipo = "Compra";
 					};					
 					var str = oportunidade.descricaoDetalhada;
-					//var reg = /$a\s|\sa\s|a$|$o\s|\so\s|o$|$e\s|\se\s|e$|de|$os\s|\sos\s|os$|$as\s|\sas\s|as$|$do\s|\sdo\s|do$|$no\s|\sno\s|nos$|$nos\s|\snos\s|noss$|$dos\s|\sdos\s|doss$|$pelo\s|\spelo\s|pelos$|$pelos\s|\spelos\s|peloss$|$da\s|\sda\s|das$|das|na|nas|pela|pelas|dum|duns|num|nuns|ante|até|após|com|de|desde|em|entre|para|per|perante|por|sem|sob|sobre|trás|compra|venda/gi;
 					function clearSTR(str){
 						var wordMatch = [" a "," A "," o ", " O "," no ", " e ", " de ", " os ", " com ", " de "];    
 						for(i=0; i<wordMatch.length; i++){
@@ -80,10 +80,8 @@ exports = module.exports = function (req, res) {
 						}
 
 						return str;
-					} 
-					
+					}					
 					var Mkeywords = clearSTR(str);
-					console.log("Keyword is: "+ Mkeywords);
 
 					//Fila salvar index
 					index.push({name: oportunidade.nome}, function (err) {
@@ -93,69 +91,70 @@ exports = module.exports = function (req, res) {
 							}
 							console.log('Oportunidade Salva');
 						});
-					});
-					
-					
+					});				
 					//Fila matching
 					query.push({name: oportunidade.nome}, function (err) {
-						db.find({selector: {"$and":[{"$text": Mkeywords}, {"$text": Mtipo},{"$text": oportunidade.tipoOferta} ]}}, function(er, result) {
+						db.find({selector: {"$and":[{"$text": Mkeywords}, {"$text": Mtipo},{"$text": oportunidade.tipoOferta} ]}}, function(er, match) {
 							if (er) {
 								throw er;
 							}
-							if(result.docs.length <= 0){
+							if(match.docs.length <= 0){
 								console.log("Nenhum matching encontrado")
 							}else{
-								for (i = 0; i < result.docs.length ; i++){
-									console.log("Matching found: "+ result.docs[i].oportunidade)
-									/*if(result.docs[i].oportunidade.email != res.locals.user.email){
-										var empresa = Empresa.model.findOne().where('id', result.docs[i].oportunidade.empresa);
-										var autorizacao = null;
-										empresa.exec(function (err, result) {
-											if(result){
-												autorizacao = result.autorizacao;
-											}
-										});
-										var emailBody = '<b>' + '<p>Saudações</p><br />' +
-										'<p> Foi encontrada uma oportunidade que voce talvez tenha interesse: </p>'; // html body
-										if(result.docs[i].oportunidade.email != res.locals.user.email && autorizacao == true){
-											emailBody = emailBody+ '<p>' + result.docs[i].oportunidade.nome +'</p><br />'+
-											'<p><a href="/oportunidades/?='+result.docs[i].oportunidade._id+'">http://localhost:3000/oportunidades/?='+result.docs[i].oportunidade._id+'</a></p></b>' // html body										
-											//EMAIL SENDER
-											emailConfig.exec(function (err, results) {
-												if (results) {
-													emailConfigs = results;
-													locals.email = emailConfigs;
+								var empresa =[];
+								var autorizacao = null;	
+								for (i = 0; i < match.docs.length ; i++){									
+									//console.log("Matching found: "+ match.docs[i].oportunidade)
+									if(match.docs[i].oportunidade.email != res.locals.user.email){
+										empresa = Empresa.model.findOne().where('controlData', match.docs[i].oportunidade.controlData)
+										empresa.exec(function (err, resultado){
+											console.log("resultado");
+											if(resultado){
+												autorizacao = resultado.autorizacao;
+												var emailBody = '<b>' + '<p>Saudações,</p><br />' +
+												'<p>Foi encontrada uma oportunidade que voce talvez tenha interesse: </p>'; // html body
+												if(autorizacao == true){
+													emailBody = emailBody+ '<p> Nome da Oportunidade: ' + oportunidade.nome +'</p><br />'+
+													'<p>Acesse Aqui: <a href="http://localhost:3000/oportunidades/?='+oportunidade.id+'">http://localhost:3000/oportunidades/?='+oportunidade.id+'</a></p></b>' // html body										
+													//EMAIL SENDER
+													emailConfig.exec(function (err, results) {
+														if (results) {
+															emailConfigs = results;
+															locals.email = emailConfigs;
 
-												}
-												var emailConfig = EmailConfig.model.findOne().where('isAtivo', true);
-												var smtps = 'smtps://' + emailConfigs.user + ':' + emailConfigs.senha + '@smtp.gmail.com';
-													var transporter = nodemailer.createTransport(smtps);
-													var mailOptions = {
-														from: emailConfigs.from, // sender address//
-														subject: emailConfigs.subjectCadastro, // Subject line
-														html: emailBody
-													};
-													EmailsAdeSampa.model.find({}, function (err, docs) {
-														var emails = [];
-														for (i = 0; i < docs.length; i++) {
-															emails[i] = docs[i].email;
 														}
-														mailOptions.to = result.docs[i].oportunidade.email;
-														{
-															transporter.sendMail(mailOptions, function (error, info) {
-																if (error) {
-																	//fila de email nao enviado
-																	return console.log(error);
-																}
-																console.log('Message sent AdeSampa: ' + info.response);
-															});
-														}
+														var emailConfig = EmailConfig.model.findOne().where('isAtivo', true);
+														var smtps = 'smtps://' + emailConfigs.user + ':' + emailConfigs.senha + '@smtp.gmail.com';
+														var transporter = nodemailer.createTransport(smtps);
+														var mailOptions = {
+															from: emailConfigs.from, // sender address//
+															subject: emailConfigs.subjectCadastro, // Subject line
+															html: emailBody
+														};
+														EmailsAdeSampa.model.find({}, function (err, docs) {
+															var emails = [];
+															for (i = 0; i < docs.length; i++) {
+																emails[i] = docs[i].email;
+															}
+															mailOptions.to = match.docs[i].oportunidade.email;
+															{
+																transporter.sendMail(mailOptions, function (error, info) {
+																	if (error) {
+																		//fila de email nao enviado
+																		return console.log(error);
+																	}
+																	console.log('Message sent AdeSampa: ' + info.response);
+																});
+															}
+														});
+														
 													});
-												
-											});
-										}										
-									}*/
-								}	
+												}
+											}
+
+										});
+									}
+								}
 							}
 						});
 					});					
