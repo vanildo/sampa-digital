@@ -48,7 +48,8 @@ function writeTableWith(dataSource){
         "aoColumns": createTableColumns(),
         "fnRowCallback": function(nRow, aData, iDisplayIndex) {
             //console.log(aData);
-            $("td:eq(0)", nRow).html("<strong><a href='http://" + aData.link + "'>"+$("td:eq(0)", nRow).html()+"</a></strong>");
+            aData.link.replace("http//", "http://");
+            $("td:eq(0)", nRow).html("<strong><a href='" + aData.link + "'>"+$("td:eq(0)", nRow).html()+"</a></strong>");
             return nRow;
         },
         "oLanguage": {
