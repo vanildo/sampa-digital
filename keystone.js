@@ -1,7 +1,6 @@
 // Simulate config options from your production environment by
 // customising the .env file in your project's root folder.
 require('dotenv').load();
-
 // Require keystone
 var keystone = require('keystone');
 
@@ -14,6 +13,8 @@ if (process.env.mongoDB) {
 } else {
     mongoUri = "mongodb://localhost/keystone";
 }
+
+
 
 // Initialise Keystone with your project's configuration.
 // See http://keystonejs.com/guide/config for available options

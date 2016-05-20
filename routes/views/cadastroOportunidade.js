@@ -9,20 +9,24 @@ var EmailConfig = keystone.list('EmailConfig');
 var EmailsAdeSampa = keystone.list('EmailsAdeSampa');
 
 // Initialize Cloudant with settings from .env
-var username = "electrun"
-var password = "OmnPr1me#";
-var cloudant = Cloudant({account:username, password:password});
-var db = cloudant.db.use("oportunidades");
+var cloudant = Cloudant(env.getDbUrl());
+var db = cloudant.use(env.db.database);
 
 var query = async.queue(function (task, callback) {
-    console.log('Task %s started  ' + task.name);
     callback();
 }, 2);
 
 var index = async.queue(function (task, callback) {
-    console.log('Task %s started ' + task.name);
     callback();
 }, 2);
+
+var db_query = {name:'query', type:'text', index:{}}
+db.index(db_query, function(er, response) {
+  if (er) {
+    throw er;
+  }
+  console.log('Index creation result: %s', response.result);
+});
 
 
 exports = module.exports = function (req, res) {
@@ -82,7 +86,11 @@ exports = module.exports = function (req, res) {
 						return str;
 					}					
 					var Mkeywords = clearSTR(str);
-
+					queryKey ={
+						
+						
+					}
+					var busca = {"$text": Mkeywords};
 					//Fila salvar index
 					index.push({name: oportunidade.nome}, function (err) {
 						db.insert({oportunidade}, oportunidade.id, function(err, body, header) {
@@ -105,7 +113,7 @@ exports = module.exports = function (req, res) {
 								var autorizacao = null;	
 								for (i = 0; i < match.docs.length ; i++){									
 									//console.log("Matching found: "+ match.docs[i].oportunidade)
-									if(match.docs[i].oportunidade.email != res.locals.user.email){
+									if(match.docs[i].oportunidade.email != res.locals.user.email && match.docs[i].oportunidade.isAtive == true){
 										empresa = Empresa.model.findOne().where('controlData', match.docs[i].oportunidade.controlData)
 										empresa.exec(function (err, resultado){
 											console.log("resultado");
