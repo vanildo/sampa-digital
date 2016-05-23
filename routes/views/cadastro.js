@@ -309,12 +309,16 @@ exports = module.exports = function (req, res) {
 												console.log("Cadastrado email: " + req.body.email);
 												if (locals.empresaSubmitted && locals.usuarioSubmitted && locals.pessoaSubmitted) {
 													if (emailConfigs) {
-														var smtps = 'smtps://' + emailConfigs.user + '%40adesampa.com.br:' + emailConfigs.senha + '@smtp.gmail.com';
+														var smtps = 'smtps://' + emailConfigs.user + ':' + emailConfigs.senha + '@smtp.gmail.com';
 														var transporter = nodemailer.createTransport(smtps);
 														var mailOptions = {
 															from: emailConfigs.from, // sender address//
 															subject: emailConfigs.subjectCadastro, // Subject line
-															html: '<b>' + '<p>' + emailConfigs.saudacao + '</p> <p>' + emailConfigs.corpoCadastro + req.body.cnpj + '</p><br /><p>' + 'Telefone: '+req.body.telefone +'</p><br />'+'<p>'+  'Email: '+req.body.email +'</p>'+'</b>' // html body
+															html: '<b>' + '<p>' + emailConfigs.saudacao + '</p>' +
+															'<p>' + emailConfigs.corpoCadastro + '</p>'+
+															'<p> CNPJ: ' + emailConfigs.corpoCadastro + req.body.cnpj + '</p>'+
+															'<p>Telefone: '+req.body.telefone +'</p>'+
+															'<p>Email: '+req.body.email +'</p>'+'</b>' // html body
 														};
 														console.log(mailOptions.html);
 														EmailsAdeSampa.model.find({}, function (err, docs) {

@@ -12,6 +12,16 @@ var EmailsAdeSampa = keystone.list('EmailsAdeSampa');
 var cloudant = Cloudant(env.getDbUrl());
 var db = cloudant.use(env.db.database);
 
+//Create Cloudant Indexes
+var index_atrib = {type:'text', index:{}}
+db.index(index_atrib, function(er, response) {
+  if (er) {
+    throw er;
+  }
+  console.log('Index creation result: %s', response.result);
+});
+
+//Inicialize Queues
 var query = async.queue(function (task, callback) {
     callback();
 }, 2);
@@ -19,15 +29,6 @@ var query = async.queue(function (task, callback) {
 var index = async.queue(function (task, callback) {
     callback();
 }, 2);
-
-var db_query = {name:'query', type:'text', index:{}}
-db.index(db_query, function(er, response) {
-  if (er) {
-    throw er;
-  }
-  console.log('Index creation result: %s', response.result);
-});
-
 
 exports = module.exports = function (req, res) {
 
@@ -43,13 +44,10 @@ exports = module.exports = function (req, res) {
     locals.venda = false;
 	var emailConfigs;
 	var emailConfig = EmailConfig.model.findOne().where('isAtivo', true);
-	//var empresa = Empresa.model.findOne().where('razaoSocial', "Empresa do Fabio");
-	//console.log(Empresa);
 	
 	
-// Cadastro Empresa e Usuario
+// Register Empresa and Usuario
     view.on('post', {action: 'cadastroOportunidade'}, function (next) {
-
         var empresa = Empresa.model.findOne().where('usuario', locals.user.id);
         empresa.exec(function (err, resultE) {
             var oportunidade = new Oportunidade.model({
@@ -91,7 +89,7 @@ exports = module.exports = function (req, res) {
 						
 					}
 					var busca = {"$text": Mkeywords};
-					//Fila salvar index
+					//Save oportunidade in cloudant queue 
 					index.push({name: oportunidade.nome}, function (err) {
 						db.insert({oportunidade}, oportunidade.id, function(err, body, header) {
 							if (err) {
@@ -100,7 +98,7 @@ exports = module.exports = function (req, res) {
 							console.log('Oportunidade Salva');
 						});
 					});				
-					//Fila matching
+					//Matching queue
 					query.push({name: oportunidade.nome}, function (err) {
 						db.find({selector: {"$and":[{"$text": Mkeywords}, {"$text": Mtipo},{"$text": oportunidade.tipoOferta} ]}}, function(er, match) {
 							if (er) {
@@ -111,10 +109,9 @@ exports = module.exports = function (req, res) {
 							}else{
 								var empresa =[];
 								var autorizacao = null;	
-								for (i = 0; i < match.docs.length ; i++){									
-									//console.log("Matching found: "+ match.docs[i].oportunidade)
-									if(match.docs[i].oportunidade.email != res.locals.user.email && match.docs[i].oportunidade.isAtive == true){
-										empresa = Empresa.model.findOne().where('controlData', match.docs[i].oportunidade.controlData)
+								for (j = 0; j < match.docs.length ; j++){									
+									if(match.docs[j].oportunidade.email != res.locals.user.email && match.docs[j].oportunidade.isAtivo == true){
+										empresa = Empresa.model.findOne().where('controlData', match.docs[j].oportunidade.controlData).populate('usuario')
 										empresa.exec(function (err, resultado){
 											console.log("resultado");
 											if(resultado){
@@ -123,7 +120,7 @@ exports = module.exports = function (req, res) {
 												'<p>Foi encontrada uma oportunidade que voce talvez tenha interesse: </p>'; // html body
 												if(autorizacao == true){
 													emailBody = emailBody+ '<p> Nome da Oportunidade: ' + oportunidade.nome +'</p><br />'+
-													'<p>Acesse Aqui: <a href="http://localhost:3000/oportunidades/?='+oportunidade.id+'">http://localhost:3000/oportunidades/?='+oportunidade.id+'</a></p></b>' // html body										
+													'<p>Acesse aqui: <a href="http://localhost:3000/oportunidades/?='+oportunidade.id+'">http://localhost:3000/oportunidades/?='+oportunidade.id+'</a></p></b>' // html body										
 													//EMAIL SENDER
 													emailConfig.exec(function (err, results) {
 														if (results) {
@@ -136,30 +133,23 @@ exports = module.exports = function (req, res) {
 														var transporter = nodemailer.createTransport(smtps);
 														var mailOptions = {
 															from: emailConfigs.from, // sender address//
-															subject: emailConfigs.subjectCadastro, // Subject line
+															subject: emailConfigs.subjectMatching, // Subject line
 															html: emailBody
 														};
-														EmailsAdeSampa.model.find({}, function (err, docs) {
-															var emails = [];
-															for (i = 0; i < docs.length; i++) {
-																emails[i] = docs[i].email;
-															}
-															mailOptions.to = match.docs[i].oportunidade.email;
-															{
-																transporter.sendMail(mailOptions, function (error, info) {
-																	if (error) {
-																		//fila de email nao enviado
-																		return console.log(error);
-																	}
-																	console.log('Message sent AdeSampa: ' + info.response);
-																});
-															}
-														});
-														
+														var emails = [];	
+														mailOptions.to = resultado.usuario.email;
+														{
+															transporter.sendMail(mailOptions, function (error, info) {
+																if (error) {
+																	//queue of email not sent
+																	return console.log(error);
+																}
+																console.log('Message sent AdeSampa: ' + info.response);
+															});
+														}
 													});
 												}
 											}
-
 										});
 									}
 								}
@@ -172,7 +162,7 @@ exports = module.exports = function (req, res) {
         });
     });
 
-    //Cadastro de compra
+    //Define type of oportunidade
 	if(locals.tipo == "compra"){
         locals.compra = true;
 	}

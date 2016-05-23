@@ -18,6 +18,7 @@ EmailConfig.add({
     subjectCadastro: {type: String, required: true, initial: true, label: "Título do email de cadastro"},
     subjectAprovacao: {type: String, required: true, initial: true, label: "Título do email de aprovação"},
     subjectRejeicao: {type: String, required: true, initial: true, label: "Título do email de rejeição"},
+	subjectMatching: {type: String, required: true, initial: true, label: "Título do email de matching"},
     saudacao: {type: String, required: true, initial: true},
     corpoCadastro: {type: Types.Textarea, required: true, initial: true, label: "Corpo do email de cadastro"},
     corpoAprovacao: {type: Types.Textarea, required: true, initial: true, label: "Corpo do email de aprovação"},
