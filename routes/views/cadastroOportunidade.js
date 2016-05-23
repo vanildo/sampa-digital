@@ -9,10 +9,11 @@ var EmailConfig = keystone.list('EmailConfig');
 var EmailsAdeSampa = keystone.list('EmailsAdeSampa');
 
 // Initialize Cloudant with settings from .env
-var cloudant = Cloudant(env.getDbUrl());
+var cloudant = Cloudant({account:env.db.username, password:env.db.password});
+//var cloudant = Cloudant(env.getDbUrl());
 var db = cloudant.use(env.db.database);
-//var cloudant = Cloudant({account:env.db.username, password:env.db.password});
-//var db = cloudant.db.use(env.db.database);
+
+
 
 //Create Cloudant Indexes
 var index_atrib = {type:'text', index:{}}
@@ -102,7 +103,7 @@ exports = module.exports = function (req, res) {
 					});				
 					//Matching queue
 					query.push({name: oportunidade.nome}, function (err) {
-						db.find({selector: {"$and":[{"$text": Mkeywords}, {"$text": Mtipo},{"$text": oportunidade.tipoOferta} ]}},{use_index:"_design/32372935e14bed00cc6db4fc9efca0f1537d34a8"}, function(er, match) {
+						db.find({selector: {"$and":[{"$text": Mkeywords}, {"$text": Mtipo},{"$text": oportunidade.tipoOferta} ]}, use_index:"_design/32372935e14bed00cc6db4fc9efca0f1537d34a8"}, function(er, match) {
 							if (er) {
 								throw er;
 							}
