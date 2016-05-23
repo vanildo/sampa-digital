@@ -11,8 +11,8 @@ var EmailsAdeSampa = keystone.list('EmailsAdeSampa');
 // Initialize Cloudant with settings from .env
 //var cloudant = Cloudant(env.getDbUrl());
 //var db = cloudant.use(env.db.database);
-var cloudant = Cloudant({account:"electrun", password:"OmnPr1me#"});
-var db = cloudant.db.use("matcher");
+var cloudant = Cloudant({account:env.db.username, password:env.db.password});
+var db = cloudant.db.use(env.db.database);
 
 //Create Cloudant Indexes
 var index_atrib = {type:'text', index:{}}
