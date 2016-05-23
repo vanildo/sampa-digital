@@ -102,7 +102,7 @@ exports = module.exports = function (req, res) {
 					});				
 					//Matching queue
 					query.push({name: oportunidade.nome}, function (err) {
-						db.find({selector: {"$and":[{"$text": Mkeywords}, {"$text": Mtipo},{"$text": oportunidade.tipoOferta} ]}}, function(er, match) {
+						db.find({selector: {"$and":[{"$text": Mkeywords}, {"$text": Mtipo},{"$text": oportunidade.tipoOferta} ]}},{use_index:"_design/32372935e14bed00cc6db4fc9efca0f1537d34a8"} function(er, match) {
 							if (er) {
 								throw er;
 							}
